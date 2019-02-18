@@ -8,13 +8,15 @@ import { ProfileFormComponent } from './component/profile-form/profile-form.comp
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faUser, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faBars, faBookOpen, faArchive, faLock } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarAlt } from '@fortawesome/free-regular-svg-icons';
 
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { SidebarModule } from 'primeng/sidebar';
+import {TableModule} from 'primeng/table';
 @NgModule({
   declarations: [
     ProfileFormComponent,
@@ -27,7 +29,8 @@ import { SidebarModule } from 'primeng/sidebar';
     PasswordModule,
     InputTextModule,
     CardModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    TableModule
   ],
   exports: [
     ProfileFormComponent,
@@ -40,11 +43,12 @@ import { SidebarModule } from 'primeng/sidebar';
     CardModule,
     SidebarModule,
     ButtonModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    TableModule
   ]
 })
 export class SharedModule {
   constructor() {
-    library.add(faUser, faBars);
+    library.add(faUser, faBars, faBookOpen, faArchive, faLock, faUser, faCalendarAlt);
   }
 }
