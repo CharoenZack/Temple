@@ -23,6 +23,7 @@ import { SidebarModule } from 'primeng/sidebar';
     CardModule,
   ],
   exports: [
+    ProfileFormComponent,
     CommonModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
