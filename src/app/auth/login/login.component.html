@@ -1,3 +1,20 @@
-<p>
-  login works!
-</p>
+<div class="container ">
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+      <form [formGroup]="form" >
+        <h1 class="text-center">{{formTitle}}</h1>
+        <br>
+        <div class="form-group">
+          <label>Email address</label>
+          <input type="email" class="form-control" formControlName="email" name="email" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" class="form-control" formControlName="password" name="password" placeholder="Password">
+        </div>
+        <button pButton type="button" label="เข้าสู่ระบบ" class="ui-button-success"></button>
+        <button pButton type="button" label="ลืมรหัสผ่าน" class="ui-button-warning"></button>
+      </form>
+    </div>
+  </div>
+</div>
