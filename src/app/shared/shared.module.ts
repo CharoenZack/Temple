@@ -30,7 +30,8 @@ import { SidebarModule } from 'primeng/sidebar';
     PasswordModule,
     InputTextModule,
     CardModule,
-    SidebarModule
+    SidebarModule,
+    ButtonModule
   ]
 })
 export class SharedModule {
