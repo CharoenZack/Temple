@@ -1,0 +1,6 @@
+.center-grid{
+    margin: 0 auto   ;
+}
+div.text-danger.text-invalid{
+    color: red
+}
