@@ -1,3 +1,32 @@
-<p>
-  login works!
-</p>
+<div class="ui-g-12">
+  <div class="row">
+    
+      <div class="ui-g-3 ui-lg-3 ui-md-3 ui-sm-12 aa">
+          <p-card header="  Login" [style]="{width: '360px',height:'300px'}">
+        <form [formGroup]="form">
+          <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ui-fluid">
+            <label>Email address</label>
+            <input type="text" pInputText formControlName="email" name="email" placeholder="Enter email" />
+          </div>
+          <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ui-fluid">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" pInputText formControlName="password" name="password" placeholder="Password" />
+          </div>
+          <div class="ui-g-6 ui-lg-6 ui-md-6 ui-sm-6 ui-fluid"></div>
+          <div class="ui-g-6 ui-lg-6 ui-md-6 ui-sm-6 ui-fluid">
+            <a> ลืมรหัสผ่าน</a>
+          </div>
+
+          <div class="ui-g-6 ui-lg-6 ui-md-6 ui-sm-6 ui-fluid">
+            <button pButton type="button" label="Login" class="ui-button-success"></button>
+
+          </div>
+          <div class="ui-g-6 ui-lg-6 ui-md-6 ui-sm-6 ui-fluid">
+            <button pButton type="button" label="Register"></button>
+          </div>
+        </form>
+      </p-card>
+      </div>
+    
+  </div>
+</div>
