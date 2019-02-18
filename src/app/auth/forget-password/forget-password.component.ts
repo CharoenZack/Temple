@@ -1,23 +1,18 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/shared/service/auth.service';
-import { Mockupdata } from 'src/app/shared/interfaces/mockupdata';
 
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-forget-password',
+  templateUrl: './forget-password.component.html',
+  styleUrls: ['./forget-password.component.css']
 })
-export class LoginComponent implements OnInit {
+export class ForgetPasswordComponent implements OnInit {
   form: FormGroup;
-  logined: Mockupdata;
-
   @Input() formTitle:string
   @Output() data =new EventEmitter<Object>()
   constructor(
-    private formBuilder: FormBuilder,
-    private authService :AuthService
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
@@ -27,20 +22,17 @@ export class LoginComponent implements OnInit {
   onSubmit(e){
     e.preventDefault()
     const email = this.form.get('email').value
-    const password = this.form.get('password').value
-    console.log(email,password);
-    
+    const username = this.form.get('username').value
     if(this.form.valid){
-      this.authService.login(email,password)
+      this.data.emit({email,username})
     }
   }
 
   private createForm() {
     this.form = this.formBuilder.group({
       "email": ['', [Validators.required, Validators.email]],
-      "password":['',Validators.required],
+      "username":['',Validators.required],
     })
   }
-  
-
 }
+
