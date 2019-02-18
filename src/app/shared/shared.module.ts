@@ -7,7 +7,7 @@ import {ProfileFormComponent} from './component/profile-form/profile-form.compon
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {ButtonModule} from 'primeng/button';
-
+import { SidebarModule } from 'primeng/sidebar';
 @NgModule({
   declarations: [
     ProfileFormComponent,
@@ -23,7 +23,8 @@ import {ButtonModule} from 'primeng/button';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     RouterModule,
-    ButtonModule
+    ButtonModule,
+    SidebarModule
   ]
 })
 export class SharedModule {

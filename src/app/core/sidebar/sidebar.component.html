@@ -1,3 +1,8 @@
-<p>
-  sidebar works!
-</p>
+<p-sidebar [visible]="true" position="left" [modal]="false" [showCloseIcon]="false" styleClass="ui-sidebar-sm">
+  <div>
+    <a [routerLink]="['/']" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active-menuitem"
+      class="list-menu"><span><i class="pi pi-home"></i> หน้าหลัก</span></a>
+    <a [routerLink]="['/login']" routerLinkActive="active-menuitem" class="list-menu"><span><i class="pi pi-lock"></i>
+        ออกจากระบบ</span></a>
+  </div>
+</p-sidebar>
