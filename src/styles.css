@@ -25,6 +25,11 @@ body {
     margin-left: -15px;
 }
 
+
+.login-form .ui-card-title{
+    text-align: center !important;
+}
+
 @media screen and (max-width:1024px) {
     .ui-sidebar-left {
         top: 95px !important;
