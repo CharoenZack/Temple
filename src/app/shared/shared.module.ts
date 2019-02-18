@@ -1,13 +1,19 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {ReactiveFormsModule} from '@angular/forms';
-import {RouterModule} from '@angular/router';
-import {ProfileFormComponent} from './component/profile-form/profile-form.component';
-import {InputTextModule} from 'primeng/inputtext';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {PasswordModule} from 'primeng/password';
-import {ButtonModule} from 'primeng/button';
-import {CardModule} from 'primeng/card';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ProfileFormComponent } from './component/profile-form/profile-form.component';
+
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faUser, faBars } from '@fortawesome/free-solid-svg-icons';
+
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
+import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
 import { SidebarModule } from 'primeng/sidebar';
 @NgModule({
   declarations: [
@@ -21,6 +27,7 @@ import { SidebarModule } from 'primeng/sidebar';
     PasswordModule,
     InputTextModule,
     CardModule,
+    FontAwesomeModule
   ],
   exports: [
     ProfileFormComponent,
@@ -32,8 +39,12 @@ import { SidebarModule } from 'primeng/sidebar';
     InputTextModule,
     CardModule,
     SidebarModule,
-    ButtonModule
+    ButtonModule,
+    FontAwesomeModule
   ]
 })
 export class SharedModule {
+  constructor() {
+    library.add(faUser, faBars);
+  }
 }
