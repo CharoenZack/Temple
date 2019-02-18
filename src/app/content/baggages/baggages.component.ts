@@ -19,7 +19,7 @@ export class BaggagesComponent implements OnInit {
     this.items = this.baggage.getItem();
     console.log(this.items)
     this.cols = [
-      {header: 'วันที่'},{header: 'หมายเลขตู้'},{header:'สถานะ'}
+      {field: 'date',header: 'วันที่'},{field: 'id',header: 'หมายเลขตู้'},{field: 'status',header:'สถานะ'}
     ]
   }
 
