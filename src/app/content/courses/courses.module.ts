@@ -20,6 +20,9 @@ import { CourseComponent } from './course/course.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports:[
+    CoursesComponent
   ]
 })
 export class CoursesModule { }
