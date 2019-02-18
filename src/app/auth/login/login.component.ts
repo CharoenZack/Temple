@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/shared/service/auth.service';
+import { Mockupdata } from 'src/app/shared/interfaces/mockupdata';
 
 
 @Component({
@@ -9,10 +11,13 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
+  logined: Mockupdata;
+
   @Input() formTitle:string
   @Output() data =new EventEmitter<Object>()
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private authService :AuthService
   ) { }
 
   ngOnInit() {
@@ -23,8 +28,10 @@ export class LoginComponent implements OnInit {
     e.preventDefault()
     const email = this.form.get('email').value
     const password = this.form.get('password').value
+    console.log(email,password);
+    
     if(this.form.valid){
-      this.data.emit({email,password})
+      this.authService.login(email,password)
     }
   }
 
@@ -34,4 +41,6 @@ export class LoginComponent implements OnInit {
       "password":['',Validators.required],
     })
   }
+  
+
 }
