@@ -1,8 +1,27 @@
-<p-sidebar [visible]="true" position="left" [modal]="false" [showCloseIcon]="false" styleClass="ui-sidebar-sm">
+<p-sidebar [visible]="openSideBar" (visibleChange)="clickOutsidebar()" position="left" [modal]="modalSidebar"
+  [showCloseIcon]="showCloseIconSidebar" styleClass="ui-sidebar-sm">
   <div>
-    <a [routerLink]="['/']" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active-menuitem"
-      class="list-menu"><span><i class="pi pi-home"></i> หน้าหลัก</span></a>
-    <a [routerLink]="['/login']" routerLinkActive="active-menuitem" class="list-menu"><span><i class="pi pi-lock"></i>
-        ออกจากระบบ</span></a>
+    <a [routerLink]="['/']" (click)="clickMenu()" [routerLinkActiveOptions]="{exact: true}"
+      routerLinkActive="active-menuitem" class="list-menu"><span><i class="pi pi-home"></i> หน้าหลัก</span></a>
+
+    <a [routerLink]="['/profile']" (click)="clickMenu()" routerLinkActive="active-menuitem" class="list-menu"><span>
+        <fa-icon [icon]="['fas', 'user']"></fa-icon> ข้อมูลส่วนตัว
+      </span></a>
+
+    <a [routerLink]="['/courses']" (click)="clickMenu()" routerLinkActive="active-menuitem" class="list-menu"><span>
+        <fa-icon [icon]="['fas', 'book-open']"></fa-icon> สมัครคอร์ส
+      </span></a>
+
+    <a [routerLink]="['/schedule']" (click)="clickMenu()" routerLinkActive="active-menuitem" class="list-menu"><span>
+        <fa-icon [icon]="['far', 'calendar-alt']"></fa-icon> ตารางเรียน
+      </span></a>
+
+    <a [routerLink]="['/baggage']" (click)="clickMenu()" routerLinkActive="active-menuitem" class="list-menu"><span>
+        <fa-icon [icon]="['fas', 'archive']"></fa-icon> สัมภาระ
+      </span></a>
+
+    <a (click)="clickMenu()" routerLinkActive="active-menuitem" class="list-menu"><span>
+        <fa-icon [icon]="['fas', 'lock']"></fa-icon> ออกจากระบบ
+      </span></a>
   </div>
 </p-sidebar>
