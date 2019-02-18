@@ -15,6 +15,7 @@ import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { SidebarModule } from 'primeng/sidebar';
+import {TableModule} from 'primeng/table';
 @NgModule({
   declarations: [
     ProfileFormComponent,
@@ -27,7 +28,8 @@ import { SidebarModule } from 'primeng/sidebar';
     PasswordModule,
     InputTextModule,
     CardModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    TableModule
   ],
   exports: [
     ProfileFormComponent,
@@ -40,7 +42,8 @@ import { SidebarModule } from 'primeng/sidebar';
     CardModule,
     SidebarModule,
     ButtonModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    TableModule
   ]
 })
 export class SharedModule {
