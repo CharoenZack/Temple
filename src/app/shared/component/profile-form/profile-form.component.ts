@@ -139,8 +139,8 @@ export class ProfileFormComponent implements OnInit {
       this.messageService.clear();
       this.typeMessage = "success";
       this.messageService.add({ key: 'warning', sticky: true, severity: 'success', summary: 'สำเร็จ', detail: 'สมัครสมาชิกสำเร็จ' });
-      this.subscribeInputMessageWaring();
     } else {
+      this.subscribeInputMessageWaring();
       this.typeMessage = "fail";
       this.messageService.clear();
       this.messageService.add({ key: 'warning', sticky: true, severity: 'warn', summary: 'ผิดพลาด', detail: 'กรุณากรอกข้อมูลให้ครบถ้วน' });
