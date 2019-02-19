@@ -2,10 +2,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TitleName } from '../../interfaces/title-name';
 import { TitleNameService } from '../../service/title-name.service';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { formatDate } from '@angular/common';
-import { MessageService } from 'primeng/components/common/messageservice';
 import { ActivatedRoute } from '@angular/router';
+import { ProfileFormService } from '../../service/profile-form.service';
 
 
 
@@ -18,13 +17,18 @@ import { ActivatedRoute } from '@angular/router';
 export class ProfileFormComponent implements OnInit {
 
   @Input() title;
+  @Output() dataForm = new EventEmitter();
+  @Output() dataFormError = new EventEmitter();
+  @Output() dataValidationMessage = new EventEmitter();
   public yearRange: string;
   public displayYear: String;
   public th: any;
   public titleName: TitleName[];
   public form: FormGroup;
   public formType: String;
-  public typeMessage: string
+  public disabled:boolean
+  public buttonVisible:boolean
+  public formRegisterDisplay:boolean;
 
   
 
@@ -40,7 +44,7 @@ export class ProfileFormComponent implements OnInit {
     phoneEmergency: ''
   }
 
-  public validationMassages = {
+  public validationMessage = {
     titleName: {
       required: '*กรุณาเลือกคำนำหน้า'
     },
@@ -73,20 +77,32 @@ export class ProfileFormComponent implements OnInit {
   constructor(
     private titleNameService: TitleNameService,
     private formBuilder: FormBuilder,
-    private messageService: MessageService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private profileService: ProfileFormService
   ) { }
 
   ngOnInit() {
     this.titleName = this.titleNameService.getTitleName();
+    this.setTypeForm();
     this.createForm();
     this.setCalendarTH();
     this.createYearRange();
-    this.setTypeForm();
+    this.setButtonVisible();
+    this.setFormRegister();
+  }
+
+  setFormRegister(){
+    this.formRegisterDisplay = this.profileService.getSettingRegisterForm();
+  }
+
+  setButtonVisible(){
+    this.buttonVisible = this.profileService.getSettingButton();
   }
 
   setTypeForm(){
     const {formType} = this.route.snapshot.data
+    this.profileService.setFormType(formType);
+    this.disabled = this.profileService.getSettingDisabled();
   }
 
   setCalendarTH() {
@@ -118,40 +134,14 @@ export class ProfileFormComponent implements OnInit {
 
   }
 
-  onValueChange() {
-    if (!this.form) return;
-    for (const field in this.formError) {
-      this.formError[field] = '';
-      const control = this.form.get(field);
 
-      if (control && !control.valid) {
-        const messages = this.validationMassages[field];
-        for (const key in control.errors) {
-          this.formError[field] += messages[key] + ' ';
-        }
-      }
-    }
-  }
 
   onSubmit(e) {
     e.preventDefault()
-    if (this.form.valid) {
-      this.messageService.clear();
-      this.typeMessage = "success";
-      this.messageService.add({ key: 'warning', sticky: true, severity: 'success', summary: 'สำเร็จ', detail: 'สมัครสมาชิกสำเร็จ' });
-    } else {
-      this.subscribeInputMessageWaring();
-      this.typeMessage = "fail";
-      this.messageService.clear();
-      this.messageService.add({ key: 'warning', sticky: true, severity: 'warn', summary: 'ผิดพลาด', detail: 'กรุณากรอกข้อมูลให้ครบถ้วน' });
-    }
-    setTimeout(() => {
-      this.onReject();
-    }, 3000);
-  }
+    this.dataForm.emit(this.form);
+    this.dataFormError.emit(this.formError);
+    this.dataValidationMessage.emit(this.validationMessage);
 
-  onReject() {
-    this.messageService.clear('warning');
   }
 
   createYearRange() {
@@ -160,15 +150,6 @@ export class ProfileFormComponent implements OnInit {
     this.yearRange = startYear + ':' + currentYear;
   }
 
-  subscribeInputMessageWaring(){
-    this.form
-    .valueChanges
-    .pipe(
-      debounceTime(500),
-      distinctUntilChanged()
-    )
-    .subscribe(() => this.onValueChange())
-  this.onValueChange();
-  }
+
 
 }

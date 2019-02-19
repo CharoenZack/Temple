@@ -24,11 +24,16 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUser, faBars, faBookOpen, faArchive, faLock } from '@fortawesome/free-solid-svg-icons';
 import { faCalendarAlt } from '@fortawesome/free-regular-svg-icons';
+import { ProfileFormService } from './service/profile-form.service';
 
+import { ConfirmButtonComponent } from './component/profile-form/confirm-button/confirm-button.component';
+import { RegisterInputComponent } from './component/profile-form/register-input/register-input.component';
 
 @NgModule({
   declarations: [
     ProfileFormComponent,
+    ConfirmButtonComponent,
+    RegisterInputComponent,
   ],
   imports: [
     CommonModule,
@@ -65,7 +70,7 @@ import { faCalendarAlt } from '@fortawesome/free-regular-svg-icons';
     StepsModule
 
   ],
-  providers: [TitleNameService,MessageService]
+  providers: [TitleNameService,MessageService,ProfileFormService]
 })
 export class SharedModule {
 }
