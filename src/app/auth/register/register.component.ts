@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -17,29 +17,36 @@ export class RegisterComponent implements OnInit {
   public validationMessage:any;
 
   constructor(
-    private route : ActivatedRoute,
-    private messageService: MessageService
+    private router:Router,
+    private messageService: MessageService,
   ) { }
 
   ngOnInit() {
     this.title = "Register";
   }
 
-  onSubmit(e){
-    this.form = e;
+  onSubmit(data){
+    this.form = data.form;
+    this.setFormError(data.formError);
+    this.setValidationMessage(data.validationMessage);
+
     if (this.form.valid) {
       this.messageService.clear();
       this.typeMessage = "success";
       this.messageService.add({ key: 'warning', sticky: true, severity: 'success', summary: 'สำเร็จ', detail: 'สมัครสมาชิกสำเร็จ' });
+      setTimeout(() => {
+        this.router.navigateByUrl('/auth/login');
+      }, 4000);
     } else {
       this.subscribeInputMessageWaring();
       this.typeMessage = "fail";
       this.messageService.clear();
       this.messageService.add({ key: 'warning', sticky: true, severity: 'warn', summary: 'ผิดพลาด', detail: 'กรุณากรอกข้อมูลให้ครบถ้วน' });
+      setTimeout(() => {
+        this.onReject();
+      }, 3000);
     }
-    setTimeout(() => {
-      this.onReject();
-    }, 3000);
+
   }
 
   onReject() {
@@ -58,11 +65,11 @@ export class RegisterComponent implements OnInit {
   this.onValueChange();
   }
 
-  setFormError(e){
-    this.formError = e;
+  setFormError(formError){
+    this.formError = formError;
   }
-  setValidationMessage(e){
-    this.validationMessage = e;
+  setValidationMessage(validationMessage){
+    this.validationMessage = validationMessage;
   }
 
   onValueChange() {

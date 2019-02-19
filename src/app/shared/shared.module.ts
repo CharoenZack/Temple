@@ -29,6 +29,8 @@ import { ProfileFormService } from './service/profile-form.service';
 import { ConfirmButtonComponent } from './component/profile-form/confirm-button/confirm-button.component';
 import { RegisterInputComponent } from './component/profile-form/register-input/register-input.component';
 
+import {FormsModule} from '@angular/forms'
+
 @NgModule({
   declarations: [
     ProfileFormComponent,
@@ -47,7 +49,8 @@ import { RegisterInputComponent } from './component/profile-form/register-input/
     InputTextareaModule,
     InputMaskModule,
     CalendarModule,
-    ToastModule
+    ToastModule,
+    FormsModule
   ],
   exports: [
     CommonModule,
@@ -67,8 +70,8 @@ import { RegisterInputComponent } from './component/profile-form/register-input/
     PasswordModule,
     FontAwesomeModule,
     TableModule,
-    StepsModule
-
+    StepsModule,
+    FormsModule
   ],
   providers: [TitleNameService,MessageService,ProfileFormService]
 })

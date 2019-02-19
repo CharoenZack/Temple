@@ -10,14 +10,16 @@
               {{title}}
             </div>
             <div class="ui-g-12">
-              <app-register-input *ngIf="formRegisterDisplay"></app-register-input>
+              <app-register-input *ngIf="formRegisterDisplay" [formError]="formError"
+                (usernameData)='setUsername($event)' (passwordData)='setPassword($event)'
+                (repasswordData)='setRepassword($event)'>
+              </app-register-input>
               <div class="ui-inputgroup">
                 <div class="ui-g-3 ui-g-offset-2 ui-lg-3 ui-lg-offset-2 ui-md-3 ui-md-offset-1 ui-sm-3 ui-sm-offset-0">
                   คำนำหน้า*
                 </div>
                 <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-9">
-                  <p-dropdown [options]="titleName" optionLabel="titleNameDisplay" 
-                    formControlName="titleName">
+                  <p-dropdown [options]="titleName" optionLabel="titleNameDisplay" formControlName="titleName">
                   </p-dropdown>
                   <div *ngIf="formError.titleName" class="text-danger text-invalid">{{formError.titleName}}</div>
                 </div>
@@ -27,7 +29,7 @@
                   ชื่อ*
                 </div>
                 <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-9">
-                  <div><input type="text" pInputText placeholder="ชื่อ"  formControlName="fname">
+                  <div><input type="text" pInputText placeholder="ชื่อ" formControlName="fname">
                   </div>
                   <div *ngIf="formError.fname" class="text-danger text-invalid">{{formError.fname}}</div>
                 </div>
@@ -37,8 +39,7 @@
                   นามสกุล*
                 </div>
                 <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-9">
-                  <div><input type="text" pInputText placeholder="นามสกุล" 
-                      formControlName="lname"></div>
+                  <div><input type="text" pInputText placeholder="นามสกุล" formControlName="lname"></div>
                   <div *ngIf="formError.lname" class="text-danger text-invalid">{{formError.lname}}</div>
                 </div>
               </div>
@@ -49,9 +50,8 @@
                 </div>
                 <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-9">
                   <div>
-                    <p-calendar  formControlName="birthday" [locale]="th" [touchUI]="true"
-                      [yearNavigator]="true" [yearRange]="yearRange">
-                    </p-calendar>
+                    <p-calendar formControlName="birthday" [locale]="th" [showIcon]="true" [yearRange]="yearRange"
+                      [yearNavigator]="true"></p-calendar>
                   </div>
                   <div *ngIf="formError.birthday" class="text-danger text-invalid">{{formError.birthday}}</div>
                 </div>
@@ -64,16 +64,14 @@
                 <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-9">
                   <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
                     <div class="ui-g-2 ui-lg-2 ui-md-12 ui-sm-12 ">
-                      <p-radioButton name="gender" value='1' label="ชาย"  formControlName="gender">
+                      <p-radioButton name="gender" value='1' label="ชาย" formControlName="gender">
                       </p-radioButton>
                     </div>
                     <div class="ui-g-2 ui-lg-2 ui-md-12 ui-sm-12">
-                      <p-radioButton name="gender" value='2' label="หญิง" 
-                        formControlName="gender"></p-radioButton>
+                      <p-radioButton name="gender" value='2' label="หญิง" formControlName="gender"></p-radioButton>
                     </div>
                     <div class="ui-g-3 ui-lg-3 ui-md-12 ui-sm-12">
-                      <p-radioButton name="gender" value='3' label="ไม่ระบุ" 
-                        formControlName="gender"></p-radioButton>
+                      <p-radioButton name="gender" value='3' label="ไม่ระบุ" formControlName="gender"></p-radioButton>
                     </div>
                   </div>
                   <div *ngIf="formError.gender" class="text-danger text-invalid">{{formError.gender}}</div>
@@ -84,7 +82,7 @@
                   ที่อยู่*
                 </div>
                 <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-9">
-                  <div><textarea [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize" 
+                  <div><textarea [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize"
                       formControlName="address"></textarea>
                   </div>
                   <div *ngIf="formError.address" class="text-danger text-invalid">{{formError.address}}</div>
@@ -96,8 +94,7 @@
                 </div>
                 <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-9">
                   <div>
-                    <p-inputMask mask="(999) 999-9999" placeholder="(099) 999-9999" 
-                      formControlName="phone">
+                    <p-inputMask mask="(999) 999-9999" placeholder="(099) 999-9999" formControlName="phone">
                     </p-inputMask>
                   </div>
                   <div *ngIf="formError.phone" class="text-danger text-invalid">{{formError.phone}}</div>
@@ -108,8 +105,7 @@
                   email*
                 </div>
                 <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-9">
-                  <div><input type="text" pInputText placeholder="example@example.com" 
-                      formControlName="email"></div>
+                  <div><input type="text" pInputText placeholder="example@example.com" formControlName="email"></div>
                   <div *ngIf="formError.email" class="text-danger text-invalid">{{formError.email}}</div>
                 </div>
               </div>
@@ -119,8 +115,7 @@
                 </div>
                 <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-9">
                   <div>
-                    <p-inputMask mask="(999) 999-9999" placeholder="(099) 999-9999" 
-                      formControlName="phoneEmergency">
+                    <p-inputMask mask="(999) 999-9999" placeholder="(099) 999-9999" formControlName="phoneEmergency">
                     </p-inputMask>
                   </div>
                   <div *ngIf="formError.phoneEmergency" class="text-danger text-invalid">{{formError.phoneEmergency}}
@@ -137,4 +132,3 @@
     </div>
   </div>
 </div>
-
