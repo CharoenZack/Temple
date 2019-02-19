@@ -16,8 +16,7 @@ const routes: Routes = [
             },
             {
                 path: "register",
-                component: RegisterComponent,
-                data:{formType:'Register'}
+                component: RegisterComponent
             },
             {
                 path: "forget-password",
