@@ -4,3 +4,8 @@
 div.text-danger.text-invalid{
     color: red
 }
+.title-p-card{
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+}
