@@ -4,6 +4,41 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class PersonalInfoService {
+  private personalData1 = {
+    titleName:'02',
+    fname: 'มานี',
+    lname: 'แสนดี',
+    birthday: '16/12/1970',
+    gender: '2',
+    address: 'เลขที่ 5 หมู่ 5 ',
+    phone: '0901112222',
+    email: 'test@test.com',
+    phoneEmergency:'0850001111'
+  }
+
+  private personalData2 = {
+    titleName:'01',
+    fname: 'สมชาย',
+    lname: 'ชายหาด',
+    birthday: '01/04/1980',
+    gender: '1',
+    address: 'เลขที่ 123 หมู่ 6 ',
+    phone: '0801213333',
+    email: 'test1@test.com',
+    phoneEmergency:'0850001111'
+  }
 
   constructor() { }
+
+  getPersonalInfo(id:String){
+    if(id=='1'){
+      console.log("test มานี");
+      return this.personalData1;
+    }
+    else if(id=='2'){
+      console.log("test สมชาย");
+      return this.personalData2;
+    }
+    return null;
+  }
 }

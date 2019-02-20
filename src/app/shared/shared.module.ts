@@ -29,9 +29,8 @@ import { ProfileFormService } from './service/profile-form.service';
 import { ConfirmButtonComponent } from './component/profile-form/confirm-button/confirm-button.component';
 
 import {FormsModule} from '@angular/forms'
-import { AuthModule } from '../auth/auth.module';
-import { RegisterInputComponent } from '../auth/register/register-input/register-input.component';
 import { RegisterInputModule } from '../auth/register/register-input/register-input.module';
+import { PersonalInfoService } from './service/personal-info.service';
 
 @NgModule({
   declarations: [
@@ -75,7 +74,7 @@ import { RegisterInputModule } from '../auth/register/register-input/register-in
     StepsModule,
     FormsModule
   ],
-  providers: [TitleNameService, MessageService, ProfileFormService]
+  providers: [TitleNameService, MessageService, ProfileFormService,PersonalInfoService]
 })
 export class SharedModule {
   constructor() {
