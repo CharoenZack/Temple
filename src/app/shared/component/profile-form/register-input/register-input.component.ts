@@ -42,9 +42,9 @@ export class RegisterInputComponent implements OnInit {
   @Output() usernameData = new EventEmitter<String>();
   @Output() passwordData = new EventEmitter<String>();
   @Output() repasswordData = new EventEmitter<String>();
-  public username:string;
-  public password:string;
-  public repassword:string;
+  public username: string;
+  public password: string;
+  public repassword: string;
 
 
   constructor() { }
@@ -52,13 +52,13 @@ export class RegisterInputComponent implements OnInit {
   ngOnInit() {
   }
 
-  bindUsername(){
+  bindUsername() {
     this.usernameData.emit(this.username);
   }
-  bindPassword(){
+  bindPassword() {
     this.passwordData.emit(this.password);
   }
-  bindRepassword(){
+  bindRepassword() {
     this.repasswordData.emit(this.repassword);
   }
 }
