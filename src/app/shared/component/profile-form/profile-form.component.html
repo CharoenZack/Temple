@@ -50,7 +50,7 @@
                 </div>
                 <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-9">
                   <div>
-                    <p-calendar formControlName="birthday" [locale]="th" [showIcon]="true" [yearRange]="yearRange"
+                    <p-calendar formControlName="birthday" placeholder="01/01/1990" [locale]="th" [showIcon]="true" [yearRange]="yearRange"
                       [yearNavigator]="true"></p-calendar>
                   </div>
                   <div *ngIf="formError.birthday" class="text-danger text-invalid">{{formError.birthday}}</div>
