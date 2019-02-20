@@ -30,6 +30,10 @@ body {
     text-align: center !important;
 }
 
+.fixtextarea {
+    max-width: 100% !important;
+    min-width: 100% !important;
+}
 @media screen and (max-width:1024px) {
     .layout-content {
         margin-left: 0;

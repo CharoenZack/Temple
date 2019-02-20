@@ -82,7 +82,7 @@
                   ที่อยู่*
                 </div>
                 <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-9">
-                  <div><textarea [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize"
+                  <div><textarea [rows]="5" [cols]="30" class ="fixtextarea" pInputTextarea 
                       formControlName="address"></textarea>
                   </div>
                   <div *ngIf="formError.address" class="text-danger text-invalid">{{formError.address}}</div>
