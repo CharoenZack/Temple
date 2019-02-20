@@ -20,17 +20,32 @@ export class ProfileFormComponent implements OnInit {
   @Output() dataForm = new EventEmitter();
   @Output() dataFormError = new EventEmitter();
   @Output() dataValidationMessage = new EventEmitter();
+
+  @Output() data = new EventEmitter();
+
   public yearRange: string;
   public displayYear: String;
   public th: any;
   public titleName: TitleName[];
   public form: FormGroup;
   public formType: String;
-  public disabled:boolean
-  public buttonVisible:boolean
-  public formRegisterDisplay:boolean;
+  public disabled: boolean
+  public buttonVisible: boolean
+  public formRegisterDisplay: boolean;
 
-  
+  public formConponent = {
+    titleName: ['', Validators.required],
+    fname: ['', Validators.required],
+    lname: ['', Validators.required],
+    birthday: ['', Validators.required],
+    gender: ['', Validators.required],
+    address: ['', Validators.required],
+    phone: ['', Validators.required],
+    email: ['', Validators.required],
+    phoneEmergency: ['', Validators.required]
+  }
+
+
 
   public formError = {
     titleName: '',
@@ -84,23 +99,64 @@ export class ProfileFormComponent implements OnInit {
   ngOnInit() {
     this.titleName = this.titleNameService.getTitleName();
     this.setTypeForm();
-    this.createForm();
     this.setCalendarTH();
     this.createYearRange();
     this.setButtonVisible();
-    this.setFormRegister();
+    this.setFormRegisterDisplay();
+    // for Register form
+    if (this.formType == 'Register') {
+      this.setFormError();
+      this.setValidationMessage();
+      this.createFormRegister();
+    } else {
+      this.createForm();
+    }
+
   }
 
-  setFormRegister(){
+
+  setValidationMessage() {
+    const validationMessage = {
+      username: {
+        required: '*กรุณากรอก Username'
+      },
+      password: {
+        required: '*กรุณากรอก Password'
+      },
+      repassword: {
+        required: '*กรุณากรอก Re-passoword'
+      }
+    }
+
+    this.validationMessage = {
+      ...validationMessage,
+      ...this.validationMessage
+    }
+  }
+
+  setFormError() {
+    const formError = {
+      username: '',
+      password: '',
+      repassword: ''
+    }
+    this.formError = {
+      ...formError,
+      ...this.formError
+    }
+  }
+
+  setFormRegisterDisplay() {
     this.formRegisterDisplay = this.profileService.getSettingRegisterForm();
   }
 
-  setButtonVisible(){
+  setButtonVisible() {
     this.buttonVisible = this.profileService.getSettingButton();
   }
 
-  setTypeForm(){
-    const {formType} = this.route.snapshot.data
+  setTypeForm() {
+    const { formType } = this.route.snapshot.data
+    this.formType = formType;
     this.profileService.setFormType(formType);
     this.disabled = this.profileService.getSettingDisabled();
   }
@@ -119,35 +175,47 @@ export class ProfileFormComponent implements OnInit {
   }
 
   createForm() {
+    this.form = this.formBuilder.group(this.formConponent);
+  }
+
+  createFormRegister() {
+    const formRegister = {
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+      repassword:['',Validators.required]
+    }
     this.form = this.formBuilder.group({
-      titleName: ['', Validators.required],
-      fname: ['', Validators.required],
-      lname: ['', Validators.required],
-      birthday: ['', Validators.required],
-      gender: ['', Validators.required],
-      address: ['', Validators.required],
-      phone: ['', Validators.required],
-      email: ['', Validators.required],
-      phoneEmergency: ['', Validators.required]
+      ...formRegister,
+      ...this.formConponent
     });
-
-
   }
 
 
 
   onSubmit(e) {
     e.preventDefault()
-    this.dataForm.emit(this.form);
-    this.dataFormError.emit(this.formError);
-    this.dataValidationMessage.emit(this.validationMessage);
-
+    const data = {
+      form: this.form,
+      formError: this.formError,
+      validationMessage: this.validationMessage
+    }
+    this.data.emit(data);
   }
 
   createYearRange() {
     const currentYear = formatDate(new Date(), 'yyyy', 'en');
     const startYear = parseInt(currentYear) - 100;
     this.yearRange = startYear + ':' + currentYear;
+  }
+
+  setUsername(username){
+    this.form.controls['username'].setValue(username);
+  }
+  setPassword(password){
+    this.form.controls['password'].setValue(password);
+  }
+  setRepassword(repassword){
+    this.form.controls['repassword'].setValue(repassword);
   }
 
 

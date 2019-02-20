@@ -11,7 +11,10 @@ export class ProfileFormService {
    * 'Profile', 'Register', 'Edit'
    */
   setFormType(formType) {
-    this.formType = formType
+    this.formType = formType;
+  }
+  getFormType() {
+    this.formType;
   }
 
   getSettingButton() {

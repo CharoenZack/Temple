@@ -1,6 +1,4 @@
-<app-profile-form [title]='title' (dataForm)='onSubmit($event)' (dataFormError)='setFormError($event)'
-    (dataValidationMessage)='setValidationMessage($event)'>
-
+<app-profile-form [title]='title' (data)='onSubmit($event)' >
 </app-profile-form>
 
 <p-toast position="center" key="warning" [modal]="true" [baseZIndex]="5000">
