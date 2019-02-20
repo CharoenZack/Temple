@@ -1,0 +1,12 @@
+.center-grid{
+    margin: 0 auto   ;
+}
+div.text-danger.text-invalid{
+    color: rgb(255, 0, 0)
+}
+.title-p-card{
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+}
+
