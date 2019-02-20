@@ -17,7 +17,7 @@ import { ScheduleComponent } from './schedule/schedule.component';
 @NgModule({
   declarations: [
     ContentComponent,
-    PersonalInfoComponent
+    PersonalInfoComponent,
     BaggagesComponent,
     CoursesComponent,
     CourseResgisterComponent,

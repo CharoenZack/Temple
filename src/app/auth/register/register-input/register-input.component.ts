@@ -7,33 +7,32 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   <fieldset>
   <legend>ข้อมูล</legend>
 
-  <div class="ui-inputgroup">
-  <div class="ui-g-3 ui-g-offset-2 ui-lg-3 ui-lg-offset-2 ui-md-3 ui-md-offset-1 ui-sm-3 ui-sm-offset-0">
+
+  <div class="ui-g-3 ui-g-offset-2 ui-lg-3 ui-lg-offset-2 ui-md-3 ui-md-offset-1 ui-sm-12 ui-sm-offset-0">
     Username*
   </div>
-  <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-9">
+  <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-12">
     <div><input type="text" pInputText placeholder="Username" [(ngModel)]="username" (blur)='bindUsername()'></div>
     <div *ngIf="formError.username" class="text-danger text-invalid">{{formError.username}}</div>
   </div>
-</div>
-<div class="ui-inputgroup">
-  <div class="ui-g-3 ui-g-offset-2 ui-lg-3 ui-lg-offset-2 ui-md-3 ui-md-offset-1 ui-sm-3 ui-sm-offset-0">
+
+
+  <div class="ui-g-3 ui-g-offset-2 ui-lg-3 ui-lg-offset-2 ui-md-3 ui-md-offset-1 ui-sm-12 ui-sm-offset-0">
     Password*
   </div>
-  <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-9">
+  <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-12">
     <div><input type="password" pInputText placeholder="Password" [(ngModel)]="password" (blur)='bindPassword()' ></div>
     <div *ngIf="formError.password" class="text-danger text-invalid">{{formError.password}}</div>
   </div>
-</div>
-<div class="ui-inputgroup">
-  <div class="ui-g-3 ui-g-offset-2 ui-lg-3 ui-lg-offset-2 ui-md-3 ui-md-offset-1 ui-sm-3 ui-sm-offset-0">
+
+  <div class="ui-g-3 ui-g-offset-2 ui-lg-3 ui-lg-offset-2 ui-md-3 ui-md-offset-1 ui-sm-12 ui-sm-offset-0">
     Re-Password*
   </div>
-  <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-9">
+  <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-12">
     <div><input type="password" pInputText placeholder="Re-Password" [(ngModel)]="repassword" (blur)='bindRepassword()' ></div>
     <div *ngIf="formError.repassword" class="text-danger text-invalid">{{formError.repassword}}</div>
   </div>
-</div>
+
 </fieldset>
   `,
   styles: [`

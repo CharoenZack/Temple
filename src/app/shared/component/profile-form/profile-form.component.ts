@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, HostBinding, Directive } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TitleName } from '../../interfaces/title-name';
 import { TitleNameService } from '../../service/title-name.service';
@@ -30,10 +30,11 @@ export class ProfileFormComponent implements OnInit {
   public titleName: TitleName[];
   public form: FormGroup;
   public formType: String;
+  public readonly: boolean
   public disabled: boolean
   public buttonVisible: boolean
   public formRegisterDisplay: boolean;
-  public titleNamePerson:TitleName;
+  public titleNamePerson: TitleName;
 
   public formConponent = {
     titleName: ['', Validators.required],
@@ -96,7 +97,7 @@ export class ProfileFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private profileService: ProfileFormService,
-    private personnalInfoService:PersonalInfoService
+    private personnalInfoService: PersonalInfoService
   ) { }
 
   ngOnInit() {
@@ -115,14 +116,14 @@ export class ProfileFormComponent implements OnInit {
       this.createForm();
     }
     // for Profile form
-    if(this.formType == 'Profile'){
+    if (this.formType == 'Profile') {
       const id = this.route.snapshot.paramMap.get('id');
       const personalData = this.personnalInfoService.getPersonalInfo(id);
       // set titlename in form
       this.titleNamePerson = this.titleNameService.getTitleName(+personalData.titleName);
       this.form.controls['fname'].setValue(personalData.fname);
       this.form.controls['lname'].setValue(personalData.lname);
-      //this.form.controls['birthday'].setValue(personalData.birthday);
+      this.form.controls['birthday'].setValue(new Date(personalData.birthday));
       this.form.controls['gender'].setValue(personalData.gender);
       this.form.controls['phone'].setValue(personalData.phone);
       this.form.controls['email'].setValue(personalData.email);
@@ -176,6 +177,7 @@ export class ProfileFormComponent implements OnInit {
     const { formType } = this.route.snapshot.data
     this.formType = formType;
     this.profileService.setFormType(formType);
+    this.readonly = this.profileService.getSettingReadOnly();
     this.disabled = this.profileService.getSettingDisabled();
   }
 
@@ -188,7 +190,7 @@ export class ProfileFormComponent implements OnInit {
         "กันยายน ", "ตุลาคม ", "พฤศจิกายน ", "ธันวาคม "],
       today: 'Today',
       clear: 'Clear',
-      dateFormat: 'dd/mm/yy'
+      // dateFormat: 'dd/mm/yy'
     };
   }
 
@@ -200,7 +202,7 @@ export class ProfileFormComponent implements OnInit {
     const formRegister = {
       username: ['', Validators.required],
       password: ['', Validators.required],
-      repassword:['',Validators.required]
+      repassword: ['', Validators.required]
     }
     this.form = this.formBuilder.group({
       ...formRegister,
@@ -226,16 +228,15 @@ export class ProfileFormComponent implements OnInit {
     this.yearRange = startYear + ':' + currentYear;
   }
 
-  setUsername(username){
+  setUsername(username) {
     this.form.controls['username'].setValue(username);
   }
-  setPassword(password){
+  setPassword(password) {
     this.form.controls['password'].setValue(password);
   }
-  setRepassword(repassword){
+  setRepassword(repassword) {
     this.form.controls['repassword'].setValue(repassword);
   }
-
 
 
 }

@@ -31,7 +31,6 @@ import { ProfileFormService } from './service/profile-form.service';
 import { ProfileFormComponent } from './component/profile-form/profile-form.component';
 import { ConfirmButtonComponent } from './component/profile-form/confirm-button/confirm-button.component';
 
-import {FormsModule} from '@angular/forms'
 import { RegisterInputModule } from '../auth/register/register-input/register-input.module';
 import { PersonalInfoService } from './service/personal-info.service';
 
@@ -76,7 +75,8 @@ import { PersonalInfoService } from './service/personal-info.service';
     TableModule,
     StepsModule,
     FormsModule,
-    FullCalendarModule
+    FullCalendarModule,
+
   ],
   providers: [TitleNameService, MessageService, ProfileFormService,PersonalInfoService]
 })

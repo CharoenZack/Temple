@@ -8,7 +8,7 @@ export class PersonalInfoService {
     titleName:'02',
     fname: 'มานี',
     lname: 'แสนดี',
-    birthday: '16/12/1970',
+    birthday: '12/21/1980',
     gender: '2',
     address: 'เลขที่ 5 หมู่ 5 ',
     phone: '0901112222',
