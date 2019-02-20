@@ -1,7 +1,12 @@
-.aa{
-    margin: 0 auto; 
+.aa {
+    margin: 0 auto;
 }
+
 .ui-fluid .ui-button {
     width: 100%;
     margin-bottom: 2mm;
+}
+
+:host>>>.ui-table .ui-table-tbody>tr>td {
+    word-wrap: break-word;
 }
