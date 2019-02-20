@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Baggage } from 'src/app/shared/interfaces/baggage';
-import { BaggageService } from 'src/app/shared/service/baggage.service';
+import { Baggage } from '../../shared/interfaces/baggage';
+import { BaggageService } from '../../shared/service/baggage.service';
 
 @Component({
   selector: 'app-baggages',
