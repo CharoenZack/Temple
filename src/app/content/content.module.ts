@@ -12,6 +12,7 @@ import { CoreModule } from "../core/core.module";
 import { SharedModule } from "../shared/shared.module";
 import { ContentRoutingModule } from "./content-routing.module";
 import { BaggagesComponent } from './baggages/baggages.component';
+import { ScheduleComponent } from './schedule/schedule.component';
 @NgModule({
   declarations: [
     ContentComponent,
@@ -23,6 +24,7 @@ import { BaggagesComponent } from './baggages/baggages.component';
     CourseCreateComponent,
     CoursesListComponent,
     CourseComponent,
+    ScheduleComponent
   ],
   imports: [
     CoreModule,

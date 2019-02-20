@@ -1,63 +1,60 @@
-<div class="ui-g-12">
+<div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+  <div style="text-align:center">
+    <h1>ตารางเรียน</h1>
+  </div>
+  <div class="line"></div>
+  <div class="container">
     <div class="row">
-  
-      <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ui-fluid">
-        <div style="text-align: center">
-          <h2>คอร์ส</h2>
-        </div>
-  
+      <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12">
         <p-table [columns]="cols" [value]="courses" [paginator]="true" [rows]="10">
           <ng-template pTemplate="header" let-columns>
             <tr>
               <th pSortableColumn="date">
                 วันที่
-                <p-sortIcon field="date" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order"
+                <p-sortIcon field="date" ariaLabel="Activate to sort"
+                  ariaLabelDesc="Activate to sort in descending order"
                   ariaLabelAsc="Activate to sort in ascending order">
                 </p-sortIcon>
               </th>
               <th pSortableColumn="name">
                 ชื่อคอร์ส
-                <p-sortIcon field="name" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order"
+                <p-sortIcon field="name" ariaLabel="Activate to sort"
+                  ariaLabelDesc="Activate to sort in descending order"
                   ariaLabelAsc="Activate to sort in ascending order">
                 </p-sortIcon>
               </th>
               <th pSortableColumn="location">
                 สถานที่
                 <p-sortIcon field="location" ariaLabel="Activate to sort"
-                  ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
+                  ariaLabelDesc="Activate to sort in descending order"
+                  ariaLabelAsc="Activate to sort in ascending order">
                 </p-sortIcon>
               </th>
               <th pSortableColumn="annotaion">
                 หมายเหตุ
                 <p-sortIcon field="annotaion" ariaLabel="Activate to sort"
-                  ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
+                  ariaLabelDesc="Activate to sort in descending order"
+                  ariaLabelAsc="Activate to sort in ascending order">
                 </p-sortIcon>
               </th>
               <th>
                 รายชื่อ
               </th>
-  
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-rowData let-columns="columns">
             <tr>
-  
-                <td *ngFor="let col of columns" [routerLink]="['/courses',rowData['id']]">
-                  {{rowData[col.field]}}
-                </td>
-       
-  
+              <td *ngFor="let col of columns" [routerLink]="['/courses',rowData['id']]">
+                {{rowData[col.field]}}
+              </td>
               <td>
-                <button pButton type="button" label="สมัคร" class="ui-button-success"  ></button>
-  
+                <button pButton type="button" label="สมัคร" class="ui-button-success"></button>
                 <button pButton type="button" label="ขออนุมัติพิเศษ" class="ui-button-info"></button>
               </td>
             </tr>
           </ng-template>
         </p-table>
-  
-  
       </div>
-  
     </div>
   </div>
+</div>

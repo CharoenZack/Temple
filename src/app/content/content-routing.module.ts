@@ -5,6 +5,7 @@ import { ContentComponent } from './content.component';
 import { BaggagesComponent } from "./baggages/baggages.component";
 import { CoursesComponent } from './courses/courses.component';
 import { CoursesListComponent } from './courses/courses-list/courses-list.component';
+import { ScheduleComponent } from './schedule/schedule.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,10 @@ const routes: Routes = [
       {
         path: "baggages",
         component: BaggagesComponent,
+      },
+      {
+        path: "schedule",
+        component: ScheduleComponent,
       }
     ]
   }
