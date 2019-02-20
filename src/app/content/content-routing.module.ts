@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { CourseComponent } from './courses/course/course.component';
 import { ContentComponent } from './content.component';
 import { BaggagesComponent } from "./baggages/baggages.component";
+import { PersonalInfoComponent } from './personal-info/personal-info.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,11 @@ const routes: Routes = [
       {
         path: "baggages",
         component: BaggagesComponent,
+      },
+      {
+        path: "profile/:id",
+        component: PersonalInfoComponent,
+        data:{formType:'Profile'}
       }
     ]
   }

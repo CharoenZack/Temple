@@ -3,6 +3,10 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-register-input',
   template: `
+
+  <fieldset>
+  <legend>ข้อมูล</legend>
+
   <div class="ui-inputgroup">
   <div class="ui-g-3 ui-g-offset-2 ui-lg-3 ui-lg-offset-2 ui-md-3 ui-md-offset-1 ui-sm-3 ui-sm-offset-0">
     Username*
@@ -30,10 +34,27 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
     <div *ngIf="formError.repassword" class="text-danger text-invalid">{{formError.repassword}}</div>
   </div>
 </div>
+</fieldset>
   `,
-  styles: [`div.text-danger.text-invalid{
-    color: rgb(255, 0, 0)
-}`]
+  styles: [`
+      div.text-danger.text-invalid{
+        color: rgb(255, 0, 0)
+      }
+      legend{
+        margin: 2em;
+        font-size: 1.15em;
+        font-weight: bold;
+        background-color: white;
+      }
+
+      fieldset {
+        margin-block-end: 2em;
+        border: 1px solid rgb(206, 206, 206);
+        box-shadow: 0px 0px 10px rgba(192, 192, 192, 0.5);
+        border-radius: 5px;
+      }
+
+`]
 
 })
 export class RegisterInputComponent implements OnInit {

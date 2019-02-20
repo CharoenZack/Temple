@@ -1,5 +1,11 @@
-<app-profile-form [title]='title' (data)='onSubmit($event)' >
-</app-profile-form>
+<div class="ui-g-12">
+    <div class="row ">
+        <div class="ui-g-7 ui-lg-7 ui-md-10 ui-sm-12 center-grid ">
+            <app-profile-form [title]='title' (data)='onSubmit($event)'>
+            </app-profile-form>
+        </div>
+    </div>
+</div>
 
 <p-toast position="center" key="warning" [modal]="true" [baseZIndex]="5000">
     <ng-template let-message pTemplate="message">

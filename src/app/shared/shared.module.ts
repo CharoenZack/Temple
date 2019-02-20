@@ -27,15 +27,16 @@ import { faCalendarAlt } from '@fortawesome/free-regular-svg-icons';
 import { ProfileFormService } from './service/profile-form.service';
 
 import { ConfirmButtonComponent } from './component/profile-form/confirm-button/confirm-button.component';
-import { RegisterInputComponent } from './component/profile-form/register-input/register-input.component';
 
 import {FormsModule} from '@angular/forms'
+import { AuthModule } from '../auth/auth.module';
+import { RegisterInputComponent } from '../auth/register/register-input/register-input.component';
+import { RegisterInputModule } from '../auth/register/register-input/register-input.module';
 
 @NgModule({
   declarations: [
     ProfileFormComponent,
-    ConfirmButtonComponent,
-    RegisterInputComponent,
+    ConfirmButtonComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +51,8 @@ import {FormsModule} from '@angular/forms'
     InputMaskModule,
     CalendarModule,
     ToastModule,
-    FormsModule
+    FormsModule,
+    RegisterInputModule
   ],
   exports: [
     CommonModule,
