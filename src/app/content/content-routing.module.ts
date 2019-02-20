@@ -4,6 +4,9 @@ import { CourseComponent } from './courses/course/course.component';
 import { ContentComponent } from './content.component';
 import { BaggagesComponent } from "./baggages/baggages.component";
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
+import { CoursesComponent } from './courses/courses.component';
+import { CoursesListComponent } from './courses/courses-list/courses-list.component';
+import { ScheduleComponent } from './schedule/schedule.component';
 
 const routes: Routes = [
   {
@@ -12,7 +15,17 @@ const routes: Routes = [
     children: [
       {
         path: "courses",
-        component: CourseComponent,
+        component: CoursesComponent,
+        children:[
+          {
+            path: "",
+            component:CoursesListComponent,
+          },
+          {
+            path: ":id",
+            component:CourseComponent,
+          },
+        ]
       },
       {
         path: "baggages",
@@ -22,6 +35,10 @@ const routes: Routes = [
         path: "profile/:id",
         component: PersonalInfoComponent,
         data:{formType:'Profile'}
+      },
+      {
+        path: "schedule",
+        component: ScheduleComponent,
       }
     ]
   }
