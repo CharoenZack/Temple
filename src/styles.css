@@ -4,27 +4,10 @@ body {
     margin: 80px 0 0 0;
 }
 
-.ui-sidebar-left {
-    top: 80px !important;
-    height: calc(100% - 80px) !important;
-    padding: 0 !important;
-}
-
-.ui-sidebar-left.ui-sidebar-sm, .ui-sidebar-right.ui-sidebar-sm {
-    width: 300px !important;
-}
-
 .layout-content {
     margin-left: 300px;
 }
 
-.fc td.fc-today.fc-day {
-    background-color: #fcf8e3 !important;
-}
-
-.fc td.fc-today.fc-day-top {
-    background: 0 0 !important;
-}
 
 .row {
     display: flex;
@@ -60,19 +43,11 @@ body {
     body {
         margin: 95px 0 0 0;
     }
-    .ui-sidebar-left {
-        top: 95px !important;
-        height: calc(100% - 95px) !important;
-    }
 }
 
 @media screen and (max-width:520px) {
     body {
         margin: 80px 0 0 0;
-    }
-    .ui-sidebar-left {
-        top: 80px !important;
-        height: calc(100% - 80px) !important;
     }
 }
 
