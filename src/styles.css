@@ -18,6 +18,14 @@ body {
     margin-left: 300px;
 }
 
+.fc td.fc-today.fc-day {
+    background-color: #fcf8e3 !important;
+}
+
+.fc td.fc-today.fc-day-top {
+    background: 0 0 !important;
+}
+
 .row {
     display: flex;
     flex-wrap: wrap;
@@ -25,8 +33,7 @@ body {
     margin-left: -15px;
 }
 
-
-.login-form .ui-card-title{
+.login-form .ui-card-title {
     text-align: center !important;
 }
 
@@ -34,6 +41,18 @@ body {
     max-width: 100% !important;
     min-width: 100% !important;
 }
+
+.line {
+    border-bottom: 1px solid #cecece;
+    clear: both;
+    display: block;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
 @media screen and (max-width:1024px) {
     .layout-content {
         margin-left: 0;
@@ -41,7 +60,6 @@ body {
     body {
         margin: 95px 0 0 0;
     }
-    
     .ui-sidebar-left {
         top: 95px !important;
         height: calc(100% - 95px) !important;
@@ -55,5 +73,11 @@ body {
     .ui-sidebar-left {
         top: 80px !important;
         height: calc(100% - 80px) !important;
+    }
+}
+
+@media screen and (max-width:414px) {
+    .container {
+        width: 95%;
     }
 }
