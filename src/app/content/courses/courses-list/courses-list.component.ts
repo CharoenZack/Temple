@@ -17,7 +17,7 @@ export class CoursesListComponent implements OnInit {
 
   ngOnInit() {
 
-    this.courses = this.course.getCourse();
+    this.courses = this.course.getCourses();
     console.log(this.courses)
     this.cols = [
       {field: 'date',header: 'วันที่'},
