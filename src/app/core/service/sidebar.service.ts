@@ -22,8 +22,8 @@ export class SidebarService {
     this.sideBar.next(false)
   }
 
-  destroy() {
-    this.sideBar.unsubscribe();
-  }
+  // destroy() {
+  //   this.sideBar.unsubscribe();
+  // }
 
 }
