@@ -6,23 +6,25 @@ import { BaggagesComponent } from "./baggages/baggages.component";
 import { CoursesComponent } from './courses/courses.component';
 import { CoursesListComponent } from './courses/courses-list/courses-list.component';
 import { ScheduleComponent } from './schedule/schedule.component';
+import { AuthGuard } from '../shared/guard/auth.guard';
 
 const routes: Routes = [
   {
     path: "",
     component: ContentComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: "courses",
         component: CoursesComponent,
-        children:[
+        children: [
           {
             path: "",
-            component:CoursesListComponent,
+            component: CoursesListComponent,
           },
           {
             path: ":id",
-            component:CourseComponent,
+            component: CourseComponent,
           },
         ]
       },
