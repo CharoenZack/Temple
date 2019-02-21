@@ -38,6 +38,13 @@ export class ProfileFormService {
     return false;
   }
 
+  getSettingReadOnly() {
+    if (this.formType == 'Profile') {
+      return true;
+    }
+    return false;
+  }
+
 
 
 }

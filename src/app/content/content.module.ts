@@ -12,12 +12,14 @@ import { CoreModule } from "../core/core.module";
 import { SharedModule } from "../shared/shared.module";
 import { ContentRoutingModule } from "./content-routing.module";
 import { BaggagesComponent } from './baggages/baggages.component';
+import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { ConfirmationService } from 'primeng/api';
 import { AuthGuard } from '../shared/guard/auth.guard';
 @NgModule({
   declarations: [
     ContentComponent,
+    PersonalInfoComponent,
     BaggagesComponent,
     CoursesComponent,
     CourseResgisterComponent,

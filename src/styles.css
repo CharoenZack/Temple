@@ -21,11 +21,6 @@ body {
     margin-right: auto;
 }
 
-้.fixtextarea {
-    max-width: 100% !important;
-    min-width: 100% !important;
-}
-
 .line {
     border-bottom: 1px solid #cecece;
     clear: both;

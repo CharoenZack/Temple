@@ -41,13 +41,14 @@ import { ProfileFormService } from './service/profile-form.service';
 
 import { ProfileFormComponent } from './component/profile-form/profile-form.component';
 import { ConfirmButtonComponent } from './component/profile-form/confirm-button/confirm-button.component';
-import { RegisterInputComponent } from './component/profile-form/register-input/register-input.component';
+
+import { RegisterInputModule } from '../auth/register/register-input/register-input.module';
+import { PersonalInfoService } from './service/personal-info.service';
 
 @NgModule({
   declarations: [
     ProfileFormComponent,
-    ConfirmButtonComponent,
-    RegisterInputComponent,
+    ConfirmButtonComponent
   ],
   imports: [
     CommonModule,
@@ -63,7 +64,7 @@ import { RegisterInputComponent } from './component/profile-form/register-input/
     CalendarModule,
     ToastModule,
     FormsModule,
-
+    RegisterInputModule
   ],
   exports: [
     CommonModule,
@@ -85,16 +86,12 @@ import { RegisterInputComponent } from './component/profile-form/register-input/
     TableModule,
     StepsModule,
     FormsModule,
-    FullCalendarModule,
     ConfirmDialogModule,
     MessageModule,
     MessagesModule,
+    FullCalendarModule,
   ],
-  providers: [
-    TitleNameService,
-    MessageService,
-    ProfileFormService
-  ]
+  providers: [TitleNameService, MessageService, ProfileFormService,PersonalInfoService]
 })
 export class SharedModule {
   constructor() {
