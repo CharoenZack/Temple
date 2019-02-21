@@ -23,10 +23,11 @@ import { FullCalendarModule } from 'primeng/fullcalendar';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
+import {DialogModule} from 'primeng/dialog';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faUser, faBars, faBookOpen, faArchive, faLock } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faBars, faBookOpen, faArchive, faLock,faLandmark,faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faCalendarAlt } from '@fortawesome/free-regular-svg-icons';
 
 import { ProfileFormService } from './service/profile-form.service';
@@ -81,11 +82,12 @@ import { RegisterInputComponent } from './component/profile-form/register-input/
     ConfirmDialogModule,
     MessageModule,
     MessagesModule,
+    DialogModule,
   ],
   providers: [TitleNameService, MessageService, ProfileFormService]
 })
 export class SharedModule {
   constructor() {
-    library.add(faUser, faBars, faBookOpen, faArchive, faLock, faCalendarAlt);
+    library.add(faUser, faBars, faBookOpen, faArchive, faLock, faCalendarAlt,faLandmark,faPlus);
   }
 }

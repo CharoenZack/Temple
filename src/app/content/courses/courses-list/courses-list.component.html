@@ -43,6 +43,9 @@
               <th class="ui-p-6">
                 รายชื่อ
               </th>
+              <th>
+
+              </th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-rowData let-columns="columns">
@@ -52,11 +55,12 @@
                 {{rowData[col.field]}}
               </td>
               <td>
-                
-                 
-                <button pButton type="button" label="สมัคร" class="ui-button-success" (click)="confirm1()"></button>
-                <button pButton type="button" label="ขออนุมัติพิเศษ" class="ui-button-info" ></button>
-                
+                <button pButton type="button" label="สมัคร" class="ui-button-success" (click)="confirm1()" style="width: 50%"></button>
+                <button pButton type="button" label="ขออนุมัติพิเศษ" class="ui-button-info" style="width: 50%"></button>
+              </td>
+              <td>
+                <button pButton type="button" label="สมัคร" class="ui-button-success" (click)="confirm1()" style="width: 50%"></button>
+                <button pButton type="button" label="ขออนุมัติพิเศษ" class="ui-button-info" style="width: 50%"></button>
               </td>
             </tr>
           </ng-template>

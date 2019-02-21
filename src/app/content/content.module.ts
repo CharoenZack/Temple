@@ -14,6 +14,7 @@ import { ContentRoutingModule } from "./content-routing.module";
 import { BaggagesComponent } from './baggages/baggages.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import {ConfirmationService} from 'primeng/api';
+import { LocationComponent } from './location/location.component';
 @NgModule({
   declarations: [
     ContentComponent,
@@ -25,7 +26,8 @@ import {ConfirmationService} from 'primeng/api';
     CourseCreateComponent,
     CoursesListComponent,
     CourseComponent,
-    ScheduleComponent
+    ScheduleComponent,
+    LocationComponent
   ],
   imports: [
     CoreModule,

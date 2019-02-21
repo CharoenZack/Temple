@@ -19,6 +19,9 @@
     <a [routerLink]="['/baggages']" (click)="clickMenu()" routerLinkActive="active-menuitem" class="list-menu"><span>
         <fa-icon [icon]="['fas', 'archive']"></fa-icon> สัมภาระ
       </span></a>
+      <a [routerLink]="['/location']" (click)="clickMenu()" routerLinkActive="active-menuitem" class="list-menu"><span>
+        <fa-icon [icon]="['fas', 'landmark']"></fa-icon> จัดการสถานที่
+      </span></a>
 
     <a (click)="clickMenu()" routerLinkActive="active-menuitem" class="list-menu"><span>
         <fa-icon [icon]="['fas', 'lock']"></fa-icon> ออกจากระบบ

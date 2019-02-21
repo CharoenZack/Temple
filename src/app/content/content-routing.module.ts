@@ -6,6 +6,7 @@ import { BaggagesComponent } from "./baggages/baggages.component";
 import { CoursesComponent } from './courses/courses.component';
 import { CoursesListComponent } from './courses/courses-list/courses-list.component';
 import { ScheduleComponent } from './schedule/schedule.component';
+import { LocationComponent } from "./location/location.component";
 
 const routes: Routes = [
   {
@@ -33,6 +34,10 @@ const routes: Routes = [
       {
         path: "schedule",
         component: ScheduleComponent,
+      },
+      {
+        path: "location",
+        component: LocationComponent,
       }
     ]
   }
