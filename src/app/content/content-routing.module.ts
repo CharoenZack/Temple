@@ -7,6 +7,7 @@ import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { CoursesComponent } from './courses/courses.component';
 import { CoursesListComponent } from './courses/courses-list/courses-list.component';
 import { ScheduleComponent } from './schedule/schedule.component';
+import { EditPersonalInfoComponent } from './personal-info/edit-personal-info/edit-personal-info.component';
 import { LocationComponent } from "./location/location.component";
 import { ManagedTitlenameComponent } from "./managed-titlename/managed-titlename.component";
 import { AuthGuard } from '../shared/guard/auth.guard';
@@ -39,6 +40,11 @@ const routes: Routes = [
         path: "profile/:id",
         component: PersonalInfoComponent,
         data:{formType:'Profile'}
+      },
+      {
+        path: "profile/:id/edit",
+        component: EditPersonalInfoComponent,
+        data:{formType:'Edit'}
       },
       {
         path: "schedule",
