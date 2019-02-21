@@ -20,6 +20,9 @@ import { PasswordModule } from 'primeng/password';
 import { TableModule } from 'primeng/table';
 import { StepsModule } from 'primeng/steps';
 import { FullCalendarModule } from 'primeng/fullcalendar';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -51,7 +54,8 @@ import { RegisterInputComponent } from './component/profile-form/register-input/
     InputMaskModule,
     CalendarModule,
     ToastModule,
-    FormsModule
+    FormsModule,
+
   ],
   exports: [
     CommonModule,
@@ -73,7 +77,10 @@ import { RegisterInputComponent } from './component/profile-form/register-input/
     TableModule,
     StepsModule,
     FormsModule,
-    FullCalendarModule
+    FullCalendarModule,
+    ConfirmDialogModule,
+    MessageModule,
+    MessagesModule,
   ],
   providers: [TitleNameService, MessageService, ProfileFormService]
 })
