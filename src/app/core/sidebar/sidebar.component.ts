@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { AuthService } from '../../shared/service/auth.service';
 import { SidebarService } from '../service/sidebar.service';
 
@@ -7,22 +7,23 @@ import { SidebarService } from '../service/sidebar.service';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
-export class SidebarComponent implements OnInit, OnDestroy {
+export class SidebarComponent implements OnInit {
 
   public openSideBar: boolean;
   public modalSidebar: boolean;
   public showCloseIconSidebar: boolean;
   public isLoggedIn: boolean;
-
   public screenWidth: number;
+
   constructor(
     private sidebarService: SidebarService,
-    private auth: AuthService
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
     this.setSidebar();
     this.sidebarService.sidebar().subscribe(res => this.openSideBar = res);
+    this.authService.isLoggedIn().subscribe(res => this.isLoggedIn = res);
   }
 
   clickOutsidebar() {
@@ -54,11 +55,17 @@ export class SidebarComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy() {
-    this.sidebarService.destroy();
-  }
+  // ngOnDestroy() {
+  //   this.sidebarService.destroy();
+  // }
 
   logout(e) {
     e.preventDefault();
+    this.authService.logout();
+    if (this.screenWidth > 1024) {
+      this.sidebarService.switchBar(true);
+    } else {
+      this.sidebarService.switchBar(false);
+    }
   }
 }

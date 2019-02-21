@@ -16,8 +16,9 @@ body {
     margin-left: -15px;
 }
 
-.login-form .ui-card-title {
-    text-align: center !important;
+.horizontal-center{
+    margin-left: auto;
+    margin-right: auto;
 }
 
 ้.fixtextarea {
