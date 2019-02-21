@@ -15,7 +15,10 @@ import { BaggagesComponent } from './baggages/baggages.component';
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { EditPersonalInfoComponent } from './personal-info/edit-personal-info/edit-personal-info.component';
-import {ConfirmationService} from 'primeng/api';
+import { AuthGuard } from '../shared/guard/auth.guard';
+import { LocationComponent } from './location/location.component';
+import { ManagedTitlenameComponent } from './managed-titlename/managed-titlename.component';
+import { ConfirmationService } from 'primeng/api';
 @NgModule({
   declarations: [
     ContentComponent,
@@ -29,6 +32,8 @@ import {ConfirmationService} from 'primeng/api';
     CoursesListComponent,
     CourseComponent,
     ScheduleComponent,
+    LocationComponent,
+    ManagedTitlenameComponent,
     EditPersonalInfoComponent
   ],
   imports: [
@@ -40,7 +45,8 @@ import {ConfirmationService} from 'primeng/api';
     ContentComponent
   ],
   providers: [
-    ConfirmationService
+    ConfirmationService,
+    AuthGuard
   ]
 })
 export class ContentModule { }

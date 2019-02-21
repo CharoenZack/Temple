@@ -8,23 +8,27 @@ import { CoursesComponent } from './courses/courses.component';
 import { CoursesListComponent } from './courses/courses-list/courses-list.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { EditPersonalInfoComponent } from './personal-info/edit-personal-info/edit-personal-info.component';
+import { LocationComponent } from "./location/location.component";
+import { ManagedTitlenameComponent } from "./managed-titlename/managed-titlename.component";
+import { AuthGuard } from '../shared/guard/auth.guard';
 
 const routes: Routes = [
   {
     path: "",
     component: ContentComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: "courses",
         component: CoursesComponent,
-        children:[
+        children: [
           {
             path: "",
-            component:CoursesListComponent,
+            component: CoursesListComponent,
           },
           {
             path: ":id",
-            component:CourseComponent,
+            component: CourseComponent,
           },
         ]
       },
@@ -45,6 +49,14 @@ const routes: Routes = [
       {
         path: "schedule",
         component: ScheduleComponent,
+      },
+      {
+        path: "location",
+        component: LocationComponent,
+      },
+      {
+        path: "managedTitlename",
+        component: ManagedTitlenameComponent,
       }
     ]
   }
