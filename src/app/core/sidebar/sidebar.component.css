@@ -24,3 +24,27 @@ a.list-menu span {
 a.active-menuitem>span {
     color: #1b82d7;
 }
+
+:host>>>.ui-sidebar-left {
+    top: 80px !important;
+    height: calc(100% - 80px) !important;
+    padding: 0 !important;
+}
+
+:host>>>.ui-sidebar-left.ui-sidebar-sm, .ui-sidebar-right.ui-sidebar-sm {
+    width: 300px !important;
+}
+
+@media screen and (max-width:1024px) {
+    :host>>>.ui-sidebar-left {
+        top: 95px !important;
+        height: calc(100% - 95px) !important;
+    }
+}
+
+@media screen and (max-width:520px) {
+    :host>>>.ui-sidebar-left {
+        top: 80px !important;
+        height: calc(100% - 80px) !important;
+    }
+}

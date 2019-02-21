@@ -4,19 +4,10 @@ body {
     margin: 80px 0 0 0;
 }
 
-.ui-sidebar-left {
-    top: 80px !important;
-    height: calc(100% - 80px) !important;
-    padding: 0 !important;
-}
-
-.ui-sidebar-left.ui-sidebar-sm, .ui-sidebar-right.ui-sidebar-sm {
-    width: 300px !important;
-}
-
 .layout-content {
     margin-left: 300px;
 }
+
 
 .row {
     display: flex;
@@ -25,15 +16,26 @@ body {
     margin-left: -15px;
 }
 
-
-.login-form .ui-card-title{
+.login-form .ui-card-title {
     text-align: center !important;
 }
 
-.fixtextarea {
+้.fixtextarea {
     max-width: 100% !important;
     min-width: 100% !important;
 }
+
+.line {
+    border-bottom: 1px solid #cecece;
+    clear: both;
+    display: block;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
 @media screen and (max-width:1024px) {
     .layout-content {
         margin-left: 0;
@@ -41,19 +43,16 @@ body {
     body {
         margin: 95px 0 0 0;
     }
-    
-    .ui-sidebar-left {
-        top: 95px !important;
-        height: calc(100% - 95px) !important;
-    }
 }
 
 @media screen and (max-width:520px) {
     body {
         margin: 80px 0 0 0;
     }
-    .ui-sidebar-left {
-        top: 80px !important;
-        height: calc(100% - 80px) !important;
+}
+
+@media screen and (max-width:414px) {
+    .container {
+        width: 95%;
     }
 }

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { ProfileFormComponent } from './component/profile-form/profile-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { ButtonModule } from 'primeng/button';
 import { RadioButtonModule } from 'primeng/radiobutton'
 import { DropdownModule } from 'primeng/dropdown';
@@ -19,17 +19,21 @@ import { SidebarModule } from 'primeng/sidebar';
 import { PasswordModule } from 'primeng/password';
 import { TableModule } from 'primeng/table';
 import { StepsModule } from 'primeng/steps';
+import { FullCalendarModule } from 'primeng/fullcalendar';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUser, faBars, faBookOpen, faArchive, faLock } from '@fortawesome/free-solid-svg-icons';
 import { faCalendarAlt } from '@fortawesome/free-regular-svg-icons';
+
 import { ProfileFormService } from './service/profile-form.service';
 
+import { ProfileFormComponent } from './component/profile-form/profile-form.component';
 import { ConfirmButtonComponent } from './component/profile-form/confirm-button/confirm-button.component';
 import { RegisterInputComponent } from './component/profile-form/register-input/register-input.component';
-
-import {FormsModule} from '@angular/forms'
 
 @NgModule({
   declarations: [
@@ -50,7 +54,8 @@ import {FormsModule} from '@angular/forms'
     InputMaskModule,
     CalendarModule,
     ToastModule,
-    FormsModule
+    FormsModule,
+
   ],
   exports: [
     CommonModule,
@@ -71,7 +76,11 @@ import {FormsModule} from '@angular/forms'
     FontAwesomeModule,
     TableModule,
     StepsModule,
-    FormsModule
+    FormsModule,
+    FullCalendarModule,
+    ConfirmDialogModule,
+    MessageModule,
+    MessagesModule,
   ],
   providers: [TitleNameService, MessageService, ProfileFormService]
 })
