@@ -12,13 +12,17 @@ import { CoreModule } from "../core/core.module";
 import { SharedModule } from "../shared/shared.module";
 import { ContentRoutingModule } from "./content-routing.module";
 import { BaggagesComponent } from './baggages/baggages.component';
+import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { ScheduleComponent } from './schedule/schedule.component';
-import {ConfirmationService} from 'primeng/api';
+import { EditPersonalInfoComponent } from './personal-info/edit-personal-info/edit-personal-info.component';
+import { AuthGuard } from '../shared/guard/auth.guard';
 import { LocationComponent } from './location/location.component';
 import { ManagedTitlenameComponent } from './managed-titlename/managed-titlename.component';
+import { ConfirmationService } from 'primeng/api';
 @NgModule({
   declarations: [
     ContentComponent,
+    PersonalInfoComponent,
     BaggagesComponent,
     CoursesComponent,
     CourseResgisterComponent,
@@ -29,7 +33,8 @@ import { ManagedTitlenameComponent } from './managed-titlename/managed-titlename
     CourseComponent,
     ScheduleComponent,
     LocationComponent,
-    ManagedTitlenameComponent
+    ManagedTitlenameComponent,
+    EditPersonalInfoComponent
   ],
   imports: [
     CoreModule,
@@ -40,7 +45,8 @@ import { ManagedTitlenameComponent } from './managed-titlename/managed-titlename
     ContentComponent
   ],
   providers: [
-    ConfirmationService
+    ConfirmationService,
+    AuthGuard
   ]
 })
 export class ContentModule { }

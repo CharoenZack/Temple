@@ -10,3 +10,30 @@ div.text-danger.text-invalid{
     font-weight: bold;
 }
 
+legend{
+    margin: 2em;
+    font-size: 1.15em;
+    font-weight: bold;
+    background-color: white;
+}
+
+fieldset {
+    
+    border: 1px solid rgb(206, 206, 206);
+    box-shadow: 0px 0px 10px rgba(192, 192, 192, 0.5);
+    border-radius: 5px;
+}
+
+:host >>> .fixtextarea {
+    max-width: 100% !important;
+    min-width: 100% !important;
+}
+
+img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 200px;
+  }
+
+

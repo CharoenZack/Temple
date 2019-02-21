@@ -1,31 +1,47 @@
-<div class="ui-g-12">
-  <div class="row login-form">
+<div class="ui-fluid">
+  <div class="container">
 
-    <div class="ui-g-3 ui-lg-3 ui-md-3 ui-sm-12 aa">
-      <p-card header="Login" [style]="{width: '360px',height:'300px'}">
-        <form [formGroup]="form" (submit)="onSubmit($event)">
-          <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ui-fluid">
-            <label>Email address</label>
-            <input type="text" pInputText formControlName="email" name="email" placeholder="Enter email" />
-          </div>
-          <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ui-fluid">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" pInputText formControlName="password" name="password" placeholder="Password" />
-          </div>
-          <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ui-fluid">
-            <a routerLink="/auth/forget-password"> ลืมรหัสผ่าน</a>
-          </div>
-
-          <div class="ui-g-6 ui-lg-6 ui-md-6 ui-sm-6 ui-fluid">
-            <button pButton type="submit" label="Login" class="ui-button-success"></button>
-
-          </div>
-          <div class="ui-g-6 ui-lg-6 ui-md-6 ui-sm-6 ui-fluid">
-            <button pButton type="button" label="Register" routerLink="/auth/register"></button>
-          </div>
-        </form>
-      </p-card>
+    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+      <div class="row">
+        <div class="ui-g-12 ui-lg-3 ui-md-5 ui-sm-12 horizontal-center">
+          <p-card>
+            <p-header>Login</p-header>
+            <form [formGroup]="form" (submit)="onSubmit($event)">
+              <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+                <label for="username">Username</label>
+                <div class="ui-inputgroup">
+                  <span class="ui-inputgroup-addon">
+                    <fa-icon [icon]="['fas', 'user']"></fa-icon>
+                  </span>
+                  <input type="text" pInputText id="username" formControlName="username" name="username"
+                    placeholder="Username" />
+                </div>
+              </div>
+              <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+                <label for="password">Password</label>
+                <div class="ui-inputgroup">
+                  <span class="ui-inputgroup-addon">
+                    <fa-icon [icon]="['fas', 'lock']"></fa-icon>
+                  </span>
+                  <input type="password" id="password" pInputText formControlName="password" name="password"
+                    placeholder="Password" />
+                </div>
+              </div>
+              <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+                <a routerLink="/auth/forget-password"> ลืมรหัสผ่าน</a>
+              </div>
+              <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+                <div class="ui-g-6 ui-lg-6 ui-md-6 ui-sm-6">
+                  <button pButton type="submit" label="Login" class="ui-button-success"></button>
+                </div>
+                <div class="ui-g-6 ui-lg-6 ui-md-6 ui-sm-6">
+                  <button pButton type="button" label="Register" routerLink="/auth/register"></button>
+                </div>
+              </div>
+            </form>
+          </p-card>
+        </div>
+      </div>
     </div>
-
   </div>
 </div>
