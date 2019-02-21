@@ -15,6 +15,7 @@ import { BaggagesComponent } from './baggages/baggages.component';
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { EditPersonalInfoComponent } from './personal-info/edit-personal-info/edit-personal-info.component';
+import {ConfirmationService} from 'primeng/api';
 @NgModule({
   declarations: [
     ContentComponent,
@@ -37,6 +38,9 @@ import { EditPersonalInfoComponent } from './personal-info/edit-personal-info/ed
   ],
   exports: [
     ContentComponent
+  ],
+  providers: [
+    ConfirmationService
   ]
 })
 export class ContentModule { }

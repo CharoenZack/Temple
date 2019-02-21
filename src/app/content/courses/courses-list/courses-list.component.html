@@ -3,10 +3,13 @@
     <h1>ตารางเรียน</h1>
   </div>
   <div class="line"></div>
+  
   <div class="container">
     <div class="row">
-      <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12">
-        <p-table [columns]="cols" [value]="courses" [paginator]="true" [rows]="10">
+      <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+          <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+          <p-messages [value]="msgs"></p-messages>
+        <p-table [columns]="cols" [value]="courses" [paginator]="true" [rows]="10" [responsive]="true">
           <ng-template pTemplate="header" let-columns>
             <tr>
               <th pSortableColumn="date">
@@ -16,40 +19,44 @@
                   ariaLabelAsc="Activate to sort in ascending order">
                 </p-sortIcon>
               </th>
-              <th pSortableColumn="name">
+              <th pSortableColumn="name" class="ui-p-4">
                 ชื่อคอร์ส
                 <p-sortIcon field="name" ariaLabel="Activate to sort"
                   ariaLabelDesc="Activate to sort in descending order"
                   ariaLabelAsc="Activate to sort in ascending order">
                 </p-sortIcon>
               </th>
-              <th pSortableColumn="location">
+              <th pSortableColumn="location" class="ui-p-5">
                 สถานที่
                 <p-sortIcon field="location" ariaLabel="Activate to sort"
                   ariaLabelDesc="Activate to sort in descending order"
                   ariaLabelAsc="Activate to sort in ascending order">
                 </p-sortIcon>
               </th>
-              <th pSortableColumn="annotaion">
+              <th pSortableColumn="annotaion" class="ui-p-6">
                 หมายเหตุ
                 <p-sortIcon field="annotaion" ariaLabel="Activate to sort"
                   ariaLabelDesc="Activate to sort in descending order"
                   ariaLabelAsc="Activate to sort in ascending order">
                 </p-sortIcon>
               </th>
-              <th>
+              <th class="ui-p-6">
                 รายชื่อ
               </th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-rowData let-columns="columns">
             <tr>
-              <td *ngFor="let col of columns" [routerLink]="['/courses',rowData['id']]">
+              <td *ngFor="let col of columns;" [routerLink]="['/courses',rowData['id']]">
+                <span class="ui-column-title">{{col.header}}</span>
                 {{rowData[col.field]}}
               </td>
               <td>
-                <button pButton type="button" label="สมัคร" class="ui-button-success"></button>
-                <button pButton type="button" label="ขออนุมัติพิเศษ" class="ui-button-info"></button>
+                
+                 
+                <button pButton type="button" label="สมัคร" class="ui-button-success" (click)="confirm1()"></button>
+                <button pButton type="button" label="ขออนุมัติพิเศษ" class="ui-button-info" ></button>
+                
               </td>
             </tr>
           </ng-template>
@@ -58,3 +65,4 @@
     </div>
   </div>
 </div>
+
