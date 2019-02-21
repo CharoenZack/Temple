@@ -7,6 +7,8 @@ import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { CoursesComponent } from './courses/courses.component';
 import { CoursesListComponent } from './courses/courses-list/courses-list.component';
 import { ScheduleComponent } from './schedule/schedule.component';
+import { LocationComponent } from "./location/location.component";
+import { ManagedTitlenameComponent } from "./managed-titlename/managed-titlename.component";
 import { AuthGuard } from '../shared/guard/auth.guard';
 
 const routes: Routes = [
@@ -41,6 +43,14 @@ const routes: Routes = [
       {
         path: "schedule",
         component: ScheduleComponent,
+      },
+      {
+        path: "location",
+        component: LocationComponent,
+      },
+      {
+        path: "managedTitlename",
+        component: ManagedTitlenameComponent,
       }
     ]
   }
