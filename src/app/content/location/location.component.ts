@@ -10,7 +10,7 @@ export class LocationComponent implements OnInit {
 
   displayDialog: boolean;
   newLocation: boolean;
-  location: location = {};
+  location: location;
   locations: location[];
   cols: any[];
   constructor() { }
@@ -49,4 +49,20 @@ export class LocationComponent implements OnInit {
   clear() {
     this.location = {};
   }
+  showEdit(id) {
+    this.newLocation = false;
+    this.location = this.locations.filter(e => e.id == id)[0];
+    console.log(this.locations.filter(e => e.id == id));
+    
+    this.displayDialog = true;
+}
+  delete(id){
+    const index = this.locations.findIndex(e => e.id == id);
+    this.locations = [
+      ...this.locations.slice(0,index),
+      ...this.locations.slice(index+1),
+    ]
+
+  }
+
 }

@@ -15,6 +15,7 @@ import { BaggagesComponent } from './baggages/baggages.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import {ConfirmationService} from 'primeng/api';
 import { LocationComponent } from './location/location.component';
+import { ManagedTitlenameComponent } from './managed-titlename/managed-titlename.component';
 @NgModule({
   declarations: [
     ContentComponent,
@@ -27,7 +28,8 @@ import { LocationComponent } from './location/location.component';
     CoursesListComponent,
     CourseComponent,
     ScheduleComponent,
-    LocationComponent
+    LocationComponent,
+    ManagedTitlenameComponent
   ],
   imports: [
     CoreModule,
