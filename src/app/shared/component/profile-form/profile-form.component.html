@@ -13,6 +13,17 @@
         <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
           <fieldset>
             <legend>ข้อมูลส่วนตัว</legend>
+            <div class="ui-g-3 ui-g-offset-2 ui-lg-3 ui-lg-offset-2 ui-md-3 ui-md-offset-1 ui-sm-12 ui-sm-offset-0">
+              รูปโปรไฟล์
+            </div>
+            <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-12">
+              <div *ngIf="formType != 'Profile'">
+                <p-fileUpload  name="myfile[]" url="." [showUploadButton]='false' accept="image/*"></p-fileUpload>
+              </div>
+              <div *ngIf="formType == 'Profile'">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1U47tsi01mt1MkF71sp1f9XkJmeSdi_SJ3SOlt1hHiaitBCbR2g" alt="รูปโปรไฟล์" >
+                </div>
+            </div>
 
             <div class="ui-g-3 ui-g-offset-2  ui-lg-3 ui-lg-offset-2 ui-md-3 ui-md-offset-1 ui-sm-12 ui-sm-offset-0">
               คำนำหน้า*
@@ -48,8 +59,9 @@
             </div>
             <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-12">
               <div>
-                <p-calendar [disabled]="disabled" formControlName="birthday" placeholder="01/01/1990" [locale]="th"
-                  [showIcon]="true" [yearRange]="yearRange" [yearNavigator]="true"></p-calendar>
+                <p-calendar [baseZIndex]="10000" [disabled]="disabled" formControlName="birthday"
+                  placeholder="01/01/1990" [locale]="th" [showIcon]="true" [yearRange]="yearRange"
+                  [yearNavigator]="true"></p-calendar>
               </div>
               <div *ngIf="formError.birthday" class="text-danger text-invalid">{{formError.birthday}}</div>
             </div>
@@ -119,7 +131,7 @@
               </div>
             </div>
             <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 center-grid">
-              <app-confirm-button *ngIf="buttonVisible"></app-confirm-button>
+              <app-confirm-button *ngIf="buttonVisible" [formType]='formType'></app-confirm-button>
             </div>
           </fieldset>
         </div>

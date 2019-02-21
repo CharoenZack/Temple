@@ -14,6 +14,7 @@ import { ContentRoutingModule } from "./content-routing.module";
 import { BaggagesComponent } from './baggages/baggages.component';
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { ScheduleComponent } from './schedule/schedule.component';
+import { EditPersonalInfoComponent } from './personal-info/edit-personal-info/edit-personal-info.component';
 @NgModule({
   declarations: [
     ContentComponent,
@@ -26,7 +27,8 @@ import { ScheduleComponent } from './schedule/schedule.component';
     CourseCreateComponent,
     CoursesListComponent,
     CourseComponent,
-    ScheduleComponent
+    ScheduleComponent,
+    EditPersonalInfoComponent
   ],
   imports: [
     CoreModule,

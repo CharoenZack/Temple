@@ -21,15 +21,16 @@ export class ProfileFormComponent implements OnInit {
   @Output() dataForm = new EventEmitter();
   @Output() dataFormError = new EventEmitter();
   @Output() dataValidationMessage = new EventEmitter();
-
   @Output() data = new EventEmitter();
 
+  public uploadedFiles: any;
+  public personalId : string;
   public yearRange: string;
   public displayYear: String;
   public th: any;
   public titleName: TitleName[];
   public form: FormGroup;
-  public formType: String;
+  public formType = '';
   public readonly: boolean
   public disabled: boolean
   public buttonVisible: boolean
@@ -116,9 +117,9 @@ export class ProfileFormComponent implements OnInit {
       this.createForm();
     }
     // for Profile form
-    if (this.formType == 'Profile') {
-      const id = this.route.snapshot.paramMap.get('id');
-      const personalData = this.personnalInfoService.getPersonalInfo(id);
+    if (this.formType == 'Profile' || this.formType == 'Edit' ) {
+      this.personalId = this.route.snapshot.paramMap.get('id');
+      const personalData = this.personnalInfoService.getPersonalInfo(this.personalId );
       // set titlename in form
       this.titleNamePerson = this.titleNameService.getTitleName(+personalData.titleName);
       this.form.controls['fname'].setValue(personalData.fname);
@@ -236,6 +237,10 @@ export class ProfileFormComponent implements OnInit {
   }
   setRepassword(repassword) {
     this.form.controls['repassword'].setValue(repassword);
+  }
+
+  onCancle(data){
+    console.log(data);
   }
 
 

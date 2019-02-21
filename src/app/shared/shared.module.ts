@@ -34,6 +34,9 @@ import { ConfirmButtonComponent } from './component/profile-form/confirm-button/
 import { RegisterInputModule } from '../auth/register/register-input/register-input.module';
 import { PersonalInfoService } from './service/personal-info.service';
 
+import {FileUploadModule} from 'primeng/fileupload';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     ProfileFormComponent,
@@ -53,7 +56,9 @@ import { PersonalInfoService } from './service/personal-info.service';
     CalendarModule,
     ToastModule,
     FormsModule,
-    RegisterInputModule
+    RegisterInputModule,
+    FileUploadModule,
+    HttpClientModule
   ],
   exports: [
     CommonModule,
@@ -76,7 +81,7 @@ import { PersonalInfoService } from './service/personal-info.service';
     StepsModule,
     FormsModule,
     FullCalendarModule,
-
+    
   ],
   providers: [TitleNameService, MessageService, ProfileFormService,PersonalInfoService]
 })
