@@ -1,10 +1,10 @@
-<div class="ui-g-12">
-    <div class="row ">
-        <div class="ui-g-7 ui-lg-7 ui-md-10 ui-sm-12 center-grid ">
-            <app-profile-form [title]='title' (data)='onSubmit($event)'>
-            </app-profile-form>
-        </div>
+<div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+  <div class="row">
+    <div class="ui-g-12 ui-lg-9 ui-md-10 ui-sm-12 container">
+      <app-profile-form (data)='onSubmit($event)'>
+      </app-profile-form>
     </div>
+  </div>
 </div>
 
 <p-toast position="center" key="warning" [modal]="true" [baseZIndex]="5000">
@@ -21,7 +21,7 @@
             <p>{{message.detail}}</p>
         </div>
         <div class="ui-g ui-fluid">
-            <div class="center-grid ui-g-6">
+            <div class="container ui-g-6">
                 <button type="button" pButton (click)="onReject()" label="ตกลง" class="ui-button-secondary"></button>
             </div>
         </div>

@@ -4,7 +4,7 @@
     <a [routerLink]="['/']" (click)="clickMenu()" [routerLinkActiveOptions]="{exact: true}"
       routerLinkActive="active-menuitem" class="list-menu"><span><i class="pi pi-home"></i> หน้าหลัก</span></a>
 
-    <a [routerLink]="['/profile']" (click)="clickMenu()" routerLinkActive="active-menuitem" class="list-menu"><span>
+    <a [routerLink]="['/profile/1']" (click)="clickMenu()" routerLinkActive="active-menuitem" class="list-menu"><span>
         <fa-icon [icon]="['fas', 'user']"></fa-icon> ข้อมูลส่วนตัว
       </span></a>
 
@@ -18,6 +18,14 @@
 
     <a [routerLink]="['/baggages']" (click)="clickMenu()" routerLinkActive="active-menuitem" class="list-menu"><span>
         <fa-icon [icon]="['fas', 'archive']"></fa-icon> สัมภาระ
+      </span></a>
+      
+    <a [routerLink]="['/location']" (click)="clickMenu()" routerLinkActive="active-menuitem" class="list-menu"><span>
+        <fa-icon [icon]="['fas', 'landmark']"></fa-icon> จัดการสถานที่
+      </span></a>
+    <a [routerLink]="['/managedTitlename']" (click)="clickMenu()" routerLinkActive="active-menuitem"
+      class="list-menu"><span>
+        <fa-icon [icon]="['far', 'id-card']"></fa-icon> จัดการคำนำหน้า
       </span></a>
 
     <a (click)="logout($event)" routerLinkActive="active-menuitem" class="list-menu"><span>

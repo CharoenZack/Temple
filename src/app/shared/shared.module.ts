@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 import { ButtonModule } from 'primeng/button';
 import { RadioButtonModule } from 'primeng/radiobutton'
@@ -23,6 +24,8 @@ import { FullCalendarModule } from 'primeng/fullcalendar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
+import { DialogModule } from 'primeng/dialog';
+import { FileUploadModule } from 'primeng/fileupload';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -32,22 +35,27 @@ import {
   faBookOpen,
   faArchive,
   faLock,
+  faLandmark,
+  faPlus
 } from '@fortawesome/free-solid-svg-icons';
 import {
-  faCalendarAlt
+  faCalendarAlt,
+  faIdCard
 } from '@fortawesome/free-regular-svg-icons';
 
 import { ProfileFormService } from './service/profile-form.service';
 
 import { ProfileFormComponent } from './component/profile-form/profile-form.component';
 import { ConfirmButtonComponent } from './component/profile-form/confirm-button/confirm-button.component';
-import { RegisterInputComponent } from './component/profile-form/register-input/register-input.component';
+
+import { RegisterInputModule } from '../auth/register/register-input/register-input.module';
+import { PersonalInfoService } from './service/personal-info.service';
+
 
 @NgModule({
   declarations: [
     ProfileFormComponent,
-    ConfirmButtonComponent,
-    RegisterInputComponent,
+    ConfirmButtonComponent
   ],
   imports: [
     CommonModule,
@@ -63,7 +71,9 @@ import { RegisterInputComponent } from './component/profile-form/register-input/
     CalendarModule,
     ToastModule,
     FormsModule,
-
+    RegisterInputModule,
+    FileUploadModule,
+    HttpClientModule
   ],
   exports: [
     CommonModule,
@@ -89,11 +99,14 @@ import { RegisterInputComponent } from './component/profile-form/register-input/
     ConfirmDialogModule,
     MessageModule,
     MessagesModule,
+    DialogModule,
+    FullCalendarModule,
   ],
   providers: [
     TitleNameService,
     MessageService,
-    ProfileFormService
+    ProfileFormService,
+    PersonalInfoService
   ]
 })
 export class SharedModule {
@@ -105,6 +118,9 @@ export class SharedModule {
       faArchive,
       faLock,
       faCalendarAlt,
+      faLandmark,
+      faPlus,
+      faIdCard
     );
   }
 }
