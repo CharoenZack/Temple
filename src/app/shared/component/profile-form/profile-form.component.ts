@@ -30,7 +30,7 @@ export class ProfileFormComponent implements OnInit {
   public th: any;
   public titleName: TitleName[];
   public form: FormGroup;
-  public formType = '';
+  public formType = ''; 
   public readonly: boolean
   public disabled: boolean
   public buttonVisible: boolean
