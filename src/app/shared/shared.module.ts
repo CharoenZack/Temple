@@ -36,7 +36,8 @@ import {
   faArchive,
   faLock,
   faLandmark,
-  faPlus
+  faPlus,
+  faUsers
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faCalendarAlt,
@@ -120,7 +121,8 @@ export class SharedModule {
       faCalendarAlt,
       faLandmark,
       faPlus,
-      faIdCard
+      faIdCard,
+      faUsers
     );
   }
 }

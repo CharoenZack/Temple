@@ -30,6 +30,8 @@ export class ConfirmButtonComponent implements OnInit {
       this.router.navigateByUrl(`/profile/${this.personalId}`);
     }else if(this.formType=='Register'){
       this.router.navigateByUrl('/auth/login');
+    }else if(this.formType=='RegisterAdmin'||this.formType=='EditAdmin'){
+      this.router.navigateByUrl('/users');
     }
   }
 
