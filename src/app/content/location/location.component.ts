@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { location } from '../../shared/interfaces/location';
+import { LocationService } from './location.service';
 
 @Component({
   selector: 'app-location',
@@ -7,29 +8,21 @@ import { location } from '../../shared/interfaces/location';
   styleUrls: ['./location.component.css']
 })
 export class LocationComponent implements OnInit {
-
   displayDialog: boolean;
   newLocation: boolean;
   location: location;
   locations: location[];
   cols: any[];
-  constructor() { }
+  constructor(
+    private locationService:LocationService,
+  ) { }
 
   ngOnInit() {
 
-    this.locations = this.getLocation()
+    this.locations = this.locationService.getLocation()
     this.cols = [
       { field: 'name', header: 'สถานที่' },
     ]
-  }
-
-  getLocation(): location[] {
-    const locations = [
-      { id: 1, name: "วัด1" },
-      { id: 2, name: "วัด2" },
-      { id: 3, name: "วัด3" }
-    ]
-    return locations;
   }
 
   showDialogToAdd() {
@@ -39,11 +32,10 @@ export class LocationComponent implements OnInit {
   }
 
   save() {
-    let locations = [...this.locations];
-    if (this.newLocation)
-      locations.push(this.location);
-    this.locations = locations;
-    this.location = null;
+    console.log(this.location);
+    
+    this.locations = this.locationService.save(this.location.name);
+    this.location = {};
     this.displayDialog = false;
   }
   clear() {
@@ -51,17 +43,11 @@ export class LocationComponent implements OnInit {
   }
   showEdit(id) {
     this.newLocation = false;
-    this.location = this.locations.filter(e => e.id == id)[0];
-    console.log(this.locations.filter(e => e.id == id));
-    
+    this.location =this.locations.filter(e => e.id == id)[0]
     this.displayDialog = true;
 }
   delete(id){
-    const index = this.locations.findIndex(e => e.id == id);
-    this.locations = [
-      ...this.locations.slice(0,index),
-      ...this.locations.slice(index+1),
-    ]
+    this.locationService.delete(id);
 
   }
 

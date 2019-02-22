@@ -117,7 +117,7 @@ export class ProfileFormComponent implements OnInit {
       this.createForm();
     }
     // for Profile form
-    if (this.formType == 'Profile' || this.formType == 'Edit' ) {
+    if (this.formType == 'Profile' || this.formType == 'Edit' || this.formType == 'EditAdmin' ) {
       this.personalId = this.route.snapshot.paramMap.get('id');
       const personalData = this.personnalInfoService.getPersonalInfo(this.personalId );
       // set titlename in form
@@ -134,6 +134,9 @@ export class ProfileFormComponent implements OnInit {
 
   }
 
+  profileSelect(e){
+    console.log(e.files);
+  }
 
   setValidationMessage() {
     const validationMessage = {

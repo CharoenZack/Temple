@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CourseComponent } from './courses/course/course.component';
 import { ContentComponent } from './content.component';
@@ -11,6 +11,8 @@ import { EditPersonalInfoComponent } from './personal-info/edit-personal-info/ed
 import { LocationComponent } from "./location/location.component";
 import { ManagedTitlenameComponent } from "./managed-titlename/managed-titlename.component";
 import { AuthGuard } from '../shared/guard/auth.guard';
+import { ManageUserComponent } from './manage-user/manage-user.component';
+import { RegisterComponent } from '../auth/register/register.component';
 
 const routes: Routes = [
   {
@@ -39,12 +41,12 @@ const routes: Routes = [
       {
         path: "profile/:id",
         component: PersonalInfoComponent,
-        data:{formType:'Profile'}
+        data: { formType: 'Profile' }
       },
       {
         path: "profile/:id/edit",
         component: EditPersonalInfoComponent,
-        data:{formType:'Edit'}
+        data: { formType: 'Edit' }
       },
       {
         path: "schedule",
@@ -57,7 +59,22 @@ const routes: Routes = [
       {
         path: "managedTitlename",
         component: ManagedTitlenameComponent,
+      },
+      {
+        path: "users",
+        component: ManageUserComponent,
+      },
+      {
+        path: "user/:id/edit",
+        component: EditPersonalInfoComponent,
+        data: { formType: 'EditAdmin' }
+      },
+      {
+        path: "user/create",
+        component: RegisterComponent,
+        data: { formType: 'RegisterAdmin' }
       }
+
     ]
   }
 ];
