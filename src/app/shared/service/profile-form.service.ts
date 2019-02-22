@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class ProfileFormService {
-  public formType: 'Register' | 'Profile' | 'Edit';
+  public formType: 'Register' | 'Profile' | 'Edit' | 'RegisterAdmin' | 'EditAdmin';
   constructor() { }
 
 
@@ -25,7 +25,7 @@ export class ProfileFormService {
   }
 
   getSettingRegisterForm() {
-    if (this.formType == 'Register') {
+    if (this.formType == 'Register' || this.formType == 'RegisterAdmin')  {
       return true;
     }
     return false;
