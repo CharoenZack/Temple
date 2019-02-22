@@ -27,4 +27,27 @@ export class CourseService {
     };
 
   }
+  save(data) {
+    let courses = this.getCourses();
+    let l = courses.length
+    return [...courses,
+    {
+      id: l+1,
+      name: data
+    }
+    ];
+    
+  }
+  showEdit(id) {
+    return  this.courses.filter(e => e.id == id)[0];
+   
+}
+  delete(id){
+    const index = this.courses.findIndex(e => e.id == id);
+    return [
+      ...this.courses.slice(0,index),
+      ...this.courses.slice(index+1),
+    ]
+    
+  }
 }

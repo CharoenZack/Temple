@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
   private loggedIn = new BehaviorSubject<boolean>(false);
-
   constructor(
     private router: Router,
+    private http: HttpClient
   ) {
   }
 
@@ -23,7 +22,7 @@ export class AuthService {
   }
 
   logout() {
-    this.loggedIn.next(false);
+  this.loggedIn.next(false)
     this.router.navigate(["/auth/login"]);
   }
 }

@@ -37,7 +37,8 @@ import {
   faLock,
   faLandmark,
   faPlus,
-  faUsers
+  faUsers,
+  faAt
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faCalendarAlt,
@@ -102,6 +103,7 @@ import { PersonalInfoService } from './service/personal-info.service';
     MessagesModule,
     DialogModule,
     FullCalendarModule,
+    HttpClientModule,
   ],
   providers: [
     TitleNameService,
@@ -122,6 +124,7 @@ export class SharedModule {
       faLandmark,
       faPlus,
       faIdCard,
+      faAt,
       faUsers
     );
   }
