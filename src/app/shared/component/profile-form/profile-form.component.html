@@ -18,7 +18,7 @@
             </div>
             <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-12">
               <div *ngIf="formType != 'Profile'">
-                <p-fileUpload  name="myfile[]" url="." [showUploadButton]='false' accept="image/*"></p-fileUpload>
+                <p-fileUpload  name="myfile" url="." [showUploadButton]='false' accept="image/*" (onSelect)="profileSelect($event)"></p-fileUpload>
               </div>
               <div *ngIf="formType == 'Profile'">
                   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1U47tsi01mt1MkF71sp1f9XkJmeSdi_SJ3SOlt1hHiaitBCbR2g" alt="รูปโปรไฟล์" >
