@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { ManageUserService } from 'src/app/shared/service/manage-user.service';
 
 @Component({
   selector: 'app-register',
@@ -19,6 +20,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private router:Router,
     private messageService: MessageService,
+    private manageUser:ManageUserService
   ) { }
 
   ngOnInit() {
@@ -34,9 +36,28 @@ export class RegisterComponent implements OnInit {
       this.messageService.clear();
       this.typeMessage = "success";
       this.messageService.add({ key: 'warning', sticky: true, severity: 'success', summary: 'สำเร็จ', detail: 'สมัครสมาชิกสำเร็จ' });
-      setTimeout(() => {
-        this.router.navigateByUrl('/auth/login');
-      }, 4000);
+      const dataUser = {
+        member_username:this.form.get('username').value,
+        member_password:this.form.get('password').value,
+        member_fname:this.form.get('fname').value,
+        member_lame:this.form.get('lname').value,
+        member_birthdata:new Date(this.form.get('birthday').value),
+        member_address:this.form.get('address').value,
+        member_tel:this.form.get('phone').value,
+        member_emergency_tel:this.form.get('phoneEmergency').value,
+        member_email:this.form.get('email').value,
+        member_img:null,
+        member_register_date:null,
+        member_last_update:null,
+        member_gender_id:this.form.get('gender').value,
+        member_role_id:1,
+        member_title_id:this.form.get('titleName').value,
+      }
+      //console.log(dataUser);
+      this.manageUser.createUser(dataUser);
+      // setTimeout(() => {
+      //   this.router.navigateByUrl('/auth/login');
+      // }, 4000);
     } else {
       this.subscribeInputMessageWaring();
       this.typeMessage = "fail";
