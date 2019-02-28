@@ -15,6 +15,17 @@ export class LocationService {
     private http:HttpClient
   ) { }
 
+  getLocations() : Observable<location> {
+    return this.http.get(`/157.179.133.38/locations`).pipe(map(res => {
+      const id = res['location'].id;
+      const name = res['location'].name;
+        return {
+          id,
+          name,
+        }
+      })
+    )
+  }
 
   getLocation() {
     return this.http.get('http://localhost:3999/api/v1/locations')
