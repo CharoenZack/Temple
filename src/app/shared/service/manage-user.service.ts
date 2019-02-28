@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { ApiConstants } from '../constants/ApiConstants';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class ManageUserService {
 
   createUser(dataUser){
     console.log(dataUser);
-    this.http.post('http://localhost:3999/api/v1/members', dataUser)
+    this.http.post(ApiConstants.baseURl+'/members', dataUser)
     .subscribe(res=>{
       console.log('success')
       console.log(res);
@@ -24,7 +25,7 @@ export class ManageUserService {
   }
 
   getAllUsers(){
-    return this.http.get('http://localhost:3999/api/v1/members')
+    return this.http.get(ApiConstants.baseURl+'/members')
     .pipe(
       map((response:any[]) => {
         return response['data'].map((data)=>{

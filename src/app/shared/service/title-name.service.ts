@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { TitleName } from '../interfaces/title-name';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { ApiConstants } from '../constants/ApiConstants';
 
 
 
@@ -13,7 +14,7 @@ export class TitleNameService {
   ) { }
 
   getTitleNames() {
-    return this.http.get('http://localhost:3999/api/v1/titlenames')
+    return this.http.get(ApiConstants.baseURl+'/titlenames')
       .pipe(
         map((res:any[]) => {
           return res.map(data=>{
