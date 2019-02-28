@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { location } from '../../shared/interfaces/location';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +12,21 @@ export class LocationService {
   newLocation: boolean;
   location: location;
   locations: location[];
-  constructor() { }
+  constructor(
+    private http:HttpClient,
+  ) { }
+
+  getLocations() : Observable<location> {
+    return this.http.get(`/157.179.133.38/locations`).pipe(map(res => {
+      const id = res['location'].id;
+      const name = res['location'].name;
+        return {
+          id,
+          name,
+        }
+      })
+    )
+  }
 
 
   getLocation(): location[] {
