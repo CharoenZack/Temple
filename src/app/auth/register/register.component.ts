@@ -36,22 +36,23 @@ export class RegisterComponent implements OnInit {
       this.messageService.clear();
       this.typeMessage = "success";
       this.messageService.add({ key: 'warning', sticky: true, severity: 'success', summary: 'สำเร็จ', detail: 'สมัครสมาชิกสำเร็จ' });
+      const titleCode = this.form.get('titleName').value;
       const dataUser = {
-        member_username:this.form.get('username').value,
-        member_password:this.form.get('password').value,
-        member_fname:this.form.get('fname').value,
-        member_lame:this.form.get('lname').value,
-        member_birthdata:new Date(this.form.get('birthday').value),
-        member_address:this.form.get('address').value,
-        member_tel:this.form.get('phone').value,
-        member_emergency_tel:this.form.get('phoneEmergency').value,
-        member_email:this.form.get('email').value,
-        member_img:null,
-        member_register_date:null,
-        member_last_update:null,
-        member_gender_id:this.form.get('gender').value,
-        member_role_id:1,
-        member_title_id:this.form.get('titleName').value,
+        memberUsername:this.form.get('username').value,
+        memberPassword:this.form.get('password').value,
+        memberFname:this.form.get('fname').value,
+        memberLname:this.form.get('lname').value,
+        memberBirthdate:this.form.get('birthday').value,
+        memberAddress:this.form.get('address').value,
+        memberTel:this.form.get('phone').value,
+        memberEmergencyTel:this.form.get('phoneEmergency').value,
+        memberEmail:this.form.get('email').value,
+        memberImg:null,
+        memberRegisterDate:null,
+        memberLastUpdate:null,
+        memberGenderId:this.form.get('gender').value,
+        memberRoleId:1,
+        memberTitleId: parseInt(titleCode.titleNameCode),
       }
       //console.log(dataUser);
       this.manageUser.createUser(dataUser);

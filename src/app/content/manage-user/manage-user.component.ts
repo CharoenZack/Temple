@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PersonalInfoService } from '../../shared/service/personal-info.service';
+import { ManageUserService } from 'src/app/shared/service/manage-user.service';
 
 @Component({
   selector: 'app-manage-user',
@@ -8,14 +8,16 @@ import { PersonalInfoService } from '../../shared/service/personal-info.service'
 })
 export class ManageUserComponent implements OnInit {
 
-  public personal:any[]
+  public personal:any[];
 
   constructor(
-    private personalInfo : PersonalInfoService
+    private manageUser:ManageUserService
   ) { }
 
   ngOnInit() {
-    this.personal = this.personalInfo.getAllPersonalInfo();
+    this.manageUser.getAllUsers().subscribe(res=> {
+      this.personal = res
+    });
   }
 
 

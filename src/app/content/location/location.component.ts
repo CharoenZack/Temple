@@ -19,7 +19,10 @@ export class LocationComponent implements OnInit {
 
   ngOnInit() {
 
-    this.locations = this.locationService.getLocation()
+    this.locationService.getLocation()
+    .subscribe(res=>{
+      this.locations = res
+    })
     this.cols = [
       { field: 'name', header: 'สถานที่' },
     ]
@@ -31,10 +34,10 @@ export class LocationComponent implements OnInit {
     this.displayDialog = true;
   }
 
-  save() {
+  save() {  
     console.log(this.location);
     
-    this.locations = this.locationService.save(this.location.name);
+    this.locationService.save(this.location);
     this.location = {};
     this.displayDialog = false;
   }

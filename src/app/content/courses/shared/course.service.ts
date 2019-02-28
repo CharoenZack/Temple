@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Course } from './course';
 import { MockCourse } from './mock-course';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +10,27 @@ import { MockCourse } from './mock-course';
 export class CourseService {
   courses:Course[] = MockCourse;
 
-  constructor() { }
-  getCourses() : Course[] {
-    const courses = this.courses
-    return courses;
+  constructor(
+    private http:HttpClient
+  ) { }
+  
+  getCourses(){
+    return this.http.get('http://localhost:3999/api/v1/courses')
+    .pipe(map( (res:any[])=>{
+      return res.map(data=>{
+        return {
+          id:data['courseId'],
+          date:data['courseStDate'],
+          name:data['courseName'],
+          annotation:null,
+          detail:data['courseDetail'],
+          location:data['locationName']
+        }
+      })
+    }))
+
+    // const courses = this.courses
+    // return courses;
 
   }
   getCourse(id: number): Course{
@@ -28,14 +47,14 @@ export class CourseService {
 
   }
   save(data) {
-    let courses = this.getCourses();
-    let l = courses.length
-    return [...courses,
-    {
-      id: l+1,
-      name: data
-    }
-    ];
+    // let courses = this.getCourses();
+    // let l = courses.length
+    // return [...courses,
+    // {
+    //   id: l+1,
+    //   name: data
+    // }
+    // ];
     
   }
   showEdit(id) {

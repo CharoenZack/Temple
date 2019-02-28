@@ -19,8 +19,12 @@ export class CoursesListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.course.getCourses().subscribe(res=>{
+      console.log(res);
+      this.courses = res;
+    });
 
-    this.courses = this.course.getCourses();
+
     this.cols = [
       {field: 'date',header: 'วันที่'},
       {field: 'name',header: 'ชื่อคอร์ส'},
