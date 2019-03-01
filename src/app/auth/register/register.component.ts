@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { ManageUserService } from 'src/app/shared/service/manage-user.service';
 
 @Component({
   selector: 'app-register',
@@ -19,6 +20,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private router:Router,
     private messageService: MessageService,
+    private manageUser:ManageUserService
   ) { }
 
   ngOnInit() {
@@ -34,9 +36,29 @@ export class RegisterComponent implements OnInit {
       this.messageService.clear();
       this.typeMessage = "success";
       this.messageService.add({ key: 'warning', sticky: true, severity: 'success', summary: 'สำเร็จ', detail: 'สมัครสมาชิกสำเร็จ' });
-      setTimeout(() => {
-        this.router.navigateByUrl('/auth/login');
-      }, 4000);
+      const titleCode = this.form.get('titleName').value;
+      const dataUser = {
+        memberUsername:this.form.get('username').value,
+        memberPassword:this.form.get('password').value,
+        memberFname:this.form.get('fname').value,
+        memberLname:this.form.get('lname').value,
+        memberBirthdate:this.form.get('birthday').value,
+        memberAddress:this.form.get('address').value,
+        memberTel:this.form.get('phone').value,
+        memberEmergencyTel:this.form.get('phoneEmergency').value,
+        memberEmail:this.form.get('email').value,
+        memberImg:null,
+        memberRegisterDate:null,
+        memberLastUpdate:null,
+        memberGenderId:this.form.get('gender').value,
+        memberRoleId:1,
+        memberTitleId: parseInt(titleCode.titleNameCode),
+      }
+      //console.log(dataUser);
+      this.manageUser.createUser(dataUser);
+      // setTimeout(() => {
+      //   this.router.navigateByUrl('/auth/login');
+      // }, 4000);
     } else {
       this.subscribeInputMessageWaring();
       this.typeMessage = "fail";

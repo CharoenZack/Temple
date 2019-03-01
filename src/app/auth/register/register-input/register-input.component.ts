@@ -12,7 +12,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
     Username*
   </div>
   <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-12">
-    <div><input type="text" pInputText placeholder="Username" [(ngModel)]="username" (blur)='bindUsername()'></div>
+    <div><input type="text" minlength="4" pInputText placeholder="Username" [(ngModel)]="username" (blur)='bindUsername()'></div>
     <div *ngIf="formError.username" class="text-danger text-invalid">{{formError.username}}</div>
   </div>
 
@@ -21,7 +21,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
     Password*
   </div>
   <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-12">
-    <div><input type="password" pInputText placeholder="Password" [(ngModel)]="password" (blur)='bindPassword()' ></div>
+    <div><input type="password" minlength="4"  pInputText placeholder="Password" [(ngModel)]="password" (blur)='bindPassword()' ></div>
     <div *ngIf="formError.password" class="text-danger text-invalid">{{formError.password}}</div>
   </div>
 
@@ -29,7 +29,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
     Re-Password*
   </div>
   <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-12">
-    <div><input type="password" pInputText placeholder="Re-Password" [(ngModel)]="repassword" (blur)='bindRepassword()' ></div>
+    <div><input type="password" minlength="4" pInputText placeholder="Re-Password" [(ngModel)]="repassword" (blur)='bindRepassword()' ></div>
     <div *ngIf="formError.repassword" class="text-danger text-invalid">{{formError.repassword}}</div>
   </div>
 

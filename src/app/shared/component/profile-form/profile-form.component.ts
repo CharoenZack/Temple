@@ -102,7 +102,15 @@ export class ProfileFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.titleName = this.titleNameService.getTitleNames();
+
+    //edit
+    this.titleNameService.getTitleNames().subscribe(res=>{
+      this.titleName = [
+        { titleNameCode: '', titleNameDisplay: 'กรุณาเลือกคำนำหน้า' },
+        ...res
+      ]
+    });
+    //---
     this.setTypeForm();
     this.setCalendarTH();
     this.createYearRange();
@@ -119,6 +127,8 @@ export class ProfileFormComponent implements OnInit {
     // for Profile form
     if (this.formType == 'Profile' || this.formType == 'Edit' || this.formType == 'EditAdmin' ) {
       this.personalId = this.route.snapshot.paramMap.get('id');
+
+
       const personalData = this.personnalInfoService.getPersonalInfo(this.personalId );
       // set titlename in form
       this.titleNamePerson = this.titleNameService.getTitleName(+personalData.titleName);
@@ -204,9 +214,9 @@ export class ProfileFormComponent implements OnInit {
 
   createFormRegister() {
     const formRegister = {
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-      repassword: ['', Validators.required]
+      username: ['', Validators.required,Validators.minLength(4)],
+      password: ['', Validators.required,Validators.minLength(4)],
+      repassword: ['', Validators.required,Validators.minLength(4)]
     }
     this.form = this.formBuilder.group({
       ...formRegister,

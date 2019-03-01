@@ -18,7 +18,7 @@ export class CourseFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.courses = this.courseService.getCourses();
+    //this.courses = this.courseService.getCourses();
     this.cols = [
       {field: 'date',header: 'วันที่'},
       {field: 'name',header: 'ชื่อคอร์ส'},
@@ -35,7 +35,7 @@ export class CourseFormComponent implements OnInit {
   save() {
     console.log(this.course );
     
-    this.courses = this.courseService.save(this.course .name);
+    //this.courses = this.courseService.save(this.course .name);
     this.course  = {};
     this.displayDialog = false;
   }

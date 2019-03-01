@@ -13,6 +13,7 @@ import { ManagedTitlenameComponent } from "./managed-titlename/managed-titlename
 import { AuthGuard } from '../shared/guard/auth.guard';
 import { ManageUserComponent } from './manage-user/manage-user.component';
 import { RegisterComponent } from '../auth/register/register.component';
+import { CourseFormComponent } from './courses/course-form/course-form.component';
 
 const routes: Routes = [
   {
@@ -31,7 +32,7 @@ const routes: Routes = [
           {
             path: ":id",
             component: CourseComponent,
-          },
+          }
         ]
       },
       {

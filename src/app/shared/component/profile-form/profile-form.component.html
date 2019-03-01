@@ -26,11 +26,11 @@
             </div>
 
             <div class="ui-g-3 ui-g-offset-2  ui-lg-3 ui-lg-offset-2 ui-md-3 ui-md-offset-1 ui-sm-12 ui-sm-offset-0">
-              คำนำหน้า*
+              คำนำหน้า* 
             </div>
             <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-12">
-              <p-dropdown [options]="titleName" optionLabel="titleNameDisplay" [readonly]="readonly"
-                formControlName="titleName" [(ngModel)]="titleNamePerson">
+              <p-dropdown [options]="titleName" optionLabel="titleNameDisplay" value="titleNameCode" [readonly]="readonly"
+                formControlName="titleName" [(ngModel)]="titleNamePerson" [autoWidth]="false" >
               </p-dropdown>
               <div *ngIf="formError.titleName" class="text-danger text-invalid">{{formError.titleName}}</div>
             </div>
@@ -114,7 +114,7 @@
             </div>
             <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-12">
               <div><input type="text" pInputText placeholder="example@example.com" [readonly]="readonly"
-                  formControlName="email"></div>
+                  formControlName="email" [email]="true" ></div>
               <div *ngIf="formError.email" class="text-danger text-invalid">{{formError.email}}</div>
             </div>
 
