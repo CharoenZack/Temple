@@ -18,11 +18,7 @@ export class LocationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
-    this.locationService.getLocation()
-    .subscribe(res=>{
-      this.locations = res
-    })
+    this.getLocation();
     this.cols = [
       { field: 'name', header: 'สถานที่' },
     ]
@@ -39,6 +35,7 @@ export class LocationComponent implements OnInit {
     
     this.locationService.save(this.location);
     this.location = {};
+    //this.getLocation();
     this.displayDialog = false;
   }
   clear() {
@@ -52,6 +49,14 @@ export class LocationComponent implements OnInit {
   delete(id){
     this.locationService.delete(id);
 
+  }
+
+  getLocation(){
+    this.locationService.getLocation()
+    .subscribe(res=>{
+      this.locations = res
+      console.log(res);
+    })
   }
 
 }
