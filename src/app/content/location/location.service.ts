@@ -42,17 +42,16 @@ export class LocationService {
 
 
   save(data) {
-    if (data['id']) {
-      this.http.put(ApiConstants.baseURl + `/locations/${data['id']}`, {
+      return this.http.post(ApiConstants.baseURl + `/locations`, {
         locationName: data['name']
-      }).subscribe(console.log)
-    } else {
-      this.http.post(ApiConstants.baseURl + `/locations`, {
-        locationName: data['name']
-      }).subscribe(console.log)
-    }
+      })
   }
 
+  update(data) {
+    return this.http.put(ApiConstants.baseURl + `/locations/${data['id']}`, {
+      locationName: data['name']
+    })
+  }
 
   showEdit(id) {
     return this.locations.filter(e => e.id == id)[0];

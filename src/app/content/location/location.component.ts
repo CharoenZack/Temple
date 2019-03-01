@@ -13,8 +13,9 @@ export class LocationComponent implements OnInit {
   location: location;
   locations: location[];
   cols: any[];
+  locationNameEdit:String;
   constructor(
-    private locationService:LocationService,
+    private locationService: LocationService,
   ) { }
 
   ngOnInit() {
@@ -30,33 +31,61 @@ export class LocationComponent implements OnInit {
     this.displayDialog = true;
   }
 
-  save() {  
-    console.log(this.location);
+  save() {
+    const locationUpdate = {
+      name:this.locationNameEdit
+    }
+    this.locationService.save(locationUpdate).toPromise().then(res=>{
+      if(res['result'] === 'Success'){
+        console.log(this.locations.length);
+        this.locations =  [
+          ...this.locations,{
+            id:res['data'][0]['locationId'],
+            name:res['data'][0]['locationName'],
+          }
+        ]
+      }
+    })
+    this.clear() 
     
-    this.locationService.save(this.location);
-    this.location = {};
-    //this.getLocation();
-    this.displayDialog = false;
   }
   clear() {
     this.location = {};
+    this.locationNameEdit='';
+    this.displayDialog = false;
   }
   showEdit(id) {
     this.newLocation = false;
-    this.location =this.locations.filter(e => e.id == id)[0]
+    this.location = this.locations.filter(e => e.id == id)[0]
+    this.locationNameEdit = this.location['name']
     this.displayDialog = true;
-}
-  delete(id){
+  }
+  delete(id) {
     this.locationService.delete(id);
 
   }
 
-  getLocation(){
+  getLocation() {
     this.locationService.getLocation()
-    .subscribe(res=>{
-      this.locations = res
-      console.log(res);
+      .toPromise().then(res => {
+        this.locations = res
+        
+      }
+      )
+  }
+
+  update(){
+    const locationUpdate = {
+      id:this.location['id'],
+      name:this.locationNameEdit
+    }
+    this.locationService.update(locationUpdate).toPromise().then(res=>{
+      if(res['result'] === 'Success'){
+        const index = this.locations.findIndex(e => e.id == res['data'][0]['locationId']);     
+        this.locations[index].name = res['data'][0]['locationName']
+      }
     })
+    this.clear()
   }
 
 }
