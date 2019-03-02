@@ -25,7 +25,7 @@ export class ManageUserService {
   }
 
   getAllUsers(){
-    return this.http.get(ApiConstants.baseURl+'/members')
+    return this.http.get(ApiConstants.baseURl+'/admin/members')
     .pipe(
       map((response:any[]) => {
         return response['data'].map((data)=>{

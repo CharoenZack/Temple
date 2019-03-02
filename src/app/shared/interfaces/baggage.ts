@@ -1,5 +1,6 @@
 export interface Baggage {
     date:string;
     id:string;
-    status:string;
+    number:string;
+    status?:string;
 }

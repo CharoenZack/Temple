@@ -17,7 +17,7 @@ export class TitleNameService {
     return this.http.get(ApiConstants.baseURl+'/titlenames') 
       .pipe(
         map((res:any[]) => {
-          return res.map(data=>{
+          return res['data'].map(data=>{
             return {
               titleNameCode: data['id'],
               titleNameDisplay: data['display']

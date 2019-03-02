@@ -29,7 +29,7 @@ export class LocationService {
   // }
 
   getLocation() {
-    return this.http.get(ApiConstants.baseURl + '/locations')
+    return this.http.get(ApiConstants.baseURl + '/admin/locations')
       .pipe(map(res => {
         return res['data'].map(data => {
           return {
@@ -42,15 +42,31 @@ export class LocationService {
 
 
   save(data) {
-      return this.http.post(ApiConstants.baseURl + `/locations`, {
+      return this.http.post(ApiConstants.baseURl + `/admin/locations`, {
         locationName: data['name']
-      })
+      }).pipe(map(res=>{
+        return {
+          status : res['result'],
+          data:{
+            id: res['data'][0]['locationId'],
+            name: res['data'][0]['locationName']
+          }
+        }
+      }))
   }
 
   update(data) {
-    return this.http.put(ApiConstants.baseURl + `/locations/${data['id']}`, {
+    return this.http.put(ApiConstants.baseURl + `/admin/locations/${data['id']}`, {
       locationName: data['name']
-    })
+    }).pipe(map(res=>{
+      return {
+        status : res['result'],
+        data:{
+          id: res['data'][0]['locationId'],
+          name: res['data'][0]['locationName']
+        }
+      }
+    }))
   }
 
   showEdit(id) {
@@ -58,11 +74,11 @@ export class LocationService {
 
   }
   delete(id) {
-    const index = this.locations.findIndex(e => e.id == id);
-    return [
-      ...this.locations.slice(0, index),
-      ...this.locations.slice(index + 1),
-    ]
-
+    return this.http.delete(ApiConstants.baseURl + `/admin/locations/${id}`)
+    .pipe(map(res=>{
+      return {
+        status: res['result']
+      }
+    }));
   }
 }
