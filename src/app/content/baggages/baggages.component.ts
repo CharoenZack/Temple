@@ -83,8 +83,6 @@ export class BaggagesComponent implements OnInit {
     }
     this.baggageService.update(data)
       .subscribe(res => {
-        console.log(res);
-        
         if (res['status'] === 'Success') {
           const index = this.items.findIndex(e => e.id == res['data']['id']);
           this.items[index].number = res['data']['number']
