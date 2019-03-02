@@ -18,7 +18,7 @@
             <ng-template pTemplate="header" let-columns>
               <tr>
                 <th pSortableColumn="name">
-                  สถานที่
+                  คำนำหน้า
                   <p-sortIcon field="name" ariaLabel="Activate to sort"
                     ariaLabelDesc="Activate to sort in descending order"
                     ariaLabelAsc="Activate to sort in ascending order">
@@ -37,8 +37,8 @@
                 </td>
                 <td>
                   <div style="text-align:center">
-                      <button pButton type="button" label="แก้ไข" class="ui-button-warning" style="width: 40%;"></button>
-                      <button pButton type="button" label="ลบ" class="ui-button-danger" style="width: 40%;margin-left: 5mm"></button>
+                      <button pButton type="button" label="แก้ไข" (click)="showEdit(rowData['titleNameCode'])" class="ui-button-warning" style="width: 40%;"></button>
+                      <button pButton type="button" label="ลบ" (click)="delete(rowData['titleNameCode'])" class="ui-button-danger" style="width: 40%;margin-left: 5mm"></button>
                   </div>
                  
                 </td>
@@ -53,17 +53,24 @@
         <div class="ui-g ui-fluid" *ngIf="titleName">
             <div class="ui-g-12">
                 <div class="ui-g-4">
-                    <label for="titleNameDisplay">ชื่อสถานที่</label>
+                    <label for="titleNameDisplay">คำนำหน้า</label>
                 </div>
                 <div class="ui-g-8">
-                    <input pInputText id="titleNameDisplay" [(ngModel)]="titleName.titleNameDisplay" />
+                    <input pInputText id="titleNameDisplay" [(ngModel)]="titleNameEdit" />
+                </div>
+                <div class="ui-g-4">
+                    <label for="titleNameDisplay">คำย่อ</label>
+                </div>
+                <div class="ui-g-8">
+                    <input pInputText id="titleNameDisplay" [(ngModel)]="titleNameAbbrEdit" />
                 </div>
             </div>
         </div>
         <p-footer>
             <div class="ui-dialog-buttonpane ui-helper-clearfix">
                 <button type="button" pButton (click)="clear()" label="Clear"></button>
-                <button type="button" pButton (click)="save()" label="Save"></button>
+                <button *ngIf="newtitleName" type="button" pButton (click)="save()" label="Save"></button>
+                <button *ngIf="!newtitleName" type="button" pButton (click)="update()" label="Update"></button>
             </div>
         </p-footer>
     </p-dialog>
