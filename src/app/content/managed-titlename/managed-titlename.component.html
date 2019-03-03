@@ -1,6 +1,6 @@
 <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
     <div style="text-align:center">
-      <h1>สถานที่</h1>
+      <h1>คำนำหน้า</h1>
     </div>
     <div class="line"></div>
     <br>
@@ -17,16 +17,23 @@
               </ng-template>
             <ng-template pTemplate="header" let-columns>
               <tr>
-                <th pSortableColumn="name">
-                  คำนำหน้า
-                  <p-sortIcon field="name" ariaLabel="Activate to sort"
-                    ariaLabelDesc="Activate to sort in descending order"
-                    ariaLabelAsc="Activate to sort in ascending order">
-                  </p-sortIcon>
-                </th>
-                <th>
-  
-                </th>
+              <th pSortableColumn="name">
+                คำนำหน้า
+                <p-sortIcon field="name" ariaLabel="Activate to sort"
+                  ariaLabelDesc="Activate to sort in descending order"
+                  ariaLabelAsc="Activate to sort in ascending order">
+                </p-sortIcon>
+              </th>
+              <th pSortableColumn="nameAbbr">
+                ตัวย่อ
+                <p-sortIcon field="nameAbbr" ariaLabel="Activate to sort"
+                  ariaLabelDesc="Activate to sort in descending order"
+                  ariaLabelAsc="Activate to sort in ascending order">
+                </p-sortIcon>
+              </th>
+              <th>
+
+              </th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-rowData let-columns="columns">

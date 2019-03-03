@@ -20,7 +20,8 @@ export class TitleNameService {
           return res['data'].map(data => {
             return {
               titleNameCode: data['id'],
-              titleNameDisplay: data['display']
+              titleNameDisplay: data['display'],
+              titleNameAbbr: data['name']
             }
           })
         })
@@ -35,7 +36,7 @@ export class TitleNameService {
             return {
               titleNameCode: data['id'],
               titleNameDisplay: data['display'],
-              titleNameAbbr: res['data'][0]['name']
+              titleNameAbbr: data['name']
             }
           })
           return {
@@ -60,20 +61,57 @@ export class TitleNameService {
       titleDisplay: data['titleNameDisplay'],
       titleName: data['titleNameAbbr']
     }
-    return this.http.post(ApiConstants.baseURl + "/titlenames", body)
+    return this.http.post(ApiConstants.baseURl + "/admin/titlenames", body)
       .pipe(
         map(res => {
-          const data = {
-            titleNameAbbr: res['data'][0]['name'],
-            titleNameCode: res['data'][0]['id'],
-            titleNameDisplay: res['data'][0]['display'],
-          }
+          // const data = {
+          //   titleNameAbbr: res['data'][0]['name'],
+          //   titleNameCode: res['data'][0]['id'],
+          //   titleNameDisplay: res['data'][0]['display'],
+          // }
           return {
             status: res['result'],
-            data: data
+            data: this.transformData(res['data'])
           }
         })
       )
+
+  }
+
+  createTitleName(data) {
+    const body = {
+      titleDisplay: data['titleNameDisplay'],
+      titleName: data['titleNameAbbr']
+    }
+    return this.http.post(ApiConstants.baseURl + "/admin/titlenames", body)
+      .pipe(
+        map(res=>{
+          return {
+            status: res['result'],
+            data: this.transformData(res['data'])
+          }
+        })
+      )
+  }
+
+  deleteTitleName(id){
+    return this.http.delete(ApiConstants.baseURl+`/admin/titlenames/${id}`)
+    .pipe(
+      map(res=>{
+        return {
+          status:res['result']
+        }
+      })
+    )
+  }
+
+
+  private transformData(data) {
+    return {
+      titleNameAbbr: data[0]['name'],
+      titleNameCode: data[0]['id'],
+      titleNameDisplay: data[0]['display'],
+    }
 
   }
 }

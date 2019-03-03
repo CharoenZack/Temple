@@ -13,28 +13,29 @@ export class ManagedTitlenameComponent implements OnInit {
   newtitleName: boolean;
   titleName: TitleName;
   titleNames: TitleName[];
-  titleNameEdit:String
-  titleNameAbbrEdit:String
+  titleNameEdit: String
+  titleNameAbbrEdit: String
   cols: any[];
   constructor(
-    private titleNamesService : TitleNameService
+    private titleNamesService: TitleNameService
   ) { }
 
   ngOnInit() {
 
-   this.getTitleName()
+    this.getTitleName()
     this.cols = [
       { field: 'titleNameDisplay', header: 'คำนำหน้า' }, { field: 'titleNameAbbr', header: 'คำย่อ' }
     ]
   }
 
-  getTitleName(){
+  getTitleName() {
     this.titleNamesService.getTitleNamesV2()
-    .subscribe(res=>{
-      if(res['status']=="Success"){
-        this.titleNames = res['data'];
-      }
-    })
+      .subscribe(res => {
+        console.log(res, 'names');
+        if (res['status'] == "Success") {
+          this.titleNames = res['data'];
+        }
+      })
   }
 
   showDialogToAdd() {
@@ -44,42 +45,62 @@ export class ManagedTitlenameComponent implements OnInit {
   }
 
   save() {
-    this.displayDialog = false;
+    const data = {
+      titleNameDisplay: this.titleNameEdit,
+      titleNameAbbr: this.titleNameAbbrEdit
+    }
+    this.titleNamesService.createTitleName(data)
+    .subscribe(res=>{
+      if(res['status']=="Success"){
+        this.titleNames = [
+          ...this.titleNames,
+          res['data']
+        ]
+      }
+    })
+    this.clear();
   }
   clear() {
     this.titleName = {};
     this.displayDialog = false;
   }
 
-  update(){
+  update() {
     console.log('ok');
     const data = {
-      titleNameCode:this.titleName.titleNameCode,
-      titleNameDisplay:this.titleNameEdit,
-      titleNameAbbr:this.titleNameAbbrEdit
+      titleNameCode: this.titleName.titleNameCode,
+      titleNameDisplay: this.titleNameEdit,
+      titleNameAbbr: this.titleNameAbbrEdit
     }
     this.titleNamesService.updateTitleName(data)
-    .subscribe(res=>{
-      console.log(res);
-      
-      if(res['status']=="Success"){
-        const index = this.titleNames.findIndex(e => e.titleNameCode == res['data']['titleNameCode']);
-        this.titleNames[index] = res['data'];
-      }
-    })
+      .subscribe(res => {
+        console.log(res);
+        if (res['status'] == "Success") {
+          const index = this.titleNames.findIndex(e => e.titleNameCode == res['data']['titleNameCode']);
+          this.titleNames[index] = res['data'];
+        }
+      })
     this.clear();
   }
 
-  showEdit(id){
+  showEdit(id) {
     this.newtitleName = false;
     this.titleName = this.titleNames.filter(e => e.titleNameCode == id)[0];
     this.titleNameEdit = this.titleName['titleNameDisplay'];
-    this.titleNameAbbrEdit ;
+    this.titleNameAbbrEdit = this.titleName['titleNameAbbr'];
     this.displayDialog = true;
   }
 
-  delete(id){
-    console.log('delete');
-    
+  delete(id) {
+    const index = this.titleNames.findIndex(e => e.titleNameCode == id);
+    this.titleNamesService.deleteTitleName(id)
+    .subscribe(res=>{
+      if(res['status']=="Success"){
+        this.titleNames = [
+          ...this.titleNames.slice(0,index),
+          ...this.titleNames.slice(index + 1)
+        ]
+      }
+    })
   }
 }
