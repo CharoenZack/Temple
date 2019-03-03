@@ -29,8 +29,8 @@
               คำนำหน้า* 
             </div>
             <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-12">
-              <p-dropdown [options]="titleName" optionLabel="titleNameDisplay" value="titleNameCode" [readonly]="readonly"
-                formControlName="titleName" [(ngModel)]="titleNamePerson" [autoWidth]="false" >
+              <p-dropdown [options]="titleName" optionLabel="titleNameDisplay" value="titleNameCode" 
+                formControlName="titleName"  [autoWidth]="false" >
               </p-dropdown>
               <div *ngIf="formError.titleName" class="text-danger text-invalid">{{formError.titleName}}</div>
             </div>
@@ -39,7 +39,7 @@
               ชื่อ*
             </div>
             <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-12">
-              <div><input type="text" pInputText placeholder="ชื่อ" [readonly]="readonly" formControlName="fname">
+              <div><input type="text" pInputText placeholder="ชื่อ"  formControlName="fname">
               </div>
               <div *ngIf="formError.fname" class="text-danger text-invalid">{{formError.fname}}</div>
             </div>
@@ -48,7 +48,7 @@
               นามสกุล*
             </div>
             <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-12">
-              <div><input type="text" pInputText placeholder="นามสกุล" [readonly]="readonly" formControlName="lname">
+              <div><input type="text" pInputText placeholder="นามสกุล"  formControlName="lname">
               </div>
               <div *ngIf="formError.lname" class="text-danger text-invalid">{{formError.lname}}</div>
             </div>
@@ -59,7 +59,7 @@
             </div>
             <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-12">
               <div>
-                <p-calendar [baseZIndex]="10000" [disabled]="disabled" formControlName="birthday"
+                <p-calendar [baseZIndex]="10000"  formControlName="birthday"
                   placeholder="01/01/1990" [locale]="th" [showIcon]="true" [yearRange]="yearRange"
                   [yearNavigator]="true"></p-calendar>
               </div>
@@ -72,15 +72,15 @@
             <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-12">
               <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
                 <div class="ui-g-3 ui-lg-3 ui-md-12 ui-sm-12 ">
-                  <p-radioButton name="gender" value='1' label="ชาย" [disabled]="disabled" formControlName="gender">
+                  <p-radioButton name="gender" value='1' label="ชาย"  formControlName="gender">
                   </p-radioButton>
                 </div>
                 <div class="ui-g-3 ui-lg-3 ui-md-12 ui-sm-12">
-                  <p-radioButton name="gender" value='2' label="หญิง" [disabled]="disabled" formControlName="gender">
+                  <p-radioButton name="gender" value='2' label="หญิง"  formControlName="gender">
                   </p-radioButton>
                 </div>
                 <div class="ui-g-3 ui-lg-3 ui-md-12 ui-sm-12">
-                  <p-radioButton name="gender" value='3' label="ไม่ระบุ" [disabled]="disabled" formControlName="gender">
+                  <p-radioButton name="gender" value='3' label="ไม่ระบุ"  formControlName="gender">
                   </p-radioButton>
                 </div>
               </div>
@@ -91,7 +91,7 @@
               ที่อยู่*
             </div>
             <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-12">
-              <div><textarea [rows]="5" [cols]="30" class="fixtextarea" pInputTextarea [readonly]="readonly"
+              <div><textarea [rows]="5" [cols]="30" class="fixtextarea" pInputTextarea 
                   formControlName="address"></textarea>
               </div>
               <div *ngIf="formError.address" class="text-danger text-invalid">{{formError.address}}</div>
@@ -102,7 +102,7 @@
             </div>
             <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-12">
               <div>
-                <p-inputMask mask="(999) 999-9999" placeholder="(099) 999-9999" [readonly]="readonly"
+                <p-inputMask mask="(999) 999-9999" placeholder="(099) 999-9999" 
                   formControlName="phone">
                 </p-inputMask>
               </div>
@@ -113,7 +113,7 @@
               email*
             </div>
             <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-12">
-              <div><input type="text" pInputText placeholder="example@example.com" [readonly]="readonly"
+              <div><input type="text" pInputText placeholder="example@example.com" 
                   formControlName="email" [email]="true" ></div>
               <div *ngIf="formError.email" class="text-danger text-invalid">{{formError.email}}</div>
             </div>
@@ -123,7 +123,7 @@
             </div>
             <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-12">
               <div>
-                <p-inputMask mask="(999) 999-9999" placeholder="(099) 999-9999" [readonly]="readonly"
+                <p-inputMask mask="(999) 999-9999" placeholder="(099) 999-9999" 
                   formControlName="phoneEmergency">
                 </p-inputMask>
               </div>
