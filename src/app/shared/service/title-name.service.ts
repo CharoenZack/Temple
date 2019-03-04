@@ -61,7 +61,7 @@ export class TitleNameService {
       titleDisplay: data['titleNameDisplay'],
       titleName: data['titleNameAbbr']
     }
-    return this.http.post(ApiConstants.baseURl + "/admin/titlenames", body)
+    return this.http.post(ApiConstants.baseURl + "/titlenames", body)
       .pipe(
         map(res => {
           // const data = {
@@ -83,7 +83,7 @@ export class TitleNameService {
       titleDisplay: data['titleNameDisplay'],
       titleName: data['titleNameAbbr']
     }
-    return this.http.post(ApiConstants.baseURl + "/admin/titlenames", body)
+    return this.http.post(ApiConstants.baseURl + "/titlenames", body)
       .pipe(
         map(res=>{
           return {
@@ -95,7 +95,7 @@ export class TitleNameService {
   }
 
   deleteTitleName(id){
-    return this.http.delete(ApiConstants.baseURl+`/admin/titlenames/${id}`)
+    return this.http.delete(ApiConstants.baseURl+`/titlenames/${id}`)
     .pipe(
       map(res=>{
         return {

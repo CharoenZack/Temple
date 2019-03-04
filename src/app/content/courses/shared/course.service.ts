@@ -16,7 +16,7 @@ export class CourseService {
   ) { }
   
   getCourses(){
-    return this.http.get(ApiConstants.baseURl+'/admincourses')
+    return this.http.get(ApiConstants.baseURl+'/courses')
     .pipe(map( (res:any[])=>{
       return res.map(data=>{
         return {

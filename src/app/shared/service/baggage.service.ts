@@ -14,7 +14,7 @@ export class BaggageService {
   ) { }
 
   getItem() {
-    return this.http.get(ApiConstants.baseURl + '/admin/baggages')
+    return this.http.get(ApiConstants.baseURl + '/baggages')
       .pipe(
         map((response: any[]) => {
           const data = response['data'].map((data) => {
@@ -41,7 +41,7 @@ export class BaggageService {
       baggageCreateBy : 1 
     }
 
-    return this.http.put(ApiConstants.baseURl+`/admin/baggages/${data['id']}`,body)
+    return this.http.put(ApiConstants.baseURl+`baggages/${data['id']}`,body)
     .pipe(map((res)=>{
       console.log(data,'res');
       
@@ -57,7 +57,7 @@ export class BaggageService {
   }
 
   delete(id) {
-    return this.http.delete(ApiConstants.baseURl + `/admin/baggages/${id}`)
+    return this.http.delete(ApiConstants.baseURl + `baggages/${id}`)
     .pipe(map(res=>{
       return {
         status: res['result']
@@ -66,7 +66,7 @@ export class BaggageService {
   }
 
   save(data){
-    return this.http.post(ApiConstants.baseURl + `/admin/baggages`, {
+    return this.http.post(ApiConstants.baseURl + `baggages`, {
       baggageNumber: data['name'],
       baggageCreateBy : 1 ,
     })
