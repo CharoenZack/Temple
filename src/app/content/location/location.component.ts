@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { location } from '../../shared/interfaces/location';
+import { Location } from '../../shared/interfaces/location';
 import { LocationService } from './location.service';
 import { MessageService } from 'primeng/api';
 
@@ -11,8 +11,8 @@ import { MessageService } from 'primeng/api';
 export class LocationComponent implements OnInit {
   displayDialog: boolean;
   newLocation: boolean;
-  location: location;
-  locations: location[];
+  location: Location;
+  locations: Location[];
   cols: any[];
   locationNameEdit: String;
   constructor(
@@ -24,7 +24,7 @@ export class LocationComponent implements OnInit {
     this.getLocation();
     this.cols = [
       { field: 'name', header: 'สถานที่' },
-    ]
+    ];
   }
 
   showDialogToAdd() {
@@ -34,21 +34,19 @@ export class LocationComponent implements OnInit {
   }
 
   save() {
-    const locationUpdate = {
-      name: this.locationNameEdit
-    }
-    this.locationService.save(locationUpdate).toPromise().then(res => {
-      console.log(res);
+    this.messageService.clear();
+    this.location['name'] = this.locationNameEdit;
+    this.locationService.save(this.location).toPromise().then(res => {
       if (res['status'] === 'Success') {
         this.locations = [
           ...this.locations,
           res['data']
-        ]
+        ];
 
-        this.messageService.add({severity:'success', summary:'เพิ่มสำเร็จ', detail:'สถานที่ : '+res['data']['name']});
+        this.messageService.add({severity: 'success', summary: 'เพิ่มสำเร็จ', detail: 'สถานที่ : ' + res['data']['name']});
       }
-    })
-    this.clear()
+    });
+    this.clear();
 
   }
   clear() {
@@ -58,48 +56,44 @@ export class LocationComponent implements OnInit {
   }
   showEdit(id) {
     this.newLocation = false;
-    this.location = this.locations.filter(e => e.id == id)[0]
-    this.locationNameEdit = this.location['name']
+    this.location = this.locations.filter(e => e.id === id)[0];
+    this.locationNameEdit = this.location['name'];
     this.displayDialog = true;
   }
   delete(id) {
-    const index = this.locations.findIndex(e => e.id === id)
-    console.log(index);
+    this.messageService.clear();
+    const index = this.locations.findIndex(e => e.id === id);
     this.locationService.delete(id).toPromise()
-    .then(res=>{
-      if(res['status']=="Success"){
+    .then(res => {
+      if ( res['status'] === 'Success' ) {
         this.locations = [
           ...this.locations.slice(0, index),
           ...this.locations.slice(index + 1)
-        ]
-        this.messageService.add({severity:'success', summary:'ลบสำเร็จ'});
+        ];
+        this.messageService.add({severity: 'success', summary: 'ลบสำเร็จ'});
       }
     });
-
-
   }
-
   getLocation() {
     this.locationService.getLocation()
       .toPromise().then(res => {
-        this.locations = res
-      })
+        if (res['status'] === 'Success') {
+          this.locations = res['data'];
+        }
+      });
   }
 
   update() {
-    const locationUpdate = {
-      id: this.location['id'],
-      name: this.locationNameEdit
-    }
-    this.locationService.update(locationUpdate).toPromise().then(res => {
+    this.messageService.clear();
+    this.location['name'] = this.locationNameEdit;
+    this.locationService.update(this.location).toPromise().then(res => {
       if (res['status'] === 'Success') {
-        const index = this.locations.findIndex(e => e.id == res['data']['id']);
-        this.locations[index].name = res['data']['name']
+        const index = this.locations.findIndex(e => e.id === res['data']['id']);
+        this.locations[index].name = res['data']['name'];
       }
-
-      this.messageService.add({severity:'success', summary:'แก้ไขสำเร็จ', detail:'สถานที่ : '+res['data']['name']});
-    })
-    this.clear()
+      this.messageService.add({severity: 'success', summary: 'แก้ไขสำเร็จ', detail: 'สถานที่ : ' + res['data']['name']});
+    });
+    this.clear();
   }
 
 }

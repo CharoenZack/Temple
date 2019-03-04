@@ -24,7 +24,7 @@ export class ManagedTitlenameComponent implements OnInit {
 
     this.getTitleName()
     this.cols = [
-      { field: 'titleNameDisplay', header: 'คำนำหน้า' }, { field: 'titleNameAbbr', header: 'คำย่อ' }
+      { field: 'display', header: 'คำนำหน้า' }, { field: 'name', header: 'คำย่อ' }
     ]
   }
 
@@ -45,11 +45,10 @@ export class ManagedTitlenameComponent implements OnInit {
   }
 
   save() {
-    const data = {
-      titleNameDisplay: this.titleNameEdit,
-      titleNameAbbr: this.titleNameAbbrEdit
-    }
-    this.titleNamesService.createTitleName(data)
+    this.titleName.display = this.titleNameEdit
+    this.titleName.name = this.titleNameAbbrEdit
+    
+    this.titleNamesService.createTitleName(this.titleName)
     .subscribe(res=>{
       if(res['status']=="Success"){
         this.titleNames = [
@@ -63,20 +62,20 @@ export class ManagedTitlenameComponent implements OnInit {
   clear() {
     this.titleName = {};
     this.displayDialog = false;
+    this.titleNameEdit = ''
+    this.titleNameAbbrEdit = ''
   }
 
   update() {
-    console.log('ok');
-    const data = {
-      titleNameCode: this.titleName.titleNameCode,
-      titleNameDisplay: this.titleNameEdit,
-      titleNameAbbr: this.titleNameAbbrEdit
-    }
-    this.titleNamesService.updateTitleName(data)
+    this.titleName.display = this.titleNameEdit
+    this.titleName.name = this.titleNameAbbrEdit
+    this.titleNamesService.updateTitleName(this.titleName)
       .subscribe(res => {
-        console.log(res);
         if (res['status'] == "Success") {
-          const index = this.titleNames.findIndex(e => e.titleNameCode == res['data']['titleNameCode']);
+          const index = this.titleNames.findIndex(e => e.id == res['data']['id']);
+          console.log( res['data'],'new');
+          console.log(this.titleNames[index],'old');
+          
           this.titleNames[index] = res['data'];
         }
       })
@@ -85,14 +84,16 @@ export class ManagedTitlenameComponent implements OnInit {
 
   showEdit(id) {
     this.newtitleName = false;
-    this.titleName = this.titleNames.filter(e => e.titleNameCode == id)[0];
-    this.titleNameEdit = this.titleName['titleNameDisplay'];
-    this.titleNameAbbrEdit = this.titleName['titleNameAbbr'];
+    this.titleName = this.titleNames.filter(e => e.id == id)[0];
+    this.titleNameEdit = this.titleName['display'];
+    this.titleNameAbbrEdit = this.titleName['name'];
     this.displayDialog = true;
   }
 
   delete(id) {
-    const index = this.titleNames.findIndex(e => e.titleNameCode == id);
+    console.log(id,'delete');
+    
+    const index = this.titleNames.findIndex(e => e.id == id);
     this.titleNamesService.deleteTitleName(id)
     .subscribe(res=>{
       if(res['status']=="Success"){

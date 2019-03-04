@@ -107,7 +107,7 @@ export class RegisterComponent implements OnInit {
     }
 
     if(this.form.get('password').value !==this.form.get('repassword').value){
-      this.formError['repassword'] = 'กรุณากรอก repassword ให้ตรงกับ password';
+      this.formError['repassword'] = 'กรุณากรอก password ให้ตรงกัน';
     }
   }
 }

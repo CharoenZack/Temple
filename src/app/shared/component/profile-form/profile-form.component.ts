@@ -134,7 +134,7 @@ export class ProfileFormComponent implements OnInit {
 
       const personalData = this.personnalInfoService.getPersonalInfo(this.personalId );
       // set titlename in form
-      this.titleNamePerson = this.titleNameService.getTitleName(+personalData.titleName);
+      //this.titleNamePerson = this.titleNameService.getTitleName(+personalData.titleName);
       
       this.form.controls['titleName'].setValue(this.titleNamePerson);
       this.form.controls['fname'].setValue(personalData.fname);

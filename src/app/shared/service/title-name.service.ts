@@ -32,46 +32,22 @@ export class TitleNameService {
     return this.http.get(ApiConstants.baseURl + '/titlenames')
       .pipe(
         map(res => {
-          const data = res['data'].map(data => {
-            return {
-              titleNameCode: data['id'],
-              titleNameDisplay: data['display'],
-              titleNameAbbr: data['name']
-            }
-          })
           return {
             status: res['result'],
-            data: data
+            data: res['data']
           }
         })
       )
   }
 
-  getTitleName(id): TitleName {
-    if (id == '01')
-      return { titleNameCode: '01', titleNameDisplay: 'นาย' }
-    else if (id == '02')
-      return { titleNameCode: '02', titleNameDisplay: 'นางสาว' }
-    return { titleNameCode: '', titleNameDisplay: 'กรุณาเลือกคำนำหน้า' }
-  }
-
   updateTitleName(data) {
-    const body = {
-      titleId: data['titleNameCode'],
-      titleDisplay: data['titleNameDisplay'],
-      titleName: data['titleNameAbbr']
-    }
-    return this.http.post(ApiConstants.baseURl + "/titlenames", body)
+    //console.log(data,'update');
+    return this.http.put(ApiConstants.baseURl + `/titlenames/${data['id']}`, data)
       .pipe(
         map(res => {
-          // const data = {
-          //   titleNameAbbr: res['data'][0]['name'],
-          //   titleNameCode: res['data'][0]['id'],
-          //   titleNameDisplay: res['data'][0]['display'],
-          // }
           return {
             status: res['result'],
-            data: this.transformData(res['data'])
+            data: res['data'][0]
           }
         })
       )
@@ -79,16 +55,12 @@ export class TitleNameService {
   }
 
   createTitleName(data) {
-    const body = {
-      titleDisplay: data['titleNameDisplay'],
-      titleName: data['titleNameAbbr']
-    }
-    return this.http.post(ApiConstants.baseURl + "/titlenames", body)
+    return this.http.post(ApiConstants.baseURl + "/titlenames", data)
       .pipe(
         map(res=>{
           return {
             status: res['result'],
-            data: this.transformData(res['data'])
+            data: res['data'][0]
           }
         })
       )
@@ -105,13 +77,4 @@ export class TitleNameService {
     )
   }
 
-
-  private transformData(data) {
-    return {
-      titleNameAbbr: data[0]['name'],
-      titleNameCode: data[0]['id'],
-      titleNameDisplay: data[0]['display'],
-    }
-
-  }
 }
