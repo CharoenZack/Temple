@@ -1,3 +1,4 @@
+
 <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
   <div style="text-align:center">
     <h1>สถานที่</h1>
@@ -7,7 +8,7 @@
   <div class="container">
     <div class="row">
       <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
-          
+          <p-messages [(value)]="msgs"></p-messages>
         <p-table [columns]="cols" [value]="locations" [paginator]="true" [rows]="10" [responsive]="true">
             <ng-template pTemplate="caption">
               <div style="text-align:left">
@@ -49,21 +50,22 @@
     </div>
   </div>
 
-  <p-dialog header="location Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '300px'}">
+  <p-dialog (onHide)="clear()" header="location Details"  [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '300px'}">
       <div class="ui-g ui-fluid" *ngIf="location">
           <div class="ui-g-12">
               <div class="ui-g-4">
                   <label for="name">ชื่อสถานที่</label>
               </div>
               <div class="ui-g-8">
-                  <input pInputText id="name" [(ngModel)]="location.name" />
+                  <input pInputText id="name" [(ngModel)]="locationNameEdit" />
               </div>
           </div>
       </div>
       <p-footer>
           <div class="ui-dialog-buttonpane ui-helper-clearfix">
-              <button type="button" pButton (click)="clear()" label="Clear"></button>
-              <button type="button" pButton (click)="save()" label="Save"></button>
+              <button  type="button" pButton (click)="clear()" label="Clear"></button>
+              <button *ngIf="newLocation" type="button" pButton (click)="save()" label="Save"></button>
+              <button *ngIf="!newLocation" type="button" pButton (click)="update()" label="Update"></button>
           </div>
       </p-footer>
   </p-dialog>

@@ -3,6 +3,7 @@ import { Course } from './course';
 import { MockCourse } from './mock-course';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { ApiConstants } from 'src/app/shared/constants/ApiConstants';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class CourseService {
   ) { }
   
   getCourses(){
-    return this.http.get('http://localhost:3999/api/v1/courses')
+    return this.http.get(ApiConstants.baseURl+'/courses')
     .pipe(map( (res:any[])=>{
       return res.map(data=>{
         return {

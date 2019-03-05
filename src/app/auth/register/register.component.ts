@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -18,7 +17,6 @@ export class RegisterComponent implements OnInit {
   public validationMessage:any;
 
   constructor(
-    private router:Router,
     private messageService: MessageService,
     private manageUser:ManageUserService
   ) { }
@@ -106,6 +104,10 @@ export class RegisterComponent implements OnInit {
           this.formError[field] += messages[key] + ' ';
         }
       }
+    }
+
+    if(this.form.get('password').value !==this.form.get('repassword').value){
+      this.formError['repassword'] = 'กรุณากรอก password ให้ตรงกัน';
     }
   }
 }
