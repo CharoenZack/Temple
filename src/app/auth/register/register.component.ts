@@ -52,11 +52,7 @@ export class RegisterComponent implements OnInit {
         memberRoleId:1,
         memberTitleId: parseInt(titleCode.titleNameCode),
       }
-      //console.log(dataUser);
       this.manageUser.createUser(dataUser);
-      // setTimeout(() => {
-      //   this.router.navigateByUrl('/auth/login');
-      // }, 4000);
     } else {
       this.subscribeInputMessageWaring();
       this.typeMessage = "fail";

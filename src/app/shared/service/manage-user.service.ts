@@ -12,27 +12,48 @@ export class ManageUserService {
     private http: HttpClient
   ) { }
 
-  createUser(dataUser){
+  createUser(dataUser) {
     console.log(dataUser);
-    this.http.post(ApiConstants.baseURl+'/members', dataUser)
-    .subscribe(res=>{
+    this.http.post(ApiConstants.baseURl + '/members', dataUser)
+    .subscribe(res => {
       console.log('success')
       console.log(res);
     },
-    err =>{
-      console.log("Error",err);
+    err => {
+      console.log('Error', err);
     });
   }
 
-  getAllUsers(){
-    return this.http.get(ApiConstants.baseURl+'/members')
+  getUser(id) {
+    return this.http.get(ApiConstants.baseURl + `/members/${id}`)
+      .pipe(
+        map((res) => {
+          return {
+            status: res['result'],
+            data: res['data'][0]
+          };
+        })
+      );
+  }
+
+  getAllUsers() {
+    return this.http.get(ApiConstants.baseURl + '/members')
     .pipe(
-      map((response) => {
+      map((res) => {
+        const data = res['data']
+          .map(member => {
+            return {
+              id: member['id'],
+              titleName: member['titleName'],
+              fname: member['fname'],
+              lname: member['lname']
+            };
+          } )
         return {
-          status: response['result'],
-          data: response['data']
-        }
+          status: res['result'],
+          data: data
+        };
       })
-    )
+    );
   }
 }

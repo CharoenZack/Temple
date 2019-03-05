@@ -5,7 +5,7 @@ import { TitleNameService } from '../../service/title-name.service';
 import { formatDate } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ProfileFormService } from '../../service/profile-form.service';
-import { PersonalInfoService } from '../../service/personal-info.service';
+import { ManageUserService } from '../../service/manage-user.service';
 
 
 
@@ -24,16 +24,16 @@ export class ProfileFormComponent implements OnInit {
   @Output() data = new EventEmitter();
 
   public uploadedFiles: any;
-  public personalId : string;
+  public personalId: string;
   public yearRange: string;
   public displayYear: String;
   public th: any;
   public titleName: TitleName[];
   public form: FormGroup;
-  public formType = ''; 
-  public readonly: boolean
+  public formType = '';
+  public readonly: boolean;
   // public disabled: boolean
-  public buttonVisible: boolean
+  public buttonVisible: boolean;
   public formRegisterDisplay: boolean;
   public titleNamePerson: TitleName;
 
@@ -99,17 +99,17 @@ export class ProfileFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private profileService: ProfileFormService,
-    private personnalInfoService: PersonalInfoService
+    private manageUserService: ManageUserService
   ) { }
 
   ngOnInit() {
 
     //edit
-    this.titleNameService.getTitleNames().subscribe(res=>{
+    this.titleNameService.getTitleNames().subscribe(res => {
       this.titleName = [
         { titleNameCode: '', titleNameDisplay: 'กรุณาเลือกคำนำหน้า' },
         ...res
-      ]
+      ];
     });
     //---
     this.setTypeForm();
@@ -118,7 +118,7 @@ export class ProfileFormComponent implements OnInit {
     this.setButtonVisible();
     this.setFormRegisterDisplay();
     // for Register form
-    if (this.formType == 'Register') {
+    if (this.formType === 'Register') {
       this.setFormError();
       this.setValidationMessage();
       this.createFormRegister();
@@ -128,27 +128,40 @@ export class ProfileFormComponent implements OnInit {
 
 
     // for Profile form
-    if (this.formType == 'Profile' || this.formType == 'Edit' || this.formType == 'EditAdmin' ) {
+    if (this.formType === 'Profile' || this.formType === 'Edit' || this.formType === 'EditAdmin' ) {
       this.personalId = this.route.snapshot.paramMap.get('id');
 
 
-      const personalData = this.personnalInfoService.getPersonalInfo(this.personalId );
+      //const personalData = this.personnalInfoService.getPersonalInfo(this.personalId );
       // set titlename in form
       //this.titleNamePerson = this.titleNameService.getTitleName(+personalData.titleName);
-      
-      this.form.controls['titleName'].setValue(this.titleNamePerson);
-      this.form.controls['fname'].setValue(personalData.fname);
-      this.form.controls['lname'].setValue(personalData.lname);
-      this.form.controls['birthday'].setValue(new Date(personalData.birthday));
-      this.form.controls['gender'].setValue(personalData.gender);
-      this.form.controls['phone'].setValue(personalData.phone);
-      this.form.controls['email'].setValue(personalData.email);
-      this.form.controls['address'].setValue(personalData.address);
-      this.form.controls['phoneEmergency'].setValue(personalData.phoneEmergency);
 
+      // this.form.controls['titleName'].setValue(this.titleNamePerson);
+      // this.form.controls['fname'].setValue(personalData.fname);
+      // this.form.controls['lname'].setValue(personalData.lname);
+      // this.form.controls['birthday'].setValue(new Date(personalData.birthday));
+      // this.form.controls['gender'].setValue(personalData.gender);
+      // this.form.controls['phone'].setValue(personalData.phone);
+      // this.form.controls['email'].setValue(personalData.email);
+      // this.form.controls['address'].setValue(personalData.address);
+      // this.form.controls['phoneEmergency'].setValue(personalData.phoneEmergency);
+
+      this.manageUserService.getUser(this.personalId)
+        .subscribe( res => {
+          console.log(res['data']);
+          this.form.controls['titleName'].setValue(res['data']['titlename']);
+          this.form.controls['fname'].setValue(res['data']['fname']);
+          this.form.controls['lname'].setValue(res['data']['lname']);
+          this.form.controls['birthday'].setValue(new Date (res['data']['birthdate']));
+          this.form.controls['gender'].setValue(res['data']['genderId']);
+          this.form.controls['phone'].setValue(res['data']['phone']);
+          this.form.controls['email'].setValue(res['data']['email']);
+          this.form.controls['address'].setValue(res['data']['address']);
+          this.form.controls['phoneEmergency'].setValue(res['data']['phoneEmergency']);
+        });
       }
 
-      if(this.formType == 'Profile'){
+      if(this.formType === 'Profile'){
         this.form.disable();
       }
 
@@ -262,7 +275,7 @@ export class ProfileFormComponent implements OnInit {
     this.form.controls['repassword'].setValue(repassword);
   }
 
-  onCancle(data){
+  onCancle(data) {
     console.log(data);
   }
 
