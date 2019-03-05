@@ -36,21 +36,21 @@ export class RegisterComponent implements OnInit {
       this.messageService.add({ key: 'warning', sticky: true, severity: 'success', summary: 'สำเร็จ', detail: 'สมัครสมาชิกสำเร็จ' });
       const titleCode = this.form.get('titleName').value;
       const dataUser = {
-        memberUsername:this.form.get('username').value,
-        memberPassword:this.form.get('password').value,
-        memberFname:this.form.get('fname').value,
-        memberLname:this.form.get('lname').value,
-        memberBirthdate:this.form.get('birthday').value,
-        memberAddress:this.form.get('address').value,
-        memberTel:this.form.get('phone').value,
-        memberEmergencyTel:this.form.get('phoneEmergency').value,
-        memberEmail:this.form.get('email').value,
-        memberImg:null,
-        memberRegisterDate:null,
-        memberLastUpdate:null,
-        memberGenderId:this.form.get('gender').value,
-        memberRoleId:1,
-        memberTitleId: parseInt(titleCode.titleNameCode),
+        username:this.form.get('username').value,
+        password:this.form.get('password').value,
+        fname:this.form.get('fname').value,
+        lname:this.form.get('lname').value,
+        birthdate:this.form.get('birthday').value,
+        address:this.form.get('address').value,
+        tel:this.form.get('phone').value,
+        emergencyTel:this.form.get('phoneEmergency').value,
+        email:this.form.get('email').value,
+        img:null,
+        registerDate:null,
+        lastUpdate:null,
+        genderId:this.form.get('gender').value,
+        roleId:1,
+        titleId: parseInt(titleCode.titleNameCode),
       }
       this.manageUser.createUser(dataUser);
     } else {
