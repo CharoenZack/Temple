@@ -27,15 +27,11 @@ export class ManageUserService {
   getAllUsers(){
     return this.http.get(ApiConstants.baseURl+'/members')
     .pipe(
-      map((response:any[]) => {
-        return response['data'].map((data)=>{
-          return {
-            id:data['memberId'],
-            titleNameDisplay:data['memberTitleName']['titleDisplay'],
-            fname:data['memberFname'],
-            lname:data['memberLname']
-          }
-        });
+      map((response) => {
+        return {
+          status: response['result'],
+          data: response['data']
+        }
       })
     )
   }
