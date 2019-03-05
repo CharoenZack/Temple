@@ -16,7 +16,9 @@ export class ManageUserComponent implements OnInit {
 
   ngOnInit() {
     this.manageUser.getAllUsers().subscribe(res=> {
-      this.personal = res
+      if(res['status'] == "Success"){
+        this.personal = res.data
+      }
     });
   }
 
