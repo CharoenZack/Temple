@@ -4,6 +4,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule} from '@angular/common/http';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { ButtonModule } from 'primeng/button';
 import { RadioButtonModule } from 'primeng/radiobutton'
@@ -75,7 +76,8 @@ import { PersonalInfoService } from './service/personal-info.service';
     FormsModule,
     RegisterInputModule,
     FileUploadModule,
-    HttpClientModule
+    HttpClientModule,
+    
   ],
   exports: [
     CommonModule,
@@ -104,6 +106,7 @@ import { PersonalInfoService } from './service/personal-info.service';
     DialogModule,
     FullCalendarModule,
     HttpClientModule,
+    NgxSpinnerModule
   ],
   providers: [
     TitleNameService,
