@@ -39,7 +39,7 @@ export class ProfileFormComponent implements OnInit {
 
   public formConponent = {
     //new FormControl({value: 'Nancy', disabled: true}, Validators.required),
-    titleName: [{value: '', disabled: false}, Validators.required],
+    titleName: [{value: '' ,optionLabel:'', disabled: false}, Validators.required],
     fname: [{value: '', disabled: false}, Validators.required],
     lname: [{value: '', disabled: false}, Validators.required],
     birthday: [{value: '', disabled: false}, Validators.required],
@@ -107,7 +107,7 @@ export class ProfileFormComponent implements OnInit {
     //edit
     this.titleNameService.getTitleNames().subscribe(res => {
       this.titleName = [
-        { titleNameCode: '', titleNameDisplay: 'กรุณาเลือกคำนำหน้า' },
+        { titleDisplay: 'กรุณาเลือกคำนำหน้า' },
         ...res
       ];
     });
@@ -147,9 +147,8 @@ export class ProfileFormComponent implements OnInit {
       // this.form.controls['phoneEmergency'].setValue(personalData.phoneEmergency);
 
       this.manageUserService.getUser(this.personalId)
-        .subscribe( res => {
-          console.log(res['data']);
-          this.form.controls['titleName'].setValue(res['data']['titlename']);
+        .subscribe( res => { 
+          this.form.controls['titleName'].setValue(res['data']['titleDisplay'])
           this.form.controls['fname'].setValue(res['data']['fname']);
           this.form.controls['lname'].setValue(res['data']['lname']);
           this.form.controls['birthday'].setValue(new Date (res['data']['birthdate']));

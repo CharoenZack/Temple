@@ -19,9 +19,9 @@ export class TitleNameService {
         map((res: any[]) => {
           return res['data'].map(data => {
             return {
-              titleNameCode: data['id'],
-              titleNameDisplay: data['display'],
-              titleNameAbbr: data['name']
+              titleCode: data['id'],
+              titleDisplay: data['display'],
+              titleAbbr: data['name']
             }
           })
         })

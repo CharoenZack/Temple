@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ApiConstants } from '../constants/ApiConstants';
 
 @Injectable()
 export class AuthService {
@@ -10,19 +11,39 @@ export class AuthService {
     private router: Router,
     private http: HttpClient
   ) {
+   
+  }
+
+
+
+  login(username, password) {
+    const body ={
+      username:username,
+      password:password
+    }
+    const responseObservable = this.http.post(ApiConstants.baseURl+'/auth/login',body)
+    responseObservable.subscribe(res => {
+      //access_token
+      if(res['result'] === 'Success'){
+        const accessToken = res['access_token'];
+        localStorage.setItem('access-token',accessToken);
+        localStorage.setItem('logined','true');
+        this.loggedIn.next(true);
+        this.router.navigate(["/"]);
+      }
+    });
   }
 
   isLoggedIn(): BehaviorSubject<boolean> {
+    if(localStorage.getItem('access-token')==='true'){
+      this.loggedIn.next(true);
+    }
     return this.loggedIn;
   }
-
-  login(username, password) {
-    this.loggedIn.next(true);
-    this.router.navigate(["/"]);
-  }
-
+ 
   logout() {
-  this.loggedIn.next(false)
+    localStorage.clear()
     this.router.navigate(["/auth/login"]);
+    // this.isLoggedOut()
   }
 }

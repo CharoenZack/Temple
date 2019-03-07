@@ -16,7 +16,7 @@ export class LocationService {
 
 
   getLocation() {
-    return this.http.get(ApiConstants.baseURl + '/locations')
+    return this.http.get(ApiConstants.baseURl + '/locations',{ headers: { Authorization: `Bearer ${localStorage.getItem('access-token')}` } })
       .pipe(
         map(res => {
           return {
@@ -29,7 +29,7 @@ export class LocationService {
 
 
   save(data) {
-      return this.http.post(ApiConstants.baseURl + `/locations`, data)
+      return this.http.post(ApiConstants.baseURl + `/locations`, data , { headers: { Authorization: `Bearer ${localStorage.getItem('access-token')}` } })
         .pipe(
           map(res => {
         return {
@@ -40,7 +40,7 @@ export class LocationService {
   }
 
   update(data) {
-    return this.http.put(ApiConstants.baseURl + `/locations/${data['id']}`, data)
+    return this.http.put(ApiConstants.baseURl + `/locations/${data['id']}`, data ,{ headers: { Authorization: `Bearer ${localStorage.getItem('access-token')}` } })
       .pipe(map(res => {
       return {
         status : res['result'],
@@ -50,7 +50,7 @@ export class LocationService {
   }
 
   delete(id) {
-    return this.http.delete(ApiConstants.baseURl + `/locations/${id}`)
+    return this.http.delete(ApiConstants.baseURl + `/locations/${id}` , { headers: { Authorization: `Bearer ${localStorage.getItem('access-token')}` } })
     .pipe(map(res => {
       return {
         status: res['result']
