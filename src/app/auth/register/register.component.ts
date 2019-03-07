@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { ManageUserService } from 'src/app/shared/service/manage-user.service';
 
 @Component({
   selector: 'app-register',
@@ -17,8 +17,8 @@ export class RegisterComponent implements OnInit {
   public validationMessage:any;
 
   constructor(
-    private router:Router,
     private messageService: MessageService,
+    private manageUser:ManageUserService
   ) { }
 
   ngOnInit() {
@@ -34,9 +34,25 @@ export class RegisterComponent implements OnInit {
       this.messageService.clear();
       this.typeMessage = "success";
       this.messageService.add({ key: 'warning', sticky: true, severity: 'success', summary: 'สำเร็จ', detail: 'สมัครสมาชิกสำเร็จ' });
-      setTimeout(() => {
-        this.router.navigateByUrl('/auth/login');
-      }, 4000);
+      const titleCode = this.form.get('titleName').value;
+      const dataUser = {
+        username:this.form.get('username').value,
+        password:this.form.get('password').value,
+        fname:this.form.get('fname').value,
+        lname:this.form.get('lname').value,
+        birthdate:this.form.get('birthday').value,
+        address:this.form.get('address').value,
+        tel:this.form.get('phone').value,
+        emergencyTel:this.form.get('phoneEmergency').value,
+        email:this.form.get('email').value,
+        img:null,
+        registerDate:null,
+        lastUpdate:null,
+        genderId:this.form.get('gender').value,
+        roleId:1,
+        titleId: parseInt(titleCode.titleNameCode),
+      }
+      this.manageUser.createUser(dataUser);
     } else {
       this.subscribeInputMessageWaring();
       this.typeMessage = "fail";
@@ -84,6 +100,10 @@ export class RegisterComponent implements OnInit {
           this.formError[field] += messages[key] + ' ';
         }
       }
+    }
+
+    if(this.form.get('password').value !==this.form.get('repassword').value){
+      this.formError['repassword'] = 'กรุณากรอก password ให้ตรงกัน';
     }
   }
 }

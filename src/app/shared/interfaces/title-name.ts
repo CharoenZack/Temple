@@ -1,4 +1,5 @@
 export interface TitleName {
-    titleNameCode?:String;
-    titleNameDisplay?: String;
+    id?: String;
+    name?: String;
+    display?: String;
 }

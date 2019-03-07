@@ -1,4 +1,4 @@
-export interface location {
-    id?:number;
-    name?:string;
+export interface Location {
+    id?: number;
+    name?: String;
 }

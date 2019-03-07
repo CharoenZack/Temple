@@ -5,7 +5,7 @@ import { TitleNameService } from '../../service/title-name.service';
 import { formatDate } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ProfileFormService } from '../../service/profile-form.service';
-import { PersonalInfoService } from '../../service/personal-info.service';
+import { ManageUserService } from '../../service/manage-user.service';
 
 
 
@@ -24,29 +24,30 @@ export class ProfileFormComponent implements OnInit {
   @Output() data = new EventEmitter();
 
   public uploadedFiles: any;
-  public personalId : string;
+  public personalId: string;
   public yearRange: string;
   public displayYear: String;
   public th: any;
   public titleName: TitleName[];
   public form: FormGroup;
-  public formType = ''; 
-  public readonly: boolean
-  public disabled: boolean
-  public buttonVisible: boolean
+  public formType = '';
+  public readonly: boolean;
+  // public disabled: boolean
+  public buttonVisible: boolean;
   public formRegisterDisplay: boolean;
   public titleNamePerson: TitleName;
 
   public formConponent = {
-    titleName: ['', Validators.required],
-    fname: ['', Validators.required],
-    lname: ['', Validators.required],
-    birthday: ['', Validators.required],
-    gender: ['', Validators.required],
-    address: ['', Validators.required],
-    phone: ['', Validators.required],
-    email: ['', Validators.required],
-    phoneEmergency: ['', Validators.required]
+    //new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    titleName: [{value: '' ,optionLabel:'', disabled: false}, Validators.required],
+    fname: [{value: '', disabled: false}, Validators.required],
+    lname: [{value: '', disabled: false}, Validators.required],
+    birthday: [{value: '', disabled: false}, Validators.required],
+    gender: [{value: '', disabled: false}, Validators.required],
+    address: [{value: '', disabled: false}, Validators.required],
+    phone: [{value: '', disabled: false}, Validators.required],
+    email: [{value: '', disabled: false}, Validators.required],
+    phoneEmergency: [{value: '', disabled: false}, Validators.required]
   }
 
 
@@ -98,39 +99,70 @@ export class ProfileFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private profileService: ProfileFormService,
-    private personnalInfoService: PersonalInfoService
+    private manageUserService: ManageUserService
   ) { }
 
   ngOnInit() {
-    this.titleName = this.titleNameService.getTitleNames();
+
+    //edit
+    this.titleNameService.getTitleNames().subscribe(res => {
+      this.titleName = [
+        { titleDisplay: 'กรุณาเลือกคำนำหน้า' },
+        ...res
+      ];
+    });
+    //---
     this.setTypeForm();
     this.setCalendarTH();
     this.createYearRange();
     this.setButtonVisible();
     this.setFormRegisterDisplay();
     // for Register form
-    if (this.formType == 'Register') {
+    if (this.formType === 'Register') {
       this.setFormError();
       this.setValidationMessage();
       this.createFormRegister();
     } else {
       this.createForm();
     }
+
+
     // for Profile form
-    if (this.formType == 'Profile' || this.formType == 'Edit' || this.formType == 'EditAdmin' ) {
+    if (this.formType === 'Profile' || this.formType === 'Edit' || this.formType === 'EditAdmin' ) {
       this.personalId = this.route.snapshot.paramMap.get('id');
-      const personalData = this.personnalInfoService.getPersonalInfo(this.personalId );
+
+
+      //const personalData = this.personnalInfoService.getPersonalInfo(this.personalId );
       // set titlename in form
-      this.titleNamePerson = this.titleNameService.getTitleName(+personalData.titleName);
-      this.form.controls['fname'].setValue(personalData.fname);
-      this.form.controls['lname'].setValue(personalData.lname);
-      this.form.controls['birthday'].setValue(new Date(personalData.birthday));
-      this.form.controls['gender'].setValue(personalData.gender);
-      this.form.controls['phone'].setValue(personalData.phone);
-      this.form.controls['email'].setValue(personalData.email);
-      this.form.controls['address'].setValue(personalData.address);
-      this.form.controls['phoneEmergency'].setValue(personalData.phoneEmergency);
-    }
+      //this.titleNamePerson = this.titleNameService.getTitleName(+personalData.titleName);
+
+      // this.form.controls['titleName'].setValue(this.titleNamePerson);
+      // this.form.controls['fname'].setValue(personalData.fname);
+      // this.form.controls['lname'].setValue(personalData.lname);
+      // this.form.controls['birthday'].setValue(new Date(personalData.birthday));
+      // this.form.controls['gender'].setValue(personalData.gender);
+      // this.form.controls['phone'].setValue(personalData.phone);
+      // this.form.controls['email'].setValue(personalData.email);
+      // this.form.controls['address'].setValue(personalData.address);
+      // this.form.controls['phoneEmergency'].setValue(personalData.phoneEmergency);
+
+      this.manageUserService.getUser(this.personalId)
+        .subscribe( res => { 
+          this.form.controls['titleName'].setValue(res['data']['titleDisplay'])
+          this.form.controls['fname'].setValue(res['data']['fname']);
+          this.form.controls['lname'].setValue(res['data']['lname']);
+          this.form.controls['birthday'].setValue(new Date (res['data']['birthdate']));
+          this.form.controls['gender'].setValue(res['data']['genderId']);
+          this.form.controls['phone'].setValue(res['data']['phone']);
+          this.form.controls['email'].setValue(res['data']['email']);
+          this.form.controls['address'].setValue(res['data']['address']);
+          this.form.controls['phoneEmergency'].setValue(res['data']['phoneEmergency']);
+        });
+      }
+
+      if(this.formType === 'Profile'){
+        this.form.disable();
+      }
 
   }
 
@@ -182,7 +214,7 @@ export class ProfileFormComponent implements OnInit {
     this.formType = formType;
     this.profileService.setFormType(formType);
     this.readonly = this.profileService.getSettingReadOnly();
-    this.disabled = this.profileService.getSettingDisabled();
+    //this.disabled = this.profileService.getSettingDisabled();
   }
 
   setCalendarTH() {
@@ -204,9 +236,9 @@ export class ProfileFormComponent implements OnInit {
 
   createFormRegister() {
     const formRegister = {
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-      repassword: ['', Validators.required]
+      username: ['', Validators.required,Validators.minLength(4)],
+      password: ['', Validators.required,Validators.minLength(4)],
+      repassword: ['', Validators.required,Validators.minLength(4)]
     }
     this.form = this.formBuilder.group({
       ...formRegister,
@@ -242,7 +274,7 @@ export class ProfileFormComponent implements OnInit {
     this.form.controls['repassword'].setValue(repassword);
   }
 
-  onCancle(data){
+  onCancle(data) {
     console.log(data);
   }
 

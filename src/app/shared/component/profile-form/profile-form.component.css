@@ -37,3 +37,16 @@ img {
   }
 
 
+  :host >>> :disabled {
+    border-style: none;
+    color: black;
+    background: antiquewhite;
+    opacity: 1 !important;
+  }
+
+
+  
+
+
+
+
