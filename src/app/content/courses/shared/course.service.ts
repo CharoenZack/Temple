@@ -16,7 +16,7 @@ export class CourseService {
   ) { }
   
   getCourses(){
-    return this.http.get(ApiConstants.baseURl+'/courses')
+    return this.http.get(ApiConstants.baseURl+'/courses',{ headers: { Authorization: `Bearer ${localStorage.getItem('access-token')}` } })
     .pipe(map( (res:any[])=>{
       return res.map(data=>{
         return {
