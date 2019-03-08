@@ -107,17 +107,20 @@ export class ProfileFormComponent implements OnInit {
     //edit
     this.titleNameService.getTitleNames().subscribe(res => {
       this.titleName = [
-        { titleDisplay: 'กรุณาเลือกคำนำหน้า' },
+        { display: 'กรุณาเลือกคำนำหน้า' },
         ...res
       ];
+
+      console.log(res , 'titlename');
+      
     });
-    //---
+
     this.setTypeForm();
     this.setCalendarTH();
     this.createYearRange();
     this.setButtonVisible();
     this.setFormRegisterDisplay();
-    // for Register form
+
     if (this.formType === 'Register') {
       this.setFormError();
       this.setValidationMessage();
@@ -130,33 +133,22 @@ export class ProfileFormComponent implements OnInit {
     // for Profile form
     if (this.formType === 'Profile' || this.formType === 'Edit' || this.formType === 'EditAdmin' ) {
       this.personalId = this.route.snapshot.paramMap.get('id');
-
-
-      //const personalData = this.personnalInfoService.getPersonalInfo(this.personalId );
-      // set titlename in form
-      //this.titleNamePerson = this.titleNameService.getTitleName(+personalData.titleName);
-
-      // this.form.controls['titleName'].setValue(this.titleNamePerson);
-      // this.form.controls['fname'].setValue(personalData.fname);
-      // this.form.controls['lname'].setValue(personalData.lname);
-      // this.form.controls['birthday'].setValue(new Date(personalData.birthday));
-      // this.form.controls['gender'].setValue(personalData.gender);
-      // this.form.controls['phone'].setValue(personalData.phone);
-      // this.form.controls['email'].setValue(personalData.email);
-      // this.form.controls['address'].setValue(personalData.address);
-      // this.form.controls['phoneEmergency'].setValue(personalData.phoneEmergency);
-
       this.manageUserService.getUser(this.personalId)
         .subscribe( res => { 
-          this.form.controls['titleName'].setValue(res['data']['titleDisplay'])
+          const titlename = {
+            id:res['data']['titleId'],
+            display:res['data']['titleDisplay'],
+            name:res['data']['titleName']
+          }
+          this.form.controls['titleName'].patchValue(titlename)
           this.form.controls['fname'].setValue(res['data']['fname']);
           this.form.controls['lname'].setValue(res['data']['lname']);
           this.form.controls['birthday'].setValue(new Date (res['data']['birthdate']));
           this.form.controls['gender'].setValue(res['data']['genderId']);
-          this.form.controls['phone'].setValue(res['data']['phone']);
+          this.form.controls['phone'].setValue(res['data']['tel']);
           this.form.controls['email'].setValue(res['data']['email']);
           this.form.controls['address'].setValue(res['data']['address']);
-          this.form.controls['phoneEmergency'].setValue(res['data']['phoneEmergency']);
+          this.form.controls['phoneEmergency'].setValue(res['data']['emergencyTel']);
         });
       }
 
@@ -236,9 +228,12 @@ export class ProfileFormComponent implements OnInit {
 
   createFormRegister() {
     const formRegister = {
-      username: ['', Validators.required,Validators.minLength(4)],
-      password: ['', Validators.required,Validators.minLength(4)],
-      repassword: ['', Validators.required,Validators.minLength(4)]
+      // username: ['', Validators.required,Validators.minLength(4)],
+      // password: ['', Validators.required,Validators.minLength(4)],
+      // repassword: ['', Validators.required,Validators.minLength(4)]
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+      repassword: ['', Validators.required]
     }
     this.form = this.formBuilder.group({
       ...formRegister,
@@ -265,13 +260,18 @@ export class ProfileFormComponent implements OnInit {
   }
 
   setUsername(username) {
-    this.form.controls['username'].setValue(username);
+    this.form.controls['username'].setValue(username)
   }
+  
   setPassword(password) {
     this.form.controls['password'].setValue(password);
+    console.log(password);
+    
   }
   setRepassword(repassword) {
     this.form.controls['repassword'].setValue(repassword);
+    console.log(repassword);
+    
   }
 
   onCancle(data) {

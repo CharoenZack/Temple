@@ -22,6 +22,22 @@ export class ManageUserComponent implements OnInit {
     });
   }
 
+  deleteUser(id){
+    console.log(id);
+    this.manageUser.deleteUser(id)
+    .subscribe(res=>{
+      if(res['status']==='Success'){
+        const index = this.personal.findIndex(e => e.id === id);
+        console.log(index);
+        
+        this.personal = [
+          ...this.personal.slice(0,index),
+          ...this.personal.slice(index+1)
+        ]
+      }
+    })
+  }
+
 
 
 }
