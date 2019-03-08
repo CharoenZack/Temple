@@ -14,7 +14,7 @@ export class ManageUserService {
 
   createUser(dataUser) {
     console.log(dataUser);
-    this.http.post(ApiConstants.baseURl + '/members', dataUser,{ headers: { Authorization: `Bearer ${localStorage.getItem('access-token')}` } })
+    this.http.post(ApiConstants.baseURl + '/auth/register', dataUser,{ headers: { Authorization: `Bearer ${localStorage.getItem('access-token')}` } })
     .subscribe(res => {
       console.log('success')
       console.log(res);
