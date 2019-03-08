@@ -26,8 +26,8 @@ export class SidebarComponent implements OnInit {
     this.authService.isLoggedIn().subscribe(res => this.isLoggedIn = res);
   }
 
-  clickOutsidebar() {
-    let data = this.openSideBar;
+  clickOutsideBar() {
+    const data = this.openSideBar;
     this.sidebarService.switchBar(!data);
   }
 

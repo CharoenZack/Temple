@@ -16,28 +16,28 @@ export class AuthService {
   ) {}
 
   login(username, password) {
-    const body ={
-      username:username,
-      password:password
-    }
-    const responseObservable = this.http.post(ApiConstants.baseURl+'/auth/login',body)
+    const body = {
+      username: username,
+      password: password
+    };
+    const responseObservable = this.http.post(ApiConstants.baseURl + '/auth/login', body);
     responseObservable.subscribe(res => {
-      //access_token
-      if(res['result'] === 'Success'){
+      // access_token
+      if (res['result'] === 'Success') {
         const accessToken = res['access_token'];
-        localStorage.setItem('access-token',accessToken)
+        localStorage.setItem('access-token', accessToken);
         this.loggedIn.next(true);
-        this.router.navigate(["/"]);
+        this.router.navigate(['/']);
       }
     });
   }
 
-  isLoggedIn():BehaviorSubject<boolean> {
+  isLoggedIn(): BehaviorSubject<boolean> {
     return this.loggedIn;
   }
- 
+
   logout() {
-    localStorage.clear()
-    this.router.navigate(["/auth/login"]);
+    localStorage.clear();
+    this.router.navigate(['/auth/login']);
   }
 }
