@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Baggage } from '../../shared/interfaces/baggage';
-import { BaggageService } from '../../shared/service/baggage.service';
+import {Component, OnInit} from '@angular/core';
+import {Baggage} from '../../shared/interfaces/baggage';
+import {BaggageService} from '../../shared/service/baggage.service';
 
 
 @Component({
@@ -16,7 +16,9 @@ export class BaggagesComponent implements OnInit {
   baggage: Baggage;
   baggageNumber: String;
   cols: any[];
-  constructor(private baggageService: BaggageService) { }
+
+  constructor(private baggageService: BaggageService) {
+  }
 
   ngOnInit() {
 
@@ -29,7 +31,7 @@ export class BaggagesComponent implements OnInit {
 
     this.cols = [
       // {field: 'date',header: 'วันที่'},{field: 'id',header: 'หมายเลขตู้'},{field: 'status',header:'สถานะ'}
-      { field: 'date', header: 'วันที่' }, { field: 'number', header: 'หมายเลขตู้' }
+      {field: 'date', header: 'วันที่'}, {field: 'number', header: 'หมายเลขตู้'}
     ];
   }
 
@@ -47,14 +49,14 @@ export class BaggagesComponent implements OnInit {
     const index = this.items.findIndex(e => e.id === id);
     console.log(index);
     this.baggageService.delete(id).toPromise()
-    .then(res => {
-      if (res['status'] === 'Success') {
-        this.items = [
-          ...this.items.slice(0, index),
-          ...this.items.slice(index + 1)
-        ];
-      }
-    });
+      .then(res => {
+        if (res['status'] === 'Success') {
+          this.items = [
+            ...this.items.slice(0, index),
+            ...this.items.slice(index + 1)
+          ];
+        }
+      });
 
 
   }
