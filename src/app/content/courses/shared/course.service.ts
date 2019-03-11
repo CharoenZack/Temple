@@ -9,7 +9,6 @@ import { ApiConstants } from 'src/app/shared/constants/ApiConstants';
   providedIn: 'root'
 })
 export class CourseService {
-  courses:Course[] = MockCourse;
 
   constructor(
     private http:HttpClient
@@ -17,17 +16,11 @@ export class CourseService {
   
   getCourses(){
     return this.http.get(ApiConstants.baseURl+'/courses',{ headers: { Authorization: `Bearer ${localStorage.getItem('access-token')}` } })
-    .pipe(map( (res:any[])=>{
-      return res.map(data=>{
-        return {
-          id:data['courseId'],
-          date:data['courseStDate'],
-          name:data['courseName'],
-          annotation:null,
-          detail:data['courseDetail'],
-          location:data['locationName']
-        }
-      })
+    .pipe(map( res =>{
+      return {
+        status : res['result'],
+        data:res['data']
+      }
     }))
 
     // const courses = this.courses
@@ -35,16 +28,18 @@ export class CourseService {
 
   }
   getCourse(id: number): Course{
-    const index = this.courses.findIndex(course => course.id === id);
-    const { date,name,annotation,location,detail} = this.courses[index];
-    return{
-      id,
-      date,
-      name,
-      annotation,
-      detail,
-      location
-    };
+
+    return null;
+    // const index = this.courses.findIndex(course => course.id === id);
+    // const { date,name,annotation,location,detail} = this.courses[index];
+    // return{
+    //   id,
+    //   date,
+    //   name,
+    //   annotation,
+    //   detail,
+    //   location
+    // };
 
   }
   save(data) {
@@ -59,15 +54,15 @@ export class CourseService {
     
   }
   showEdit(id) {
-    return  this.courses.filter(e => e.id == id)[0];
+    // return  this.courses.filter(e => e.id == id)[0];
    
 }
   delete(id){
-    const index = this.courses.findIndex(e => e.id == id);
-    return [
-      ...this.courses.slice(0,index),
-      ...this.courses.slice(index+1),
-    ]
+    // const index = this.courses.findIndex(e => e.id == id);
+    // return [
+    //   ...this.courses.slice(0,index),
+    //   ...this.courses.slice(index+1),
+    // ]
     
   }
 }
