@@ -27,7 +27,7 @@ export class BaggagesComponent implements OnInit {
       if (res['status'] === 'Success') {
         this.items = res['data'];
       }
-    });
+    }).catch((e)=> console.log(e['error']['message']));
 
     this.cols = [
       // {field: 'date',header: 'วันที่'},{field: 'id',header: 'หมายเลขตู้'},{field: 'status',header:'สถานะ'}
@@ -49,14 +49,14 @@ export class BaggagesComponent implements OnInit {
     const index = this.items.findIndex(e => e.id === id);
     console.log(index);
     this.baggageService.delete(id).toPromise()
-      .then(res => {
-        if (res['status'] === 'Success') {
-          this.items = [
-            ...this.items.slice(0, index),
-            ...this.items.slice(index + 1)
-          ];
-        }
-      });
+    .then(res => {
+      if (res['status'] === 'Success') {
+        this.items = [
+          ...this.items.slice(0, index),
+          ...this.items.slice(index + 1)
+        ];
+      }
+    }).catch((e)=> console.log(e['error']['message']));
 
 
   }
@@ -73,7 +73,7 @@ export class BaggagesComponent implements OnInit {
           res['data']
         ];
       }
-    });
+    }).catch((e)=> console.log(e['error']['message']));
     this.clear();
 
   }
@@ -89,6 +89,9 @@ export class BaggagesComponent implements OnInit {
           const index = this.items.findIndex(e => e.id === res['data']['id']);
           this.items[index].number = res['data']['number'];
         }
+      },
+      (e)=>{
+        console.log(e['error']['message']);  
       });
     this.clear();
   }

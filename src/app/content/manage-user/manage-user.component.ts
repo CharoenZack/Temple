@@ -12,15 +12,16 @@ export class ManageUserComponent implements OnInit {
 
   constructor(
     private manageUser: ManageUserService
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
     this.manageUser.getAllUsers().subscribe(res => {
       if (res['status'] === 'Success') {
         this.personal = res.data;
       }
-    });
+    },
+      (e) => console.log(e['error']['message'])
+    );
   }
 
   deleteUser(id) {
@@ -34,9 +35,11 @@ export class ManageUserComponent implements OnInit {
           this.personal = [
             ...this.personal.slice(0, index),
             ...this.personal.slice(index + 1)
-          ];
+          ]
         }
-      });
+      },
+        (e) => console.log(e['error']['message'])
+      );
   }
 
 

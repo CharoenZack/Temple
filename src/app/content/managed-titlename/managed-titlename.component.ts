@@ -52,13 +52,15 @@ export class ManagedTitlenameComponent implements OnInit {
 
     this.titleNamesService.createTitleName(this.titleName)
       .subscribe(res => {
-        if (res['status'] === 'Success') {
+        if (res['status'] == "Success") {
           this.titleNames = [
             ...this.titleNames,
             res['data']
-          ];
+          ]
         }
-      });
+      },
+        (e) => console.log(e['error']['message'])
+      );
     this.clear();
   }
 
@@ -81,7 +83,9 @@ export class ManagedTitlenameComponent implements OnInit {
 
           this.titleNames[index] = res['data'];
         }
-      });
+      },
+        (e) => console.log(e['error']['message'])
+      );
     this.clear();
   }
 
@@ -99,12 +103,14 @@ export class ManagedTitlenameComponent implements OnInit {
     const index = this.titleNames.findIndex(e => e.id === id);
     this.titleNamesService.deleteTitleName(id)
       .subscribe(res => {
-        if (res['status'] === 'Success') {
+        if (res['status'] == "Success") {
           this.titleNames = [
             ...this.titleNames.slice(0, index),
             ...this.titleNames.slice(index + 1)
-          ];
+          ]
         }
-      });
+      },
+        (e) => console.log(e['error']['message'])
+      )
   }
 }
