@@ -38,8 +38,8 @@ export class SidebarComponent implements OnInit {
     }
   }
 
-  clickOutsidebar() {
-    let data = this.openSideBar;
+  clickOutsideBar() {
+    const data = this.openSideBar;
     this.sidebarService.switchBar(!data);
   }
 

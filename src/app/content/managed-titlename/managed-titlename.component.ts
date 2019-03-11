@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { TitleName } from '../../shared/interfaces/title-name';
-import { TitleNameService } from 'src/app/shared/service/title-name.service';
+import {Component, OnInit} from '@angular/core';
+import {TitleName} from '../../shared/interfaces/title-name';
+import {TitleNameService} from 'src/app/shared/service/title-name.service';
 
 @Component({
   selector: 'app-managed-titlename',
@@ -13,29 +13,31 @@ export class ManagedTitlenameComponent implements OnInit {
   newtitleName: boolean;
   titleName: TitleName;
   titleNames: TitleName[];
-  titleNameEdit: String
-  titleNameAbbrEdit: String
+  titleNameEdit: String;
+  titleNameAbbrEdit: String;
   cols: any[];
+
   constructor(
     private titleNamesService: TitleNameService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
 
-    this.getTitleName()
+    this.getTitleName();
     this.cols = [
-      { field: 'display', header: 'คำนำหน้า' }, { field: 'name', header: 'คำย่อ' }
-    ]
+      {field: 'display', header: 'คำนำหน้า'}, {field: 'name', header: 'คำย่อ'}
+    ];
   }
 
   getTitleName() {
     this.titleNamesService.getTitleNamesV2()
       .subscribe(res => {
         console.log(res, 'names');
-        if (res['status'] == "Success") {
+        if (res['status'] === 'Success') {
           this.titleNames = res['data'];
         }
-      })
+      });
   }
 
   showDialogToAdd() {
@@ -45,8 +47,8 @@ export class ManagedTitlenameComponent implements OnInit {
   }
 
   save() {
-    this.titleName.display = this.titleNameEdit
-    this.titleName.name = this.titleNameAbbrEdit
+    this.titleName.display = this.titleNameEdit;
+    this.titleName.name = this.titleNameAbbrEdit;
 
     this.titleNamesService.createTitleName(this.titleName)
       .subscribe(res => {
@@ -61,19 +63,20 @@ export class ManagedTitlenameComponent implements OnInit {
       );
     this.clear();
   }
+
   clear() {
     this.titleName = {};
     this.displayDialog = false;
-    this.titleNameEdit = ''
-    this.titleNameAbbrEdit = ''
+    this.titleNameEdit = '';
+    this.titleNameAbbrEdit = '';
   }
 
   update() {
-    this.titleName.display = this.titleNameEdit
-    this.titleName.name = this.titleNameAbbrEdit
+    this.titleName.display = this.titleNameEdit;
+    this.titleName.name = this.titleNameAbbrEdit;
     this.titleNamesService.updateTitleName(this.titleName)
       .subscribe(res => {
-        if (res['status'] == "Success") {
+        if (res['status'] === 'Success') {
           const index = this.titleNames.findIndex(e => e.id == res['data']['id']);
           console.log(res['data'], 'new');
           console.log(this.titleNames[index], 'old');
@@ -88,7 +91,7 @@ export class ManagedTitlenameComponent implements OnInit {
 
   showEdit(id) {
     this.newtitleName = false;
-    this.titleName = this.titleNames.filter(e => e.id == id)[0];
+    this.titleName = this.titleNames.filter(e => e.id === id)[0];
     this.titleNameEdit = this.titleName['display'];
     this.titleNameAbbrEdit = this.titleName['name'];
     this.displayDialog = true;
@@ -97,7 +100,7 @@ export class ManagedTitlenameComponent implements OnInit {
   delete(id) {
     console.log(id, 'delete');
 
-    const index = this.titleNames.findIndex(e => e.id == id);
+    const index = this.titleNames.findIndex(e => e.id === id);
     this.titleNamesService.deleteTitleName(id)
       .subscribe(res => {
         if (res['status'] == "Success") {

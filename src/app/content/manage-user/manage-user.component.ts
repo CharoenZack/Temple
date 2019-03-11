@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ManageUserService } from 'src/app/shared/service/manage-user.service';
+import {Component, OnInit} from '@angular/core';
+import {ManageUserService} from 'src/app/shared/service/manage-user.service';
 
 @Component({
   selector: 'app-manage-user',
@@ -16,8 +16,8 @@ export class ManageUserComponent implements OnInit {
 
   ngOnInit() {
     this.manageUser.getAllUsers().subscribe(res => {
-      if (res['status'] == "Success") {
-        this.personal = res.data
+      if (res['status'] === 'Success') {
+        this.personal = res.data;
       }
     },
       (e) => console.log(e['error']['message'])
@@ -41,7 +41,6 @@ export class ManageUserComponent implements OnInit {
         (e) => console.log(e['error']['message'])
       );
   }
-
 
 
 }

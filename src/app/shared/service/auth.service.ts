@@ -28,16 +28,15 @@ export class AuthService {
     const body = {
       username: username,
       password: password
-    }
-    const responseObservable = this.http.post(ApiConstants.baseURl + '/auth/login', body)
+    };
+    const responseObservable = this.http.post(ApiConstants.baseURl + '/auth/login', body);
     responseObservable.subscribe(res => {
+      // access_token
       if (res['result'] === 'Success') {
-        console.log(res);
-        this.role.next(res['roleName']);
         const accessToken = res['access_token'];
         localStorage.setItem('access-token', accessToken);
         this.loggedIn.next(true);
-        this.router.navigate(["/"]);
+        this.router.navigate(['/']);
       }
     });
   }
@@ -47,7 +46,7 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.clear()
-    this.router.navigate(["/auth/login"]);
+    localStorage.clear();
+    this.router.navigate(['/auth/login']);
   }
 }
