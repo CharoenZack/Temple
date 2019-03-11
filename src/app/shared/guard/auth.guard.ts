@@ -3,13 +3,13 @@ import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '
 import {AuthService} from '../service/auth.service';
 import {HttpClient} from '@angular/common/http';
 import {ApiConstants} from '../constants/ApiConstants';
+import {switchMap} from 'rxjs/operators';
+import {assertDataInRange} from '@angular/core/src/render3/assert';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-
-  private isLoggedIn: boolean;
 
   constructor(
     private router: Router,
@@ -25,8 +25,7 @@ export class AuthGuard implements CanActivate {
           {
             headers:
               {Authorization: `Bearer ${localStorage.getItem('access-token')}`}
-          })
-          .toPromise().then(res => {
+          }).toPromise().then(res => {
           console.log(res, 'res');
           if (res['result'] === 'Success') {
             this.authService.isLoggedIn().next(true);
@@ -35,6 +34,11 @@ export class AuthGuard implements CanActivate {
             this.authService.isLoggedIn().next(false);
             return reject(false);
           }
+        }).catch(() => {
+          console.log('token invalid');
+          localStorage.removeItem('access-token');
+          this.authService.isLoggedIn().next(false);
+          return reject(false);
         });
       } else {
         this.authService.isLoggedIn().next(false);
