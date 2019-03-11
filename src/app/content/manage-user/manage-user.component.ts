@@ -8,34 +8,38 @@ import { ManageUserService } from 'src/app/shared/service/manage-user.service';
 })
 export class ManageUserComponent implements OnInit {
 
-  public personal:any[];
+  public personal: any[];
 
   constructor(
-    private manageUser:ManageUserService
+    private manageUser: ManageUserService
   ) { }
 
   ngOnInit() {
-    this.manageUser.getAllUsers().subscribe(res=> {
-      if(res['status'] == "Success"){
+    this.manageUser.getAllUsers().subscribe(res => {
+      if (res['status'] == "Success") {
         this.personal = res.data
       }
-    });
+    },
+      (e) => console.log(e['error']['message'])
+    );
   }
 
-  deleteUser(id){
+  deleteUser(id) {
     console.log(id);
     this.manageUser.deleteUser(id)
-    .subscribe(res=>{
-      if(res['status']==='Success'){
-        const index = this.personal.findIndex(e => e.id === id);
-        console.log(index);
-        
-        this.personal = [
-          ...this.personal.slice(0,index),
-          ...this.personal.slice(index+1)
-        ]
-      }
-    })
+      .subscribe(res => {
+        if (res['status'] === 'Success') {
+          const index = this.personal.findIndex(e => e.id === id);
+          console.log(index);
+
+          this.personal = [
+            ...this.personal.slice(0, index),
+            ...this.personal.slice(index + 1)
+          ]
+        }
+      },
+        (e) => console.log(e['error']['message'])
+      );
   }
 
 

@@ -47,16 +47,18 @@ export class ManagedTitlenameComponent implements OnInit {
   save() {
     this.titleName.display = this.titleNameEdit
     this.titleName.name = this.titleNameAbbrEdit
-    
+
     this.titleNamesService.createTitleName(this.titleName)
-    .subscribe(res=>{
-      if(res['status']=="Success"){
-        this.titleNames = [
-          ...this.titleNames,
-          res['data']
-        ]
-      }
-    })
+      .subscribe(res => {
+        if (res['status'] == "Success") {
+          this.titleNames = [
+            ...this.titleNames,
+            res['data']
+          ]
+        }
+      },
+        (e) => console.log(e['error']['message'])
+      );
     this.clear();
   }
   clear() {
@@ -73,12 +75,14 @@ export class ManagedTitlenameComponent implements OnInit {
       .subscribe(res => {
         if (res['status'] == "Success") {
           const index = this.titleNames.findIndex(e => e.id == res['data']['id']);
-          console.log( res['data'],'new');
-          console.log(this.titleNames[index],'old');
-          
+          console.log(res['data'], 'new');
+          console.log(this.titleNames[index], 'old');
+
           this.titleNames[index] = res['data'];
         }
-      })
+      },
+        (e) => console.log(e['error']['message'])
+      );
     this.clear();
   }
 
@@ -91,17 +95,19 @@ export class ManagedTitlenameComponent implements OnInit {
   }
 
   delete(id) {
-    console.log(id,'delete');
-    
+    console.log(id, 'delete');
+
     const index = this.titleNames.findIndex(e => e.id == id);
     this.titleNamesService.deleteTitleName(id)
-    .subscribe(res=>{
-      if(res['status']=="Success"){
-        this.titleNames = [
-          ...this.titleNames.slice(0,index),
-          ...this.titleNames.slice(index + 1)
-        ]
-      }
-    })
+      .subscribe(res => {
+        if (res['status'] == "Success") {
+          this.titleNames = [
+            ...this.titleNames.slice(0, index),
+            ...this.titleNames.slice(index + 1)
+          ]
+        }
+      },
+        (e) => console.log(e['error']['message'])
+      )
   }
 }

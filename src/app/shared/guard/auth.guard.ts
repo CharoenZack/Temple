@@ -11,21 +11,14 @@ import { resolve } from 'url';
 })
 export class AuthGuard implements CanActivate {
 
-  private isLoggedIn: boolean
-  private isActivate: boolean
   constructor(
     private router: Router,
     private authService: AuthService,
     private http: HttpClient
   ) {
-    console.log("con");
-
-    //this.isLoggedIn = true;
-
-    //this.authService.isLoggedIn().subscribe(res=>this.isLoggedIn = res);
-
-
   }
+
+
 
   auth() {
     return new Promise((resolve, reject) => {
@@ -35,9 +28,9 @@ export class AuthGuard implements CanActivate {
             console.log(res, 'res')
             if (res['result'] === 'Success') {
               this.authService.isLoggedIn().next(true);
+              this.authService.setRole(res['data'][0]['roleName']);
               return resolve(true)
             } else {
-              //this.isLoggedIn = false
               this.authService.isLoggedIn().next(false);
               return reject(false)
             }
@@ -55,12 +48,6 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot) {
 
-    console.log(this.isLoggedIn, 'Activate');
-    // this.authService.isLoggedIn().subscribe(res => {
-    //   this.isLoggedIn = res
-    //   console.log(res);
-
-    // })
     return this.auth().then(() => {
       return true;
     }).catch(() => {

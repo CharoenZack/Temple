@@ -10,17 +10,24 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CourseComponent implements OnInit {
 
-  course:Course
+  course: Course
 
   constructor(
     private route: ActivatedRoute,
     private courseService: CourseService,
-    ) { }
+  ) { }
 
   ngOnInit() {
-    this.route.params.subscribe(
-      params => this.course = this.courseService.getCourse(+params.id));
-
+    this.course = {};
+    let id = this.route.snapshot.paramMap.get('id');
+    this.courseService.getCourse(id)
+      .subscribe(res => {
+        if (res['status'] === 'Success') {
+          this.course = res['data']
+          console.log(this.course);
+        }
+      });
   }
+
 
 }

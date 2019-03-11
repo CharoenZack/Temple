@@ -1,5 +1,5 @@
 export interface Course {
-    id:number;
+    id?:number;
     name?:String;
     stDate?:Date;
     endDate?:Date;

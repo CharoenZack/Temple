@@ -27,6 +27,7 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { DialogModule } from 'primeng/dialog';
 import { FileUploadModule } from 'primeng/fileupload';
+import { CookieService } from 'ngx-cookie-service';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -112,7 +113,8 @@ import { PersonalInfoService } from './service/personal-info.service';
     TitleNameService,
     MessageService,
     ProfileFormService,
-    PersonalInfoService
+    PersonalInfoService,
+    CookieService 
   ]
 })
 export class SharedModule {

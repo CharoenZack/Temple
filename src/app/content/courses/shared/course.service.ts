@@ -11,15 +11,18 @@ import { ApiConstants } from 'src/app/shared/constants/ApiConstants';
 export class CourseService {
 
   constructor(
-    private http:HttpClient
+    private http: HttpClient
   ) { }
-  
-  getCourses(){
-    return this.http.get(ApiConstants.baseURl+'/courses',{ headers: { Authorization: `Bearer ${localStorage.getItem('access-token')}` } })
-    .pipe(map( res =>{
+
+  getCourses() {
+    return this.http.get(ApiConstants.baseURl + '/courses', {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access-token')}`
+      }
+    }).pipe(map(res => {
       return {
-        status : res['result'],
-        data:res['data']
+        status: res['result'],
+        data: res['data']
       }
     }))
 
@@ -27,20 +30,18 @@ export class CourseService {
     // return courses;
 
   }
-  getCourse(id: number): Course{
-
-    return null;
-    // const index = this.courses.findIndex(course => course.id === id);
-    // const { date,name,annotation,location,detail} = this.courses[index];
-    // return{
-    //   id,
-    //   date,
-    //   name,
-    //   annotation,
-    //   detail,
-    //   location
-    // };
-
+  getCourse(id) {
+    return this.http.get(ApiConstants.baseURl + `/courses/${id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access-token')}`
+      }
+    }).pipe(map(res => {
+      console.log(res, 'get one');
+      return {
+        status: res['result'],
+        data: res['data'][0]
+      }
+    }))
   }
   save(data) {
     // let courses = this.getCourses();
@@ -51,18 +52,18 @@ export class CourseService {
     //   name: data
     // }
     // ];
-    
+
   }
   showEdit(id) {
     // return  this.courses.filter(e => e.id == id)[0];
-   
-}
-  delete(id){
+
+  }
+  delete(id) {
     // const index = this.courses.findIndex(e => e.id == id);
     // return [
     //   ...this.courses.slice(0,index),
     //   ...this.courses.slice(index+1),
     // ]
-    
+
   }
 }
