@@ -4,6 +4,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule} from '@angular/common/http';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { ButtonModule } from 'primeng/button';
 import { RadioButtonModule } from 'primeng/radiobutton'
@@ -26,6 +27,7 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { DialogModule } from 'primeng/dialog';
 import { FileUploadModule } from 'primeng/fileupload';
+import { CookieService } from 'ngx-cookie-service';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -75,7 +77,8 @@ import { PersonalInfoService } from './service/personal-info.service';
     FormsModule,
     RegisterInputModule,
     FileUploadModule,
-    HttpClientModule
+    HttpClientModule,
+    
   ],
   exports: [
     CommonModule,
@@ -104,12 +107,14 @@ import { PersonalInfoService } from './service/personal-info.service';
     DialogModule,
     FullCalendarModule,
     HttpClientModule,
+    NgxSpinnerModule
   ],
   providers: [
     TitleNameService,
     MessageService,
     ProfileFormService,
-    PersonalInfoService
+    PersonalInfoService,
+    CookieService 
   ]
 })
 export class SharedModule {

@@ -14,7 +14,7 @@ export class ManageUserService {
 
   createUser(dataUser) {
     console.log(dataUser);
-    this.http.post(ApiConstants.baseURl + '/members', dataUser)
+    this.http.post(ApiConstants.baseURl + '/auth/register', dataUser,{ headers: { Authorization: `Bearer ${localStorage.getItem('access-token')}` } })
     .subscribe(res => {
       console.log('success')
       console.log(res);
@@ -25,7 +25,7 @@ export class ManageUserService {
   }
 
   getUser(id) {
-    return this.http.get(ApiConstants.baseURl + `/members/${id}`)
+    return this.http.get(ApiConstants.baseURl + `/members/${id}`,{ headers: { Authorization: `Bearer ${localStorage.getItem('access-token')}` } })
       .pipe(
         map((res) => {
           return {
@@ -37,7 +37,7 @@ export class ManageUserService {
   }
 
   getAllUsers() {
-    return this.http.get(ApiConstants.baseURl + '/members')
+    return this.http.get(ApiConstants.baseURl + '/members',{ headers: { Authorization: `Bearer ${localStorage.getItem('access-token')}` } })
     .pipe(
       map((res) => {
         const data = res['data']
@@ -55,5 +55,28 @@ export class ManageUserService {
         };
       })
     );
+  }
+
+  updateUser(id,data){
+    console.log(data);
+    
+    return this.http.put(ApiConstants.baseURl+`/members/${id}`,data,{ headers: { Authorization: `Bearer ${localStorage.getItem('access-token')}` } })
+    .pipe(
+      map(res=>{
+        return {
+          status : res['result']
+        }
+      }))
+  }
+
+  deleteUser(id){
+    return this.http.delete(ApiConstants.baseURl+`/members/${id}`,{ headers: { Authorization: `Bearer ${localStorage.getItem('access-token')}` } })
+    .pipe(
+      map(res =>{
+        return {
+          status: res['result']
+        }
+      })
+    )
   }
 }

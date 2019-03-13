@@ -30,10 +30,15 @@ export class RegisterComponent implements OnInit {
     this.setFormError(data.formError);
     this.setValidationMessage(data.validationMessage);
 
+    console.log(this.form);
+    
+
     if (this.form.valid) {
       this.messageService.clear();
       this.typeMessage = "success";
       this.messageService.add({ key: 'warning', sticky: true, severity: 'success', summary: 'สำเร็จ', detail: 'สมัครสมาชิกสำเร็จ' });
+      
+      if(this.form.get('password').value ===this.form.get('repassword').value){
       const titleCode = this.form.get('titleName').value;
       const dataUser = {
         username:this.form.get('username').value,
@@ -50,7 +55,7 @@ export class RegisterComponent implements OnInit {
         lastUpdate:null,
         genderId:this.form.get('gender').value,
         roleId:1,
-        titleId: parseInt(titleCode.titleNameCode),
+        titleId: parseInt(titleCode.id),
       }
       this.manageUser.createUser(dataUser);
     } else {
@@ -62,6 +67,9 @@ export class RegisterComponent implements OnInit {
         this.onReject();
       }, 3000);
     }
+  }else{
+    this.formError['repassword'] = 'กรุณากรอก password ให้ตรงกัน';
+  }
 
   }
 

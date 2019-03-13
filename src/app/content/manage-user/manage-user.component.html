@@ -37,7 +37,7 @@
               <td>
                 <div style="text-align:center">
                   <button pButton type="button" [routerLink]="[ '/user',rowData.id,'edit']" label="แก้ไข" class="ui-button-warning" style="width: 40%;"></button>
-                  <button pButton type="button" label="ลบ" class="ui-button-danger"
+                  <button pButton type="button" (click)="deleteUser(rowData.id)" label="ลบ" class="ui-button-danger"
                     style="width: 40%;margin-left: 5mm"></button>
                 </div>
 

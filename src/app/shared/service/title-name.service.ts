@@ -19,9 +19,9 @@ export class TitleNameService {
         map((res: any[]) => {
           return res['data'].map(data => {
             return {
-              titleNameCode: data['id'],
-              titleNameDisplay: data['display'],
-              titleNameAbbr: data['name']
+              id: data['id'],
+              display: data['display'],
+              name: data['name']
             }
           })
         })
@@ -41,7 +41,6 @@ export class TitleNameService {
   }
 
   updateTitleName(data) {
-    //console.log(data,'update');
     return this.http.put(ApiConstants.baseURl + `/titlenames/${data['id']}`, data)
       .pipe(
         map(res => {

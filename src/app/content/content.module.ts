@@ -21,6 +21,7 @@ import { ManagedTitlenameComponent } from './managed-titlename/managed-titlename
 import { ConfirmationService } from 'primeng/api';
 import { ManageUserComponent } from './manage-user/manage-user.component';
 import { EditUserComponent } from './manageUser/edit-user/edit-user.component';
+
 @NgModule({
   declarations: [
     ContentComponent,
@@ -38,7 +39,8 @@ import { EditUserComponent } from './manageUser/edit-user/edit-user.component';
     ManagedTitlenameComponent,
     EditPersonalInfoComponent,
     ManageUserComponent,
-    EditUserComponent
+    EditUserComponent,
+
   ],
   imports: [
     CoreModule,

@@ -29,7 +29,7 @@
               คำนำหน้า* 
             </div>
             <div class="ui-g-7 ui-lg-7 ui-md-8 ui-sm-12">
-              <p-dropdown [options]="titleName" optionLabel="titleNameDisplay" value="titleNameCode" 
+              <p-dropdown [options]="titleName" optionLabel="display" value="id" 
                 formControlName="titleName"  [autoWidth]="false" >
               </p-dropdown>
               <div *ngIf="formError.titleName" class="text-danger text-invalid">{{formError.titleName}}</div>

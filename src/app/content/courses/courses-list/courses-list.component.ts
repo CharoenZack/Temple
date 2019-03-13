@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Course } from '../shared/course';
+
 import { CourseService } from '../shared/course.service';
-import {ConfirmationService} from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
+import { Course } from 'src/app/shared/interfaces/course';
 
 @Component({
   selector: 'app-courses-list',
@@ -14,35 +15,39 @@ export class CoursesListComponent implements OnInit {
   courses: Course[];
   cols: any[];
   constructor(
-    private course:CourseService,
+    private course: CourseService,
     private confirmationService: ConfirmationService
   ) { }
 
   ngOnInit() {
-    this.course.getCourses().subscribe(res=>{
+    this.course.getCourses().subscribe(res => {
       console.log(res);
-      this.courses = res;
+
+      if (res['status'] === 'Success') {
+        this.courses = res['data'];
+      }
     });
 
 
     this.cols = [
-      {field: 'date',header: 'วันที่'},
-      {field: 'name',header: 'ชื่อคอร์ส'},
-      {field: 'location',header:'สถานที่'},
-      {field: 'annotation',header:'หมายเหตุ'},
+      { field: 'stDate', header: 'วันที่' },
+      { field: 'name', header: 'ชื่อคอร์ส' },
+      { field: 'locationName', header: 'สถานที่' },
+      { field: 'conditionMin', header: 'หมายเหตุ' },
     ]
   }
   confirm1() {
     this.confirmationService.confirm({
-        message: 'Are you sure that you want to proceed?',
-        header: 'Confirmation',
-        icon: 'pi pi-exclamation-triangle',
-        accept: () => {
-            this.msgs = [{severity:'info', summary:'Confirmed', detail:'You have accepted'}];
-        },
-        reject: () => {
-            this.msgs = [{severity:'info', summary:'Rejected', detail:'You have rejected'}];
-        }
+      message: 'Are you sure that you want to proceed?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.msgs = [{ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' }];
+      },
+      reject: () => {
+        this.msgs = [{ severity: 'info', summary: 'Rejected', detail: 'You have rejected' }];
+      }
     });
-}
+  }
+
 }

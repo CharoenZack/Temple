@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Baggage } from '../../shared/interfaces/baggage';
-import { BaggageService } from '../../shared/service/baggage.service';
+import {Component, OnInit} from '@angular/core';
+import {Baggage} from '../../shared/interfaces/baggage';
+import {BaggageService} from '../../shared/service/baggage.service';
 
 
 @Component({
@@ -16,7 +16,9 @@ export class BaggagesComponent implements OnInit {
   baggage: Baggage;
   baggageNumber: String;
   cols: any[];
-  constructor(private baggageService: BaggageService) { }
+
+  constructor(private baggageService: BaggageService) {
+  }
 
   ngOnInit() {
 
@@ -25,11 +27,11 @@ export class BaggagesComponent implements OnInit {
       if (res['status'] === 'Success') {
         this.items = res['data'];
       }
-    });
+    }).catch((e)=> console.log(e['error']['message']));
 
     this.cols = [
       // {field: 'date',header: 'วันที่'},{field: 'id',header: 'หมายเลขตู้'},{field: 'status',header:'สถานะ'}
-      { field: 'date', header: 'วันที่' }, { field: 'number', header: 'หมายเลขตู้' }
+      {field: 'date', header: 'วันที่'}, {field: 'number', header: 'หมายเลขตู้'}
     ];
   }
 
@@ -54,7 +56,7 @@ export class BaggagesComponent implements OnInit {
           ...this.items.slice(index + 1)
         ];
       }
-    });
+    }).catch((e)=> console.log(e['error']['message']));
 
 
   }
@@ -71,7 +73,7 @@ export class BaggagesComponent implements OnInit {
           res['data']
         ];
       }
-    });
+    }).catch((e)=> console.log(e['error']['message']));
     this.clear();
 
   }
@@ -87,6 +89,9 @@ export class BaggagesComponent implements OnInit {
           const index = this.items.findIndex(e => e.id === res['data']['id']);
           this.items[index].number = res['data']['number'];
         }
+      },
+      (e)=>{
+        console.log(e['error']['message']);  
       });
     this.clear();
   }

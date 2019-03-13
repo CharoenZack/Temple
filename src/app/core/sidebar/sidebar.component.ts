@@ -14,6 +14,7 @@ export class SidebarComponent implements OnInit {
   public showCloseIconSidebar: boolean;
   public isLoggedIn: boolean;
   public screenWidth: number;
+  public role: String;
 
   constructor(
     private sidebarService: SidebarService,
@@ -24,10 +25,21 @@ export class SidebarComponent implements OnInit {
     this.setSidebar();
     this.sidebarService.sidebar().subscribe(res => this.openSideBar = res);
     this.authService.isLoggedIn().subscribe(res => this.isLoggedIn = res);
+    this.authService.getRole().subscribe(res => this.role = res)
+    console.log(this.role, 'role');
+
   }
 
-  clickOutsidebar() {
-    let data = this.openSideBar;
+  showSideBar(...role) {
+    if (role.includes(this.role)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  clickOutsideBar() {
+    const data = this.openSideBar;
     this.sidebarService.switchBar(!data);
   }
 
