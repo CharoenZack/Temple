@@ -39,15 +39,15 @@ export class ProfileFormComponent implements OnInit {
 
   public formConponent = {
     //new FormControl({value: 'Nancy', disabled: true}, Validators.required),
-    titleName: [{value: '' ,optionLabel:'', disabled: false}, Validators.required],
-    fname: [{value: '', disabled: false}, Validators.required],
-    lname: [{value: '', disabled: false}, Validators.required],
-    birthday: [{value: '', disabled: false}, Validators.required],
-    gender: [{value: '', disabled: false}, Validators.required],
-    address: [{value: '', disabled: false}, Validators.required],
-    phone: [{value: '', disabled: false}, Validators.required],
-    email: [{value: '', disabled: false}, Validators.required],
-    phoneEmergency: [{value: '', disabled: false}, Validators.required]
+    titleName: [{ value: '', optionLabel: '', disabled: false }, Validators.required],
+    fname: [{ value: '', disabled: false }, Validators.required],
+    lname: [{ value: '', disabled: false }, Validators.required],
+    birthday: [{ value: '', disabled: false }, Validators.required],
+    gender: [{ value: '', disabled: false }, Validators.required],
+    address: [{ value: '', disabled: false }, Validators.required],
+    phone: [{ value: '', disabled: false }, Validators.required],
+    email: [{ value: '', disabled: false }, Validators.required],
+    phoneEmergency: [{ value: '', disabled: false }, Validators.required]
   }
 
 
@@ -111,9 +111,11 @@ export class ProfileFormComponent implements OnInit {
         ...res
       ];
 
-      console.log(res , 'titlename');
-      
-    });
+      console.log(res, 'titlename');
+
+    },
+      (e) => console.log(e['error']['message'])
+    );
 
     this.setTypeForm();
     this.setCalendarTH();
@@ -131,34 +133,36 @@ export class ProfileFormComponent implements OnInit {
 
 
     // for Profile form
-    if (this.formType === 'Profile' || this.formType === 'Edit' || this.formType === 'EditAdmin' ) {
+    if (this.formType === 'Profile' || this.formType === 'Edit' || this.formType === 'EditAdmin') {
       this.personalId = this.route.snapshot.paramMap.get('id');
       this.manageUserService.getUser(this.personalId)
-        .subscribe( res => { 
+        .subscribe(res => {
           const titlename = {
-            id:res['data']['titleId'],
-            display:res['data']['titleDisplay'],
-            name:res['data']['titleName']
+            id: res['data']['titleId'],
+            display: res['data']['titleDisplay'],
+            name: res['data']['titleName']
           }
           this.form.controls['titleName'].patchValue(titlename)
           this.form.controls['fname'].setValue(res['data']['fname']);
           this.form.controls['lname'].setValue(res['data']['lname']);
-          this.form.controls['birthday'].setValue(new Date (res['data']['birthdate']));
+          this.form.controls['birthday'].setValue(new Date(res['data']['birthdate']));
           this.form.controls['gender'].setValue(res['data']['genderId']);
           this.form.controls['phone'].setValue(res['data']['tel']);
           this.form.controls['email'].setValue(res['data']['email']);
           this.form.controls['address'].setValue(res['data']['address']);
           this.form.controls['phoneEmergency'].setValue(res['data']['emergencyTel']);
-        });
-      }
+        },
+          (e) => console.log(e['error']['message'])
+        );
+    }
 
-      if(this.formType === 'Profile'){
-        this.form.disable();
-      }
+    if (this.formType === 'Profile') {
+      this.form.disable();
+    }
 
   }
 
-  profileSelect(e){
+  profileSelect(e) {
     console.log(e.files);
   }
 
@@ -262,16 +266,16 @@ export class ProfileFormComponent implements OnInit {
   setUsername(username) {
     this.form.controls['username'].setValue(username)
   }
-  
+
   setPassword(password) {
     this.form.controls['password'].setValue(password);
     console.log(password);
-    
+
   }
   setRepassword(repassword) {
     this.form.controls['repassword'].setValue(repassword);
     console.log(repassword);
-    
+
   }
 
   onCancle(data) {

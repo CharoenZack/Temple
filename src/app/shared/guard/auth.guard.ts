@@ -29,6 +29,7 @@ export class AuthGuard implements CanActivate {
           console.log(res, 'res');
           if (res['result'] === 'Success') {
             this.authService.isLoggedIn().next(true);
+            this.authService.setRole(res['data']['0']['roleName']);
             return resolve(true);
           } else {
             this.authService.isLoggedIn().next(false);
