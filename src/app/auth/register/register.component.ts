@@ -54,7 +54,7 @@ export class RegisterComponent implements OnInit {
         registerDate:null,
         lastUpdate:null,
         genderId:this.form.get('gender').value,
-        roleId:1,
+        //roleId:1,
         titleId: parseInt(titleCode.id),
       }
       this.manageUser.createUser(dataUser);
