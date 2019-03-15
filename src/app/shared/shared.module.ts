@@ -78,7 +78,6 @@ import { PersonalInfoService } from './service/personal-info.service';
     RegisterInputModule,
     FileUploadModule,
     HttpClientModule,
-    
   ],
   exports: [
     CommonModule,
@@ -114,7 +113,7 @@ import { PersonalInfoService } from './service/personal-info.service';
     MessageService,
     ProfileFormService,
     PersonalInfoService,
-    CookieService 
+    CookieService,
   ]
 })
 export class SharedModule {

@@ -1,13 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter, HostBinding, Directive } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { TitleName } from '../../interfaces/title-name';
-import { TitleNameService } from '../../service/title-name.service';
-import { formatDate } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
-import { ProfileFormService } from '../../service/profile-form.service';
-import { ManageUserService } from '../../service/manage-user.service';
-
-
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {TitleName} from '../../interfaces/title-name';
+import {TitleNameService} from '../../service/title-name.service';
+import {formatDate} from '@angular/common';
+import {ActivatedRoute} from '@angular/router';
+import {ProfileFormService} from '../../service/profile-form.service';
+import {ManageUserService} from '../../service/manage-user.service';
 
 
 @Component({
@@ -38,18 +36,17 @@ export class ProfileFormComponent implements OnInit {
   public titleNamePerson: TitleName;
 
   public formConponent = {
-    //new FormControl({value: 'Nancy', disabled: true}, Validators.required),
-    titleName: [{ value: '', optionLabel: '', disabled: false }, Validators.required],
-    fname: [{ value: '', disabled: false }, Validators.required],
-    lname: [{ value: '', disabled: false }, Validators.required],
-    birthday: [{ value: '', disabled: false }, Validators.required],
-    gender: [{ value: '', disabled: false }, Validators.required],
-    address: [{ value: '', disabled: false }, Validators.required],
-    phone: [{ value: '', disabled: false }, Validators.required],
-    email: [{ value: '', disabled: false }, Validators.required],
-    phoneEmergency: [{ value: '', disabled: false }, Validators.required]
-  }
-
+    // new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+    titleName: [{value: '', optionLabel: '', disabled: false}, Validators.required],
+    fname: [{value: '', disabled: false}, Validators.required],
+    lname: [{value: '', disabled: false}, Validators.required],
+    birthday: [{value: '', disabled: false}, Validators.required],
+    gender: [{value: '', disabled: false}, Validators.required],
+    address: [{value: '', disabled: false}, Validators.required],
+    phone: [{value: '', disabled: false}, Validators.required],
+    email: [{value: '', disabled: false}, Validators.required],
+    phoneEmergency: [{value: '', disabled: false}, Validators.required]
+  };
 
 
   public formError = {
@@ -62,7 +59,7 @@ export class ProfileFormComponent implements OnInit {
     phone: '',
     email: '',
     phoneEmergency: ''
-  }
+  };
 
   public validationMessage = {
     titleName: {
@@ -92,7 +89,7 @@ export class ProfileFormComponent implements OnInit {
     phoneEmergency: {
       required: '*กรุณากรอกเบอร์ติดต่อฉุกเฉิน'
     }
-  }
+  };
 
   constructor(
     private titleNameService: TitleNameService,
@@ -100,20 +97,21 @@ export class ProfileFormComponent implements OnInit {
     private route: ActivatedRoute,
     private profileService: ProfileFormService,
     private manageUserService: ManageUserService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
 
-    //edit
+    // edit
     this.titleNameService.getTitleNames().subscribe(res => {
-      this.titleName = [
-        { display: 'กรุณาเลือกคำนำหน้า' },
-        ...res
-      ];
+        this.titleName = [
+          {display: 'กรุณาเลือกคำนำหน้า'},
+          ...res
+        ];
 
-      console.log(res, 'titlename');
+        console.log(res, 'titlename');
 
-    },
+      },
       (e) => console.log(e['error']['message'])
     );
 
@@ -137,21 +135,21 @@ export class ProfileFormComponent implements OnInit {
       this.personalId = this.route.snapshot.paramMap.get('id');
       this.manageUserService.getUser(this.personalId)
         .subscribe(res => {
-          const titlename = {
-            id: res['data']['titleId'],
-            display: res['data']['titleDisplay'],
-            name: res['data']['titleName']
-          }
-          this.form.controls['titleName'].patchValue(titlename)
-          this.form.controls['fname'].setValue(res['data']['fname']);
-          this.form.controls['lname'].setValue(res['data']['lname']);
-          this.form.controls['birthday'].setValue(new Date(res['data']['birthdate']));
-          this.form.controls['gender'].setValue(res['data']['genderId']);
-          this.form.controls['phone'].setValue(res['data']['tel']);
-          this.form.controls['email'].setValue(res['data']['email']);
-          this.form.controls['address'].setValue(res['data']['address']);
-          this.form.controls['phoneEmergency'].setValue(res['data']['emergencyTel']);
-        },
+            const titlename = {
+              id: res['data']['titleId'],
+              display: res['data']['titleDisplay'],
+              name: res['data']['titleName']
+            };
+            this.form.controls['titleName'].patchValue(titlename);
+            this.form.controls['fname'].setValue(res['data']['fname']);
+            this.form.controls['lname'].setValue(res['data']['lname']);
+            this.form.controls['birthday'].setValue(new Date(res['data']['birthdate']));
+            this.form.controls['gender'].setValue(res['data']['genderId']);
+            this.form.controls['phone'].setValue(res['data']['tel']);
+            this.form.controls['email'].setValue(res['data']['email']);
+            this.form.controls['address'].setValue(res['data']['address']);
+            this.form.controls['phoneEmergency'].setValue(res['data']['emergencyTel']);
+          },
           (e) => console.log(e['error']['message'])
         );
     }
@@ -177,12 +175,12 @@ export class ProfileFormComponent implements OnInit {
       repassword: {
         required: '*กรุณากรอก Re-passoword'
       }
-    }
+    };
 
     this.validationMessage = {
       ...validationMessage,
       ...this.validationMessage
-    }
+    };
   }
 
   setFormError() {
@@ -190,11 +188,11 @@ export class ProfileFormComponent implements OnInit {
       username: '',
       password: '',
       repassword: ''
-    }
+    };
     this.formError = {
       ...formError,
       ...this.formError
-    }
+    };
   }
 
   setFormRegisterDisplay() {
@@ -206,20 +204,20 @@ export class ProfileFormComponent implements OnInit {
   }
 
   setTypeForm() {
-    const { formType } = this.route.snapshot.data
+    const {formType} = this.route.snapshot.data;
     this.formType = formType;
     this.profileService.setFormType(formType);
     this.readonly = this.profileService.getSettingReadOnly();
-    //this.disabled = this.profileService.getSettingDisabled();
+    // this.disabled = this.profileService.getSettingDisabled();
   }
 
   setCalendarTH() {
     this.th = {
       firstDayOfWeek: 0,
-      dayNamesMin: ["อา", "จ", "อ", "พ", "พฤ", "ศ", "ส"],
-      monthNames: ["มกราคม ", "กุมภาพันธ์ ", "มีนาคม ", "เมษายน ",
-        "พฤษภาคม  ", "มิถุนายน ", "กรกฎาคม ", "สิงหาคม ",
-        "กันยายน ", "ตุลาคม ", "พฤศจิกายน ", "ธันวาคม "],
+      dayNamesMin: ['อา', 'จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส'],
+      monthNames: ['มกราคม ', 'กุมภาพันธ์ ', 'มีนาคม ', 'เมษายน ',
+        'พฤษภาคม  ', 'มิถุนายน ', 'กรกฎาคม ', 'สิงหาคม ',
+        'กันยายน ', 'ตุลาคม ', 'พฤศจิกายน ', 'ธันวาคม '],
       today: 'Today',
       clear: 'Clear',
       // dateFormat: 'dd/mm/yy'
@@ -238,7 +236,7 @@ export class ProfileFormComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required],
       repassword: ['', Validators.required]
-    }
+    };
     this.form = this.formBuilder.group({
       ...formRegister,
       ...this.formConponent
@@ -246,14 +244,13 @@ export class ProfileFormComponent implements OnInit {
   }
 
 
-
   onSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
     const data = {
       form: this.form,
       formError: this.formError,
       validationMessage: this.validationMessage
-    }
+    };
     this.data.emit(data);
   }
 
@@ -264,7 +261,7 @@ export class ProfileFormComponent implements OnInit {
   }
 
   setUsername(username) {
-    this.form.controls['username'].setValue(username)
+    this.form.controls['username'].setValue(username);
   }
 
   setPassword(password) {
@@ -272,6 +269,7 @@ export class ProfileFormComponent implements OnInit {
     console.log(password);
 
   }
+
   setRepassword(repassword) {
     this.form.controls['repassword'].setValue(repassword);
     console.log(repassword);

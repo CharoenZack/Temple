@@ -1,44 +1,35 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { Router } from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ApiConstants } from '../constants/ApiConstants';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
+import {Router} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {ApiConstants} from '../constants/ApiConstants';
 
 
 @Injectable()
 export class AuthService {
   private loggedIn = new BehaviorSubject<boolean>(false);
-  // private loggedIn: new Subject<boolean>;
   private role = new BehaviorSubject<String>('user');
+
   constructor(
     private router: Router,
     private http: HttpClient
-  ) { 
-    
+  ) {
+
   }
 
   getRole() {
     return this.role;
   }
-  setRole(role:String){
+
+  setRole(role: String) {
     this.role.next(role);
   }
 
   login(username, password) {
     const body = {
-      username: username,
-      password: password
+      username, password
     };
-    const responseObservable = this.http.post(ApiConstants.baseURl + '/auth/login', body);
-    responseObservable.subscribe(res => {
-      // access_token
-      if (res['result'] === 'Success') {
-        const accessToken = res['access_token'];
-        localStorage.setItem('access-token', accessToken);
-        this.loggedIn.next(true);
-        this.router.navigate(['/']);
-      }
-    });
+    return this.http.post(ApiConstants.baseURl + '/auth/login', body);
   }
 
   isLoggedIn(): BehaviorSubject<boolean> {
