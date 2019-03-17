@@ -14,6 +14,7 @@ import { AuthGuard } from '../shared/guard/auth.guard';
 import { ManageUserComponent } from './manage-user/manage-user.component';
 import { RegisterComponent } from '../auth/register/register.component';
 import { EditFormComponent } from './edit-form/edit-form.component';
+import { HomeComponent } from './home/home.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,10 @@ const routes: Routes = [
     component: ContentComponent,
     canActivate: [AuthGuard],
     children: [
+      {
+        path: "",
+        component: HomeComponent,
+      },
       {
         path: "courses",
         component: CoursesComponent,

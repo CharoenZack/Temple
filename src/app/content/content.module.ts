@@ -22,6 +22,7 @@ import { ConfirmationService } from 'primeng/api';
 import { ManageUserComponent } from './manage-user/manage-user.component';
 import { EditUserComponent } from './manageUser/edit-user/edit-user.component';
 import { EditFormComponent } from './edit-form/edit-form.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { EditFormComponent } from './edit-form/edit-form.component';
     ManageUserComponent,
     EditUserComponent,
     EditFormComponent,
+    HomeComponent,
 
   ],
   imports: [

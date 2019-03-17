@@ -1,0 +1,15 @@
+.menu {
+    margin: 15%;
+}
+
+:host>>>.ui-card {
+    background: #cdaa54;
+    border-radius: 10px;
+    box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0.0), 0 0px 0px 0px rgba(0, 0, 0, 0);
+    width: 100%;
+}
+
+:host>>>app-home {
+    width: 100%;
+    padding: 5px;
+}
