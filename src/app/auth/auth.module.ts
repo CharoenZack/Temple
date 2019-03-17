@@ -6,13 +6,15 @@ import { RegisterComponent } from './register/register.component';
 
 import { AuthRoutingModule } from "./auth-routing.module";
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { RegisterFormComponent } from './register-form/register-form.component';
 
 @NgModule({
   declarations: [
     AuthComponent, 
     LoginComponent, 
     RegisterComponent, 
-    ForgetPasswordComponent
+    ForgetPasswordComponent, 
+    RegisterFormComponent
   ],
   imports: [
     SharedModule,

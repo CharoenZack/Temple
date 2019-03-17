@@ -4,6 +4,7 @@ import { AuthComponent } from './auth.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ForgetPasswordComponent } from "./forget-password/forget-password.component";
+import { RegisterFormComponent } from './register-form/register-form.component';
 
 const routes: Routes = [
     {
@@ -19,15 +20,20 @@ const routes: Routes = [
                 path: "login",
                 component: LoginComponent
             },
+            // {
+            //     path: "register",
+            //     component: RegisterComponent,
+            //     data: { formType: 'Register' }
+            // },
             {
                 path: "register",
-                component: RegisterComponent,
-                data:{formType:'Register'}
+                component: RegisterFormComponent,
+                data: { urlback: '/auth/login' }
             },
             {
                 path: "forget-password",
                 component: ForgetPasswordComponent
-            }
+            },
         ]
     }
 ];
