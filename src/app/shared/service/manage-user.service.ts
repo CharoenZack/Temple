@@ -59,14 +59,17 @@ export class ManageUserService {
       );
   }
 
-  updateUser(id, data) {
-    console.log(data);
-
+  updateUser(id, dataUser) {
+    const data = {
+      ...dataUser,
+      roleId:3
+    }
     return this.http.put(ApiConstants.baseURl + `/members/${id}`, data, { headers: { Authorization: `Bearer ${localStorage.getItem('access-token')}` } })
       .pipe(
         map(res => {
           return {
-            status: res['result']
+            status: res['result'],
+            res:res
           }
         }))
   }

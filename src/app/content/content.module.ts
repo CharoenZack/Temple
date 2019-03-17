@@ -21,6 +21,7 @@ import { ManagedTitlenameComponent } from './managed-titlename/managed-titlename
 import { ConfirmationService } from 'primeng/api';
 import { ManageUserComponent } from './manage-user/manage-user.component';
 import { EditUserComponent } from './manageUser/edit-user/edit-user.component';
+import { EditFormComponent } from './edit-form/edit-form.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { EditUserComponent } from './manageUser/edit-user/edit-user.component';
     EditPersonalInfoComponent,
     ManageUserComponent,
     EditUserComponent,
+    EditFormComponent,
 
   ],
   imports: [
