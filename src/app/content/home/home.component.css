@@ -2,17 +2,17 @@
     margin: 15%;
 }
 
-.first-menu-card {
-    margin-top: 12px;
+.warp-menu {
+    padding: 1.5em;
 }
 
 .menu-card {
     background: #cdaa54;
-    border-color: #cdaa54;
+    border-color: #fff;
+    border: 20px;
     border-radius: 2px;
-    margin-right: 10px;
-    margin-left: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 1.5em;
+    /* margin: 1em; */
 }
 
 .menu-card:hover {
@@ -24,23 +24,23 @@
     width: 5em;
 }
 
-
-/* .text-center {
-    display: table-cell;
+.text-center {
     vertical-align: middle;
-    text-align: center;
-    height: 100%;
-} */
-
-.text-canter {
-    height: 100%;
+    text-align: left;
+    height: 90px;
+    line-height: 90px;
 }
 
-
-/* .full {
-    margin: 0 auto;
+@media only screen and (min-width: 640px) {
+    .img-menu {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10px;
+    }
+    .text-center {
+        text-align: center;
+        height: 30px;
+        line-height: 30px;
+    }
 }
-
-:host>>>.ui-g-12.ui-lg-12.ui-md-8.ui-sm-8.height-content {
-    height: 5em;
-} */
