@@ -23,6 +23,7 @@ import { ManageUserComponent } from './manage-user/manage-user.component';
 import { EditUserComponent } from './manageUser/edit-user/edit-user.component';
 import { EditFormComponent } from './edit-form/edit-form.component';
 import { HomeComponent } from './home/home.component';
+import { ApprovalComponent } from './approval/approval.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { HomeComponent } from './home/home.component';
     EditUserComponent,
     EditFormComponent,
     HomeComponent,
+    ApprovalComponent,
 
   ],
   imports: [
