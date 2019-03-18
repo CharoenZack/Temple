@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TitleName} from '../../shared/interfaces/title-name';
 import {TitleNameService} from 'src/app/shared/service/title-name.service';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-managed-titlename',
@@ -16,6 +17,7 @@ export class ManagedTitlenameComponent implements OnInit {
   titleNameEdit: String;
   titleNameAbbrEdit: String;
   cols: any[];
+  public menu: MenuItem[];
 
   constructor(
     private titleNamesService: TitleNameService
@@ -27,6 +29,11 @@ export class ManagedTitlenameComponent implements OnInit {
     this.getTitleName();
     this.cols = [
       {field: 'display', header: 'คำนำหน้า'}, {field: 'name', header: 'คำย่อ'}
+    ];
+
+    this.menu = [
+      { label: '',icon:"pi pi-home",routerLink:'/'},
+      { label: 'Approval user : อนุมัติพิเศษ' },
     ];
   }
 

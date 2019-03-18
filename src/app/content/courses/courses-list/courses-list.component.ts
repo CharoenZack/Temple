@@ -38,7 +38,7 @@ export class CoursesListComponent implements OnInit {
       { field: 'conditionMin', header: 'หมายเหตุ' },
     ]
     this.menu = [
-      { label: '',icon:"pi pi-home",url:'/'},
+      { label: '',icon:"pi pi-home",routerLink:'/'},
       { label: 'Courses : ข้อมูลคอร์สทั้งหมด' },
     ];
   }

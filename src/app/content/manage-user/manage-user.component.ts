@@ -25,7 +25,7 @@ export class ManageUserComponent implements OnInit {
       (e) => console.log(e['error']['message'])
     );
     this.menu = [
-      { label: '',icon:"pi pi-home",url:'/'},
+      { label: '',icon:"pi pi-home",routerLink:'/'},
       { label: 'Manange Locations : จัดการสถานที่' },
     ];
   }
