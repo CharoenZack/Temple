@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Baggage} from '../../shared/interfaces/baggage';
 import {BaggageService} from '../../shared/service/baggage.service';
+import { MenuItem } from 'primeng/api';
 
 
 @Component({
@@ -16,6 +17,7 @@ export class BaggagesComponent implements OnInit {
   baggage: Baggage;
   baggageNumber: String;
   cols: any[];
+  public menu: MenuItem[];
 
   constructor(private baggageService: BaggageService) {
   }
@@ -32,6 +34,11 @@ export class BaggagesComponent implements OnInit {
     this.cols = [
       // {field: 'date',header: 'วันที่'},{field: 'id',header: 'หมายเลขตู้'},{field: 'status',header:'สถานะ'}
       {field: 'date', header: 'วันที่'}, {field: 'number', header: 'หมายเลขตู้'}
+    ];
+
+    this.menu = [
+      { label: '',icon:"pi pi-home",url:'/'},
+      { label: 'Baggages manage: จัดการสัมภาระ' },
     ];
   }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '../../shared/interfaces/location';
 import { LocationService } from './location.service';
-import { MessageService } from 'primeng/api';
+import { MessageService, MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-location',
@@ -14,6 +14,8 @@ export class LocationComponent implements OnInit {
   location: Location;
   locations: Location[];
   cols: any[];
+  public menu: MenuItem[];
+
   locationNameEdit: String;
   constructor(
     private locationService: LocationService,
@@ -24,6 +26,11 @@ export class LocationComponent implements OnInit {
     this.getLocation();
     this.cols = [
       { field: 'name', header: 'สถานที่' },
+    ];
+
+    this.menu = [
+      { label: '',icon:"pi pi-home",url:'/'},
+      { label: 'Manange Locations : จัดการสถานที่' },
     ];
   }
 
