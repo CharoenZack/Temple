@@ -1,13 +1,37 @@
+/* You can add global styles to this file, and also import other style files */
+
+@font-face {
+  font-family: 'ekkamai_standardbold';
+  src: url('/assets/fonts/ekkamaistandard-light-webfont.eot');
+  src: url('/assets/fonts/ekkamaistandard-light-webfont.eot?#iefix') format('embedded-opentype'),
+  url('/assets/fonts/ekkamaistandard-light-webfont.woff2') format('woff2'),
+  url('/assets/fonts/ekkamaistandard-light-webfont.woff') format('woff'),
+  url('/assets/fonts/ekkamaistandard-light-webfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+body {
+  margin: 80px 0 0 0;
+  font-family: 'ekkamai_standardbold', Roboto, sans-serif;
+
+}
 body {
     margin: 95px 0 0 0;
     background-color: #f0e6ce;
 }
 
+.layout-content {
+  margin-left: 300px;
+}
+
+
 .row {
-    display: flex;
-    flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -15px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
 }
 
 .horizontal-center {
@@ -16,22 +40,22 @@ body {
 }
 
 .line {
-    border-bottom: 1px solid #cecece;
-    clear: both;
-    display: block;
+  border-bottom: 1px solid #cecece;
+  clear: both;
+  display: block;
 }
 
 .container {
-    width: 90%;
-    margin: 0 auto;
+  width: 90%;
+  margin: 0 auto;
 }
 
 @media screen and (max-width:1024px) {}
 
 @media screen and (max-width:520px) {}
 
-@media screen and (max-width:414px) {
-    .container {
-        width: 95%;
-    }
+@media screen and (max-width: 414px) {
+  .container {
+    width: 95%;
+  }
 }
