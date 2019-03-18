@@ -1,25 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
-
-@font-face {
-  font-family: 'ekkamai_standardbold';
-  src: url('/assets/fonts/ekkamaistandard-light-webfont.eot');
-  src: url('/assets/fonts/ekkamaistandard-light-webfont.eot?#iefix') format('embedded-opentype'),
-  url('/assets/fonts/ekkamaistandard-light-webfont.woff2') format('woff2'),
-  url('/assets/fonts/ekkamaistandard-light-webfont.woff') format('woff'),
-  url('/assets/fonts/ekkamaistandard-light-webfont.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-
-}
+@import url('https://fonts.googleapis.com/css?family=Trirong:300,400&subset=thai');
 
 body {
-  margin: 80px 0 0 0;
-  font-family: 'ekkamai_standardbold', Roboto, sans-serif;
-
+  margin: 95px 0 0 0;
+  background-color: #f0e6ce;
 }
-body {
-    margin: 95px 0 0 0;
-    background-color: #f0e6ce;
+
+* {
+  font-family: 'Trirong', sans-serif !important;
 }
 
 .layout-content {
@@ -35,8 +22,8 @@ body {
 }
 
 .horizontal-center {
-    margin-left: auto;
-    margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .line {
@@ -50,9 +37,11 @@ body {
   margin: 0 auto;
 }
 
-@media screen and (max-width:1024px) {}
+@media screen and (max-width: 1024px) {
+}
 
-@media screen and (max-width:520px) {}
+@media screen and (max-width: 520px) {
+}
 
 @media screen and (max-width: 414px) {
   .container {
