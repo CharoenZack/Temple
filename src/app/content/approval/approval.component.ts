@@ -1,28 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { MenuItem, MessageService } from 'primeng/api';
-import { ApprovalService } from './approval.service';
+import {Component, OnInit} from '@angular/core';
+import {MenuItem, MessageService} from 'primeng/api';
+import {ApprovalService} from './approval.service';
+import {BreadcrumbService} from '../../shared/service/breadcrumb.service';
 
 
 @Component({
-  selector: 'app-approval',
-  templateUrl: './approval.component.html',
-  styleUrls: ['./approval.component.css']
+    selector: 'app-approval',
+    templateUrl: './approval.component.html',
+    styleUrls: ['./approval.component.css']
 })
 export class ApprovalComponent implements OnInit {
 
-  public menu: MenuItem[];
-  
-  constructor(
-    public approvalService: ApprovalService,
-    private messageService: MessageService,
-  ) { }
+    public menu: MenuItem[];
 
-  ngOnInit() {
+    constructor(
+        private approvalService: ApprovalService,
+        private messageService: MessageService,
+        private breadCrumbService: BreadcrumbService,
+    ) {
+    }
 
-    this.menu = [
-      { label: '',icon:"pi pi-home",routerLink:'/'},
-      { label: 'Approval user : อนุมัติพิเศษ' },
-    ];
-  }
+    ngOnInit() {
+        this.breadCrumbService.setPath([
+            {label: 'Approval: การอนุมัติ', routerLink: '/approval'},
+        ]);
+    }
 
 }
