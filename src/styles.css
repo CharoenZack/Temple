@@ -10,9 +10,6 @@ button {
     font-family: 'Trirong', sans-serif !important;
 }
 
-.layout-content {
-    margin-left: 300px;
-}
 
 .row {
     display: flex;
