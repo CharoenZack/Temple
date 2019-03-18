@@ -2,14 +2,45 @@
     margin: 15%;
 }
 
-:host>>>.ui-card {
-    background: #cdaa54;
-    border-radius: 10px;
-    box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0.0), 0 0px 0px 0px rgba(0, 0, 0, 0);
-    width: 100%;
+.warp-menu {
+    padding: 1.5em;
 }
 
-:host>>>app-home {
-    width: 100%;
-    padding: 5px;
+.menu-card {
+    background: #cdaa54;
+    border-color: #fff;
+    border: 20px;
+    border-radius: 2px;
+    margin-bottom: 1.5em;
+    /* margin: 1em; */
+}
+
+.menu-card:hover {
+    background: #b8860b;
+    border-color: #b8860b;
+}
+
+.img-menu {
+    width: 5em;
+}
+
+.text-center {
+    vertical-align: middle;
+    text-align: left;
+    height: 90px;
+    line-height: 90px;
+}
+
+@media only screen and (min-width: 640px) {
+    .img-menu {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10px;
+    }
+    .text-center {
+        text-align: center;
+        height: 30px;
+        line-height: 30px;
+    }
 }
