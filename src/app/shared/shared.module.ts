@@ -28,6 +28,8 @@ import { MessageModule } from 'primeng/message';
 import { DialogModule } from 'primeng/dialog';
 import { FileUploadModule } from 'primeng/fileupload';
 import { CookieService } from 'ngx-cookie-service';
+import {BreadcrumbModule} from 'primeng/breadcrumb';
+
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -78,7 +80,6 @@ import { PersonalInfoService } from './service/personal-info.service';
     RegisterInputModule,
     FileUploadModule,
     HttpClientModule,
-    
   ],
   exports: [
     CommonModule,
@@ -107,14 +108,17 @@ import { PersonalInfoService } from './service/personal-info.service';
     DialogModule,
     FullCalendarModule,
     HttpClientModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    BreadcrumbModule,
+    FileUploadModule,
+    CalendarModule,
   ],
   providers: [
     TitleNameService,
     MessageService,
     ProfileFormService,
     PersonalInfoService,
-    CookieService 
+    CookieService,
   ]
 })
 export class SharedModule {
