@@ -1,28 +1,35 @@
-<div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+<!-- <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
     <p-breadcrumb [model]="menu" class="breadcrumb"></p-breadcrumb>
-</div>
+</div> -->
+
+<div class="ui-g">
+
+
+
 
 <div class="ui-g-12">
     
   <div class="row">
-    <div class="ui-g-6 ui-lg-6 ui-md-6 ui-sm-12 aa">
-      <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ui-fluid">
-        <div style="text-align: center"><h2>สัมภาระ</h2></div>
-        
-        <p-table [columns]="cols" [value]="items" [paginator]="true" [rows]="10">
-          <ng-template pTemplate="caption">
-              <div style="text-align:left">
-                  <button pButton type="button" (click)="showDialogToAdd()" label="เพิ่ม" class="ui-button-info" style="width: 20%"></button>
-              </div>
-               
-            </ng-template>
-          <ng-template pTemplate="header" let-columns>
-            <tr>
-              <th *ngFor="let col of columns" [pSortableColumn]="col.field">
-                {{col.header}}
-                <p-sortIcon [field]="col.field" ariaLabel="Activate to sort"
-                  ariaLabelDesc="Activate to sort in descending order"
-                  ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+    <div class="ui-g">
+      <div class="ui-g-6 ui-lg-6 ui-md-6 ui-sm-12 aa">
+        <div class="ui-g">
+          <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ui-fluid">
+          <div style="text-align: center"><h2>สัมภาระ</h2></div>
+          
+          <p-table [columns]="cols" [value]="items" [paginator]="true" [rows]="10">
+            <ng-template pTemplate="caption">
+                <div style="text-align:left">
+                    <button pButton type="button" (click)="showDialogToAdd()" label="เพิ่ม" class="ui-button-info" style="width: 20%"></button>
+                </div>
+                
+              </ng-template>
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                  {{col.header}}
+                  <p-sortIcon [field]="col.field" ariaLabel="Activate to sort"
+                    ariaLabelDesc="Activate to sort in descending order"
+                    ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
 
               </th>
               <th>Option</th>
@@ -36,23 +43,29 @@
                 {{rowData[col.field]}}
               </td>
               <td>
-                <div style="text-align:center ui-g-12">
-                <div class="ui-g-6 ui-lg-6 ui-md-12 ui-sm-12 ">
-                <button pButton type="button" (click)="showEdit(rowData['id'])" label="แก้ไข" class="ui-button-warning" ></button>
+                <div class="ui-g">
+                 <div style="text-align:center ui-g-12">
+                    <div class="ui-g">
+                      <div class="ui-g-6 ui-lg-6 ui-md-12 ui-sm-12 ">
+                        <button pButton type="button" (click)="showEdit(rowData['id'])" label="แก้ไข" class="ui-button-warning" ></button>
+                      </div>
+                    </div>
+                    <div class="ui-g">
+                      <div class="ui-g-6 ui-lg-6 ui-md-12 ui-sm-12 ">
+                        <button pButton type="button" (click)="delete(rowData['id'])" label="ลบ" class="ui-button-danger" ></button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="ui-g-6 ui-lg-6 ui-md-12 ui-sm-12 ">
-                <button pButton type="button" (click)="delete(rowData['id'])" label="ลบ" class="ui-button-danger" ></button>
-                </div>
-                    
-                </div>
-               
               </td>
             </tr>
           </ng-template>
         </p-table>
       </div>
     </div>
-
+  </div>
+</div>
+</div>
   </div>
 </div>
 

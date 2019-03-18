@@ -112,7 +112,7 @@ export class EditFormComponent implements OnInit {
     )
 
     this.menu = [
-      { label: '',icon:"pi pi-home",url:'/'},
+      { label: '',icon:"pi pi-home",routerLink:'/'},
       { label: 'Edit profile : แก้ไขข้อมูลส่วนตัว' },
     ];
   }

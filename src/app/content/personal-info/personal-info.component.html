@@ -1,11 +1,16 @@
-<div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
-    <div class="row">
-        <div class="ui-g-12 ui-lg-9 ui-md-10 ui-sm-12 center-grid">
-            <app-profile-form [title]='title'></app-profile-form>
-        </div>
-        <div class="ui-g-12 ui-lg-8 ui-md-7 ui-sm-12 center-grid">
-            <div class="ui-g-12">
-                <button pButton type="submit" label="แก้ไข" class="ui-button-raised block"  (click)="editPersonal()"></button>
+<div class="ui-g">
+    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+        <div class="row">
+            <div class="ui-g">
+                <div class="ui-g-12 ui-lg-9 ui-md-10 ui-sm-12 center-grid">
+                    <app-profile-form [title]='title'></app-profile-form>
+                </div>
+                <div class="ui-g-12 ui-lg-8 ui-md-7 ui-sm-12 center-grid">
+                    <div class="ui-g-12">
+                        <button pButton type="submit" label="แก้ไข" class="ui-button-raised block"
+                            (click)="editPersonal()"></button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
