@@ -24,6 +24,7 @@ export class EditFormComponent implements OnInit {
   public urlback: string;
   public personalId: string;
 
+
   public formError = {
     username: '',
     password: '',
@@ -107,11 +108,11 @@ export class EditFormComponent implements OnInit {
       err => {
         console.log(err['error']['message']);
 
-      }
+      }  
     )
 
     this.menu = [
-      { label: 'Home', url: '' },
+      { label: '',icon:"pi pi-home",url:'/'},
       { label: 'Edit profile : แก้ไขข้อมูลส่วนตัว' },
     ];
   }

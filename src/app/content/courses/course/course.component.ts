@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Course } from '../shared/course';
 import { CourseService } from '../shared/course.service';
 import { ActivatedRoute } from '@angular/router';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-course',
@@ -11,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 export class CourseComponent implements OnInit {
 
   course: Course
+  public menu: MenuItem[];
 
   constructor(
     private route: ActivatedRoute,
@@ -27,6 +29,10 @@ export class CourseComponent implements OnInit {
           console.log(this.course);
         }
       });
+      this.menu = [
+        { label: '',icon:"pi pi-home",url:'/'},
+        { label: 'Course : ตารางคอร์ส' },
+      ];
   }
 
 

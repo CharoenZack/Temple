@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { CourseService } from '../shared/course.service';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MenuItem } from 'primeng/api';
 import { Course } from 'src/app/shared/interfaces/course';
 
 @Component({
@@ -14,6 +14,8 @@ export class CoursesListComponent implements OnInit {
   msgs: any[] = [];
   courses: Course[];
   cols: any[];
+  public menu: MenuItem[];
+
   constructor(
     private course: CourseService,
     private confirmationService: ConfirmationService
@@ -35,6 +37,10 @@ export class CoursesListComponent implements OnInit {
       { field: 'locationName', header: 'สถานที่' },
       { field: 'conditionMin', header: 'หมายเหตุ' },
     ]
+    this.menu = [
+      { label: '',icon:"pi pi-home",url:'/'},
+      { label: 'Courses : ข้อมูลคอร์สทั้งหมด' },
+    ];
   }
   confirm1() {
     this.confirmationService.confirm({
