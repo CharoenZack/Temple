@@ -7,12 +7,11 @@
 }
 
 .menu-card {
+    display: block;
     background: #cdaa54;
-    border-color: #fff;
-    border: 20px;
-    border-radius: 2px;
+    border: 20px #fff;
+    /* border-radius: 2px; */
     margin-bottom: 1.5em;
-    /* margin: 1em; */
 }
 
 .menu-card:hover {
