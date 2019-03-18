@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Course} from '../shared/course';
+
 import {CourseService} from '../shared/course.service';
 import {ActivatedRoute} from '@angular/router';
 import {MenuItem} from 'primeng/api';
 import {BreadcrumbService} from '../../../shared/service/breadcrumb.service';
+import { Course } from 'src/app/shared/interfaces/course';
 
 @Component({
     selector: 'app-course',

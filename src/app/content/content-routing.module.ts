@@ -15,6 +15,7 @@ import { ManageUserComponent } from './manage-user/manage-user.component';
 import { RegisterComponent } from '../auth/register/register.component';
 import { EditFormComponent } from './edit-form/edit-form.component';
 import { HomeComponent } from './home/home.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 const routes: Routes = [
@@ -47,14 +48,8 @@ const routes: Routes = [
       },
       {
         path: "profile/:id",
-        component: PersonalInfoComponent,
-        data: { formType: 'Profile' }
+        component: ProfileComponent,
       },
-      // {
-      //   path: "profile/:id/edit",
-      //   component: EditPersonalInfoComponent,
-      //   data: { formType: 'Edit' }
-      // },
       {
         path: "profile/:id/edit",
         component: EditFormComponent,
