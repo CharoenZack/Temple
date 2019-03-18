@@ -2,14 +2,45 @@
     margin: 15%;
 }
 
-:host>>>.ui-card {
-    background: #cdaa54;
-    border-radius: 10px;
-    box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0.0), 0 0px 0px 0px rgba(0, 0, 0, 0);
-    width: 100%;
+.first-menu-card {
+    margin-top: 12px;
 }
 
-:host>>>app-home {
-    width: 100%;
-    padding: 5px;
+.menu-card {
+    background: #cdaa54;
+    border-color: #cdaa54;
+    border-radius: 2px;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-bottom: 15px;
 }
+
+.menu-card:hover {
+    background: #b8860b;
+    border-color: #b8860b;
+}
+
+.img-menu {
+    width: 5em;
+}
+
+
+/* .text-center {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    height: 100%;
+} */
+
+.text-canter {
+    height: 100%;
+}
+
+
+/* .full {
+    margin: 0 auto;
+}
+
+:host>>>.ui-g-12.ui-lg-12.ui-md-8.ui-sm-8.height-content {
+    height: 5em;
+} */
