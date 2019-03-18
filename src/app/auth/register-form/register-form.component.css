@@ -41,11 +41,11 @@ fieldset {
 }
 
 :host>>>.temple-button .ui-button {
-    background-color: #b8860b;
+    background-color: #b8860b !important;
     color: #fff;
     margin-left: 5px;
     margin-right: 5px;
-    border: #b8860b;
+    border: #b8860b !important;
     border-radius: 5px;
     font-size: 1em;
 }
@@ -153,4 +153,8 @@ fieldset {
     padding-left: 15px;
     text-align: left;
     font-size: 1em;
+}
+:host >>> .ui-radiobutton-box.ui-widget.ui-state-default.ui-state-active{
+    background-color: #b8860b !important;
+    border: #b8860b !important;
 }

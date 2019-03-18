@@ -1,17 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
+import {Component, OnInit} from '@angular/core';
+import {MenuItem} from 'primeng/api';
+import {BreadcrumbService} from '../../shared/service/breadcrumb.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+    constructor(
+        private breadCrumbService: BreadcrumbService,
+    ) {
+    }
 
-  ngOnInit() {
-
-  }
+    ngOnInit() {
+        this.breadCrumbService.clearPath();
+    }
 
 }
