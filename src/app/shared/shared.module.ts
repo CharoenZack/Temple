@@ -50,20 +50,13 @@ import {
     faIdCard
 } from '@fortawesome/free-regular-svg-icons';
 
-import {ProfileFormService} from './service/profile-form.service';
 
-import {ProfileFormComponent} from './component/profile-form/profile-form.component';
-import {ConfirmButtonComponent} from './component/profile-form/confirm-button/confirm-button.component';
-
-import {RegisterInputModule} from '../auth/register/register-input/register-input.module';
 import {PersonalInfoService} from './service/personal-info.service';
 import {BreadcrumbComponent} from './component/breadcrumb/breadcrumb.component';
 
 
 @NgModule({
     declarations: [
-        ProfileFormComponent,
-        ConfirmButtonComponent,
         BreadcrumbComponent
     ],
     imports: [
@@ -80,7 +73,6 @@ import {BreadcrumbComponent} from './component/breadcrumb/breadcrumb.component';
         CalendarModule,
         ToastModule,
         FormsModule,
-        RegisterInputModule,
         FileUploadModule,
         HttpClientModule,
         BreadcrumbModule,
@@ -91,7 +83,6 @@ import {BreadcrumbComponent} from './component/breadcrumb/breadcrumb.component';
         BrowserAnimationsModule,
         RouterModule,
         ButtonModule,
-        ProfileFormComponent,
         BreadcrumbComponent,
         RadioButtonModule,
         DropdownModule,
@@ -121,7 +112,6 @@ import {BreadcrumbComponent} from './component/breadcrumb/breadcrumb.component';
     providers: [
         TitleNameService,
         MessageService,
-        ProfileFormService,
         PersonalInfoService,
         CookieService,
     ]
