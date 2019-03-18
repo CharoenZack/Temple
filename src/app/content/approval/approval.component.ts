@@ -18,6 +18,11 @@ export class ApprovalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.menu = [
+      { label: '',icon:"pi pi-home",routerLink:'/'},
+      { label: 'Approval user : อนุมัติพิเศษ' },
+    ];
   }
 
 }

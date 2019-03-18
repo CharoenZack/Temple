@@ -29,7 +29,7 @@ export class LocationComponent implements OnInit {
     ];
 
     this.menu = [
-      { label: '',icon:"pi pi-home",url:'/'},
+      { label: '',icon:"pi pi-home",routerLink:'/'},
       { label: 'Manange Locations : จัดการสถานที่' },
     ];
   }

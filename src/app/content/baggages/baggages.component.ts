@@ -37,7 +37,7 @@ export class BaggagesComponent implements OnInit {
     ];
 
     this.menu = [
-      { label: '',icon:"pi pi-home",url:'/'},
+      { label: '',icon:"pi pi-home",routerLink:'/'},
       { label: 'Baggages manage: จัดการสัมภาระ' },
     ];
   }
