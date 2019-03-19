@@ -1,3 +1,7 @@
+.margin-top-bottom {
+    margin: 20px
+}
+
 .layout-content {
     background-color: #fff;
     border-radius: 1em;
@@ -154,7 +158,8 @@ fieldset {
     text-align: left;
     font-size: 1em;
 }
-:host >>> .ui-radiobutton-box.ui-widget.ui-state-default.ui-state-active{
+
+:host>>>.ui-radiobutton-box.ui-widget.ui-state-default.ui-state-active {
     background-color: #b8860b !important;
     border: #b8860b !important;
 }

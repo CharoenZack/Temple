@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {CourseService} from '../shared/course.service';
-import {Course} from '../shared/course';
+
 import {BreadcrumbService} from '../../../shared/service/breadcrumb.service';
+import { Course } from 'src/app/shared/interfaces/course';
 
 @Component({
     selector: 'app-course-form',

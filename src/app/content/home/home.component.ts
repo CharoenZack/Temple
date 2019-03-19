@@ -9,6 +9,8 @@ import {BreadcrumbService} from '../../shared/service/breadcrumb.service';
 })
 export class HomeComponent implements OnInit {
 
+    public userId:String;
+
     constructor(
         private breadCrumbService: BreadcrumbService,
     ) {
@@ -16,6 +18,7 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
         this.breadCrumbService.clearPath();
+        this.userId = localStorage.getItem('userId');
     }
 
 }

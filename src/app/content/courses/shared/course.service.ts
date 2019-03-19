@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Course } from './course';
-import { MockCourse } from './mock-course';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { ApiConstants } from 'src/app/shared/constants/ApiConstants';
