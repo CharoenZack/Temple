@@ -1,23 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { SidebarService } from '../service/sidebar.service';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../../shared/service/auth.service';
 
 @Component({
-  selector: 'app-topbar',
-  templateUrl: './topbar.component.html',
-  styleUrls: ['./topbar.component.css']
+    selector: 'app-topbar',
+    templateUrl: './topbar.component.html',
+    styleUrls: ['./topbar.component.css']
 })
 export class TopbarComponent implements OnInit {
+    public isLoggedIn: boolean;
 
-  constructor(
-    private sidebarService: SidebarService,
-  ) { }
+    constructor(
+        private authService: AuthService,
+    ) {
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+        this.authService.isLoggedIn().subscribe(res => this.isLoggedIn = res);
+    }
 
-  btnSidebar() {
-    let data;
-    this.sidebarService.sidebar().subscribe(res => data = res);
-    this.sidebarService.switchBar(!data);
-  }
+    logout() {
+        this.authService.logout();
+    }
 }

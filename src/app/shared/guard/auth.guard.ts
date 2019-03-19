@@ -26,10 +26,12 @@ export class AuthGuard implements CanActivate {
             headers:
               {Authorization: `Bearer ${localStorage.getItem('access-token')}`}
           }).toPromise().then(res => {
-          console.log(res, 'res');
+          console.log(res);
           if (res['result'] === 'Success') {
             this.authService.isLoggedIn().next(true);
             this.authService.setRole(res['data']['0']['roleName']);
+            console.log(res['data'][0]['id']);
+            localStorage.setItem('userId',res['data'][0]['id']);
             return resolve(true);
           } else {
             this.authService.isLoggedIn().next(false);

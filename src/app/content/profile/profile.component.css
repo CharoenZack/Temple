@@ -1,0 +1,33 @@
+.margin-top-bottom {
+    margin: 20px
+}
+
+legend {
+    padding: 5px;
+    background-color: #b8860b;
+    color: #fff;
+}
+
+fieldset {
+    background-color: #f1efe9 !important;
+    border-radius: 5px;
+    border: 1px #b8860b solid;
+}
+
+.center {
+    margin: auto;
+}
+
+:host >>> .temple-button .ui-button {
+    background-color: #b8860b !important;
+    color: #fff;
+    margin-left: 5px;
+    margin-right: 5px;
+    border: #b8860b !important;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.font-show {
+    font-size: 1.2em;
+}
