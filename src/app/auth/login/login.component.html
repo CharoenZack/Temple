@@ -18,6 +18,7 @@
                   <input type="text" pInputText id="username" formControlName="username" name="username"
                     placeholder="Username" />
                 </div>
+                <div *ngIf="formError.username" class="text-danger text-invalid">{{formError.username}}</div>
               </div>
               <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
                 <label for="password">Password</label>
@@ -28,6 +29,7 @@
                   <input type="password" id="password" pInputText formControlName="password" name="password"
                     placeholder="Password" />
                 </div>
+                <div *ngIf="formError.password" class="text-danger text-invalid">{{formError.password }}</div>
               </div>
               <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
                 <a routerLink="/auth/forget-password"> ลืมรหัสผ่าน</a>
@@ -46,4 +48,17 @@
       </div>
     </div>
   </div>
+  <p-toast position="center" key="alert"  [modal]="true" [baseZIndex]="99999">
+    <ng-template let-message pTemplate="message">
+      <div style="text-align: center">
+        <i class="pi pi-times" style="font-size: 3em"></i>
+        <h3>{{message.summary}}</h3>
+      </div>
+      <div class="ui-g ui-fluid">
+        <div class="ui-g-12">
+          <button type="button" pButton (click)="onConfirm()" label="OK" class="ui-button-success"></button>
+        </div>
+      </div>
+    </ng-template>
+  </p-toast>
 </div>

@@ -13,6 +13,8 @@ import { ManagedTitlenameComponent } from "./managed-titlename/managed-titlename
 import { AuthGuard } from '../shared/guard/auth.guard';
 import { ManageUserComponent } from './manage-user/manage-user.component';
 import { RegisterComponent } from '../auth/register/register.component';
+import { EditFormComponent } from './edit-form/edit-form.component';
+import { HomeComponent } from './home/home.component';
 
 
 const routes: Routes = [
@@ -21,6 +23,10 @@ const routes: Routes = [
     component: ContentComponent,
     canActivate: [AuthGuard],
     children: [
+      {
+        path: "",
+        component: HomeComponent,
+      },
       {
         path: "courses",
         component: CoursesComponent,
@@ -44,10 +50,15 @@ const routes: Routes = [
         component: PersonalInfoComponent,
         data: { formType: 'Profile' }
       },
+      // {
+      //   path: "profile/:id/edit",
+      //   component: EditPersonalInfoComponent,
+      //   data: { formType: 'Edit' }
+      // },
       {
         path: "profile/:id/edit",
-        component: EditPersonalInfoComponent,
-        data: { formType: 'Edit' }
+        component: EditFormComponent,
+        data: { urlback:'/profile/'}
       },
       {
         path: "schedule",

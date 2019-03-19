@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {BreadcrumbService} from '../../../shared/service/breadcrumb.service';
 
 @Component({
   selector: 'app-course-create',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CourseCreateComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+      private breadCrumbService: BreadcrumbService,
+
+  ) { }
 
   ngOnInit() {
+      this.breadCrumbService.setPath([
+          {label: 'Course : ตารางคอร์ส', routerLink: '/courses'},
+      ]);
   }
 
 }

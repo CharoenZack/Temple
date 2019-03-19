@@ -1,0 +1,15 @@
+.layout-content {
+    background-color: #fff;
+    border-radius: 1em;
+    border: 1px solid #b8860b;
+    margin-left: 17px;
+    margin-right: 17px;
+    /*display: flex;*/
+}
+
+.layout-footer {
+    margin-top: 30px;
+    background-color: #cdaa54;
+    width: 100%;
+    height: 50px;
+}

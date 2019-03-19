@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ManageUserService} from 'src/app/shared/service/manage-user.service';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-manage-user',
@@ -9,6 +10,7 @@ import {ManageUserService} from 'src/app/shared/service/manage-user.service';
 export class ManageUserComponent implements OnInit {
 
   public personal: any[];
+  public menu: MenuItem[];
 
   constructor(
     private manageUser: ManageUserService
@@ -22,6 +24,10 @@ export class ManageUserComponent implements OnInit {
     },
       (e) => console.log(e['error']['message'])
     );
+    this.menu = [
+      { label: '',icon:"pi pi-home",routerLink:'/'},
+      { label: 'Manange Locations : จัดการสถานที่' },
+    ];
   }
 
   deleteUser(id) {

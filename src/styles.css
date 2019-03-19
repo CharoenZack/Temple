@@ -1,37 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
-
-@font-face {
-    font-family: 'K2D';
-    src: url('./assets/fonts/k2d-bold-webfont.eot');
-    src: url('./assets/fonts/k2d-bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('./assets/fonts/k2d-bold-webfont.woff2') format('woff2'),
-         url('./assets/fonts/k2d-bold-webfont.woff') format('woff'),
-         url('./assets/fonts/k2d-bold-webfont.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
-
-
-
-@font-face {
-    font-family: 'K2D_extralight';
-    src: url('./assets/fonts/k2d-extralight-webfont.eot');
-    src: url('./assets/fonts/k2d-extralight-webfont.eot?#iefix') format('embedded-opentype'),
-         url('./assets/fonts/k2d-extralight-webfont.woff2') format('woff2'),
-         url('./assets/fonts/k2d-extralight-webfont.woff') format('woff'),
-         url('./assets/fonts/k2d-extralight-webfont.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-
-}
+@import url('https://fonts.googleapis.com/css?family=Trirong:300,400&subset=thai');
 body {
-    margin: 80px 0 0 0;
+    margin: 95px 0 0 0;
+    background-color: #f0e6ce;
 }
 
-.layout-content {
-    margin-left: 300px;
+body,
+body .ui-widget,
+button {
+    font-family: 'Trirong', sans-serif !important;
 }
 
 
@@ -42,7 +18,7 @@ body {
     margin-left: -15px;
 }
 
-.horizontal-center{
+.horizontal-center {
     margin-left: auto;
     margin-right: auto;
 }
@@ -58,22 +34,11 @@ body {
     margin: 0 auto;
 }
 
-@media screen and (max-width:1024px) {
-    .layout-content {
-        margin-left: 0;
-    }
-    body {
-        margin: 95px 0 0 0;
-    }
-}
+@media screen and (max-width: 1024px) {}
 
-@media screen and (max-width:520px) {
-    body {
-        margin: 80px 0 0 0;
-    }
-}
+@media screen and (max-width: 520px) {}
 
-@media screen and (max-width:414px) {
+@media screen and (max-width: 414px) {
     .container {
         width: 95%;
     }
