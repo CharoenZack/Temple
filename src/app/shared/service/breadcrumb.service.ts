@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {MenuItem} from 'primeng/api';
-import {BehaviorSubject, Subject} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
