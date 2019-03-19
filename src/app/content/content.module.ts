@@ -7,14 +7,11 @@ import {CourseEditComponent} from './courses/course-edit/course-edit.component';
 import {CourseCreateComponent} from './courses/course-create/course-create.component';
 import {CoursesListComponent} from './courses/courses-list/courses-list.component';
 import {CourseComponent} from './courses/course/course.component';
-
 import {CoreModule} from '../core/core.module';
 import {SharedModule} from '../shared/shared.module';
 import {ContentRoutingModule} from './content-routing.module';
 import {BaggagesComponent} from './baggages/baggages.component';
-import {PersonalInfoComponent} from './personal-info/personal-info.component';
 import {ScheduleComponent} from './schedule/schedule.component';
-import {EditPersonalInfoComponent} from './personal-info/edit-personal-info/edit-personal-info.component';
 import {AuthGuard} from '../shared/guard/auth.guard';
 import {LocationComponent} from './location/location.component';
 import {ManagedTitlenameComponent} from './managed-titlename/managed-titlename.component';
@@ -24,11 +21,11 @@ import {EditUserComponent} from './manageUser/edit-user/edit-user.component';
 import {EditFormComponent} from './edit-form/edit-form.component';
 import {HomeComponent} from './home/home.component';
 import {ApprovalComponent} from './approval/approval.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
     declarations: [
         ContentComponent,
-        PersonalInfoComponent,
         BaggagesComponent,
         CoursesComponent,
         CourseResgisterComponent,
@@ -40,12 +37,12 @@ import {ApprovalComponent} from './approval/approval.component';
         ScheduleComponent,
         LocationComponent,
         ManagedTitlenameComponent,
-        EditPersonalInfoComponent,
         ManageUserComponent,
         EditUserComponent,
         EditFormComponent,
         HomeComponent,
         ApprovalComponent,
+        ProfileComponent,
 
     ],
     imports: [
