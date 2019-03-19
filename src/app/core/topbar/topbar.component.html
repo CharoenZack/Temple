@@ -5,7 +5,7 @@
     <div class="title">
         <span>ระบบรับสมัครอบรมธรรมมะ วัดป่าโสมพนัส</span>
     </div>
-    <div class="top-menu">
+    <div class="top-menu" (click)="logout()" *ngIf="isLoggedIn">
         <span><img class="logout-menu" src="/assets/images/logout.png"> ออกจากระบบ</span>
     </div>
 </div>
