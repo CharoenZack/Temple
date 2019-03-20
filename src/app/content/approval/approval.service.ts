@@ -8,10 +8,12 @@ import {ApiConstants} from 'src/app/shared/constants/ApiConstants';
 })
 export class ApprovalService {
 
+    
     constructor(
         private http: HttpClient,
     ) {
     }
+
 
     getLocation() {
         return this.http.get(ApiConstants.baseURl + '/approval', {
