@@ -13,3 +13,26 @@
     width: 100%;
     height: 50px;
 }
+
+
+/* dialog header */
+
+:host>>>.ui-dialog-titlebar.ui-widget-header.ui-helper-clearfix.ui-corner-top.ng-tns-c6-0.ng-star-inserted {
+    border: 0px !important;
+    background-color: #f0e6ce !important;
+}
+
+
+/* dialog content */
+
+:host>>>.ui-dialog-content.ui-widget-content {
+    border: 0px !important;
+}
+
+
+/* dialog footer */
+
+:host>>>.ui-dialog-footer.ui-widget-content.ng-tns-c6-0.ng-star-inserted {
+    border: 0px !important;
+    background-color: #f1efe9 !important;
+}
