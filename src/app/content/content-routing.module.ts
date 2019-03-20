@@ -18,27 +18,63 @@ import { ApprovalComponent } from './approval/approval.component';
 
 
 const routes: Routes = [
-  {
-    path: "",
-    component: ContentComponent,
-    canActivate: [AuthGuard],
-    children: [
-      {
-        path: "",
-        component: HomeComponent,
-      },
-      {
-        path: "courses",
-        component: CoursesComponent,
+    {
+        path: '',
+        component: ContentComponent,
+        canActivate: [AuthGuard],
         children: [
-          {
-            path: "",
-            component: CoursesListComponent,
-          },
-          {
-            path: ":id",
-            component: CourseComponent,
-          }
+            {
+                path: '',
+                component: HomeComponent,
+            },
+            {
+                path: 'courses',
+                component: CoursesComponent,
+                children: [
+                    {
+                        path: '',
+                        component: CoursesListComponent,
+                    },
+                    {
+                        path: ':id',
+                        component: CourseComponent,
+                    }
+                ]
+            },
+            {
+                path: 'baggages',
+                component: BaggagesComponent,
+            },
+            {
+                path: 'profile/:id',
+                component: ProfileComponent,
+            },
+            {
+                path: 'profile/:id/edit',
+                component: EditFormComponent,
+                data: {urlback: '/profile/'}
+            },
+            {
+                path: 'schedule',
+                component: ScheduleComponent,
+            },
+            {
+                path: 'location',
+                component: LocationComponent,
+            },
+            {
+                path: 'managedTitlename',
+                component: ManagedTitlenameComponent,
+            },
+            {
+                path: 'users',
+                component: ManageUserComponent,
+            },
+            {
+                path: 'user/create',
+                component: RegisterFormComponent,
+            }
+
         ]
       },
       {
@@ -84,7 +120,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule]
 })
-export class ContentRoutingModule { }
+export class ContentRoutingModule {
+}
