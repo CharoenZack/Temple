@@ -26,7 +26,21 @@
   font-weight: bold;
 }
 
+.logout-menu{
+    width: 2em;
+    vertical-align: middle;
+}
 
+.top-menu {
+    line-height: 80px;
+    margin: 0 0 0 auto;
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+.top-menu:hover {
+    background-color: #d3a842
+}
 @media screen and (max-width: 1024px) {
 
 }

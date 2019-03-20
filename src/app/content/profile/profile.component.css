@@ -9,17 +9,16 @@ legend {
 }
 
 fieldset {
-    border-color: #b8860b !important;
     background-color: #f1efe9 !important;
     border-radius: 5px;
-    border-width: 1px;
+    border: 1px #b8860b solid;
 }
 
 .center {
     margin: auto;
 }
 
-:host>>>.temple-button .ui-button {
+:host >>> .temple-button .ui-button {
     background-color: #b8860b !important;
     color: #fff;
     margin-left: 5px;
