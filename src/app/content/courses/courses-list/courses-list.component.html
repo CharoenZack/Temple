@@ -17,29 +17,29 @@
                   <th pSortableColumn="date">
                     วันที่
                     <p-sortIcon field="date" ariaLabel="Activate to sort"
-                      ariaLabelDesc="Activate to sort in descending order"
-                      ariaLabelAsc="Activate to sort in ascending order">
+                                ariaLabelDesc="Activate to sort in descending order"
+                                ariaLabelAsc="Activate to sort in ascending order">
                     </p-sortIcon>
                   </th>
                   <th pSortableColumn="name" class="ui-p-4">
                     ชื่อคอร์ส
                     <p-sortIcon field="name" ariaLabel="Activate to sort"
-                      ariaLabelDesc="Activate to sort in descending order"
-                      ariaLabelAsc="Activate to sort in ascending order">
+                                ariaLabelDesc="Activate to sort in descending order"
+                                ariaLabelAsc="Activate to sort in ascending order">
                     </p-sortIcon>
                   </th>
                   <th pSortableColumn="location" class="ui-p-5">
                     สถานที่
                     <p-sortIcon field="location" ariaLabel="Activate to sort"
-                      ariaLabelDesc="Activate to sort in descending order"
-                      ariaLabelAsc="Activate to sort in ascending order">
+                                ariaLabelDesc="Activate to sort in descending order"
+                                ariaLabelAsc="Activate to sort in ascending order">
                     </p-sortIcon>
                   </th>
                   <th pSortableColumn="conditionMin" class="ui-p-6">
                     หมายเหตุ
                     <p-sortIcon field="conditionMin" ariaLabel="Activate to sort"
-                      ariaLabelDesc="Activate to sort in descending order"
-                      ariaLabelAsc="Activate to sort in ascending order">
+                                ariaLabelDesc="Activate to sort in descending order"
+                                ariaLabelAsc="Activate to sort in ascending order">
                     </p-sortIcon>
                   </th>
                   <th class="ui-p-6">
@@ -75,16 +75,18 @@
 
                   </td>
                   <td *ngIf="rowData['status']  != '1' && rowData['status']  != '2'">
-                    <button pButton type="button" label="สมัคร" class="ui-button-success" (click)="assignCourse(rowData['id'])"
-                      style="width: 50%"></button>
+                    <button pButton type="button" label="สมัคร" class="ui-button-success"
+                            (click)="assignCourse(rowData['id'])"
+                            style="width: 50%"></button>
                     <button pButton type="button" label="ขออนุมัติพิเศษ" class="ui-button-info"
-                      style="width: 50%"></button>
+                            style="width: 50%"></button>
                   </td>
                   <td *ngIf="rowData['status']  == '1' || rowData['status']  == '2'">
-                    <button pButton type="button" label="สมัคร" class="ui-button-success" (click)="assignCourse(rowData['id'])"
-                      style="width: 50%" disabled></button>
+                    <button pButton type="button" label="สมัคร" class="ui-button-success"
+                            (click)="assignCourse(rowData['id'])"
+                            style="width: 50%" disabled></button>
                     <button pButton type="button" label="ขออนุมัติพิเศษ" class="ui-button-info" style="width: 50%"
-                      disabled></button>
+                            disabled></button>
                   </td>
 
                 </tr>
