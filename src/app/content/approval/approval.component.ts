@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {MenuItem, MessageService, ConfirmationService} from 'primeng/api';
 import {ApprovalService} from './approval.service';
 import {BreadcrumbService} from '../../shared/service/breadcrumb.service';
+import { Route } from '@angular/compiler/src/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -20,6 +22,7 @@ export class ApprovalComponent implements OnInit {
         private messageService: MessageService,
         private confirmationService: ConfirmationService,
         private breadCrumbService: BreadcrumbService,
+        private router: Router,
     ) {
     }
 
@@ -39,6 +42,7 @@ export class ApprovalComponent implements OnInit {
 
     confirm1() {
         this.confirmationService.confirm({
+            key:'approvalMessage',
             message: 'Are you sure that you want to proceed?',
             header: 'Confirmation',
             icon: 'pi pi-exclamation-triangle',
@@ -49,11 +53,14 @@ export class ApprovalComponent implements OnInit {
                 this.msgs = [{severity: 'info', summary: 'Rejected', detail: 'You have rejected'}];
             }
         });
+        
     }
 
     onReject() {
         this.messageService.clear('systemMessage');
         
       }
-
+      onApprove() {
+        this.router.navigateByUrl('/approval');
+      }
 }

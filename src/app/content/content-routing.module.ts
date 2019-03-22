@@ -114,9 +114,6 @@ const routes: Routes = [
         path: "approval",
         component: ApprovalComponent,
       }
-
-    ]
-  }
 ];
 
 @NgModule({

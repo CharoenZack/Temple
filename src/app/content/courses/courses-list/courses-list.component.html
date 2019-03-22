@@ -51,27 +51,34 @@
                       </th>
                     </tr>
                   </ng-template>
-                  <ng-template pTemplate="body" let-rowData let-columns="columns">
+                  <ng-template pTemplate="body"  let-rowData let-columns="columns" >
                     <tr>
                       <td *ngFor="let col of columns;" [routerLink]="['/courses',rowData['id']]">
                         <span class="ui-column-title">{{col.header}}</span>
                         {{rowData[col.field]}}
                       </td>
-                      <td>
+                      <td ngIf="status == '0'" >
                         <button pButton type="button" label="สมัคร" class="ui-button-success" (click)="confirm1()" style="width: 50%"></button>
                         <button pButton type="button" label="ขออนุมัติพิเศษ" class="ui-button-info" style="width: 50%"></button>
                       </td>
+                      <td ngIf="status == '1' || status == '2'" >
+                          <button pButton type="button" label="สมัคร" class="ui-button-success" (click)="confirm1()" style="width: 50%" disabled></button>
+                          <button pButton type="button" label="ขออนุมัติพิเศษ" class="ui-button-info" style="width: 50%" disabled></button>
+                        </td>
                       <td>
                       <div class="ui-g">
                         <div class="ui-g-6 ui-lg-6 ui-md-6 ui-sm-6">
-                        <button pButton type="button" label="สมัคร" class="ui-button-success" (click)="confirm1()" ></button>
+                          <div ngIf="status == '0'" >
+                              <h2>ยังไม่ได้ลงทะเบียน</h2>
+                          </div>
+                          <div ngIf="status == '1'" >
+                              <h2>สำเร็จการศึกษา</h2>
+                          </div>
+                          <div ngIf="status == '2'" >
+                              <h2>กำลังศึกษา</h2>
+                          </div>
                         </div>
                      </div>
-                      <div class="ui-g">
-                        <div class="ui-g-6 ui-lg-6 ui-md-6 ui-sm-6">
-                        <button pButton type="button" label="ขออนุมัติพิเศษ" class="ui-button-info" ></button>
-                        </div>
-                      </div>
                                       
                       </td>
                     </tr>

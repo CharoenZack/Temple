@@ -56,7 +56,7 @@
                     <div class="ui-g">
                       <div class="ui-g-6 ui-lg-6 ui-md-6 ui-sm-6">
                         <button pButton type="button" label="อนุมัติ" class="ui-button-warning"
-                          (click)="confirm1()"></button>
+                          (click)="confirm1()" ></button>
                       </div>
                     </div>
                     <div class="ui-g">
@@ -93,3 +93,20 @@
       </div>
   </ng-template>
 </p-toast> -->
+
+<p-toast position="center" key="approvalMessage"  [modal]="true" [baseZIndex]="99999">
+  <ng-template let-message pTemplate="message">
+    <div style="text-align: center">
+      <i class="pi pi-times" style="font-size: 3em"></i>
+      <h3>{{message.summary}}</h3>
+    </div>
+    <div class="ui-g ui-fluid">
+      <div class="ui-g-6">
+        <button type="button" pButton (click)="onApprove()" label="ยืนยัน" class="ui-button-warning"></button>
+    </div>
+    <div class="ui-g-6">
+        <button type="button" pButton (click)="onReject()" label="ยกเลิก" class="ui-button-secondary"></button>
+    </div>
+    </div>
+  </ng-template>
+</p-toast>
