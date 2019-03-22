@@ -40,6 +40,15 @@ export class CourseService {
       };
     }));
   }
+  assignCourse(id){
+    
+
+    return this.http.post(ApiConstants.baseURl + `/courses/register`, {courseId : id}, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access-token')}`
+      }
+    })
+  }
 
   save(data) {
     // let courses = this.getCourses();

@@ -26,6 +26,7 @@ export class CourseComponent implements OnInit {
     ngOnInit() {
         this.course = {};
         const id = this.route.snapshot.paramMap.get('id');
+        console.log(id);
         this.courseService.getCourse(id)
             .subscribe(res => {
                 if (res['status'] === 'Success') {
