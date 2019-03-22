@@ -39,6 +39,7 @@ export class CoursesListComponent implements OnInit {
             {field: 'name', header: 'ชื่อคอร์ส'},
             {field: 'locationName', header: 'สถานที่'},
             {field: 'conditionMin', header: 'หมายเหตุ'},
+            {field: 'status', header: 'สถานะ'},
         ];
 
         this.breadCrumbService.setPath([
@@ -46,13 +47,20 @@ export class CoursesListComponent implements OnInit {
         ]);
     }
 
-    confirm1() {
+    assignCourse(id) {
         this.confirmationService.confirm({
             message: 'Are you sure that you want to proceed?',
             header: 'Confirmation',
             icon: 'pi pi-exclamation-triangle',
-            accept: () => {
+            accept: ()=> {
+                console.log(this);
+                
                 this.msgs = [{severity: 'info', summary: 'Confirmed', detail: 'You have accepted'}];
+                this.course.assignCourse(id).subscribe(function(res) {
+                    if (res['status'] === 'Success') {
+                        this.courses = res['data'];
+                    }
+                });
             },
             reject: () => {
                 this.msgs = [{severity: 'info', summary: 'Rejected', detail: 'You have rejected'}];
