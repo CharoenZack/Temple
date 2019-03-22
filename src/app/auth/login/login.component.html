@@ -36,10 +36,10 @@
               </div>
               <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
                 <div class="ui-g-6 ui-lg-6 ui-md-6 ui-sm-6">
-                  <button pButton type="submit" label="Login" class="ui-button-success"></button>
+                  <button pButton type="submit" label="Login"  class="ui-button-warning"></button>
                 </div>
                 <div class="ui-g-6 ui-lg-6 ui-md-6 ui-sm-6">
-                  <button pButton type="button" label="Register" routerLink="/auth/register"></button>
+                  <button pButton type="button" label="Register" class="ui-button-secondary" routerLink="/auth/register"></button>
                 </div>
               </div>
             </form>
@@ -56,7 +56,7 @@
       </div>
       <div class="ui-g ui-fluid">
         <div class="ui-g-12">
-          <button type="button" pButton (click)="onConfirm()" label="OK" class="ui-button-success"></button>
+          <button type="button" autofocus  pButton (click)="onConfirm()" label="OK" class="ui-button-success"></button>
         </div>
       </div>
     </ng-template>
