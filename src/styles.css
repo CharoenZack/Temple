@@ -1,8 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Trirong:300,400&subset=thai');
 
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  margin: 95px 0 0 0;
   background-color: #f0e6ce;
+  padding-top: 95px;
 }
 
 body,
@@ -12,7 +18,7 @@ pre {
   font-family: 'Trirong', sans-serif !important;
 }
 
-.img-info {
+img {
   max-width: 100%;
 }
 
@@ -28,10 +34,10 @@ legend {
   color: #fff;
 }
 
-.ui-button{
+.ui-button {
   background-color: #fcc438 !important;
   border: 1px solid #fcc438 !important;
-  color: #000  !important;
+  color: #000 !important;
 }
 
 body .ui-button:enabled:focus {
