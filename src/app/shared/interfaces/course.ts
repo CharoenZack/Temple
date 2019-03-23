@@ -10,4 +10,5 @@ export interface Course {
     memberLname?:String;
     locationId?:number;
     locationName?:String;
+    status?:number;
 }

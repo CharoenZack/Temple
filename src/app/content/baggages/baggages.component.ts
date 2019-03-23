@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Baggage} from '../../shared/interfaces/baggage';
 import {BaggageService} from '../../shared/service/baggage.service';
 import {MenuItem} from 'primeng/api';
+import { BreadcrumbService } from 'src/app/shared/service/breadcrumb.service';
 
 
 @Component({
@@ -19,7 +20,10 @@ export class BaggagesComponent implements OnInit {
     cols: any[];
     public menu: MenuItem[];
 
-    constructor(private baggageService: BaggageService) {
+    constructor(
+        private baggageService: BaggageService,
+        private breadCrumbService:BreadcrumbService,
+    ) {
     }
 
     ngOnInit() {
@@ -35,11 +39,9 @@ export class BaggagesComponent implements OnInit {
             // {field: 'date',header: 'วันที่'},{field: 'id',header: 'หมายเลขตู้'},{field: 'status',header:'สถานะ'}
             {field: 'date', header: 'วันที่'}, {field: 'number', header: 'หมายเลขตู้'}
         ];
-
-        this.menu = [
-            {label: '', icon: 'pi pi-home', routerLink: '/'},
-            {label: 'Baggages manage: จัดการสัมภาระ'},
-        ];
+        this.breadCrumbService.setPath([
+            {label: 'Baggages manage: จัดการสัมภาระ'}
+        ]);
     }
 
 
