@@ -2,21 +2,10 @@
     margin: 20px
 }
 
-legend {
-    padding: 5px;
-    background-color: #b8860b;
-    color: #fff;
-}
-
-fieldset {
-    background-color: #f1efe9 !important;
-    border-radius: 5px;
-    border: 1px #b8860b solid;
-}
 
 .center {
-    margin: auto;
-}
+   margin: 0 auto;
+ }
 
 :host >>> .temple-button .ui-button {
     background-color: #b8860b !important;
@@ -30,4 +19,13 @@ fieldset {
 
 .font-show {
     font-size: 1.2em;
+}
+
+.text-info {
+  font-weight: bold;
+  text-align: right;
+}
+
+.img-info{
+  width: 400px;
 }
