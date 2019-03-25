@@ -4,7 +4,7 @@ export interface Course {
     stDate?:Date;
     endDate?:Date;
     detail?:String;
-    coditionMin?:Number;
+    conditionMin?:Number;
     memberId?:String;
     memberFname?:String;
     memberLname?:String;

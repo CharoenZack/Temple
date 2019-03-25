@@ -22,6 +22,7 @@ import {EditFormComponent} from './edit-form/edit-form.component';
 import {HomeComponent} from './home/home.component';
 import {ApprovalComponent} from './approval/approval.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ManageCourseComponent } from './manage-course/manage-course.component';
 
 @NgModule({
     declarations: [
@@ -43,6 +44,7 @@ import { ProfileComponent } from './profile/profile.component';
         HomeComponent,
         ApprovalComponent,
         ProfileComponent,
+        ManageCourseComponent,
 
     ],
     imports: [
