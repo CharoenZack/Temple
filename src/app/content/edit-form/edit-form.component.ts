@@ -114,7 +114,7 @@ export class EditFormComponent implements OnInit {
         );
 
         this.breadCrumbService.setPath([
-            {label: 'Profile : ข้อมูลส่วนตัว', routerLink: '/profile'},
+            {label: 'Profile : ข้อมูลส่วนตัว', routerLink: ['/profile', localStorage.getItem('userId')]},
             {label: 'Edit Profile : แก้ไขข้อมูลส่วนตัว'},
         ]);
     }
