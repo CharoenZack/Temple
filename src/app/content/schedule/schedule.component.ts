@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ScheduleService } from 'src/app/shared/service/schedule.service';
+import { BreadcrumbService } from 'src/app/shared/service/breadcrumb.service';
 
 @Component({
   selector: 'app-schedule',
@@ -10,12 +11,16 @@ export class ScheduleComponent implements OnInit {
   events: any[];
   options: any;
   constructor(
-    private scheduleService: ScheduleService
+    private scheduleService: ScheduleService,
+    private breadCrumbService: BreadcrumbService
   ) {
 
   }
 
   ngOnInit() {
+    this.breadCrumbService.setPath([
+      { label: 'Schedule: ตารางเรียน' },
+    ]);
     // this.events = [
     //   {
     //     "title": "คอร์สธรรมะ 1",
