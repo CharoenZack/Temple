@@ -74,51 +74,18 @@ const routes: Routes = [
             {
                 path: 'user/create',
                 component: RegisterFormComponent,
+            },
+            {
+              path: "approval",
+              component: ApprovalComponent,
+            },
+            {
+              path: "managedCourse",
+              component:ManageCourseComponent
             }
 
         ]
       },
-      {
-        path: "baggages",
-        component: BaggagesComponent,
-      },
-      {
-        path: "profile/:id",
-        component: ProfileComponent,
-      },
-      {
-        path: "profile/:id/edit",
-        component: EditFormComponent,
-        data: { urlback:'/profile/'}
-      },
-      {
-        path: "schedule",
-        component: ScheduleComponent,
-      },
-      {
-        path: "location",
-        component: LocationComponent,
-      },
-      {
-        path: "managedTitlename",
-        component: ManagedTitlenameComponent,
-      },
-      {
-        path: "users",
-        component: ManageUserComponent,
-      },
-      {
-        path: "user/create",
-        component: RegisterFormComponent,
-      },
-      {
-        path: "approval",
-        component: ApprovalComponent,
-      },
-      {
-        path: "managedCourse",
-        component:ManageCourseComponent
-      }
 ];
 
 @NgModule({

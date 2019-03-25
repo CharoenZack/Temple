@@ -48,6 +48,13 @@ export class CourseService {
       }
     });
   }
+  approvalCourse(id){
+    // return this.http.post(ApiConstants.baseURl + `/courses/register`, {courseId: id}, {
+    //   headers: {
+    //     Authorization: `Bearer ${localStorage.getItem('access-token')}`
+    //   }
+    // });
+  }
 
   createCourse(){
     return this.http.post(ApiConstants.baseURl + `/courses`, {
