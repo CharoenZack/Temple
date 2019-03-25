@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {AuthService} from '../../shared/service/auth.service';
 import {NgxSpinnerService} from 'ngx-spinner';
