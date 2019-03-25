@@ -1,6 +1,7 @@
 <div class="wrapper-menu">
     <div class="ui-g">
-        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['profile',userId]" *ngIf="showHomeMenu('user','monk')" >
+        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['profile',userId]"
+            *ngIf="showHomeMenu('user','monk')">
             <div class="menu-card">
                 <div class="ui-g">
                     <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
@@ -12,7 +13,7 @@
                 </div>
             </div>
         </div>
-        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/courses']"  *ngIf="showHomeMenu('user')">
+        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/courses']" *ngIf="showHomeMenu('user')">
             <div class="menu-card">
                 <div class="ui-g">
                     <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
@@ -24,7 +25,7 @@
                 </div>
             </div>
         </div>
-        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/schedule']"  *ngIf="showHomeMenu('user')">
+        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/schedule']" *ngIf="showHomeMenu('user')">
             <div class="menu-card">
                 <div class="ui-g">
                     <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
@@ -37,7 +38,7 @@
             </div>
         </div>
 
-        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/schedule']"  *ngIf="showHomeMenu('monk')">
+        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/schedule']" *ngIf="showHomeMenu('monk')">
             <div class="menu-card">
                 <div class="ui-g">
                     <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
@@ -61,7 +62,19 @@
                 </div>
             </div>
         </div>
-        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/']"  *ngIf="showHomeMenu('admin')">
+        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/managedCourse']" *ngIf="showHomeMenu('admin')">
+            <div class="menu-card">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
+                        <img class="img-menu" src="/assets/images/notebook.png" alt>
+                    </div>
+                    <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
+                        <div class="text-center">จัดการคอร์ส</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/']" *ngIf="showHomeMenu('admin')">
             <div class="menu-card">
                 <div class="ui-g">
                     <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
@@ -110,18 +123,18 @@
                 </div>
             </div>
         </div>
-      <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/baggages']" *ngIf="showHomeMenu('user')">
-        <div class="menu-card">
-          <div class="ui-g">
-            <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
-              <img class="img-menu" src="/assets/images/lockers.png" alt>
+        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/baggages']" *ngIf="showHomeMenu('user')">
+            <div class="menu-card">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
+                        <img class="img-menu" src="/assets/images/lockers.png" alt>
+                    </div>
+                    <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
+                        <div class="text-center">สัมพาระ</div>
+                    </div>
+                </div>
             </div>
-            <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
-              <div class="text-center">สัมพาระ</div>
-            </div>
-          </div>
         </div>
-      </div>
         <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/baggages']" *ngIf="showHomeMenu('admin')">
             <div class="menu-card">
                 <div class="ui-g">
@@ -134,5 +147,6 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>

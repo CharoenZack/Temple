@@ -15,6 +15,7 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterFormComponent } from '../auth/register-form/register-form.component';
 import { ApprovalComponent } from './approval/approval.component';
+import { ManageCourseComponent } from './manage-course/manage-course.component';
 
 
 const routes: Routes = [
@@ -113,6 +114,10 @@ const routes: Routes = [
       {
         path: "approval",
         component: ApprovalComponent,
+      },
+      {
+        path: "managedCourse",
+        component:ManageCourseComponent
       }
 ];
 

@@ -49,6 +49,30 @@ export class CourseService {
     });
   }
 
+  createCourse(){
+    return this.http.post(ApiConstants.baseURl + `/courses`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access-token')}`
+      }
+    });
+  }
+  editCourse(id){
+    return this.http.patch(ApiConstants.baseURl + `/courses`, {courseId: id}, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access-token')}`
+      }
+    });
+  }
+  
+  deleteCourse(id){
+    return this.http.patch(ApiConstants.baseURl + `/courses`, {courseId: id}, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access-token')}`
+      }
+    });
+  }
+
+
   save(data) {
     // let courses = this.getCourses();
     // let l = courses.length
