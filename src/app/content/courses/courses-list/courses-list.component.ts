@@ -25,11 +25,7 @@ export class CoursesListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.course.getCourses().subscribe(res => {
-      if (res['status'] === 'Success') {
-        this.courses = res['data'];
-      }
-    });
+    this.getData();
 
     this.cols = [
       {field: 'stDate', header: 'วันที่'},
@@ -46,23 +42,38 @@ export class CoursesListComponent implements OnInit {
 
   assignCourse(id) {
     this.confirmationService.confirm({
-      message: 'Are you sure that you want to proceed?',
-      header: 'Confirmation',
+      message: 'ยืนยันการลงทะเบียน',
+      header: 'ข้อความจากระบบ',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        console.log(this);
 
-        this.msgs = [{severity: 'info', summary: 'Confirmed', detail: 'You have accepted'}];
-        this.course.assignCourse(id).subscribe(function (res) {
-          if (res['status'] === 'Success') {
-            this.courses = res['data'];
+        this.msgs = [{severity: 'success', summary: 'ข้อความจากระบบ', detail: 'ลงทะเบียนสำเร็จ'}];
+        this.course.assignCourse(id).subscribe((res) => {
+          console.log(res);
+
+          if (res['result'] === 'Success') {
+            const index = this.courses.findIndex(course => course.id === id);
+            const upd = this.courses[index];
+            upd.status = 2;
+            this.courses = [
+              ...this.courses.slice(0, index),
+              upd,
+              ...this.courses.slice(index + 1, )
+            ];
           }
         });
       },
       reject: () => {
-        this.msgs = [{severity: 'info', summary: 'Rejected', detail: 'You have rejected'}];
       }
     });
   }
 
+  private getData() {
+    this.course.getCourses().subscribe(res => {
+      if (res['status'] === 'Success') {
+        this.courses = res['data'];
+        console.log(this.courses);
+      }
+    });
+  }
 }

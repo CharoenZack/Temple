@@ -1,14 +1,14 @@
 export interface Course {
-    id?:number;
-    name?:String;
-    stDate?:Date;
-    endDate?:Date;
-    detail?:String;
-    coditionMin?:Number;
-    memberId?:String;
-    memberFname?:String;
-    memberLname?:String;
-    locationId?:number;
-    locationName?:String;
-    status?:number;
+  id?: number;
+  name?: string;
+  stDate?: Date;
+  endDate?: Date;
+  detail?: string;
+  coditionMin?: Number;
+  memberId?: string;
+  memberFname?: string;
+  memberLname?: string;
+  locationId?: number;
+  locationName?: string;
+  status?: number;
 }
