@@ -8,7 +8,7 @@
         <div class="ui-g">
           <div class="ui-g-12 ui-lg-2 ui-md-2 ui-sm-12">
             <label><b>วันที่</b></label></div>
-          <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 "> {{(course) ? course.stDate:''}}  </div>
+          <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 "> {{(course) ? course.stDate:''}} </div>
 
           <div class="ui-g-12 ui-lg- ui-md-2 ui-sm-12">
             <label><b>รายละเอียด</b></label></div>
@@ -25,7 +25,8 @@
           </div>
           <div class="ui-g-12 ui-lg-2 ui-md-2 ui-sm-12">
             <label><b>สถานะ</b></label></div>
-          <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 " *ngIf="[course.status]  != '1' || [course.status] != '2'"> ยังทำการไม่ได้ลงทะเบียน </div>
+          <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 " *ngIf="[course.status]  != '1' && [course.status] != '2'">
+            ยังทำการไม่ได้ลงทะเบียน </div>
           <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 " *ngIf="[course.status]  == '1'"> สำเร็จการศึกษา </div>
           <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 " *ngIf="[course.status]  == '2'"> กำลังศึกษา </div>
 
@@ -34,15 +35,19 @@
           <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
             <div class="ui-g">
               <div class="ui-g-2 ui-lg-2 ui-md-3 ui-sm-12">
-                <button pButton type="button" label="สมัคร" icon="pi pi-check"></button>
+                <button pButton type="button" label="สมัคร" icon="pi pi-check"
+                  [disabled]="[course.status]  == '1' || [course.status] == '2'"></button>
               </div>
-            </div>
-            <div class="ui-g">
+              <div class="ui-g-2 ui-lg-2 ui-md-3 ui-sm-12">
+                <button pButton type="button" label="ขออนุมัติพิเศษ" icon="pi pi-check"
+                  [disabled]="[course.status]  == '1' || [course.status] == '2'"></button>
+              </div>
               <div class="ui-g-2 ui-lg-2 ui-md-3 ui-sm-12">
                 <button pButton type="button" label="กลับ" class="ui-button-secondary" routerLink="/courses"></button>
               </div>
             </div>
           </div>
+
         </div>
 
 
