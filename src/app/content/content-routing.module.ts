@@ -32,110 +32,59 @@ const routes: Routes = [
         path: 'courses',
         component: CoursesComponent,
         children: [
-            {
-                path: '',
-                component: HomeComponent,
-            },
-            {
-                path: 'courses',
-                component: CoursesComponent,
-                children: [
-                    {
-                        path: '',
-                        component: CoursesListComponent,
-                    },
-                    {
-                        path: ':id',
-                        component: CourseComponent,
-                    }
-                ]
-            },
-            {
-                path: 'baggages',
-                component: BaggagesComponent,
-            },
-            {
-                path: 'profile/:id',
-                component: ProfileComponent,
-            },
-            {
-                path: 'profile/:id/edit',
-                component: EditFormComponent,
-                data: {urlback: '/profile/'}
-            },
-            {
-                path: 'schedule',
-                component: ScheduleComponent,
-            },
-            {
-                path: 'location',
-                component: LocationComponent,
-            },
-            {
-                path: 'managedTitlename',
-                component: ManagedTitlenameComponent,
-            },
-            {
-                path: 'users',
-                component: ManageUserComponent,
-            },
-            {
-                path: 'user/create',
-                component: RegisterFormComponent,
-            },
-            {
-              path: "approval",
-              component: ApprovalComponent,
-            },
-            {
-              path: "managedCourse",
-              component:ManageCourseComponent
-            }
-
+          {
+            path: '',
+            component: CoursesListComponent,
+          },
+          {
+            path: ':id',
+            component: CourseComponent,
+          }
         ]
       },
       {
-        path: "baggages",
+        path: 'baggages',
         component: BaggagesComponent,
       },
       {
-        path: "profile/:id",
+        path: 'profile/:id',
         component: ProfileComponent,
       },
       {
-        path: "profile/:id/edit",
+        path: 'profile/:id/edit',
         component: EditFormComponent,
-        data: { urlback:'/profile/'}
+        data: {urlback: '/profile/'}
       },
       {
-        path: "schedule",
+        path: 'schedule',
         component: ScheduleComponent,
       },
       {
-        path: "location",
+        path: 'location',
         component: LocationComponent,
       },
       {
-        path: "managedTitlename",
+        path: 'manageTitlename',
         component: ManagedTitlenameComponent,
       },
       {
-        path: "users",
+        path: 'users',
         component: ManageUserComponent,
       },
       {
-        path: "user/create",
+        path: 'user/create',
         component: RegisterFormComponent,
       },
       {
-        path: "approval",
+        path: 'approval',
         component: ApprovalComponent,
       },
       {
-        path: "managedCourse",
-        component:ManageCourseComponent
+        path: 'manageCourse',
+        component: ManageCourseComponent
       }
-];
+    ]
+  }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

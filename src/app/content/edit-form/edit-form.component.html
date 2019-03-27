@@ -11,7 +11,9 @@
                             </div>
                             <div class="ui-g-9 ui-lg-9 ui-md-8 ui-sm-12">
                                 <div>
-                                    <p-fileUpload name="myfile" url="." [showUploadButton]='false' accept="image/*" (onSelect)="profileSelect($event)"></p-fileUpload>
+                                    <p-fileUpload name="myFile"  [showUploadButton]='true' accept="image/*" (onUpload)="profileSelect($event)">
+
+                                    </p-fileUpload>
                                 </div>
                             </div>
                         </div>
