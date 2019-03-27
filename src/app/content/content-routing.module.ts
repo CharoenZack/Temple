@@ -34,22 +34,12 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            component: HomeComponent,
+            component: CoursesListComponent,
           },
           {
-            path: 'courses',
-            component: CoursesComponent,
-            children: [
-              {
-                path: '',
-                component: CoursesListComponent,
-              },
-              {
-                path: ':id',
-                component: CourseComponent,
-              }
-            ]
-          },
+            path: ':id',
+            component: CourseComponent,
+          }
         ]
       },
       {
@@ -74,7 +64,7 @@ const routes: Routes = [
         component: LocationComponent,
       },
       {
-        path: 'managedTitlename',
+        path: 'manageTitlename',
         component: ManagedTitlenameComponent,
       },
       {

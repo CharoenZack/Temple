@@ -3,8 +3,6 @@ import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '
 import {AuthService} from '../service/auth.service';
 import {HttpClient} from '@angular/common/http';
 import {ApiConstants} from '../constants/ApiConstants';
-import {switchMap} from 'rxjs/operators';
-import {assertDataInRange} from '@angular/core/src/render3/assert';
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +28,7 @@ export class AuthGuard implements CanActivate {
           if (res['result'] === 'Success') {
             this.authService.isLoggedIn().next(true);
             this.authService.setRole(res['data']['0']['roleName']);
-            console.log(res['data'][0]['id']);
-            localStorage.setItem('userId',res['data'][0]['id']);
+            localStorage.setItem('userId', res['data'][0]['id']);
             return resolve(true);
           } else {
             this.authService.isLoggedIn().next(false);
