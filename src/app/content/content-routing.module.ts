@@ -42,7 +42,7 @@ const routes: Routes = [
           }
         ]
       },
-<<<<<<< Updated upstream
+
       {
         path: 'baggages',
         component: BaggagesComponent,

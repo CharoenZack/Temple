@@ -15,6 +15,8 @@ export class CoursesListComponent implements OnInit {
   msgs: any[] = [];
   courses: Course[];
   cols: any[];
+  checkapprove: boolean;
+
   public menu: MenuItem[];
 
   constructor(
@@ -38,6 +40,7 @@ export class CoursesListComponent implements OnInit {
     this.breadCrumbService.setPath([
       {label: 'Courses : ข้อมูลคอร์สทั้งหมด', routerLink: '/courses'},
     ]);
+    this.checkapprove = false;
   }
 
   assignCourse(id) {
@@ -68,6 +71,35 @@ export class CoursesListComponent implements OnInit {
     });
   }
 
+  approvalCourse(id){
+    this.confirmationService.confirm({
+      message: 'ยืนยันการขออนุมัติพิเศษ',
+      header: 'ข้อความจากระบบ',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+
+        this.msgs = [{severity: 'success', summary: 'ข้อความจากระบบ', detail: 'ขออนุมัติพิเศษสำเร็จ'}];
+        this.course.approvalCourse(id).subscribe((res) => {
+          console.log(res);
+
+          if (res['result'] === 'Success') {
+            const index = this.courses.findIndex(course => course.id === id);
+            const upd = this.courses[index];
+            upd.status = 2;
+            this.courses = [
+              ...this.courses.slice(0, index),
+              upd,
+              ...this.courses.slice(index + 1, )
+            ];
+          }
+        });
+      },
+      reject: () => {
+      }
+    });
+  }
+
+
   private getData() {
     this.course.getCourses().subscribe(res => {
       if (res['status'] === 'Success') {
@@ -76,4 +108,9 @@ export class CoursesListComponent implements OnInit {
       }
     });
   }
+
+  checkSpecialApprove(){
+    this.checkapprove = true;
+  }
+
 }
