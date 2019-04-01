@@ -23,6 +23,8 @@ import {HomeComponent} from './home/home.component';
 import {ApprovalComponent} from './approval/approval.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ManageCourseComponent } from './manage-course/manage-course.component';
+import { ManagePassCourseComponent } from './manage-pass-course/manage-pass-course.component';
+import { ManagePassCourseFormComponent } from './manage-pass-course-form/manage-pass-course-form.component';
 
 @NgModule({
     declarations: [
@@ -45,6 +47,8 @@ import { ManageCourseComponent } from './manage-course/manage-course.component';
         ApprovalComponent,
         ProfileComponent,
         ManageCourseComponent,
+        ManagePassCourseComponent,
+        ManagePassCourseFormComponent,
 
     ],
     imports: [

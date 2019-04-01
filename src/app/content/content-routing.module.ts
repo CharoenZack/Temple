@@ -16,13 +16,15 @@ import {ProfileComponent} from './profile/profile.component';
 import {RegisterFormComponent} from '../auth/register-form/register-form.component';
 import {ApprovalComponent} from './approval/approval.component';
 import {ManageCourseComponent} from './manage-course/manage-course.component';
+import { ManagePassCourseComponent } from './manage-pass-course/manage-pass-course.component';
+import { ManagePassCourseFormComponent } from './manage-pass-course-form/manage-pass-course-form.component';
 
 
 const routes: Routes = [
   {
     path: '',
     component: ContentComponent,
-    canActivate: [AuthGuard],
+    //ngcanActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -42,6 +44,7 @@ const routes: Routes = [
           }
         ]
       },
+
       {
         path: 'baggages',
         component: BaggagesComponent,
@@ -82,7 +85,17 @@ const routes: Routes = [
       {
         path: 'manageCourse',
         component: ManageCourseComponent
-      }
+      },
+      {
+        path: 'managepasscourse',
+        component: ManagePassCourseComponent,
+        children: [
+          {
+            path: ':id',
+            component: ManagePassCourseFormComponent,
+          },
+        ]
+      },
     ]
   }];
 

@@ -29,6 +29,8 @@ import {DialogModule} from 'primeng/dialog';
 import {FileUploadModule} from 'primeng/fileupload';
 import {CookieService} from 'ngx-cookie-service';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
+import {CheckboxModule} from 'primeng/checkbox';
+import {ListboxModule} from 'primeng/listbox';
 
 
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
@@ -108,6 +110,8 @@ import {BreadcrumbComponent} from './component/breadcrumb/breadcrumb.component';
         BreadcrumbModule,
         FileUploadModule,
         CalendarModule,
+        CheckboxModule,
+        ListboxModule,
     ],
     providers: [
         TitleNameService,

@@ -11,7 +11,7 @@
 
 /* dialog header */
 
-:host>>>.ui-dialog-titlebar.ui-widget-header.ui-helper-clearfix.ui-corner-top.ng-tns-c6-0.ng-star-inserted {
+:host>>>.ui-dialog .ui-dialog-titlebar {
     border: 0px !important;
     background-color: #f0e6ce !important;
 }
@@ -26,7 +26,16 @@
 
 /* dialog footer */
 
-:host>>>.ui-dialog-footer.ui-widget-content.ng-tns-c6-0.ng-star-inserted {
+:host>>>.ui-dialog .ui-dialog-footer {
     border: 0px !important;
     background-color: #f1efe9 !important;
+}
+
+:host>>>.ui-table .ui-sortable-column.ui-state-highlight {
+    background-color: #f0e6ce;
+    color: #333333;
+}
+
+:host>>>.ui-table .ui-sortable-column.ui-state-highlight .ui-sortable-column-icon {
+    color: #333333;
 }

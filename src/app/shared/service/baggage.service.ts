@@ -19,9 +19,9 @@ export class BaggageService {
       }
     }).pipe(
       map(res => {
-        res['data'].map(data => {
-          data['date'] = formatDate(data['date'], 'dd/MM/yyyy', 'en-US');
-        });
+        // res['data'].map(data => {
+        //   data['date'] = formatDate(data['date'], 'dd/MM/yyyy', 'en-US');
+        // });
 
         return {
           status: res['result'],
