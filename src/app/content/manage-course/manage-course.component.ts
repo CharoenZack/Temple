@@ -3,6 +3,7 @@ import {ConfirmationService, MenuItem} from 'primeng/api';
 import {Course} from 'src/app/shared/interfaces/course';
 import { CourseService } from '../courses/shared/course.service';
 import { BreadcrumbService } from 'src/app/shared/service/breadcrumb.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-manage-course',
@@ -20,6 +21,8 @@ export class ManageCourseComponent implements OnInit {
     private courseService: CourseService,
     private confirmationService: ConfirmationService,
     private breadCrumbService: BreadcrumbService,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {
   }
 
@@ -47,6 +50,8 @@ export class ManageCourseComponent implements OnInit {
     //     this.courses = res['data'];
     //   }
     // });
+
+    this.router.navigateByUrl("/createCourse");
   }
 
   editCourse(id) {
