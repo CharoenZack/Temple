@@ -51,34 +51,29 @@
             <ng-template pTemplate="body" let-rowData let-columns="columns">
               <tr>
                 <td *ngFor="let col of columns;" [routerLink]="['/courses',rowData['id']]">
-                  <div *ngIf="rowData[col.field] != rowData['status']">
+                  <div>
                     <span class="ui-column-title">{{col.header}}</span>
+                    <div *ngIf="rowData[col.field] == rowData['stDate']">{{rowData['stDate']}} - {{rowData['endDate']}}</div>
                     <div *ngIf="rowData[col.field] == rowData['conditionMin']">ต้องผ่านการเรียนคอร์สมาอย่างน้อย</div>
-                    {{rowData[col.field]}}
+                    <div *ngIf="rowData[col.field] != rowData['stDate']">{{rowData[col.field]}}</div>
                     <div *ngIf="rowData[col.field] == rowData['conditionMin']">คอร์ส</div>
                   </div>
-                  <div class="ui-g" *ngIf="rowData[col.field] == rowData['status']">
-                    <div *ngIf="rowData['status']  == '0'">
-                      <span>ยังไม่ได้ลงทะเบียน</span>
-                    </div>
-                    <div *ngIf="rowData['status']  == '1'">
-                      <span>สำเร็จการศึกษา</span>
-                    </div>
-                    <div *ngIf="rowData['status']  == '2'">
-                      <span>กำลังศึกษา</span>
-                    </div>
-                  </div>
+                
                 </td>
                 <td>
                   <div class="ui-g" style="text-align: center">
                     <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
                       <button pButton type="button" label="สมัคร"
-                              (click)="assignCourse(rowData['id'])" [disabled]="rowData['status'] == '1' || rowData['status'] == '2'"></button>
+                              (click)="assignCourse(rowData['id'])" [disabled]="rowData['canRegister'] == '0' "></button>
 
                     </div>
-                    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
-                      <button pButton type="button" label="ขออนุมัติพิเศษ" class="ui-button-warning" [disabled]="rowData['status'] == '1' || rowData['status'] == '2'"
+                    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12" *ngIf="rowData['canRegister'] != '0' || rowData['saStatus'] != '2'">
+                      <button pButton type="button" label="ขออนุมัติพิเศษ" class="ui-button-warning" [disabled]="rowData['canRegister'] == '0'"
                       (click)="approvalCourse(rowData['id'])"></button>
+                    </div>
+                    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12" *ngIf="rowData['saStatus'] == '2'">
+                      <button pButton type="button" label="ยกเลิกการขออนุมัติพิเศษ" class="ui-button-warning" [disabled]="rowData['canRegister'] != '0'"
+                      (click)="cancelApprovalCourse(rowData['id'])"></button>
                     </div>
                   </div>
                 </td>

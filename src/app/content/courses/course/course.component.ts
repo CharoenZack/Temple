@@ -12,7 +12,7 @@ import { Course } from 'src/app/shared/interfaces/course';
     styleUrls: ['./course.component.css']
 })
 export class CourseComponent implements OnInit {
-
+    courses: Course[];
     course: Course;
     msgs: any[] = [];
     public menu: MenuItem[];
@@ -43,41 +43,61 @@ export class CourseComponent implements OnInit {
     }
     assignCourse(id) {
         this.confirmationService.confirm({
-            message: 'Are you sure that you want to proceed?',
-            header: 'Confirmation',
+            message: 'ยืนยันการลงทะเบียน',
+            header: 'ข้อความจากระบบ',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                console.log(this);
+                this.courseService.assignCourse(id).subscribe((res) => {
+                    console.log(res);
 
-                this.msgs = [{ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' }];
-                this.courseService.assignCourse(id).subscribe(function (res) {
-                    if (res['status'] === 'Success') {
-                        this.courses = res['data'];
+                    if (res['result'] === 'Success') {
+                        this.msgs = [{ severity: 'success', summary: 'ข้อความจากระบบ', detail: 'ลงทะเบียนสำเร็จ' }];
+                        const index = this.courses.findIndex(course => course.id === id);
+                        const upd = this.courses[index];
+                        upd.status = 2;
+                        this.courses = [
+                            ...this.courses.slice(0, index),
+                            upd,
+                            ...this.courses.slice(index + 1)
+                        ];
+                    } else if (res['result'] === 'Fail') {
+                        this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: res['errorMessage'] }];
                     }
                 });
             },
             reject: () => {
-                this.msgs = [{ severity: 'info', summary: 'Rejected', detail: 'You have rejected' }];
+                this.msgs = [{ severity: 'info', summary: 'ข้อความจากระบบ', detail: 'ยกเลิกการลงเทียน' }];
+
             }
         });
     }
     approvalCourse(id) {
         this.confirmationService.confirm({
-            message: 'Are you sure that you want to proceed?',
-            header: 'Confirmation',
+            message: 'ยืนยันการขออนุมัติพิเศษ',
+            header: 'ข้อความจากระบบ',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                console.log(this);
+                this.courseService.approvalCourse(id).subscribe((res) => {
+                    console.log(res);
 
-                this.msgs = [{ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' }];
-                //   this.courseService.approvalCourse(id).subscribe(function (res) {
-                //     if (res['status'] === 'Success') {
-                //       this.courses = res['data'];
-                //     }
-                //   });
+                    if (res['result'] === 'Success') {
+                        this.msgs = [{ severity: 'success', summary: 'ข้อความจากระบบ', detail: 'ขออนุมัติพิเศษสำเร็จ' }];
+                        const index = this.courses.findIndex(course => course.id === id);
+                        const upd = this.courses[index];
+                        upd.status = 2;
+                        this.courses = [
+                            ...this.courses.slice(0, index),
+                            upd,
+                            ...this.courses.slice(index + 1)
+                        ];
+                        this.msgs = [{ severity: 'success', summary: 'ข้อความจากระบบ', detail: 'ขออนุมัติพิเศษสำเร็จ' }];
+                    } else if (res['result'] === 'Fail') {
+                        this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: res['errorMessage'] }];
+                    }
+                });
             },
             reject: () => {
-                this.msgs = [{ severity: 'info', summary: 'Rejected', detail: 'You have rejected' }];
+                this.msgs = [{ severity: 'info', summary: 'ข้อความจากระบบ', detail: 'ยกเลิกการขออนุมัติพิเศษ' }];
             }
         });
     }

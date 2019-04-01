@@ -24,6 +24,7 @@ export class EditFormComponent implements OnInit {
   public showCancelMessage: boolean;
   public urlback: string;
   public personalId: string;
+  public onEdit: boolean;
 
 
   public formError = {
@@ -97,6 +98,7 @@ export class EditFormComponent implements OnInit {
     this.urlback = this.route.snapshot.data.urlback;
     this.registerSuccess = false;
     this.showCancelMessage = false;
+    this.onEdit = false;
     this.createForm();
     this.settingForm();
     this.settingCalendarTH();
@@ -231,12 +233,15 @@ export class EditFormComponent implements OnInit {
         }
       );
     } else if (type === 'success') {
-      this.registerSuccess = true;
+      this.showCancelMessage = true;
+      this.onEdit = true;
+      //this.registerSuccess = true;
       this.messageService.add(
         {
           key: 'systemMessage',
           sticky: true,
-          summary: 'สมัครสมาชิกสำเร็จ',
+          summary: 'ยืนยันการแก้ไขข้อมูลส่วนตัวสำเร็จ',
+          detail: 'คุณต้องการยืนยันใช่หรือไม่'
         }
       );
     } else if (type === 'cancel') {
@@ -245,7 +250,7 @@ export class EditFormComponent implements OnInit {
         {
           key: 'systemMessage',
           sticky: true,
-          summary: 'ยกเลิกการสมัครสมาชิก',
+          summary: 'ยกเลิกการแก้ไขข้อมูลส่วนตัว',
           detail: 'คุณต้องการยกเลิกใช่หรือไม่'
         }
       );
@@ -254,12 +259,16 @@ export class EditFormComponent implements OnInit {
         {
           key: 'systemMessage',
           sticky: true,
-          summary: 'ยกเลิกการสมัครสมาชิก',
+          summary: 'ยกเลิกการแก้ไขข้อมูลส่วนตัว',
           detail: 'คุณต้องการยกเลิกใช่หรือไม่'
         }
       );
     }
 
+  }
+  onEditprofile(){
+    this.registerSuccess = true;
+    this.router.navigateByUrl(this.urlback + this.personalId);
   }
 
   onCancel() {

@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {map} from 'rxjs/operators';
-import {ApiConstants} from 'src/app/shared/constants/ApiConstants';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { ApiConstants } from 'src/app/shared/constants/ApiConstants';
 
 @Injectable({
   providedIn: 'root'
@@ -42,37 +42,46 @@ export class CourseService {
   }
 
   assignCourse(id) {
-    return this.http.post(ApiConstants.baseURl + `/courses/register`, {courseId: id}, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('access-token')}`
-      }
-    });
-  }
-  approvalCourse(id){
-    return this.http.post(ApiConstants.baseURl + `/courses/approval`, {courseId: id}, {
+    return this.http.post(ApiConstants.baseURl + `/courses/register`, { courseId: id }, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('access-token')}`
       }
     });
   }
 
-  createCourse(){
+
+  createCourse() {
     return this.http.post(ApiConstants.baseURl + `/courses`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('access-token')}`
       }
     });
   }
-  editCourse(id){
-    return this.http.patch(ApiConstants.baseURl + `/courses`, {courseId: id}, {
+  editCourse(id) {
+    return this.http.patch(ApiConstants.baseURl + `/courses`, { courseId: id }, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('access-token')}`
       }
     });
   }
-  
-  deleteCourse(id){
-    return this.http.patch(ApiConstants.baseURl + `/courses`, {courseId: id}, {
+
+  deleteCourse(id) {
+    return this.http.patch(ApiConstants.baseURl + `/courses`, { courseId: id }, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access-token')}`
+      }
+    });
+  }
+  approvalCourse(id) {
+    return this.http.post(ApiConstants.baseURl + `/courses/approval`, { courseId: id }, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access-token')}`
+      }
+    });
+  }
+
+  cancelApprovalCourse(id) {
+    return this.http.delete(ApiConstants.baseURl + `/courses/approval/${id}`,  {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('access-token')}`
       }
