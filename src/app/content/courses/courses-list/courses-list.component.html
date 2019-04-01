@@ -77,7 +77,8 @@
 
                     </div>
                     <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
-                      <button pButton type="button" label="ขออนุมัติพิเศษ" class="ui-button-warning" [disabled]="rowData['status'] == '1' || rowData['status'] == '2'"></button>
+                      <button pButton type="button" label="ขออนุมัติพิเศษ" class="ui-button-warning" [disabled]="rowData['status'] == '1' || rowData['status'] == '2'"
+                      (click)="approvalCourse(rowData['id'])"></button>
                     </div>
                   </div>
                 </td>
