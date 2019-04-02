@@ -10,6 +10,8 @@ export interface Course {
   memberLname?: string;
   locationId?: number;
   locationName?: string;
-  status?: number;
+  status?: string;
+  saStatus?: string;
+  mhcStatus?: string;
   canRegister?: number;
 }
