@@ -24,7 +24,7 @@ const routes: Routes = [
   {
     path: '',
     component: ContentComponent,
-    //ngcanActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -87,14 +87,12 @@ const routes: Routes = [
         component: ManageCourseComponent
       },
       {
+        path: 'managepasscourse/:id',
+        component: ManagePassCourseFormComponent
+      },
+      {
         path: 'managepasscourse',
         component: ManagePassCourseComponent,
-        children: [
-          {
-            path: ':id',
-            component: ManagePassCourseFormComponent,
-          },
-        ]
       },
       {
         path: 'createCourse',
