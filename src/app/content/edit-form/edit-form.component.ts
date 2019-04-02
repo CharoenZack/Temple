@@ -268,7 +268,8 @@ export class EditFormComponent implements OnInit {
     }
 
   }
-  onEditprofile(){
+
+  onEditprofile() {
     this.registerSuccess = true;
     this.router.navigateByUrl(this.urlback + this.personalId);
   }

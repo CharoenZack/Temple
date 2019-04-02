@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TitleName} from '../../shared/interfaces/title-name';
 import {TitleNameService} from 'src/app/shared/service/title-name.service';
-import { MenuItem } from 'primeng/api';
+import {MenuItem} from 'primeng/api';
 
 @Component({
   selector: 'app-managed-titlename',
@@ -32,8 +32,8 @@ export class ManagedTitlenameComponent implements OnInit {
     ];
 
     this.menu = [
-      { label: '',icon:"pi pi-home",routerLink:'/'},
-      { label: 'Approval user : อนุมัติพิเศษ' },
+      {label: '', icon: 'pi pi-home', routerLink: '/'},
+      {label: 'Approval user : อนุมัติพิเศษ'},
     ];
   }
 
@@ -59,13 +59,13 @@ export class ManagedTitlenameComponent implements OnInit {
 
     this.titleNamesService.createTitleName(this.titleName)
       .subscribe(res => {
-        if (res['status'] == "Success") {
-          this.titleNames = [
-            ...this.titleNames,
-            res['data']
-          ]
-        }
-      },
+          if (res['status'] === 'Success') {
+            this.titleNames = [
+              ...this.titleNames,
+              res['data']
+            ];
+          }
+        },
         (e) => console.log(e['error']['message'])
       );
     this.clear();
@@ -83,14 +83,14 @@ export class ManagedTitlenameComponent implements OnInit {
     this.titleName.name = this.titleNameAbbrEdit;
     this.titleNamesService.updateTitleName(this.titleName)
       .subscribe(res => {
-        if (res['status'] === 'Success') {
-          const index = this.titleNames.findIndex(e => e.id == res['data']['id']);
-          console.log(res['data'], 'new');
-          console.log(this.titleNames[index], 'old');
+          if (res['status'] === 'Success') {
+            const index = this.titleNames.findIndex(e => e.id === res['data']['id']);
+            console.log(res['data'], 'new');
+            console.log(this.titleNames[index], 'old');
 
-          this.titleNames[index] = res['data'];
-        }
-      },
+            this.titleNames[index] = res['data'];
+          }
+        },
         (e) => console.log(e['error']['message'])
       );
     this.clear();
@@ -110,14 +110,14 @@ export class ManagedTitlenameComponent implements OnInit {
     const index = this.titleNames.findIndex(e => e.id === id);
     this.titleNamesService.deleteTitleName(id)
       .subscribe(res => {
-        if (res['status'] == "Success") {
-          this.titleNames = [
-            ...this.titleNames.slice(0, index),
-            ...this.titleNames.slice(index + 1)
-          ]
-        }
-      },
+          if (res['status'] === 'Success') {
+            this.titleNames = [
+              ...this.titleNames.slice(0, index),
+              ...this.titleNames.slice(index + 1)
+            ];
+          }
+        },
         (e) => console.log(e['error']['message'])
-      )
+      );
   }
 }
