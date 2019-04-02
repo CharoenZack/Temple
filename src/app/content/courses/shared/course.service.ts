@@ -2,15 +2,27 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {ApiConstants} from 'src/app/shared/constants/ApiConstants';
+import {SpecialApprove} from '../../../shared/interfaces/special-approve';
+import {Course} from '../../../shared/interfaces/course';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CourseService {
 
+  private course: Course;
+
   constructor(
     private http: HttpClient
   ) {
+  }
+
+  setCourse(course: Course) {
+    this.course = course;
+  }
+
+  getCourse(): Course {
+    return this.course;
   }
 
   getCourses() {
@@ -28,19 +40,6 @@ export class CourseService {
     );
   }
 
-  getCourse(id) {
-    return this.http.get(ApiConstants.baseURl + `/courses/${id}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('access-token')}`
-      }
-    }).pipe(map(res => {
-      return {
-        status: res['result'],
-        data: res['data'][0]
-      };
-    }));
-  }
-
   assignCourse(id) {
     return this.http.post(ApiConstants.baseURl + `/courses/register`, {courseId: id}, {
       headers: {
@@ -48,6 +47,48 @@ export class CourseService {
       }
     });
   }
+
+
+  createCourse() {
+    return this.http.post(ApiConstants.baseURl + `/courses`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access-token')}`
+      }
+    });
+  }
+
+  editCourse(id) {
+    return this.http.patch(ApiConstants.baseURl + `/courses`, {courseId: id}, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access-token')}`
+      }
+    });
+  }
+
+  deleteCourse(id) {
+    return this.http.patch(ApiConstants.baseURl + `/courses`, {courseId: id}, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access-token')}`
+      }
+    });
+  }
+
+  approvalCourse(data: SpecialApprove) {
+    return this.http.post(ApiConstants.baseURl + `/approve`, data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access-token')}`
+      }
+    });
+  }
+
+  cancelApprovalCourse(id) {
+    return this.http.delete(ApiConstants.baseURl + `/approve/${id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access-token')}`
+      }
+    });
+  }
+
 
   save(data) {
     // let courses = this.getCourses();

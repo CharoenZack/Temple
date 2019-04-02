@@ -1,5 +1,7 @@
 export interface Baggage {
-    date: String;
-    id: String;
-    number: String;
+    id?: String;
+    number?: String;
+    date?: Date;
+
+
 }

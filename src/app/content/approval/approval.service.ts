@@ -15,8 +15,8 @@ export class ApprovalService {
     }
 
 
-    getLocation() {
-        return this.http.get(ApiConstants.baseURl + '/approval', {
+    getAllApproval(){
+        return this.http.get(ApiConstants.baseURl + '/approve', {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('access-token')}`
             }
@@ -29,4 +29,6 @@ export class ApprovalService {
             })
         );
     }
+
+
 }

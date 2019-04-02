@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Location } from '../../shared/interfaces/location';
-import { LocationService } from './location.service';
-import { MessageService, MenuItem } from 'primeng/api';
+import {Component, OnInit} from '@angular/core';
+import {Location} from '../../shared/interfaces/location';
+import {LocationService} from './location.service';
+import {MessageService, MenuItem} from 'primeng/api';
 
 @Component({
   selector: 'app-location',
@@ -17,20 +17,22 @@ export class LocationComponent implements OnInit {
   public menu: MenuItem[];
 
   locationNameEdit: String;
+
   constructor(
     private locationService: LocationService,
     private messageService: MessageService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.getLocation();
     this.cols = [
-      { field: 'name', header: 'สถานที่' },
+      {field: 'name', header: 'สถานที่'},
     ];
 
     this.menu = [
-      { label: '',icon:"pi pi-home",routerLink:'/'},
-      { label: 'Manange Locations : จัดการสถานที่' },
+      {label: '', icon: 'pi pi-home', routerLink: '/'},
+      {label: 'Manange Locations : จัดการสถานที่'},
     ];
   }
 
@@ -56,38 +58,42 @@ export class LocationComponent implements OnInit {
     this.clear();
 
   }
+
   clear() {
     this.location = {};
     this.locationNameEdit = '';
     this.displayDialog = false;
   }
+
   showEdit(id) {
     this.newLocation = false;
     this.location = this.locations.filter(e => e.id === id)[0];
     this.locationNameEdit = this.location['name'];
     this.displayDialog = true;
   }
+
   delete(id) {
     this.messageService.clear();
     const index = this.locations.findIndex(e => e.id === id);
     this.locationService.delete(id).toPromise()
-    .then(res => {
-      if ( res['status'] === 'Success' ) {
-        this.locations = [
-          ...this.locations.slice(0, index),
-          ...this.locations.slice(index + 1)
-        ];
-        this.messageService.add({severity: 'success', summary: 'ลบสำเร็จ'});
-      }
-    });
+      .then(res => {
+        if (res['status'] === 'Success') {
+          this.locations = [
+            ...this.locations.slice(0, index),
+            ...this.locations.slice(index + 1)
+          ];
+          this.messageService.add({severity: 'success', summary: 'ลบสำเร็จ'});
+        }
+      });
   }
+
   getLocation() {
     this.locationService.getLocation()
       .toPromise().then(res => {
-        if (res['status'] === 'Success') {
-          this.locations = res['data'];
-        }
-      });
+      if (res['status'] === 'Success') {
+        this.locations = res['data'];
+      }
+    });
   }
 
   update() {

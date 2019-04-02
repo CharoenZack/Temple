@@ -2,7 +2,15 @@
     display: flex;
 }
 
+.btn-center > div {
+  text-align: center;
 
+}
+
+.btn-center {
+  justify-content: center;
+
+}
 /* Column Priorities */
 
 @media only all {
