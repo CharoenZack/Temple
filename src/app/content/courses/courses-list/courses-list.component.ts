@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import {CourseService} from '../shared/course.service';
-import {ConfirmationService, MenuItem} from 'primeng/api';
-import {Course} from 'src/app/shared/interfaces/course';
-import {BreadcrumbService} from '../../../shared/service/breadcrumb.service';
+import { CourseService } from '../shared/course.service';
+import { ConfirmationService, MenuItem } from 'primeng/api';
+import { Course } from 'src/app/shared/interfaces/course';
+import { BreadcrumbService } from '../../../shared/service/breadcrumb.service';
 
 @Component({
   selector: 'app-courses-list',
@@ -11,12 +11,10 @@ import {BreadcrumbService} from '../../../shared/service/breadcrumb.service';
   styleUrls: ['./courses-list.component.css']
 })
 export class CoursesListComponent implements OnInit {
-
   msgs: any[] = [];
   courses: Course[];
   cols: any[];
   checkapprove: boolean;
-
   public menu: MenuItem[];
 
   constructor(
@@ -25,35 +23,28 @@ export class CoursesListComponent implements OnInit {
     private breadCrumbService: BreadcrumbService,
   ) {
   }
-
   ngOnInit() {
     this.getData();
-
     this.cols = [
-      {field: 'stDate', header: 'วันที่'},
-      {field: 'name', header: 'ชื่อคอร์ส'},
-      {field: 'locationName', header: 'สถานที่'},
-      {field: 'conditionMin', header: 'หมายเหตุ'},
-      {field: 'status', header: 'สถานะ'},
+      { field: 'stDate', header: 'วันที่' },
+      { field: 'name', header: 'ชื่อคอร์ส' },
+      { field: 'locationName', header: 'สถานที่' },
+      { field: 'conditionMin', header: 'หมายเหตุ' },
+      { field: 'status', header: 'สถานะ' },
     ];
-
     this.breadCrumbService.setPath([
-      {label: 'Courses : ข้อมูลคอร์สทั้งหมด', routerLink: '/courses'},
+      { label: 'Courses : ข้อมูลคอร์สทั้งหมด', routerLink: '/courses' },
     ]);
     this.checkapprove = false;
   }
-
   assignCourse(id) {
     this.confirmationService.confirm({
       message: 'ยืนยันการลงทะเบียน',
       header: 'ข้อความจากระบบ',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-
-        this.msgs = [{severity: 'success', summary: 'ข้อความจากระบบ', detail: 'ลงทะเบียนสำเร็จ'}];
         this.course.assignCourse(id).subscribe((res) => {
           console.log(res);
-
           if (res['result'] === 'Success') {
             const index = this.courses.findIndex(course => course.id === id);
             const upd = this.courses[index];
@@ -61,24 +52,27 @@ export class CoursesListComponent implements OnInit {
             this.courses = [
               ...this.courses.slice(0, index),
               upd,
-              ...this.courses.slice(index + 1, )
+              ...this.courses.slice(index + 1)
             ];
+            this.msgs = [{ severity: 'success', summary: 'ข้อความจากระบบ', detail: 'ลงทะเบียนสำเร็จ' }];
+          } else if (res['result'] === 'Fail') {
+            this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: res['errorMessage'] }];
           }
         });
       },
       reject: () => {
+        this.msgs = [{ severity: 'info', summary: 'ข้อความจากระบบ', detail: 'ปฏิเสธการลงเทียน' }];
+
       }
     });
   }
 
-  approvalCourse(id){
+  approvalCourse(id) {
     this.confirmationService.confirm({
       message: 'ยืนยันการขออนุมัติพิเศษ',
       header: 'ข้อความจากระบบ',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-
-        this.msgs = [{severity: 'success', summary: 'ข้อความจากระบบ', detail: 'ขออนุมัติพิเศษสำเร็จ'}];
         this.course.approvalCourse(id).subscribe((res) => {
           console.log(res);
 
@@ -89,12 +83,16 @@ export class CoursesListComponent implements OnInit {
             this.courses = [
               ...this.courses.slice(0, index),
               upd,
-              ...this.courses.slice(index + 1, )
+              ...this.courses.slice(index + 1)
             ];
+            this.msgs = [{ severity: 'success', summary: 'ข้อความจากระบบ', detail: 'ขออนุมัติพิเศษสำเร็จ' }];
+          } else if (res['result'] === 'Fail') {
+            this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: res['errorMessage'] }];
           }
         });
       },
       reject: () => {
+        this.msgs = [{ severity: 'info', summary: 'ข้อความจากระบบ', detail: 'ปฏิเสธการขออนุมัติพิเศษ' }];
       }
     });
   }
@@ -109,8 +107,35 @@ export class CoursesListComponent implements OnInit {
     });
   }
 
-  checkSpecialApprove(){
+  checkSpecialApprove() {
     this.checkapprove = true;
   }
-
+  cancelApprovalCourse(id) {
+    this.confirmationService.confirm({
+      message: 'ยืนยันการขออนุมัติพิเศษ',
+      header: 'ข้อความจากระบบ',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.course.cancelApprovalCourse(id).subscribe((res) => {
+          console.log(res);
+          if (res['result'] === 'Success') {
+            // const index = this.courses.findIndex(course => course.id === id);
+            // const upd = this.courses[index];
+            // upd.status = 2;
+            // this.courses = [
+            //   ...this.courses.slice(0, index),
+            //   upd,
+            //   ...this.courses.slice(index + 1)
+            // ];
+            this.msgs = [{ severity: 'success', summary: 'ข้อความจากระบบ', detail: 'ยกเลิกการขออนุมัติพิเศษสำเร็จ' }];
+          } else if (res['result'] === 'Fail') {
+            this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: res['errorMessage'] }];
+          }
+        });
+      },
+      reject: () => {
+        this.msgs = [{ severity: 'info', summary: 'ข้อความจากระบบ', detail: 'ปฏิเสธการยกเลิกการขออนุมัติพิเศษ' }];
+      }
+    });
+  }
 }

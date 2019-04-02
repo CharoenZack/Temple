@@ -4,11 +4,12 @@ export interface Course {
   stDate?: Date;
   endDate?: Date;
   detail?: string;
-  coditionMin?: Number;
+  conditionMin?: Number;
   memberId?: string;
   memberFname?: string;
   memberLname?: string;
   locationId?: number;
   locationName?: string;
   status?: number;
+  canRegister?: number;
 }

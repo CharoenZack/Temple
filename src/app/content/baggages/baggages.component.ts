@@ -3,6 +3,7 @@ import {Baggage} from '../../shared/interfaces/baggage';
 import {BaggageService} from '../../shared/service/baggage.service';
 import {MenuItem} from 'primeng/api';
 import { BreadcrumbService } from 'src/app/shared/service/breadcrumb.service';
+import { AuthService } from 'src/app/shared/service/auth.service';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class BaggagesComponent implements OnInit {
     constructor(
         private baggageService: BaggageService,
         private breadCrumbService:BreadcrumbService,
+        private authService:AuthService,
     ) {
     }
 
@@ -41,6 +43,7 @@ export class BaggagesComponent implements OnInit {
         this.breadCrumbService.setPath([
             {label: 'Baggages manage: จัดการสัมภาระ'}
         ]);
+        this.authService.getRole().subscribe(res => this.role = res)
     }
 
     private getData(){
@@ -87,51 +90,51 @@ export class BaggagesComponent implements OnInit {
 
     }
 
-    // save() {
-    //     const baggage = {
-    //         name: this.baggageNumber
-    //     };
-    //     this.baggageService.save(baggage).toPromise().then(res => {
-    //         console.log(res);
-    //         if (res['status'] === 'Success') {
-    //             this.items = [
-    //                 ...this.items,
-    //                 res['data']
-    //             ];
-    //         }
-    //     }).catch((e) => console.log(e['error']['message']));
-    //     this.clear();
+    save() {
+        const baggage = {
+            name: this.baggageNumber
+        };
+        this.baggageService.save(baggage).toPromise().then(res => {
+            console.log(res);
+            if (res['status'] === 'Success') {
+                this.items = [
+                    ...this.items,
+                    res['data']
+                ];
+            }
+        }).catch((e) => console.log(e['error']['message']));
+        this.clear();
 
-    // }
+    }
 
-    // update() {
-    //     const data = {
-    //         id: this.baggage['id'],
-    //         number: this.baggageNumber
-    //     };
-    //     this.baggageService.update(data)
-    //         .subscribe(res => {
-    //                 if (res['status'] === 'Success') {
-    //                     const index = this.items.findIndex(e => e.id === res['data']['id']);
-    //                     this.items[index].number = res['data']['number'];
-    //                 }
-    //             },
-    //             (e) => {
-    //                 console.log(e['error']['message']);
-    //             });
-    //     this.clear();
-    // }
+    update() {
+        const data = {
+            id: this.baggage['id'],
+            number: this.baggageNumber
+        };
+        this.baggageService.update(data)
+            .subscribe(res => {
+                    if (res['status'] === 'Success') {
+                        const index = this.items.findIndex(e => e.id === res['data']['id']);
+                        this.items[index].number = res['data']['number'];
+                    }
+                },
+                (e) => {
+                    console.log(e['error']['message']);
+                });
+        this.clear();
+    }
 
-    // clear() {
-    //     this.baggage = {date: '', number: '', id: ''};
-    //     this.baggageNumber = '';
-    //     this.displayDialog = false;
-    // }
+    clear() {
+        this.baggage = { number: '', id: ''};
+        this.baggageNumber = '';
+        this.displayDialog = false;
+    }
 
 
-    // showDialogToAdd() {
-    //     this.newBaggage = true;
-    //     this.baggage = {date: '', number: '', id: ''};
-    //     this.displayDialog = true;
-    // }
+    showDialogToAdd() {
+        this.newBaggage = true;
+        this.baggage = { number: '', id: ''};
+        this.displayDialog = true;
+    }
 }

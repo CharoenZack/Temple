@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {BreadcrumbService} from '../../../shared/service/breadcrumb.service';
+import { BreadcrumbService } from '../../../shared/service/breadcrumb.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Course } from 'src/app/shared/interfaces/course';
 
 @Component({
   selector: 'app-course-create',
@@ -8,15 +10,29 @@ import {BreadcrumbService} from '../../../shared/service/breadcrumb.service';
 })
 export class CourseCreateComponent implements OnInit {
 
-  constructor(
-      private breadCrumbService: BreadcrumbService,
+  public formEdit: FormGroup;
+  public courses:Course[];
 
+  constructor(
+    private breadCrumbService: BreadcrumbService,
+    private formBuilder: FormBuilder,
   ) { }
 
   ngOnInit() {
-      this.breadCrumbService.setPath([
-          {label: 'Course : ตารางคอร์ส', routerLink: '/courses'},
-      ]);
+    this.createForm();
+    this.breadCrumbService.setPath([
+      { label: 'CreateCourse : สร้างคอร์ส', routerLink: '/createCourse' },
+    ]);
   }
-
+  createForm() {
+    this.formEdit = this.formBuilder.group(
+      {
+        courseName: ['', Validators.required],
+        detail: ['', Validators.required],
+        location: ['', Validators.required],
+        stDate: ['', Validators.required],
+        annotation: ['', Validators.required],
+      }
+    );
+  }
 }
