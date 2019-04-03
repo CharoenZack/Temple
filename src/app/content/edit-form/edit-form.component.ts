@@ -25,6 +25,7 @@ export class EditFormComponent implements OnInit {
   public showCancelMessage: boolean;
   public urlback: string;
   public personalId: string;
+  public previewImg: any;
   public onEdit: boolean;
   public pipe = new DatePipe('th-TH')
 
@@ -134,7 +135,8 @@ export class EditFormComponent implements OnInit {
         address: ['', Validators.required],
         phone: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
-        phoneEmergency: ['', Validators.required]
+        phoneEmergency: ['', Validators.required],
+        imgProfile: ['']
       }
     );
   }
@@ -207,7 +209,7 @@ export class EditFormComponent implements OnInit {
         registerDate: null,
         lastUpdate: null,
         genderId: this.formEdit.get('gender').value,
-        titleId: parseInt(titleCode.id),
+        titleId: +(titleCode.id),
       };
       this.manageUserService.updateUser(this.personalId, dataUser).subscribe(
         res => {
@@ -272,7 +274,8 @@ export class EditFormComponent implements OnInit {
     }
 
   }
-  onEditprofile(){
+
+  onEditprofile() {
     this.registerSuccess = true;
     this.router.navigateByUrl(this.urlback + this.personalId);
   }
@@ -295,8 +298,24 @@ export class EditFormComponent implements OnInit {
 
 
   profileSelect(e) {
-    console.log(e);
-    console.log(e.files);
+    const file = e.target.files;
+    console.log(file);
+
+    if (file.length === 0) {
+      return;
+    }
+
+    const mimeType = file[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file[0]);
+    this.formEdit.controls['imgProfile'].setValue(file[0]);
+    reader.onload = () => {
+      this.previewImg = reader.result;
+    };
 
   }
 

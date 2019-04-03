@@ -29,6 +29,8 @@ import {DialogModule} from 'primeng/dialog';
 import {FileUploadModule} from 'primeng/fileupload';
 import {CookieService} from 'ngx-cookie-service';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
+import {CheckboxModule} from 'primeng/checkbox';
+import {ListboxModule} from 'primeng/listbox';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
@@ -53,6 +55,7 @@ import {
 
 import {PersonalInfoService} from './service/personal-info.service';
 import {BreadcrumbComponent} from './component/breadcrumb/breadcrumb.component';
+import {HttpClientService} from './service/http-client.service';
 
 
 @NgModule({
@@ -109,6 +112,8 @@ import {BreadcrumbComponent} from './component/breadcrumb/breadcrumb.component';
         BreadcrumbModule,
         FileUploadModule,
         CalendarModule,
+        CheckboxModule,
+        ListboxModule,
         AutoCompleteModule,
     ],
     providers: [
@@ -116,6 +121,7 @@ import {BreadcrumbComponent} from './component/breadcrumb/breadcrumb.component';
         MessageService,
         PersonalInfoService,
         CookieService,
+        HttpClientService,
     ]
 })
 export class SharedModule {

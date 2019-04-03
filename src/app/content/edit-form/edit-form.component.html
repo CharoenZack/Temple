@@ -2,180 +2,178 @@
 
 
 <form [formGroup]="formEdit" (submit)="onSubmit($event)">
-    <div class="ui-g">
-        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
-            <div class="margin-top-bottom">
-                <fieldset>
-                    <legend class="font-show">ข้อมูลส่วนตัว</legend>
-                    <div class="ui-g-9 ui-lg-9 ui-md-12 ui-sm-12 ">
-                        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
-                            <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
-                                <div class="text-right">รูปประจำตัว</div>
-                            </div>
-                            <div class="ui-g-9 ui-lg-9 ui-md-8 ui-sm-12">
-                                <div>
-                                    <p-fileUpload name="myFile" [showUploadButton]='true' accept="image/*"
-                                        (onUpload)="profileSelect($event)">
+  <div class="ui-g">
+    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+      <div class="margin-top-bottom">
+        <fieldset>
+          <legend class="font-show">ข้อมูลส่วนตัว</legend>
+          <div class="ui-g-9 ui-lg-9 ui-md-12 ui-sm-12 ">
+            <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+              <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
+                <div class="text-right">รูปประจำตัว</div>
+              </div>
+              <div class="ui-g-9 ui-lg-9 ui-md-8 ui-sm-12">
+                <div>
+                  <!--<p-fileUpload name="myFile"  [showUploadButton]='true' accept="image/*" (onUpload)="profileSelect($event)">-->
 
-                                    </p-fileUpload>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
-                            <div *ngIf="!formError.titleName" class="text-right">
-                                คำนำหน้า
-                            </div>
-                            <div *ngIf="formError.titleName" class="text-danger text-invalid text-right">
-                                {{formError.titleName}}
-                            </div>
-                        </div>
-                        <div class="ui-g-9 ui-lg-9 ui-md-8 ui-sm-12">
-                            <div>
-                                <p-dropdown [options]="titleName" optionLabel="display" value="id" [autoWidth]="false"
-                                    formControlName="titleName"></p-dropdown>
-                            </div>
-                        </div>
-                        <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
-                            <div *ngIf="!formError.fname" class="text-right">
-                                ชื่อ
-                            </div>
-                            <div *ngIf="formError.fname" class="text-danger text-invalid text-right">
-                                {{formError.fname}}
-                            </div>
-                        </div>
-                        <div class="ui-g-3 ui-lg-3 ui-md-8 ui-sm-12">
-                            <div>
-                                <input type="text" pInputText placeholder="ชื่อ" formControlName="fname">
-                            </div>
-                        </div>
-                        <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
-                            <div *ngIf="!formError.lname" class="text-right">
-                                นามสกุล
-                            </div>
-                            <div *ngIf="formError.lname" class="text-danger text-invalid text-right">
-                                {{formError.lname}}
-                            </div>
-                        </div>
-                        <div class="ui-g-3 ui-lg-3 ui-md-8 ui-sm-12">
-                            <div>
-                                <input type="text" pInputText placeholder="นามสกุล" formControlName="lname">
-                            </div>
-                        </div>
-                        <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
-                            <div *ngIf="!formError.birthday" class="text-right">
-                                วันเกิด
-                            </div>
-                            <div *ngIf="formError.birthday" class="text-danger text-invalid text-right">
-                                {{formError.birthday}}
-                            </div>
-                        </div>
-                        <div class="ui-g-9 ui-lg-9 ui-md-8 ui-sm-12">
-                            <div>
-                                <p-calendar class="calendar-button"  [yearRange]="yearRange" 
-                                    placeholder="01/01/1990" [showIcon]="true" [yearNavigator]="true"
-                                    dateFormat="dd/mm/yy" [monthNavigator]="true" formControlName="birthday">
-                                </p-calendar>
-                            </div>
-                        </div>
-
-                        <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
-                            <div *ngIf="!formError.gender" class="text-right">
-                                เพศ
-                            </div>
-                            <div *ngIf="formError.gender" class="text-danger text-invalid text-right">
-                                {{formError.gender}}
-                            </div>
-                        </div>
-                        <div class="ui-g-9 ui-lg-9 ui-md-8 ui-sm-12">
-                            <div class="ui-g-3 ui-lg-3 ui-md-12 ui-sm-12 ">
-                                <p-radioButton name="gender" class="checkmark" value='1' label="ชาย"
-                                    formControlName="gender">
-                                </p-radioButton>
-                            </div>
-                            <div class="ui-g-3 ui-lg-3 ui-md-12 ui-sm-12">
-                                <p-radioButton name="gender" class="checkmark" value='2' label="หญิง"
-                                    formControlName="gender">
-                                </p-radioButton>
-                            </div>
-                            <div class="ui-g-3 ui-lg-3 ui-md-12 ui-sm-12">
-                                <p-radioButton name="gender" class="checkmark" value='3' label="ไม่ระบุ"
-                                    formControlName="gender">
-                                </p-radioButton>
-                            </div>
-                        </div>
-                        <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
-                            <div *ngIf="!formError.address" class="text-right">
-                                ที่อยู่
-                            </div>
-                            <div *ngIf="formError.address" class="text-danger text-invalid text-right">
-                                {{formError.address}}
-                            </div>
-                        </div>
-                        <div class="ui-g-9 ui-lg-9 ui-md-8 ui-sm-12">
-                            <div>
-                                <textarea [rows]="5" [cols]="30" class="fixtextarea" pInputTextarea
-                                    formControlName="address"></textarea>
-                            </div>
-                        </div>
-                        <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
-                            <div *ngIf="!formError.phone" class="text-right">
-                                เบอร์โทร
-                            </div>
-                            <div *ngIf="formError.phone" class="text-danger text-invalid text-right">
-                                {{formError.phone}}
-                            </div>
-                        </div>
-                        <div class="ui-g-3 ui-lg-3 ui-md-8 ui-sm-12">
-                            <div>
-                                <p-inputMask mask="999-999-9999" placeholder="099-999-9999" formControlName="phone">
-                                </p-inputMask>
-                            </div>
-                        </div>
-                        <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
-                            <div *ngIf="!formError.phoneEmergency" class="text-right">
-                                เบอร์ติดต่อฉุกเฉิน
-                            </div>
-                            <div *ngIf="formError.phoneEmergency" class="text-danger text-invalid text-right">
-                                {{formError.phoneEmergency}}
-                            </div>
-                        </div>
-                        <div class="ui-g-3 ui-lg-3 ui-md-8 ui-sm-12">
-                            <div>
-                                <p-inputMask mask="999-999-9999" placeholder="099-999-9999"
-                                    formControlName="phoneEmergency">
-                                </p-inputMask>
-                            </div>
-                        </div>
-                        <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
-                            <div *ngIf="!formError.email" class="text-right">
-                                E-mail
-                            </div>
-                            <div *ngIf="formError.email" class="text-danger text-invalid text-right">
-                                {{formError.email}}
-                            </div>
-                        </div>
-                        <div class="ui-g-9 ui-lg-9 ui-md-8 ui-sm-12">
-                            <div>
-                                <input type="email" pInputText placeholder="example@example.com"
-                                    formControlName="email">
-                            </div>
-                        </div>
-                    </div>
-
-                </fieldset>
-
-
-                <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 row">
-                    <div class="center temple-button font-show">
-                        <p-button type="reset" label="ล้างค่า" (onClick)="clear()"></p-button>
-                        <p-button type="submit" label="ยืนยัน"></p-button>
-                        <p-button type="button" label="ยกเลิก" (onClick)="showCancel()"></p-button>
-                    </div>
+                  <!--</p-fileUpload>-->
+                  <img [src]="previewImg ? previewImg: '/assets/images/no-img.png'" class="img-info"/>
+                  <div class="btn-upload">
+                    <label for="profile" pButton label="Custom Upload"></label>
+                    <input type="file" id="profile" (change)="profileSelect($event)" accept='image/*'/>
+                  </div>
                 </div>
+              </div>
             </div>
+
+            <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
+              <div *ngIf="!formError.titleName" class="text-right">
+                คำนำหน้า
+              </div>
+              <div *ngIf="formError.titleName" class="text-danger text-invalid text-right">
+                {{formError.titleName}}
+              </div>
+            </div>
+            <div class="ui-g-9 ui-lg-9 ui-md-8 ui-sm-12">
+              <div>
+                <p-dropdown [options]="titleName" optionLabel="display" value="id" [autoWidth]="false"
+                            formControlName="titleName"></p-dropdown>
+              </div>
+            </div>
+            <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
+              <div *ngIf="!formError.fname" class="text-right">
+                ชื่อ
+              </div>
+              <div *ngIf="formError.fname" class="text-danger text-invalid text-right">
+                {{formError.fname}}
+              </div>
+            </div>
+            <div class="ui-g-3 ui-lg-3 ui-md-8 ui-sm-12">
+              <div>
+                <input type="text" pInputText placeholder="ชื่อ" formControlName="fname">
+              </div>
+            </div>
+            <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
+              <div *ngIf="!formError.lname" class="text-right">
+                นามสกุล
+              </div>
+              <div *ngIf="formError.lname" class="text-danger text-invalid text-right">
+                {{formError.lname}}
+              </div>
+            </div>
+            <div class="ui-g-3 ui-lg-3 ui-md-8 ui-sm-12">
+              <div>
+                <input type="text" pInputText placeholder="นามสกุล" formControlName="lname">
+              </div>
+            </div>
+            <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
+              <div *ngIf="!formError.birthday" class="text-right">
+                วันเกิด
+              </div>
+              <div *ngIf="formError.birthday" class="text-danger text-invalid text-right">
+                {{formError.birthday}}
+              </div>
+            </div>
+            <div class="ui-g-9 ui-lg-9 ui-md-8 ui-sm-12">
+              <div>
+                <p-calendar class="calendar-button" [locale]="th" [yearRange]="yearRange" placeholder="01/01/1990"
+                            [showIcon]="true" [yearNavigator]="true" dateFormat="dd/mm/yy" [monthNavigator]="true"
+                            formControlName="birthday"></p-calendar>
+              </div>
+            </div>
+
+            <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
+              <div *ngIf="!formError.gender" class="text-right">
+                เพศ
+              </div>
+              <div *ngIf="formError.gender" class="text-danger text-invalid text-right">
+                {{formError.gender}}
+              </div>
+            </div>
+            <div class="ui-g-9 ui-lg-9 ui-md-8 ui-sm-12">
+              <div class="ui-g-3 ui-lg-3 ui-md-12 ui-sm-12 ">
+                <p-radioButton name="gender" class="checkmark" value='1' label="ชาย" formControlName="gender">
+                </p-radioButton>
+              </div>
+              <div class="ui-g-3 ui-lg-3 ui-md-12 ui-sm-12">
+                <p-radioButton name="gender" class="checkmark" value='2' label="หญิง" formControlName="gender">
+                </p-radioButton>
+              </div>
+              <div class="ui-g-3 ui-lg-3 ui-md-12 ui-sm-12">
+                <p-radioButton name="gender" class="checkmark" value='3' label="ไม่ระบุ" formControlName="gender">
+                </p-radioButton>
+              </div>
+            </div>
+            <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
+              <div *ngIf="!formError.address" class="text-right">
+                ที่อยู่
+              </div>
+              <div *ngIf="formError.address" class="text-danger text-invalid text-right">
+                {{formError.address}}
+              </div>
+            </div>
+            <div class="ui-g-9 ui-lg-9 ui-md-8 ui-sm-12">
+              <div>
+                <textarea [rows]="5" [cols]="30" class="fixtextarea" pInputTextarea
+                          formControlName="address"></textarea>
+              </div>
+            </div>
+            <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
+              <div *ngIf="!formError.phone" class="text-right">
+                เบอร์โทร
+              </div>
+              <div *ngIf="formError.phone" class="text-danger text-invalid text-right">
+                {{formError.phone}}
+              </div>
+            </div>
+            <div class="ui-g-3 ui-lg-3 ui-md-8 ui-sm-12">
+              <div>
+                <p-inputMask mask="999-999-9999" placeholder="099-999-9999" formControlName="phone">
+                </p-inputMask>
+              </div>
+            </div>
+            <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
+              <div *ngIf="!formError.phoneEmergency" class="text-right">
+                เบอร์ติดต่อฉุกเฉิน
+              </div>
+              <div *ngIf="formError.phoneEmergency" class="text-danger text-invalid text-right">
+                {{formError.phoneEmergency}}
+              </div>
+            </div>
+            <div class="ui-g-3 ui-lg-3 ui-md-8 ui-sm-12">
+              <div>
+                <p-inputMask mask="999-999-9999" placeholder="099-999-9999" formControlName="phoneEmergency">
+                </p-inputMask>
+              </div>
+            </div>
+            <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
+              <div *ngIf="!formError.email" class="text-right">
+                E-mail
+              </div>
+              <div *ngIf="formError.email" class="text-danger text-invalid text-right">
+                {{formError.email}}
+              </div>
+            </div>
+            <div class="ui-g-9 ui-lg-9 ui-md-8 ui-sm-12">
+              <div>
+                <input type="email" pInputText placeholder="example@example.com" formControlName="email">
+              </div>
+            </div>
+          </div>
+
+        </fieldset>
+
+
+        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 row">
+          <div class="center temple-button font-show">
+            <p-button type="reset" label="ล้างค่า" (onClick)="clear()"></p-button>
+            <p-button type="submit" label="ยืนยัน"></p-button>
+            <p-button type="button" label="ยกเลิก" (onClick)="showCancel()"></p-button>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </form>
 
 <p-toast position="center" key="systemMessage" (onClose)="onReject()" [modal]="true" [baseZIndex]="5000">

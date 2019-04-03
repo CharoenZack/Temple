@@ -202,7 +202,7 @@
 
                 <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 row">
                     <div class="center temple-button font-show">
-                        <p-button type="submit" label="ยืนยัน"></p-button>
+                        <p-button type="submit" label="ยืนยัน" autofocus></p-button>
                         <p-button type="button" label="ยกเลิก" (onClick)="showCancel()"></p-button>
                     </div>
                 </div>
@@ -219,7 +219,7 @@
             </div>
             <div class="ui-g ui-fluid" *ngIf="showCancelMessage">
                 <div class="ui-g-6">
-                    <button type="button" pButton (click)="onCancel()" label="ยืนยัน" class="ui-button-warning"></button>
+                    <button type="button" pButton (click)="onCancel()" label="ยืนยัน" class="ui-button-warning" autofocus ></button>
                 </div>
                 <div class="ui-g-6">
                     <button type="button" pButton (click)="onReject()" label="ยกเลิก" class="ui-button-secondary"></button>
