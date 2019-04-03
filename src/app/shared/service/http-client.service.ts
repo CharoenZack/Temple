@@ -9,16 +9,9 @@ export class HttpClientService {
   ) {
   }
 
-  createAuthorizationHeader(headers: HttpHeaders) {
-    headers.set(
-      // 'Authorization', `Bearer ${localStorage.getItem('access-token')}`
-      'Authorization', 'asd'
-    );
-  }
+
 
   get(url) {
-    const headers = new HttpHeaders();
-    this.createAuthorizationHeader(headers);
     return this.http.get(url, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('access-token')}`
@@ -27,9 +20,33 @@ export class HttpClientService {
   }
 
   post(url, data) {
-    const headers = new HttpHeaders();
-    this.createAuthorizationHeader(headers);
     return this.http.post(url, data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access-token')}`
+      }
+    });
+  }
+
+  
+  put(url, data) {
+    return this.http.put(url, data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access-token')}`
+      }
+    });
+  }
+
+  patch(url, data) {
+    return this.http.patch(url, data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access-token')}`
+      }
+    });
+  }
+
+  
+  delete(url) {
+    return this.http.delete(url,{
       headers: {
         Authorization: `Bearer ${localStorage.getItem('access-token')}`
       }
