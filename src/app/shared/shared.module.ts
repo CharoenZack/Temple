@@ -29,7 +29,7 @@ import {DialogModule} from 'primeng/dialog';
 import {FileUploadModule} from 'primeng/fileupload';
 import {CookieService} from 'ngx-cookie-service';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
-
+import {AutoCompleteModule} from 'primeng/autocomplete';
 
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {library} from '@fortawesome/fontawesome-svg-core';
@@ -76,6 +76,7 @@ import {BreadcrumbComponent} from './component/breadcrumb/breadcrumb.component';
         FileUploadModule,
         HttpClientModule,
         BreadcrumbModule,
+        AutoCompleteModule,
     ],
     exports: [
         CommonModule,
@@ -108,6 +109,7 @@ import {BreadcrumbComponent} from './component/breadcrumb/breadcrumb.component';
         BreadcrumbModule,
         FileUploadModule,
         CalendarModule,
+        AutoCompleteModule,
     ],
     providers: [
         TitleNameService,

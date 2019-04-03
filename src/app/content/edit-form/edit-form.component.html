@@ -1,3 +1,6 @@
+
+
+
 <form [formGroup]="formEdit" (submit)="onSubmit($event)">
     <div class="ui-g">
         <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
@@ -11,7 +14,8 @@
                             </div>
                             <div class="ui-g-9 ui-lg-9 ui-md-8 ui-sm-12">
                                 <div>
-                                    <p-fileUpload name="myFile"  [showUploadButton]='true' accept="image/*" (onUpload)="profileSelect($event)">
+                                    <p-fileUpload name="myFile" [showUploadButton]='true' accept="image/*"
+                                        (onUpload)="profileSelect($event)">
 
                                     </p-fileUpload>
                                 </div>
@@ -28,7 +32,8 @@
                         </div>
                         <div class="ui-g-9 ui-lg-9 ui-md-8 ui-sm-12">
                             <div>
-                                <p-dropdown [options]="titleName" optionLabel="display" value="id" [autoWidth]="false" formControlName="titleName"></p-dropdown>
+                                <p-dropdown [options]="titleName" optionLabel="display" value="id" [autoWidth]="false"
+                                    formControlName="titleName"></p-dropdown>
                             </div>
                         </div>
                         <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
@@ -67,7 +72,10 @@
                         </div>
                         <div class="ui-g-9 ui-lg-9 ui-md-8 ui-sm-12">
                             <div>
-                                <p-calendar class="calendar-button" [locale]="th" [yearRange]="yearRange" placeholder="01/01/1990" [showIcon]="true" [yearNavigator]="true" dateFormat="dd/mm/yy" [monthNavigator]="true" formControlName="birthday"></p-calendar>
+                                <p-calendar class="calendar-button"  [yearRange]="yearRange" 
+                                    placeholder="01/01/1990" [showIcon]="true" [yearNavigator]="true"
+                                    dateFormat="dd/mm/yy" [monthNavigator]="true" formControlName="birthday">
+                                </p-calendar>
                             </div>
                         </div>
 
@@ -81,15 +89,18 @@
                         </div>
                         <div class="ui-g-9 ui-lg-9 ui-md-8 ui-sm-12">
                             <div class="ui-g-3 ui-lg-3 ui-md-12 ui-sm-12 ">
-                                <p-radioButton name="gender" class="checkmark" value='1' label="ชาย" formControlName="gender">
+                                <p-radioButton name="gender" class="checkmark" value='1' label="ชาย"
+                                    formControlName="gender">
                                 </p-radioButton>
                             </div>
                             <div class="ui-g-3 ui-lg-3 ui-md-12 ui-sm-12">
-                                <p-radioButton name="gender" class="checkmark" value='2' label="หญิง" formControlName="gender">
+                                <p-radioButton name="gender" class="checkmark" value='2' label="หญิง"
+                                    formControlName="gender">
                                 </p-radioButton>
                             </div>
                             <div class="ui-g-3 ui-lg-3 ui-md-12 ui-sm-12">
-                                <p-radioButton name="gender" class="checkmark" value='3' label="ไม่ระบุ" formControlName="gender">
+                                <p-radioButton name="gender" class="checkmark" value='3' label="ไม่ระบุ"
+                                    formControlName="gender">
                                 </p-radioButton>
                             </div>
                         </div>
@@ -103,7 +114,8 @@
                         </div>
                         <div class="ui-g-9 ui-lg-9 ui-md-8 ui-sm-12">
                             <div>
-                                <textarea [rows]="5" [cols]="30" class="fixtextarea" pInputTextarea formControlName="address"></textarea>
+                                <textarea [rows]="5" [cols]="30" class="fixtextarea" pInputTextarea
+                                    formControlName="address"></textarea>
                             </div>
                         </div>
                         <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
@@ -130,7 +142,8 @@
                         </div>
                         <div class="ui-g-3 ui-lg-3 ui-md-8 ui-sm-12">
                             <div>
-                                <p-inputMask mask="999-999-9999" placeholder="099-999-9999" formControlName="phoneEmergency">
+                                <p-inputMask mask="999-999-9999" placeholder="099-999-9999"
+                                    formControlName="phoneEmergency">
                                 </p-inputMask>
                             </div>
                         </div>
@@ -144,7 +157,8 @@
                         </div>
                         <div class="ui-g-9 ui-lg-9 ui-md-8 ui-sm-12">
                             <div>
-                                <input type="email" pInputText placeholder="example@example.com" formControlName="email">
+                                <input type="email" pInputText placeholder="example@example.com"
+                                    formControlName="email">
                             </div>
                         </div>
                     </div>
@@ -172,10 +186,11 @@
         </div>
         <div class="ui-g ui-fluid" *ngIf="showCancelMessage">
             <div class="ui-g-6" *ngIf="onEdit != true">
-                <button type="button" pButton (click)="onCancel()" label="ยืนยัน" class="ui-button-warning" ></button>
+                <button type="button" pButton (click)="onCancel()" label="ยืนยัน" class="ui-button-warning"></button>
             </div>
             <div class="ui-g-6" *ngIf="onEdit == true">
-                <button type="button" pButton (click)="onEditprofile()" label="ยืนยัน" class="ui-button-warning" ></button>
+                <button type="button" pButton (click)="onEditprofile()" label="ยืนยัน"
+                    class="ui-button-warning"></button>
             </div>
             <div class="ui-g-6">
                 <button type="button" pButton (click)="onReject()" label="ยกเลิก" class="ui-button-secondary"></button>

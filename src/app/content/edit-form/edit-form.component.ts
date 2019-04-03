@@ -1,12 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
-import {formatDate} from '@angular/common';
+import {formatDate, DatePipe} from '@angular/common';
 import {Validators, FormBuilder, FormGroup} from '@angular/forms';
 import {MessageService, MenuItem} from 'primeng/api';
 import {TitleNameService} from 'src/app/shared/service/title-name.service';
 import {Router, ActivatedRoute} from '@angular/router';
 import {ManageUserService} from 'src/app/shared/service/manage-user.service';
 import {BreadcrumbService} from '../../shared/service/breadcrumb.service';
+import localeTh from '@angular/common/locales/th.js';
 
 @Component({
   selector: 'app-edit-form',
@@ -25,6 +26,7 @@ export class EditFormComponent implements OnInit {
   public urlback: string;
   public personalId: string;
   public onEdit: boolean;
+  public pipe = new DatePipe('th-TH')
 
 
   public formError = {
@@ -170,9 +172,13 @@ export class EditFormComponent implements OnInit {
       clear: 'Clear',
     };
 
-    const currentYear = formatDate(new Date(), 'yyyy', 'en');
+    // const currentYear = new Date().toLocaleString('en-Us',{timeZone:'Asia/Bangkok'})
+    // const aestTime = new Date(currentYear)
+    //const currentYear = parseInt(formatDate(Date.now(),'yyyy','th'))
+    const currentYear = this.pipe.transform(Date.now(),'yyyy');
     const startYear = parseInt(currentYear) - 100;
     this.yearRange = startYear + ':' + currentYear;
+    
   }
 
   onCancle() {

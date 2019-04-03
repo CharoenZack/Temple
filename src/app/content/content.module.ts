@@ -23,6 +23,11 @@ import {HomeComponent} from './home/home.component';
 import {ApprovalComponent} from './approval/approval.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ManageCourseComponent } from './manage-course/manage-course.component';
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeTh from '@angular/common/locales/th';
+
+registerLocaleData(localeTh);
 
 @NgModule({
     declarations: [
@@ -57,7 +62,9 @@ import { ManageCourseComponent } from './manage-course/manage-course.component';
     ],
     providers: [
         ConfirmationService,
-        AuthGuard
+        AuthGuard,
+        { provide: LOCALE_ID, useValue: "th" }
+        
     ]
 })
 export class ContentModule {

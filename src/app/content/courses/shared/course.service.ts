@@ -87,7 +87,14 @@ export class CourseService {
       }
     });
   }
-
+  
+  getTeachers() {
+    return this.http.get(ApiConstants.baseURl + `/members/monk`,  {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access-token')}`
+      }
+    });
+  }
 
   save(data) {
     // let courses = this.getCourses();
