@@ -18,34 +18,19 @@
     height: 50px;
 }
 
-:host>>>.ui-breadcrumb {
-    border-color: #b8860b !important;
-    background-color: #f1efe9 !important;
-}
-
 .breadcrumb {
     width: 100%;
 }
 
-:host>>>.ui-breadcrumb ul li:first-child a {
-    color: #675c41;
-}
-
 
 :host>>>.temple-button .ui-button {
-    background-color: #b8860b !important;
-    color: #fff;
     margin-left: 5px;
     margin-right: 5px;
-    border: #b8860b !important;
-    border-radius: 5px;
-    font-size: 1em;
 }
 
-:host>>>.temple-button .ui-button:hover {
-    background-color: #cdaa54 !important;
-    border: #b8860b;
-    border-radius: 5px;
+:host>>>  .ui-radiobutton .ui-radiobutton-box.ui-state-active:not(.ui-state-disabled):hover {
+  border-color: #9e7309;
+  background-color: #9e7309;
 }
 
 .center {
@@ -64,76 +49,6 @@
     }
 }
 
-:host>>>button.ui-datepicker-trigger.ui-calendar-button.ng-tns-c5-1.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-icon-only.ng-star-inserted {
-    border: 1px solid#b8860b;
-    background: #b8860b;
-}
-
-:host>>>button.ui-datepicker-trigger.ui-calendar-button.ng-tns-c5-1.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-icon-only.ng-star-inserted :hover :not(:focus) {
-    background-color: #cdaa54;
-}
-
-.font-show {
-    font-size: 1.2em;
-}
-
-:host>>>span.ui-fileupload-choose.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left {
-    background-color: #b8860b;
-    border: #b8860b;
-    border-radius: 3px;
-}
-
-:host>>>span.ui-fileupload-choose.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left:hover {
-    background-color: #cdaa54;
-    border: #b8860b;
-    border-radius: 3px;
-}
-
-:host>>>button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left.ui-state-disabled {
-    background-color: #b8860b;
-    border: #b8860b;
-    border-radius: 3px;
-}
-
-:host>>>button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left.ui-state-disabled:hover {
-    background-color: #cdaa54;
-    border: #b8860b;
-    border-radius: 3px;
-}
-
-:host>>>button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-icon-only {
-    background-color: #b8860b;
-    border: #b8860b;
-    border-radius: 3px;
-}
-
-:host>>>button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-icon-only:hover {
-    background-color: #cdaa54;
-    border: #b8860b;
-    border-radius: 3px;
-}
-
-:host>>>button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left {
-    background-color: #b8860b;
-    border: #b8860b;
-    border-radius: 3px;
-}
-
-:host>>>button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left:hover {
-    background-color: #cdaa54;
-    border: #b8860b;
-    border-radius: 3px;
-}
-
-:host>>>.ui-toast .ui-toast-message {
-    background: #f0e6ce;
-}
-
-:host>>>a.ui-toast-close-icon.pi.pi-times.ng-tns-c8-4.ng-star-inserted {
-    color: #675c41;
-}
-
-
 .text-danger.text-invalid {
     color: red !important;
 }
@@ -147,4 +62,16 @@
 :host>>> .ui-radiobutton .ui-radiobutton-box.ui-state-active {
   border-color: #9e7309;
   background-color: #b8860b;
+}
+
+.img-info{
+  width: 400px;
+}
+
+#profile {
+  display: none;
+}
+
+.btn-upload {
+  margin-top: 15px;
 }

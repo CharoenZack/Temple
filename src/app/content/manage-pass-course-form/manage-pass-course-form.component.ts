@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild, SimpleChanges } from '@angular/core';
-import { BreadcrumbService } from 'src/app/shared/service/breadcrumb.service';
-import { isNgTemplate } from '@angular/compiler';
+import {Component, OnInit, ViewChild, SimpleChanges} from '@angular/core';
+import {BreadcrumbService} from 'src/app/shared/service/breadcrumb.service';
+import {isNgTemplate} from '@angular/compiler';
 
 @Component({
   selector: 'app-manage-pass-course-form',
@@ -14,17 +14,17 @@ export class ManagePassCourseFormComponent implements OnInit {
   public selectedValues: string[] = [];
   public countSelect: number;
   public checked: boolean = true;
-  public menuSelect:string;
+  public menuSelect: string;
   public menusSelect = [
     {
-      menuId:"1",
-      menuName:"อนุมัติ",
+      menuId: '1',
+      menuName: 'อนุมัติ',
     },
     {
-      menuId:"2",
-      menuName:"ไม่อนุมัติ",
+      menuId: '2',
+      menuName: 'ไม่อนุมัติ',
     },
-  ]
+  ];
 
   public member = [
     {
@@ -58,18 +58,19 @@ export class ManagePassCourseFormComponent implements OnInit {
 
   constructor(
     private breadCrumbService: BreadcrumbService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.check = false;
     this.countSelect = 1;
     this.breadCrumbService.setPath([
-      { label: 'Manage Pass Course: จัดการการอนุมัติผู้เรียน' },
-      { label: 'Manage Pass Course: จัดการการอนุมัติผู้เรียน' },
+      {label: 'Manage Pass Course: จัดการการอนุมัติผู้เรียน'},
+      {label: 'Manage Pass Course: จัดการการอนุมัติผู้เรียน'},
     ]);
 
     this.cols = [
-      { field: 'name', header: 'ชื่อ-นามสกุล' },
+      {field: 'name', header: 'ชื่อ-นามสกุล'},
     ];
   }
 
@@ -80,21 +81,21 @@ export class ManagePassCourseFormComponent implements OnInit {
     if (this.check) {
       this.member.map((data) => {
         data.checked = true;
-      })
+      });
     } else {
       this.member.map((data) => {
         data.checked = false;
-      })
+      });
     }
 
   }
 
   oncheck() {
-    var obj = this.member.filter((item) => {
-      return item.checked == true;
+    const obj = this.member.filter((item) => {
+      return item.checked === true;
     });
 
-    if (obj.length != this.member.length) {
+    if (obj.length !== this.member.length) {
       this.check = false;
     } else {
       this.check = true;

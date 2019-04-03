@@ -25,6 +25,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ManageCourseComponent } from './manage-course/manage-course.component';
 import { ManagePassCourseComponent } from './manage-pass-course/manage-pass-course.component';
 import { ManagePassCourseFormComponent } from './manage-pass-course-form/manage-pass-course-form.component';
+import {ManageUserService} from '../shared/service/manage-user.service';
 
 @NgModule({
     declarations: [
@@ -61,7 +62,8 @@ import { ManagePassCourseFormComponent } from './manage-pass-course-form/manage-
     ],
     providers: [
         ConfirmationService,
-        AuthGuard
+        AuthGuard,
+        ManageUserService,
     ]
 })
 export class ContentModule {
