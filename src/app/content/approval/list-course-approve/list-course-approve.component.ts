@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {MenuItem, MessageService, ConfirmationService, LazyLoadEvent} from 'primeng/api';
 import {ApprovalService} from '../approval.service';
 import {BreadcrumbService} from '../../../shared/service/breadcrumb.service';
-import {Router} from '@angular/router';
 import {Course} from '../../../shared/interfaces/course';
 
 @Component({
@@ -11,7 +10,7 @@ import {Course} from '../../../shared/interfaces/course';
   styleUrls: ['./list-course-approve.component.scss']
 })
 export class ListCourseApproveComponent implements OnInit {
-  cols: any[];
+  public cols: any[];
   public courses: Course[];
   public menu: MenuItem[];
   public totalRecords: number;
@@ -23,19 +22,19 @@ export class ListCourseApproveComponent implements OnInit {
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private breadCrumbService: BreadcrumbService,
-    private router: Router,
   ) {
   }
 
   ngOnInit() {
+    this.loading = true;
     this.setColumn();
     this.setBreadCrumb();
-    this.getData();
+    this.getTotalRecord();
   }
 
   public loadData(e: LazyLoadEvent) {
     console.log(e);
-    this.getData(e.rows);
+    this.getData(e.first, e.rows);
   }
 
   private setColumn() {
@@ -56,31 +55,21 @@ export class ListCourseApproveComponent implements OnInit {
     console.log(e);
   }
 
-  private getData(page?: number) {
-    this.approvalService.getCoursesApproval().subscribe(res => {
+  private getData(first = 0, rows = 10) {
+    this.loading = true;
+    this.approvalService.getCoursesApproval(first, rows).subscribe(res => {
       if (res['status'] === 'Success') {
-        // this.courses = res['data'];
+        this.courses = res['data'];
+        this.loading = false;
       }
     });
+  }
 
-    this.courses = [
-      {name: '1', conditionMin: 2, detail: 'qwerty'},
-      {name: '1', conditionMin: 2, detail: 'qwerty'},
-      {name: '1', conditionMin: 2, detail: 'qwerty'},
-      {name: '1', conditionMin: 2, detail: 'qwerty'},
-      {name: '1', conditionMin: 2, detail: 'qwerty'},
-      {name: '1', conditionMin: 2, detail: 'qwerty'},
-      {name: '1', conditionMin: 2, detail: 'qwerty'},
-      {name: '1', conditionMin: 2, detail: 'qwerty'},
-      {name: '1', conditionMin: 2, detail: 'qwerty'},
-      {name: '1', conditionMin: 2, detail: 'qwerty'},
-      {name: '1', conditionMin: 2, detail: 'qwerty'},
-      {name: '1', conditionMin: 2, detail: 'qwerty'},
-      {name: '1', conditionMin: 2, detail: 'qwerty'},
-      {name: '1', conditionMin: 2, detail: 'qwerty'},
-      {name: '1', conditionMin: 2, detail: 'qwerty'},
-      {name: '1', conditionMin: 2, detail: 'qwerty'},
-    ];
-
+  private getTotalRecord() {
+    this.approvalService.getTotalRecord().subscribe(res => {
+      if (res['status'] === 'Success') {
+        this.totalRecords = res['data'][0]['totalRecord'];
+      }
+    });
   }
 }

@@ -12,11 +12,15 @@
               [columns]="cols"
               [value]="courses"
               [paginator]="true"
-              [rows]="10"
+              [rows]="5"
               [responsive]="true"
               selectionMode="single"
               [(selection)]="selectedCourse"
               (onRowSelect)="onRowSelect($event)"
+              [lazy]="true"
+              (onLazyLoad)="loadData($event)"
+              [totalRecords]="totalRecords"
+              [loading]="loading"
             >
               <ng-template pTemplate="header" let-columns>
                 <tr>
@@ -28,6 +32,7 @@
               <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr [pSelectableRow]="rowData">
                   <td *ngFor="let col of columns">
+                    <span class="ui-column-title">{{col.header}}</span>
                     {{rowData[col.field]}}
                   </td>
                 </tr>
