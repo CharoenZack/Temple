@@ -15,8 +15,17 @@ export class ApprovalService {
   }
 
 
-  getCoursesApproval() {
-    return this.http.get(ApiConstants.baseURl + '/courses/approve').pipe(
+  getTotalRecord() {
+    return this.http.get(`${ApiConstants.baseURl}/courses/approve/count`).pipe(
+      map(res => ({
+        status: res['result'],
+        data: res['data']
+      }))
+    );
+  }
+
+  getCoursesApproval(first: number, rows: number) {
+    return this.http.get(`${ApiConstants.baseURl}/courses/approve/${first}/${rows}`).pipe(
       map(res => ({
         status: res['result'],
         data: res['data']

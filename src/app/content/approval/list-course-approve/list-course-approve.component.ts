@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { MenuItem, MessageService, ConfirmationService, LazyLoadEvent } from 'primeng/api';
-import { ApprovalService } from '../approval.service';
-import { BreadcrumbService } from '../../../shared/service/breadcrumb.service';
-import { Router } from '@angular/router';
-import { Course } from '../../../shared/interfaces/course';
+import {Component, OnInit} from '@angular/core';
+import {MenuItem, MessageService, ConfirmationService, LazyLoadEvent} from 'primeng/api';
+import {ApprovalService} from '../approval.service';
+import {BreadcrumbService} from '../../../shared/service/breadcrumb.service';
+import {Course} from '../../../shared/interfaces/course';
 
 @Component({
   selector: 'app-list-course-approve',
@@ -11,24 +10,32 @@ import { Course } from '../../../shared/interfaces/course';
   styleUrls: ['./list-course-approve.component.scss']
 })
 export class ListCourseApproveComponent implements OnInit {
+  public cols: any[];
+  public courses: Course[];
+  public menu: MenuItem[];
+  public totalRecords: number;
+  public loading: boolean;
+  public selectedCourse: Course;
 
-  // cols: any[];
-  // public courses: Course[];
-  // public menu: MenuItem[];
-  // public totalRecords: number;
-  // public loading: boolean;
-  // public selectedCourse: Course;
+  constructor(
+    private approvalService: ApprovalService,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService,
+    private breadCrumbService: BreadcrumbService,
+  ) {
+  }
 
-  // public coursesList :any[];
+  ngOnInit() {
+    this.loading = true;
+    this.setColumn();
+    this.setBreadCrumb();
+    this.getTotalRecord();
+  }
 
-  // constructor(
-  //   private approvalService: ApprovalService,
-  //   private messageService: MessageService,
-  //   private confirmationService: ConfirmationService,
-  //   private breadCrumbService: BreadcrumbService,
-  //   private router: Router,
-  // ) {
-  // }
+  public loadData(e: LazyLoadEvent) {
+    console.log(e);
+    this.getData(e.first, e.rows);
+  }
 
   // ngOnInit() {
   //   this.setColumn();
@@ -124,15 +131,21 @@ export class ListCourseApproveComponent implements OnInit {
 
   }
 
-  loadCarsLazy(event: LazyLoadEvent) {
-    console.log('lazy');
-    
-
+  private getData(first = 0, rows = 10) {
     this.loading = true;
+    this.approvalService.getCoursesApproval(first, rows).subscribe(res => {
+      if (res['status'] === 'Success') {
+        this.courses = res['data'];
+        this.loading = false;
+      }
+    });
+  }
 
-    if (this.dataSources) {
-      this.courses = this.dataSources.slice(event.first, (event.first + event.rows));
-      this.loading = false;
-    }
+  private getTotalRecord() {
+    this.approvalService.getTotalRecord().subscribe(res => {
+      if (res['status'] === 'Success') {
+        this.totalRecords = res['data'][0]['totalRecord'];
+      }
+    });
   }
 }

@@ -9,47 +9,46 @@ export class HttpClientService {
   ) {
   }
 
-
+  private getHeader() {
+    return {
+      Authorization: `Bearer ${localStorage.getItem('access-token')}`
+    };
+  }
 
   get(url) {
+    const header = this.getHeader();
     return this.http.get(url, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('access-token')}`
-      }
+      headers: header
     });
   }
 
   post(url, data) {
+    const header = this.getHeader();
     return this.http.post(url, data, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('access-token')}`
-      }
+      headers: header
     });
   }
 
-  
+
   put(url, data) {
+    const header = this.getHeader();
     return this.http.put(url, data, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('access-token')}`
-      }
+      headers: header
     });
   }
 
   patch(url, data) {
+    const header = this.getHeader();
     return this.http.patch(url, data, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('access-token')}`
-      }
+      headers: header
     });
   }
 
-  
+
   delete(url) {
-    return this.http.delete(url,{
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('access-token')}`
-      }
+    const header = this.getHeader();
+    return this.http.delete(url, {
+      headers: header
     });
   }
 }
