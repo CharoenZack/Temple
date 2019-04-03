@@ -55,6 +55,7 @@ import {
 
 import {PersonalInfoService} from './service/personal-info.service';
 import {BreadcrumbComponent} from './component/breadcrumb/breadcrumb.component';
+import {HttpClientService} from './service/http-client.service';
 
 
 @NgModule({
@@ -118,6 +119,7 @@ import {BreadcrumbComponent} from './component/breadcrumb/breadcrumb.component';
         MessageService,
         PersonalInfoService,
         CookieService,
+        HttpClientService,
     ]
 })
 export class SharedModule {
