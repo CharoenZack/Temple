@@ -15,16 +15,16 @@ export class ManagePassCourseFormComponent implements OnInit {
   public countSelect: number;
   public checked: boolean = true;
   public menuSelect: string;
-  public menusSelect = [
-    {
-      menuId: '1',
-      menuName: 'อนุมัติ',
-    },
-    {
-      menuId: '2',
-      menuName: 'ไม่อนุมัติ',
-    },
-  ];
+  // public menusSelect = [
+  //   {
+  //     menuId: '1',
+  //     menuName: 'อนุมัติ',
+  //   },
+  //   {
+  //     menuId: '2',
+  //     menuName: 'ไม่อนุมัติ',
+  //   },
+  // ];
 
   public member = [
     {

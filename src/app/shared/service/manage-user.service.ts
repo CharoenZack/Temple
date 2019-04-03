@@ -2,12 +2,14 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {ApiConstants} from '../constants/ApiConstants';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class ManageUserService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private authService: AuthService
   ) {
   }
 
@@ -70,7 +72,7 @@ export class ManageUserService {
   updateUser(id, dataUser) {
     const data = {
       ...dataUser,
-      roleId: 3
+      roleId: this.authService.getRole()
     };
     return this.http.put(ApiConstants.baseURl + `/members/${id}`, data, {
       headers: {
