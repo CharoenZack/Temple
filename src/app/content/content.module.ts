@@ -72,9 +72,11 @@ registerLocaleData(localeTh);
     ConfirmationService,
     AuthGuard,
     ManageUserService,
-    HttpClientService
+    HttpClientService,
+    { provide: LOCALE_ID, useValue: "th" },
+
   ]
-        { provide: LOCALE_ID, useValue: "th" }
+        
 })
 export class ContentModule {
 }
