@@ -28,6 +28,7 @@ import {ManagePassCourseFormComponent} from './manage-pass-course-form/manage-pa
 import {ManageUserService} from '../shared/service/manage-user.service';
 import { ListCourseApproveComponent } from './approval/list-course-approve/list-course-approve.component';
 import {HttpClientService} from '../shared/service/http-client.service';
+import { ListAllowComponent } from './list-allow/list-allow.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import {HttpClientService} from '../shared/service/http-client.service';
     ManagePassCourseComponent,
     ManagePassCourseFormComponent,
     ListCourseApproveComponent,
+    ListAllowComponent,
 
   ],
   imports: [
