@@ -7,7 +7,25 @@
     /*display: flex;*/
 }
 
+:host>>>.temple-button .ui-button {
+    background-color: #b8860b !important;
+    color: #fff;
+    margin-left: 5px;
+    margin-right: 5px;
+    border: #b8860b !important;
+    border-radius: 5px;
+    font-size: 1em;
+}
 
+:host>>>.temple-button .ui-button:hover {
+    background-color: #cdaa54 !important;
+    border: #b8860b;
+    border-radius: 5px;
+}
+
+:host>>>.center {
+    margin: auto;
+}
 
 /* dialog header */
 

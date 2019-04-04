@@ -7,6 +7,7 @@ import { LocationService } from '../../location/location.service';
 import { CourseService } from '../shared/course.service';
 // import { Teacher } from 'src/app/shared/interfaces/teacher';
 import { Member } from 'src/app/shared/interfaces/member';
+import { Router } from '@angular/router';
 // import { Teacher } from 'src/app/shared/interfaces/teacher';
 
 @Component({
@@ -30,6 +31,7 @@ export class CourseCreateComponent implements OnInit {
     private formBuilder: FormBuilder,
     private locationService: LocationService,
     private courseService: CourseService,
+    private router: Router,
     // private memberService: MemberService,
   ) { }
 
@@ -86,19 +88,15 @@ export class CourseCreateComponent implements OnInit {
     e.preventDefault();
     const date = this.formEdit.get('date').value;
     const datesort = date.map( res => formatDate(res,"yyyy-MM-dd",'en')).sort();
-    // const stdate = datesort[0];
-    // const enddate = datesort[date.length-1];
-    console.log(this.formEdit.get('teachers').value[0].id);
     console.log(this.formEdit.get('teachers').value);
+    
     const course = {
         name: this.formEdit.get('courseName').value,
         detail: this.formEdit.get('detail').value,
         locationId: this.formEdit.get('location').value.id,
-        // stdate: stdate,
-        // enddate: enddate,
         conditionMin: this.formEdit.get('conditionMin').value.id,
         date:datesort,
-        teacher:this.formEdit.get('teachers').value[0].id
+        teacher:this.formEdit.get('teachers').value
       };
       console.log(course);
       
@@ -111,9 +109,6 @@ export class CourseCreateComponent implements OnInit {
           console.log(err['error']['message']);
         }
       );
-    const courseS = {
-        date: datesort
-    }  
   }
   filterTeacherMultiple(event) {
     let query = event.query;
@@ -131,7 +126,9 @@ export class CourseCreateComponent implements OnInit {
     }
     console.log(filtered);
     return filtered;
-    
-    
-}
+    }
+
+    onCancel() {
+      this.router.navigateByUrl('/manageCourse');
+    }
 }

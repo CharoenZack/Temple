@@ -19,6 +19,7 @@ import {ManageCourseComponent} from './manage-course/manage-course.component';
 import {ManagePassCourseComponent} from './manage-pass-course/manage-pass-course.component';
 import {ManagePassCourseFormComponent} from './manage-pass-course-form/manage-pass-course-form.component';
 import {CourseCreateComponent} from './courses/course-create/course-create.component';
+import {CourseEditComponent} from './courses/course-edit/course-edit.component';
 
 const routes: Routes = [
   {
@@ -97,6 +98,11 @@ const routes: Routes = [
       {
         path: 'createCourse',
         component: CourseCreateComponent
+      }
+      ,
+      {
+        path: 'editCourse/:id',
+        component: CourseEditComponent
       }
     ]
   }];
