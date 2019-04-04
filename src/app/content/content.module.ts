@@ -26,10 +26,8 @@ import {ManagePassCourseFormComponent} from './manage-pass-course-form/manage-pa
 import {ManageUserService} from '../shared/service/manage-user.service';
 import { ListCourseApproveComponent } from './approval/list-course-approve/list-course-approve.component';
 import {HttpClientService} from '../shared/service/http-client.service';
-<<<<<<< HEAD
 import { ListAllowComponent } from './list-allow/list-allow.component';
 import { CourseApproveComponent } from './approval/course-approve/course-approve.component';
-=======
 import { ProfileComponent } from './profile/profile.component';
 import { ManageCourseComponent } from './manage-course/manage-course.component';
 import { LOCALE_ID } from '@angular/core';
@@ -37,7 +35,6 @@ import { registerLocaleData } from '@angular/common';
 import localeTh from '@angular/common/locales/th';
 
 registerLocaleData(localeTh);
->>>>>>> SK
 
 @NgModule({
   declarations: [
