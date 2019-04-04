@@ -114,6 +114,7 @@ import {HttpClientService} from './service/http-client.service';
     CalendarModule,
     CheckboxModule,
     ListboxModule,
+    AutoCompleteModule,
   ],
   providers: [
     TitleNameService,
