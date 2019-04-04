@@ -1,3 +1,6 @@
+
+
+
 <form [formGroup]="formEdit" (submit)="onSubmit($event)">
   <div class="ui-g">
     <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
@@ -181,10 +184,11 @@
         </div>
         <div class="ui-g ui-fluid" *ngIf="showCancelMessage">
             <div class="ui-g-6" *ngIf="onEdit != true">
-                <button type="button" pButton (click)="onCancel()" label="ยืนยัน" class="ui-button-warning" ></button>
+                <button type="button" pButton (click)="onCancel()" label="ยืนยัน" class="ui-button-warning"></button>
             </div>
             <div class="ui-g-6" *ngIf="onEdit == true">
-                <button type="button" pButton (click)="onEditprofile()" label="ยืนยัน" class="ui-button-warning" ></button>
+                <button type="button" pButton (click)="onEditprofile()" label="ยืนยัน"
+                    class="ui-button-warning"></button>
             </div>
             <div class="ui-g-6">
                 <button type="button" pButton (click)="onReject()" label="ยกเลิก" class="ui-button-secondary"></button>
