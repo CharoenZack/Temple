@@ -3,6 +3,9 @@ import {MenuItem, MessageService, ConfirmationService, LazyLoadEvent} from 'prim
 import {ApprovalService} from '../approval.service';
 import {BreadcrumbService} from '../../../shared/service/breadcrumb.service';
 import {Course} from '../../../shared/interfaces/course';
+import {of} from 'rxjs';
+import {switchMap, tap} from 'rxjs/operators';
+import {logger} from 'codelyzer/util/logger';
 
 @Component({
   selector: 'app-list-course-approve',
@@ -34,7 +37,11 @@ export class ListCourseApproveComponent implements OnInit {
 
   public loadData(e: LazyLoadEvent) {
     console.log(e);
-    this.getData(e.first, e.rows);
+    let query = '';
+    if (e.globalFilter) {
+      query = e.globalFilter;
+    }
+    this.getData(e.first, e.rows, query);
   }
 
   private setColumn() {
@@ -55,9 +62,12 @@ export class ListCourseApproveComponent implements OnInit {
     console.log(e);
   }
 
-  private getData(first = 0, rows = 10) {
+  private getData(first = 0, rows = 10, query: string = '') {
     this.loading = true;
-    this.approvalService.getCoursesApproval(first, rows).subscribe(res => {
+    of([first, rows, query]).pipe(
+      switchMap(([firstCon, rowsCon, queryCon]: [number, number, string]) =>
+        this.approvalService.getCoursesApproval(firstCon, rowsCon, queryCon))
+    ).subscribe(res => {
       if (res['status'] === 'Success') {
         this.courses = res['data'];
         this.loading = false;
