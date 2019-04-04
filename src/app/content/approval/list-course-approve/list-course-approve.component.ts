@@ -5,7 +5,6 @@ import {BreadcrumbService} from '../../../shared/service/breadcrumb.service';
 import {Course} from '../../../shared/interfaces/course';
 import {of} from 'rxjs';
 import {switchMap, tap} from 'rxjs/operators';
-import {logger} from 'codelyzer/util/logger';
 
 @Component({
   selector: 'app-list-course-approve',

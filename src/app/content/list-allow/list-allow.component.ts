@@ -10,12 +10,12 @@ export class ListAllowComponent implements OnInit {
 
   @Input('member') member;
   @Input('option') option;
+  @Input('cols') cols;
   @Output() listData = new EventEmitter();
   public status;
   public check: boolean;
   public countSelect: number;
   public checked: boolean = true;
-  public cols: any[];
   public menusSelect = [
     {
       status: '1',
@@ -28,10 +28,7 @@ export class ListAllowComponent implements OnInit {
   ];
 
 
-  constructor(
-
-  ) {
-  }
+  constructor() {}
 
   ngOnInit() {
     this.status = {
@@ -39,10 +36,6 @@ export class ListAllowComponent implements OnInit {
       menuName: 'อนุมัติ',
     }
     this.check = false;
-
-    this.cols = [
-      { field: 'name', header: 'ชื่อ-นามสกุล' },
-    ];
   }
 
 
