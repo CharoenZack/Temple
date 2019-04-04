@@ -38,6 +38,17 @@ export class CourseCreateComponent implements OnInit {
     this.breadCrumbService.setPath([
       { label: 'CreateCourse : สร้างคอร์ส', routerLink: '/createCourse' },
     ]);
+    this.courseService.getTeachers().subscribe( 
+      res => {
+        if(res.status == 'Success'){
+          this.teachers = res.data;
+        }    
+      },
+      error =>{
+        console.log(error['error']['message']);
+        
+      }
+    ) 
     this.locationService.getLocation().subscribe( 
       res => {
         if(res.status == 'Success'){
@@ -67,7 +78,7 @@ export class CourseCreateComponent implements OnInit {
         location: ['', Validators.required],
         date: ['', Validators.required],
         conditionMin: ['', Validators.required],
-        // teacher:['', Validators.required],
+        teachers:['', Validators.required],
       }
     );
   }
@@ -77,8 +88,8 @@ export class CourseCreateComponent implements OnInit {
     const datesort = date.map( res => formatDate(res,"yyyy-MM-dd",'en')).sort();
     // const stdate = datesort[0];
     // const enddate = datesort[date.length-1];
-    console.log(this.teacher);
-    
+    console.log(this.formEdit.get('teachers').value[0].id);
+    console.log(this.formEdit.get('teachers').value);
     const course = {
         name: this.formEdit.get('courseName').value,
         detail: this.formEdit.get('detail').value,
@@ -87,7 +98,7 @@ export class CourseCreateComponent implements OnInit {
         // enddate: enddate,
         conditionMin: this.formEdit.get('conditionMin').value.id,
         date:datesort,
-        teacher:this.teacher
+        teacher:this.formEdit.get('teachers').value[0].id
       };
       console.log(course);
       
@@ -102,30 +113,19 @@ export class CourseCreateComponent implements OnInit {
       );
     const courseS = {
         date: datesort
-    }
-
-
-
-
-      
+    }  
   }
   filterTeacherMultiple(event) {
     let query = event.query;
-    console.log(query);
-    
-    this.courseService.getTeachers().subscribe(teachers => {
-        this.filteredTeacher = this.filterTeacher(query, teachers);
-        
-        
-    });
+    this.filteredTeacher = this.filterTeacher(query, this.teachers);
   } 
   filterTeacher(query, teachers: any):any[] {
     console.log(query,teachers);
     
     let filtered : any[] = [];
-    for(let i = 0; i < teachers.data.length; i++) {
-        let teacher = teachers.data[i].fname+' '+teachers.data[i].lname;
-        if(teacher.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+    for(let i = 0; i < teachers.length; i++) {
+        let teacher = teachers[i]
+        if((teacher.fname+teacher.lname).toLowerCase().indexOf(query.toLowerCase()) == 0) {
             filtered.push(teacher);
         }
     }

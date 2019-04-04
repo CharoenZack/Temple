@@ -39,9 +39,9 @@
               <label><b>ผู้สอน
                 </b></label></div>
             <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 ">
-              <p-autoComplete  [(ngModel)]="teachers" [suggestions]="filteredTeacher"
+              <p-autoComplete  formControlName="teachers" [suggestions]="filteredTeacher" 
                 (completeMethod)="filterTeacherMultiple($event)" styleClass="wid100" [minLength]="1"
-                placeholder="ผู้สอน"  [multiple]="true" [dropdown]="true">
+                placeholder="ผู้สอน" field="fname" [multiple]="true" [dropdown]="true">
               </p-autoComplete>
             </div>
 
