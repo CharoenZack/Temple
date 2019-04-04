@@ -39,7 +39,6 @@ export class ListAllowComponent implements OnInit {
       menuName: 'อนุมัติ',
     }
     this.check = false;
-    this.countSelect = 1;
 
     this.cols = [
       { field: 'name', header: 'ชื่อ-นามสกุล' },
@@ -94,9 +93,7 @@ export class ListAllowComponent implements OnInit {
       status: this.status.status
       }
     
-    console.log(memberSent);
-
-    //this.listData.emit(memberSent)
+      this.listData.emit(memberSent)
   }
 
 }

@@ -37,98 +37,22 @@ export class ListCourseApproveComponent implements OnInit {
     this.getData(e.first, e.rows);
   }
 
-  // ngOnInit() {
-  //   this.setColumn();
-  //   this.setBreadCrumb();
-  //   this.getData();
-  // }
-
-  // public loadData(e: LazyLoadEvent) {
-  //   console.log(e);
-  //   this.getData(e.rows);
-  // }
-
-  // private setColumn() {
-  //   this.cols = [
-  //     { field: 'name', header: 'ชื่อคอร์ส' },
-  //     { field: 'conditionMin', header: 'หมายเหตุ' },
-  //     { field: 'detail', header: 'รายละเอียด' },
-  //   ];
-  // }
-
-  // private setBreadCrumb() {
-  //   this.breadCrumbService.setPath([
-  //     { label: 'Approval: การอนุมัติ', routerLink: '/approval' },
-  //   ]);
-  // }
-
-  // onRowSelect(e) {
-  //   console.log(e);
-  // }
-
-  // private getData(page?: number) {
-  //   this.approvalService.getCoursesApproval().subscribe(res => {
-  //     if (res['status'] === 'Success') {
-  //       // this.courses = res['data'];
-  //     }
-  //   });
-
-  //   this.courses = [
-  //     { name: '1', conditionMin: 2, detail: 'qwerty' },
-  //     { name: '2', conditionMin: 2, detail: 'qwerty' },
-  //     { name: '3', conditionMin: 2, detail: 'qwerty' },
-  //     { name: '4', conditionMin: 2, detail: 'qwerty' },
-  //     { name: '5', conditionMin: 2, detail: 'qwerty' },
-  //     { name: '6', conditionMin: 2, detail: 'qwerty' },
-  //     { name: '7', conditionMin: 2, detail: 'qwerty' },
-  //     { name: '8', conditionMin: 2, detail: 'qwerty' },
-  //     { name: '9', conditionMin: 2, detail: 'qwerty' },
-  //     { name: '10', conditionMin: 2, detail: 'qwerty' },
-  //     { name: '11', conditionMin: 2, detail: 'qwerty' },
-  //     { name: '12', conditionMin: 2, detail: 'qwerty' },
-  //     { name: '13', conditionMin: 2, detail: 'qwerty' },
-  //     { name: '14', conditionMin: 2, detail: 'qwerty' },
-  //     { name: '15', conditionMin: 2, detail: 'qwerty' },
-  //     { name: '16', conditionMin: 2, detail: 'qwerty' },
-  //   ];
-
-  // }
-
-  public dataSources = [
-        { name: '1', conditionMin: 2, detail: 'qwerty' },
-        { name: '2', conditionMin: 2, detail: 'qwerty' },
-        { name: '3', conditionMin: 2, detail: 'qwerty' },
-        { name: '4', conditionMin: 2, detail: 'qwerty' },
-        { name: '5', conditionMin: 2, detail: 'qwerty' },
-        { name: '6', conditionMin: 2, detail: 'qwerty' },
-        { name: '7', conditionMin: 2, detail: 'qwerty' },
-        { name: '8', conditionMin: 2, detail: 'qwerty' },
-        { name: '9', conditionMin: 2, detail: 'qwerty' },
-        { name: '10', conditionMin: 2, detail: 'qwerty' },
-        { name: '11', conditionMin: 2, detail: 'qwerty' },
-        { name: '12', conditionMin: 2, detail: 'qwerty' },
-        { name: '13', conditionMin: 2, detail: 'qwerty' },
-        { name: '14', conditionMin: 2, detail: 'qwerty' },
-        { name: '15', conditionMin: 2, detail: 'qwerty' },
-        { name: '16', conditionMin: 2, detail: 'qwerty' },
-      ];
-
-  public courses: any[];
-  public cols: any[];
-  public totalRecords:number;
-  public loading:boolean;
-
-  ngOnInit(){
-    this.totalRecords = this.dataSources.length
-
+  private setColumn() {
     this.cols = [
-      { field: 'name', header: 'ชื่อคอร์ส' },
-      { field: 'conditionMin', header: 'หมายเหตุ' },
-      { field: 'detail', header: 'รายละเอียด' },
+      {field: 'name', header: 'ชื่อคอร์ส'},
+      {field: 'conditionMin', header: 'หมายเหตุ'},
+      {field: 'detail', header: 'รายละเอียด'},
     ];
+  }
 
-    this.loading = true
+  private setBreadCrumb() {
+    this.breadCrumbService.setPath([
+      {label: 'Approval: การอนุมัติ', routerLink: '/approval'},
+    ]);
+  }
 
+  onRowSelect(e) {
+    console.log(e);
   }
 
   private getData(first = 0, rows = 10) {
