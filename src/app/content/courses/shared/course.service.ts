@@ -42,12 +42,8 @@ export class CourseService {
   }
 
 
-  createCourse() {
-    // return this.http.post(ApiConstants.baseURl + `/courses`, {
-    //   headers: {
-    //     Authorization: `Bearer ${localStorage.getItem('access-token')}`
-    //   }
-    // });
+  createCourse(data) {
+    return this.http.post(ApiConstants.baseURl + `/courses`, data );
   }
 
   editCourse(id) {
@@ -67,7 +63,14 @@ export class CourseService {
   }
   
   getTeachers() {
-    return this.http.get(ApiConstants.baseURl + `/members/monk`);
+    return this.http.get(ApiConstants.baseURl + `/members/monk`).pipe(
+      map(res => {
+        return {
+          status: res['result'],
+          data: res['data']
+        };
+      })
+    );
   }
 
   save(data) {
