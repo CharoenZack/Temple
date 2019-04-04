@@ -31,7 +31,7 @@ import {CookieService} from 'ngx-cookie-service';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
 import {CheckboxModule} from 'primeng/checkbox';
 import {ListboxModule} from 'primeng/listbox';
-
+import {AutoCompleteModule} from 'primeng/autocomplete';
 
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {library} from '@fortawesome/fontawesome-svg-core';
@@ -114,6 +114,7 @@ import {HttpClientService} from './service/http-client.service';
     CalendarModule,
     CheckboxModule,
     ListboxModule,
+    AutoCompleteModule,
   ],
   providers: [
     TitleNameService,
