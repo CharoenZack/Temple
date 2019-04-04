@@ -33,8 +33,8 @@ export class ApprovalService {
     );
   }
 
-  getCoursesApproval(first: number, rows: number) {
-    return this.http.get(`${ApiConstants.baseURl}/courses/approve/${first}/${rows}`).pipe(
+  getCoursesApproval(first: number, rows: number, query: string) {
+    return this.http.get(`${ApiConstants.baseURl}/courses/approve?query=${query}&offset=${first}&limit=${rows}`).pipe(
       map(res => ({
         status: res['result'],
         data: res['data']
