@@ -135,8 +135,8 @@ export class CourseComponent implements OnInit, OnDestroy {
       createDate: null,
       lastUpdate: null,
       courseName: null,
-    }
-    ;
+    };
+    //this.specialApprove={};
   }
 
   private getData() {
@@ -164,5 +164,6 @@ export class CourseComponent implements OnInit, OnDestroy {
       mhcStatus: '',
       canRegister: null
     };
+    //this.course={};
   }
 }

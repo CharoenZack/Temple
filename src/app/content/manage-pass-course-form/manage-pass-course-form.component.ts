@@ -15,6 +15,7 @@ export class ManagePassCourseFormComponent implements OnInit {
   @Input() option: String;
   @Input() member: ApproveForMember[];
   @Input() cols: any[];
+  @Input() fieldId: string
   @Output() listData;
   public courseId:string;
 
@@ -30,6 +31,7 @@ export class ManagePassCourseFormComponent implements OnInit {
 
   ngOnInit() {
     this.option = "1";
+    this.fieldId = "uId"
     this.breadCrumbService.setPath([
       { label: 'Manage Pass Course: จัดการการอนุมัติผู้เรียน' },
       { label: 'Manage Pass Course: จัดการการอนุมัติผู้เรียน' },

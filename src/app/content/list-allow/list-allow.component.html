@@ -5,7 +5,7 @@
 <div class="ui-g-1 ui-lg-1 ui-md-2 ui-sm-3">
     <p-button label="ยืนยัน" (onClick)=sentData()></p-button>
 </div>
-
+<p-messages [value]="msgs"></p-messages>
 <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
 
     <p-table [columns]="cols" [value]="member" [paginator]="true" [rows]="10">

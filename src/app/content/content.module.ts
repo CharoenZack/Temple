@@ -33,6 +33,7 @@ import { ManageCourseComponent } from './manage-course/manage-course.component';
 import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeTh from '@angular/common/locales/th';
+import { ApprovalFormComponent } from './approval/approval-form/approval-form.component';
 
 registerLocaleData(localeTh);
 
@@ -62,6 +63,7 @@ registerLocaleData(localeTh);
     ListCourseApproveComponent,
     ListAllowComponent,
     CourseApproveComponent,
+    ApprovalFormComponent,
 
   ],
   imports: [

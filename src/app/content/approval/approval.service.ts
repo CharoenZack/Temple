@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {map} from 'rxjs/operators';
-import {ApiConstants} from '../../shared/constants/ApiConstants';
-import {HttpClientService} from '../../shared/service/http-client.service';
+import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
+import { ApiConstants } from '../../shared/constants/ApiConstants';
+import { HttpClientService } from '../../shared/service/http-client.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +14,21 @@ export class ApprovalService {
   ) {
   }
 
-  getMemberForApprove(coursesId){
+  getMemberForApprove(coursesId) {
     return this.http.get(`${ApiConstants.baseURl}/approve/${coursesId}`).pipe(
-      map(res => ({
-        status: res['result'],
-        data: res['data']
-      }))
+      map((res) => {
+        const data = res['data'].map((member) => {
+          var checked = member.status === '1' ? true : false;
+          return {
+            ...member,
+            checked: checked
+          }
+        })
+        return {
+          status: res['result'],
+          data: data,
+        }
+      })
     );
   }
 
@@ -39,6 +48,23 @@ export class ApprovalService {
         status: res['result'],
         data: res['data']
       }))
+    );
+  }
+
+
+  approveStudents(data){
+    const req = {
+      saId:data.member,
+      courseId:data.courseId,
+      status:data.status
+    }
+    return this.http.put(`${ApiConstants.baseURl}/approve`,req).pipe(
+      map((res) => {
+        return {
+          status: res['result'],
+          data: res['data'],
+        }
+      })
     );
   }
 

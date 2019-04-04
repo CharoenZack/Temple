@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BreadcrumbService } from 'src/app/shared/service/breadcrumb.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list-allow',
@@ -11,11 +12,13 @@ export class ListAllowComponent implements OnInit {
   @Input('member') member;
   @Input('option') option;
   @Input('cols') cols;
+  @Input('fieldId') fieldId;
+  @Input('msgs') msgs;
   @Output() listData = new EventEmitter();
   public status;
   public check: boolean;
-  public countSelect: number;
   public checked: boolean = true;
+  public courseId: string;
   public menusSelect = [
     {
       status: '1',
@@ -28,14 +31,18 @@ export class ListAllowComponent implements OnInit {
   ];
 
 
-  constructor() {}
+  constructor(
+    private route: ActivatedRoute,
+  ) { }
 
   ngOnInit() {
+    this.courseId = this.route.snapshot.paramMap.get("id")
     this.status = {
       status: '1',
       menuName: 'อนุมัติ',
     }
     this.check = false;
+
   }
 
 
@@ -75,18 +82,20 @@ export class ListAllowComponent implements OnInit {
   }
 
   sentData() {
+    this.check = false;
+    if (this.member.length != 0) {
+      var memberSent = this.member.filter((member) => member.checked === true).map(member => member[this.fieldId])
+      memberSent =
+        {
+          member: [
+            ...memberSent
+          ],
+          courseId: this.courseId,
+          status: this.status.status
+        }
 
-    var memberSent = this.member.filter((member) => member.checked === true).map(member => member.name)
-    memberSent = 
-      {
-        member: [
-          ...memberSent
-        ],
-      courseId: "11111",
-      status: this.status.status
-      }
-    
       this.listData.emit(memberSent)
+    }
   }
 
 }
