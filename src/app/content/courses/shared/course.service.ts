@@ -14,6 +14,15 @@ export class CourseService {
   ) {
   }
 
+  getTotalRecord() {
+    return this.http.get(`${ApiConstants.baseURl}/courses/count`).pipe(
+      map(res => ({
+        status: res['result'],
+        data: res['data']
+      }))
+    );
+  }
+
   getCourseByid(id) {
     return this.http.get(ApiConstants.baseURl + `/courses/${id}`).pipe(
       map(res => ({
@@ -23,8 +32,8 @@ export class CourseService {
       ));
   }
 
-  getCourses() {
-    return this.http.get(ApiConstants.baseURl + '/courses').pipe(
+  getCourses(first: number, rows: number, query: string) {
+    return this.http.get(`${ApiConstants.baseURl}/courses?query=${query}&offset=${first}&limit=${rows}`).pipe(
       map(res => {
         return {
           status: res['result'],
