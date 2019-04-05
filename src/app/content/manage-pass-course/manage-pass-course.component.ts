@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { BreadcrumbService } from 'src/app/shared/service/breadcrumb.service';
-import { CourseService } from '../courses/shared/course.service';
+import {Component, OnInit} from '@angular/core';
+import {BreadcrumbService} from 'src/app/shared/service/breadcrumb.service';
 
 @Component({
   selector: 'app-manage-pass-course',
@@ -11,16 +10,15 @@ export class ManagePassCourseComponent implements OnInit {
 
 
   constructor(
-    private breadCrumbService : BreadcrumbService,
-    private coureseService : CourseService,
-  ) { }
+    private breadCrumbService: BreadcrumbService,
+  ) {
+  }
 
   ngOnInit() {
     this.breadCrumbService.setPath([
       {label: 'Manage Pass Course: จัดการการอนุมัติผู้เรียน'},
     ]);
   }
-
 
 
 }
