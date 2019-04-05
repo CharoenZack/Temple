@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
 import {CourseService} from '../shared/course.service';
-import {ConfirmationService, MenuItem} from 'primeng/api';
+import {ConfirmationService, LazyLoadEvent, MenuItem} from 'primeng/api';
 import {Course} from '../../../shared/interfaces/course';
 import {BreadcrumbService} from '../../../shared/service/breadcrumb.service';
 import {SpecialApprove} from '../../../shared/interfaces/special-approve';
@@ -21,6 +21,8 @@ export class CoursesListComponent implements OnInit {
   public displayDialog = false;
   public specialApprove: SpecialApprove;
   public selectedCourse: Course;
+  public totalRecords: number;
+  public loading: boolean;
 
   constructor(
     private courseService: CourseService,
@@ -43,6 +45,15 @@ export class CoursesListComponent implements OnInit {
     this.breadCrumbService.setPath([
       {label: 'Courses : ข้อมูลคอร์สทั้งหมด', routerLink: '/courses'},
     ]);
+  }
+
+  public loadData(e: LazyLoadEvent) {
+    console.log(e);
+    let query = '';
+    if (e.globalFilter) {
+      query = e.globalFilter;
+    }
+    // this.getData(e.first, e.rows, query);
   }
 
   public assignCourse(id) {
@@ -180,7 +191,6 @@ export class CoursesListComponent implements OnInit {
 
   public onRowSelect(e) {
     const course: Course = e.data;
-    this.courseService.setCourse(course);
     this.router.navigate(['/courses', course.id]);
   }
 }

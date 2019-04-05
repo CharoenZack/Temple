@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { BreadcrumbService } from 'src/app/shared/service/breadcrumb.service';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {BreadcrumbService} from 'src/app/shared/service/breadcrumb.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-list-allow',
@@ -17,7 +17,7 @@ export class ListAllowComponent implements OnInit {
   @Output() listData = new EventEmitter();
   public status;
   public check: boolean;
-  public checked: boolean = true;
+  public checked = true;
   public courseId: string;
   public menusSelect = [
     {
@@ -33,14 +33,15 @@ export class ListAllowComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
-    this.courseId = this.route.snapshot.paramMap.get("id")
+    this.courseId = this.route.snapshot.paramMap.get('id');
     this.status = {
       status: '1',
       menuName: 'อนุมัติ',
-    }
+    };
     this.check = false;
 
   }
@@ -61,7 +62,7 @@ export class ListAllowComponent implements OnInit {
 
   }
 
-  oncheck() {
+  onCheck() {
     const obj = this.member.filter((item) => {
       return item.checked === true;
     });
@@ -73,47 +74,46 @@ export class ListAllowComponent implements OnInit {
     }
   }
 
-  dropdrow() {
-    if (this.option === "1") {
-      return false
-    } else if (this.option === "2") {
-      return true
+  dropdown() {
+    if (this.option === '1') {
+      return false;
+    } else if (this.option === '2') {
+      return true;
     }
   }
 
   sentData() {
     this.check = false;
-    var memberSent;
-    if (this.option === "1") {
-      memberSent = this.member.map(member =>{
-        return { 
-          mhcId: member[this.fieldId], 
-          status: member['checked']?'1':'2' 
-        }
-      })
+    let memberSent;
+    if (this.option === '1') {
+      memberSent = this.member.map(member => {
+        return {
+          mhcId: member[this.fieldId],
+          status: member['checked'] ? '1' : '2'
+        };
+      });
       memberSent = {
-        member:[...memberSent],
-        courseId:this.courseId
-      }
-      
-    } else if (this.option === "2") {
-      memberSent = this.member.filter((member) => member.checked === true).map(member => member[this.fieldId])
-      memberSent =
-        {
+        member: [...memberSent],
+        courseId: this.courseId
+      };
+
+    } else if (this.option === '2') {
+      memberSent = this.member.filter((member) => member.checked === true).map(member => member[this.fieldId]);
+      memberSent = {
           member: [
             ...memberSent
           ],
           courseId: this.courseId,
           status: this.status.status
-        }
+        };
     }
-    if (this.member.length != 0) {
-      this.listData.emit(memberSent)
+    if (this.member.length !== 0) {
+      this.listData.emit(memberSent);
     }
   }
 
-  showCheckbox(){
-    return this.member[0]['displayName']==="ไม่มีข้อมูล"?false:true;
+  showCheckbox() {
+    return !(this.member[0]['displayName'] === 'ไม่มีข้อมูล');
   }
 
 }
