@@ -6,6 +6,8 @@ import {Course} from '../../../shared/interfaces/course';
 import {BreadcrumbService} from '../../../shared/service/breadcrumb.service';
 import {SpecialApprove} from '../../../shared/interfaces/special-approve';
 import {Router} from '@angular/router';
+import {of} from 'rxjs';
+import {switchMap} from 'rxjs/operators';
 
 
 @Component({
@@ -35,6 +37,8 @@ export class CoursesListComponent implements OnInit {
   ngOnInit() {
     this.getData();
     this.initSpecialApprove();
+    this.getTotalRecord();
+
     this.cols = [
       {field: 'stDate', header: 'วันที่'},
       {field: 'name', header: 'ชื่อคอร์ส'},
@@ -42,6 +46,8 @@ export class CoursesListComponent implements OnInit {
       {field: 'conditionMin', header: 'หมายเหตุ'},
       {field: 'status', header: 'สถานะ'},
     ];
+
+
     this.breadCrumbService.setPath([
       {label: 'Courses : ข้อมูลคอร์สทั้งหมด', routerLink: '/courses'},
     ]);
@@ -53,7 +59,7 @@ export class CoursesListComponent implements OnInit {
     if (e.globalFilter) {
       query = e.globalFilter;
     }
-    // this.getData(e.first, e.rows, query);
+    this.getData(e.first, e.rows, query);
   }
 
   public assignCourse(id) {
@@ -124,16 +130,26 @@ export class CoursesListComponent implements OnInit {
   }
 
 
-  private getData() {
-    this.courseService.getCourses().subscribe(res => {
+  private getData(first = 0, rows = 10, query: string = '') {
+    this.loading = true;
+    of([first, rows, query]).pipe(
+      switchMap(([firstCon, rowsCon, queryCon]: [number, number, string]) =>
+        this.courseService.getCourses(firstCon, rowsCon, queryCon))
+    ).subscribe(res => {
       if (res['status'] === 'Success') {
         this.courses = res['data'];
-        console.log(this.courses);
+        this.loading = false;
       }
     });
   }
 
-
+  private getTotalRecord() {
+    this.courseService.getTotalRecord().subscribe(res => {
+      if (res['status'] === 'Success') {
+        this.totalRecords = res['data'][0]['totalRecord'];
+      }
+    });
+  }
   public cancelApprovalCourse(id) {
     this.confirmationService.confirm({
       message: 'ยืนยันการยกเลิกการขออนุมัติพิเศษ',
