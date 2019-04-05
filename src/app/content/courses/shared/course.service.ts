@@ -4,26 +4,25 @@ import {map} from 'rxjs/operators';
 import {ApiConstants} from 'src/app/shared/constants/ApiConstants';
 import {SpecialApprove} from '../../../shared/interfaces/special-approve';
 import {Course} from '../../../shared/interfaces/course';
-import { HttpClientService } from 'src/app/shared/service/http-client.service';
+import {HttpClientService} from 'src/app/shared/service/http-client.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CourseService {
 
-  private course: Course;
-
   constructor(
     private http: HttpClientService
   ) {
   }
 
-  setCourse(course: Course) {
-    this.course = course;
-  }
-
-  getCourse(): Course {
-    return this.course;
+  getCourseฺByid(id) {
+    return this.http.get(ApiConstants.baseURl + `/courses/${id}`).pipe(
+      map(res => ({
+          status: res['result'],
+          data: res['data'][0]
+        })
+      ));
   }
 
   getCourses() {
@@ -43,7 +42,7 @@ export class CourseService {
 
 
   createCourse(data) {
-    return this.http.post(ApiConstants.baseURl + `/courses`, data );
+    return this.http.post(ApiConstants.baseURl + `/courses`, data);
   }
 
   editCourse(id) {
@@ -61,7 +60,7 @@ export class CourseService {
   cancelApprovalCourse(id) {
     return this.http.delete(ApiConstants.baseURl + `/approve/${id}`);
   }
-  
+
   getTeachers() {
     return this.http.get(ApiConstants.baseURl + `/members/monk`).pipe(
       map(res => {
