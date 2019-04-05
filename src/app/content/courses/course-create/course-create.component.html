@@ -33,13 +33,13 @@
                 </b></label></div>
             <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 ">
               <p-calendar class="calendar-button" dateFormat="dd/mm/yy" [monthNavigator]="true" formControlName="date"
-                selectionMode="multiple" [readonlyInput]="true"></p-calendar>
+                selectionMode="multiple" [readonlyInput]="true" [yearNavigator]="true" [yearRange]="yearRange"></p-calendar>
             </div>
             <div class="ui-g-12 ui-lg-2 ui-md-2 ui-sm-12">
               <label><b>ผู้สอน
                 </b></label></div>
             <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 ">
-              <p-autoComplete  formControlName="teachers" [suggestions]="filteredTeacher" 
+              <p-autoComplete  formControlName="teachers" [suggestions]="filteredTeacher" value="id"
                 (completeMethod)="filterTeacherMultiple($event)" styleClass="wid100" [minLength]="1"
                 placeholder="ผู้สอน" field="fname" [multiple]="true" [dropdown]="true">
               </p-autoComplete>

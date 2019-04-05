@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BreadcrumbService } from '../../../shared/service/breadcrumb.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Course } from 'src/app/shared/interfaces/course';
-import { formatDate } from '@angular/common';
+import { formatDate, DatePipe } from '@angular/common';
 import { LocationService } from '../../location/location.service';
 import { CourseService } from '../shared/course.service';
 // import { Teacher } from 'src/app/shared/interfaces/teacher';
@@ -25,6 +25,8 @@ export class CourseCreateComponent implements OnInit {
   public filteredTeacher: any[];
   public teachers:any[];
   public teacher:any;
+  public pipe = new DatePipe('th-TH')
+  public yearRange: string;
 
   constructor(
     private breadCrumbService: BreadcrumbService,
@@ -37,7 +39,9 @@ export class CourseCreateComponent implements OnInit {
 
   ngOnInit() {
     this.initNotice();
+    
     this.breadCrumbService.setPath([
+      { label: 'ManageCourse : ตารางคอร์ส', routerLink: '/manageCourse' },
       { label: 'CreateCourse : สร้างคอร์ส', routerLink: '/createCourse' },
     ]);
     this.courseService.getTeachers().subscribe( 
@@ -62,6 +66,9 @@ export class CourseCreateComponent implements OnInit {
         
       }
     ) 
+    const currentYear = this.pipe.transform(Date.now(),'yyyy');
+    const startYear = parseInt(currentYear) - 100;
+    this.yearRange = startYear + ':' + currentYear;
     this.createForm();   
   }
   
@@ -96,7 +103,7 @@ export class CourseCreateComponent implements OnInit {
         locationId: this.formEdit.get('location').value.id,
         conditionMin: this.formEdit.get('conditionMin').value.id,
         date:datesort,
-        teacher:this.formEdit.get('teachers').value
+        teacher:this.formEdit.get('teachers').value.map(res => res.id)
       };
       console.log(course);
       
@@ -115,8 +122,6 @@ export class CourseCreateComponent implements OnInit {
     this.filteredTeacher = this.filterTeacher(query, this.teachers);
   } 
   filterTeacher(query, teachers: any):any[] {
-    console.log(query,teachers);
-    
     let filtered : any[] = [];
     for(let i = 0; i < teachers.length; i++) {
         let teacher = teachers[i]
@@ -124,7 +129,6 @@ export class CourseCreateComponent implements OnInit {
             filtered.push(teacher);
         }
     }
-    console.log(filtered);
     return filtered;
     }
 
