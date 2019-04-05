@@ -113,30 +113,25 @@
         </p-table>
       </div>
     </div>
-  </div>
 </div>
 
-<p-dialog header="ข้อความจากระบบ" [(visible)]="displayDialog" [responsive]="true" showEffect="fade"
-          [modal]="true">
-  <div class="ui-g">
-    <div class="ui-g-12">
-      <div class="ui-g">
-        <div class="ui-g-4">
-          <label for="name">รายละเอียด</label>
+<p-dialog header="ข้อความจากระบบ" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+    <div class="ui-g">
+        <div class="ui-g-12">
+            <div class="ui-g">
+                <div class="ui-g-4">
+                    <label for="name">รายละเอียด</label>
+                </div>
+                <div class="ui-g-8">
+                    <input pInputText id="name" [(ngModel)]="specialApprove.detail" />
+                </div>
+            </div>
         </div>
-        <div class="ui-g-8">
-          <input pInputText id="name" [(ngModel)]="specialApprove.detail"/>
+    </div>
+    <p-footer>
+        <div>
+            <button type="button" pButton (click)="approvalCourse()" label="ยืนยัน"></button>
+            <button type="button" pButton (click)="displayDialog=false" label="ยกเลิก"></button>
         </div>
-      </div>
-    </div>
-  </div>
-  <p-footer>
-    <div>
-      <button type="button" pButton (click)="approvalCourse()" label="ยืนยัน"></button>
-      <button type="button" pButton (click)="displayDialog=false" label="ยกเลิก"></button>
-    </div>
-  </p-footer>
+    </p-footer>
 </p-dialog>
-
-
-

@@ -60,6 +60,17 @@ export class CourseService {
   cancelApprovalCourse(id) {
     return this.http.delete(ApiConstants.baseURl + `/approve/${id}`);
   }
+  
+  getTeachers() {
+    return this.http.get(ApiConstants.baseURl + `/members/monk`).pipe(
+      map(res => {
+        return {
+          status: res['result'],
+          data: res['data']
+        };
+      })
+    );
+  }
 
   getTeachers() {
     return this.http.get(ApiConstants.baseURl + `/members/monk`).pipe(

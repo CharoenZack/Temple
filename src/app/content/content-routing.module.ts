@@ -19,6 +19,7 @@ import {ManageCourseComponent} from './manage-course/manage-course.component';
 import {ManagePassCourseComponent} from './manage-pass-course/manage-pass-course.component';
 import {ManagePassCourseFormComponent} from './manage-pass-course-form/manage-pass-course-form.component';
 import {CourseCreateComponent} from './courses/course-create/course-create.component';
+import { ApprovalFormComponent } from './approval/approval-form/approval-form.component';
 
 const routes: Routes = [
   {
@@ -81,6 +82,10 @@ const routes: Routes = [
       {
         path: 'approval',
         component: ApprovalComponent,
+      },
+      {
+        path: 'approval/:id',
+        component: ApprovalFormComponent,
       },
       {
         path: 'manageCourse',

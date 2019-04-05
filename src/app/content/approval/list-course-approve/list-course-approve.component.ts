@@ -5,7 +5,8 @@ import {BreadcrumbService} from '../../../shared/service/breadcrumb.service';
 import {Course} from '../../../shared/interfaces/course';
 import {of} from 'rxjs';
 import {switchMap, tap} from 'rxjs/operators';
-import {logger} from 'codelyzer/util/logger';
+import {Router, ActivatedRoute } from '@angular/router';
+import { ApiConstants } from 'src/app/shared/constants/ApiConstants';
 
 @Component({
   selector: 'app-list-course-approve',
@@ -19,12 +20,14 @@ export class ListCourseApproveComponent implements OnInit {
   public totalRecords: number;
   public loading: boolean;
   public selectedCourse: Course;
+  public courseId:string;
 
   constructor(
     private approvalService: ApprovalService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private breadCrumbService: BreadcrumbService,
+    private router:Router,
   ) {
   }
 
@@ -59,7 +62,7 @@ export class ListCourseApproveComponent implements OnInit {
   }
 
   onRowSelect(e) {
-    console.log(e);
+    this.router.navigateByUrl(`/approval/${e.data.id}`);
   }
 
   private getData(first = 0, rows = 10, query: string = '') {

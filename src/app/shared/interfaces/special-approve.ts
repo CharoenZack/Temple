@@ -1,6 +1,6 @@
 export interface SpecialApprove {
   specialApproveId?: number;
-  courseId: number;
+  courseId?: number;
   memberId?: number;
   detail?: string;
   status?: string;
