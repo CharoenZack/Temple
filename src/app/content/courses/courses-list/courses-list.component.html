@@ -1,77 +1,117 @@
 <div class="ui-g">
-    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
-        <div style="text-align:center">
-            <h1>ตารางคอร์ส</h1>
-        </div>
-        <div class="line"></div>
-        <div class="container">
-            <div class="ui-g">
-                <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
-                    <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
-                    <p-messages [value]="msgs"></p-messages>
-                    <p-table [columns]="cols" [value]="courses" [paginator]="true" [rows]="5" [responsive]="true" selectionMode="single" [(selection)]="selectedCourse">
-                        <ng-template pTemplate="header" let-columns>
-                            <tr>
-                                <th pSortableColumn="date">
-                                    วันที่
-                                    <p-sortIcon field="date" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
-                                    </p-sortIcon>
-                                </th>
-                                <th pSortableColumn="name" class="ui-p-4">
-                                    ชื่อคอร์ส
-                                    <p-sortIcon field="name" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
-                                    </p-sortIcon>
-                                </th>
-                                <th pSortableColumn="location" class="ui-p-5">
-                                    สถานที่
-                                    <p-sortIcon field="location" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
-                                    </p-sortIcon>
-                                </th>
-                                <th pSortableColumn="conditionMin" class="ui-p-6">
-                                    หมายเหตุ
-                                    <p-sortIcon field="conditionMin" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
-                                    </p-sortIcon>
-                                </th>
-                                <th class="ui-p-6">
-                                    สถานะ
-                                </th>
-                                <th>
-
-                                </th>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-rowData let-columns="columns">
-                            <tr [pSelectableRow]="rowData">
-                                <td *ngFor="let col of columns;">
-                                    <div>
-                                        <span class="ui-column-title">{{col.header}}</span>
-                                        <div *ngIf="rowData[col.field] == rowData['stDate']">{{rowData['stDate']}} - {{rowData['endDate']}}</div>
-                                        <div *ngIf="rowData[col.field] == rowData['conditionMin']">ต้องผ่านการเรียนคอร์สมาอย่างน้อย</div>
-                                        <div *ngIf="rowData[col.field] != rowData['stDate']">{{rowData[col.field]}}</div>
-                                        <div *ngIf="rowData[col.field] == rowData['conditionMin']">คอร์ส</div>
-                                    </div>
-
-                                </td>
-                                <td>
-                                    <div class="ui-g" style="text-align: center" *ngIf="rowData['saStatus'] !== '2' && rowData['canRegister'] === 1">
-                                        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
-                                            <button pButton type="button" label="สมัคร" (click)="assignCourse(rowData['id'])" [disabled]="rowData['canRegister'] === 0"></button>
-                                        </div>
-                                        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
-                                            <button pButton type="button" label="ขออนุมัติพิเศษ" class="ui-button-warning" [disabled]="rowData['canRegister'] === 0" (click)="saCourse(rowData['id'])"></button>
-                                        </div>
-
-                                    </div>
-                                    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12" *ngIf="rowData['saStatus'] === '2' && rowData['canRegister'] === 0">
-                                        <button pButton type="button" label="ยกเลิกการขออนุมัติพิเศษ" class="ui-button-warning" [disabled]="rowData['canRegister'] !== 0" (click)="cancelApprovalCourse(rowData['id'])"></button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
+  <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+    <div style="text-align:center">
+      <h1>ตารางคอร์ส</h1>
+    </div>
+    <div class="line"></div>
+    <div class="ui-g">
+      <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+        <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+        <p-messages [value]="msgs"></p-messages>
+        <p-table
+          #dt
+          [columns]="cols"
+          [value]="courses"
+          [paginator]="true"
+          [rows]="10"
+          [responsive]="true"
+          selectionMode="single"
+          [(selection)]="selectedCourse"
+          (onRowSelect)="onRowSelect($event)"
+          [lazy]="true"
+          (onLazyLoad)="loadData($event)"
+          [totalRecords]="totalRecords"
+          [loading]="loading"
+        >
+          <ng-template pTemplate="caption">
+            <div style="text-align: right">
+              <div class="ui-g">
+                <div class="ui-g-4">
+                  <div class="ui-inputgroup">
+                    <fa-icon [icon]="['fas', 'search']" class="ui-inputgroup-addon"></fa-icon>
+                    <input type="text" pInputText placeholder="Global Filter"
+                           (input)="dt.filterGlobal($event.target.value, 'contains')">
+                  </div>
                 </div>
+              </div>
             </div>
-        </div>
+          </ng-template>
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th pSortableColumn="date">
+                วันที่
+                <p-sortIcon field="date" ariaLabel="Activate to sort"
+                            ariaLabelDesc="Activate to sort in descending order"
+                            ariaLabelAsc="Activate to sort in ascending order">
+                </p-sortIcon>
+              </th>
+              <th pSortableColumn="name" class="ui-p-4">
+                ชื่อคอร์ส
+                <p-sortIcon field="name" ariaLabel="Activate to sort"
+                            ariaLabelDesc="Activate to sort in descending order"
+                            ariaLabelAsc="Activate to sort in ascending order">
+                </p-sortIcon>
+              </th>
+              <th pSortableColumn="location" class="ui-p-5">
+                สถานที่
+                <p-sortIcon field="location" ariaLabel="Activate to sort"
+                            ariaLabelDesc="Activate to sort in descending order"
+                            ariaLabelAsc="Activate to sort in ascending order">
+                </p-sortIcon>
+              </th>
+              <th pSortableColumn="conditionMin" class="ui-p-6">
+                หมายเหตุ
+                <p-sortIcon field="conditionMin" ariaLabel="Activate to sort"
+                            ariaLabelDesc="Activate to sort in descending order"
+                            ariaLabelAsc="Activate to sort in ascending order">
+                </p-sortIcon>
+              </th>
+              <th class="ui-p-6">
+                สถานะ
+              </th>
+              <th>
+
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr [pSelectableRow]="rowData">
+              <td *ngFor="let col of columns;">
+                <div>
+                  <span class="ui-column-title">{{col.header}}</span>
+                  <div *ngIf="rowData[col.field] == rowData['stDate']">{{rowData['stDate']}}
+                    - {{rowData['endDate']}}</div>
+                  <div *ngIf="rowData[col.field] == rowData['conditionMin']">ต้องผ่านการเรียนคอร์สมาอย่างน้อย</div>
+                  <div *ngIf="rowData[col.field] != rowData['stDate']">{{rowData[col.field]}}</div>
+                  <div *ngIf="rowData[col.field] == rowData['conditionMin']">คอร์ส</div>
+                </div>
+
+              </td>
+              <td>
+                <div class="ui-g" style="text-align: center"
+                     *ngIf="rowData['saStatus'] !== '2' && rowData['canRegister'] === 1">
+                  <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+                    <button pButton type="button" label="สมัคร"
+                            (click)="assignCourse(rowData['id'])" [disabled]="rowData['canRegister'] === 0"></button>
+                  </div>
+                  <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+                    <button pButton type="button" label="ขออนุมัติพิเศษ" class="ui-button-warning"
+                            [disabled]="rowData['canRegister'] === 0"
+                            (click)="saCourse(rowData['id'])"></button>
+                  </div>
+
+                </div>
+                <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12"
+                     *ngIf="rowData['saStatus'] === '2' && rowData['canRegister'] === 0">
+                  <button pButton type="button" label="ยกเลิกการขออนุมัติพิเศษ" class="ui-button-warning"
+                          [disabled]="rowData['canRegister'] !== 0"
+                          (click)="cancelApprovalCourse(rowData['id'])"></button>
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
     </div>
 </div>
 
