@@ -21,50 +21,68 @@ import {EditUserComponent} from './manageUser/edit-user/edit-user.component';
 import {EditFormComponent} from './edit-form/edit-form.component';
 import {HomeComponent} from './home/home.component';
 import {ApprovalComponent} from './approval/approval.component';
+import {ManagePassCourseComponent} from './manage-pass-course/manage-pass-course.component';
+import {ManagePassCourseFormComponent} from './manage-pass-course-form/manage-pass-course-form.component';
+import {ManageUserService} from '../shared/service/manage-user.service';
+import { ListCourseApproveComponent } from './approval/list-course-approve/list-course-approve.component';
+import {HttpClientService} from '../shared/service/http-client.service';
 import { ProfileComponent } from './profile/profile.component';
 import { ManageCourseComponent } from './manage-course/manage-course.component';
-import { ManagePassCourseComponent } from './manage-pass-course/manage-pass-course.component';
-import { ManagePassCourseFormComponent } from './manage-pass-course-form/manage-pass-course-form.component';
-import {ManageUserService} from '../shared/service/manage-user.service';
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeTh from '@angular/common/locales/th';
+import { ListAllowComponent } from './list-allow/list-allow.component';
+import { CourseApproveComponent } from './approval/course-approve/course-approve.component';
+import { ApprovalFormComponent } from './approval/approval-form/approval-form.component';
+
+registerLocaleData(localeTh);
 
 @NgModule({
-    declarations: [
-        ContentComponent,
-        BaggagesComponent,
-        CoursesComponent,
-        CourseResgisterComponent,
-        CourseFormComponent,
-        CourseEditComponent,
-        CourseCreateComponent,
-        CoursesListComponent,
-        CourseComponent,
-        ScheduleComponent,
-        LocationComponent,
-        ManagedTitlenameComponent,
-        ManageUserComponent,
-        EditUserComponent,
-        EditFormComponent,
-        HomeComponent,
-        ApprovalComponent,
-        ProfileComponent,
-        ManageCourseComponent,
-        ManagePassCourseComponent,
-        ManagePassCourseFormComponent,
+  declarations: [
+    ContentComponent,
+    BaggagesComponent,
+    CoursesComponent,
+    CourseResgisterComponent,
+    CourseFormComponent,
+    CourseEditComponent,
+    CourseCreateComponent,
+    CoursesListComponent,
+    CourseComponent,
+    ScheduleComponent,
+    LocationComponent,
+    ManagedTitlenameComponent,
+    ManageUserComponent,
+    EditUserComponent,
+    EditFormComponent,
+    HomeComponent,
+    ApprovalComponent,
+    ProfileComponent,
+    ManageCourseComponent,
+    ManagePassCourseComponent,
+    ManagePassCourseFormComponent,
+    ListCourseApproveComponent,
+    ListAllowComponent,
+    CourseApproveComponent,
+    ApprovalFormComponent,
 
-    ],
-    imports: [
-        CoreModule,
-        SharedModule,
-        ContentRoutingModule
-    ],
-    exports: [
-        ContentComponent
-    ],
-    providers: [
-        ConfirmationService,
-        AuthGuard,
-        ManageUserService,
-    ]
+  ],
+  imports: [
+    CoreModule,
+    SharedModule,
+    ContentRoutingModule
+  ],
+  exports: [
+    ContentComponent
+  ],
+  providers: [
+    ConfirmationService,
+    AuthGuard,
+    ManageUserService,
+    HttpClientService,
+    { provide: LOCALE_ID, useValue: "th" },
+
+  ]
+        
 })
 export class ContentModule {
 }

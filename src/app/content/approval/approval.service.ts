@@ -1,34 +1,72 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {map} from 'rxjs/operators';
-import {ApiConstants} from 'src/app/shared/constants/ApiConstants';
+import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
+import { ApiConstants } from '../../shared/constants/ApiConstants';
+import { HttpClientService } from '../../shared/service/http-client.service';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class ApprovalService {
 
-    
-    constructor(
-        private http: HttpClient,
-    ) {
-    }
+
+  constructor(
+    private http: HttpClientService,
+  ) {
+  }
+
+  getMemberForApprove(coursesId) {
+    return this.http.get(`${ApiConstants.baseURl}/approve/${coursesId}`).pipe(
+      map((res) => {
+        const data = res['data'].map((member) => {
+          var checked = member.status === '1' ? true : false;
+          return {
+            ...member,
+            checked: checked
+          }
+        })
+        return {
+          status: res['result'],
+          data: data,
+        }
+      })
+    );
+  }
 
 
-    getAllApproval(){
-        return this.http.get(ApiConstants.baseURl + '/approve', {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('access-token')}`
-            }
-        }).pipe(
-            map(res => {
-                return {
-                    status: res['result'],
-                    data: res['data']
-                };
-            })
-        );
+  getTotalRecord() {
+    return this.http.get(`${ApiConstants.baseURl}/courses/approve/count`).pipe(
+      map(res => ({
+        status: res['result'],
+        data: res['data']
+      }))
+    );
+  }
+
+  getCoursesApproval(first: number, rows: number, query: string) {
+    return this.http.get(`${ApiConstants.baseURl}/courses/approve?query=${query}&offset=${first}&limit=${rows}`).pipe(
+      map(res => ({
+        status: res['result'],
+        data: res['data']
+      }))
+    );
+  }
+
+
+  approveStudents(data){
+    const req = {
+      saId:data.member,
+      courseId:data.courseId,
+      status:data.status
     }
+    return this.http.put(`${ApiConstants.baseURl}/approve`,req).pipe(
+      map((res) => {
+        return {
+          status: res['result'],
+          data: res['data'],
+        }
+      })
+    );
+  }
 
 
 }

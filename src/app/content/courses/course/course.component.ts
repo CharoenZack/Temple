@@ -6,6 +6,7 @@ import {MenuItem, ConfirmationService} from 'primeng/api';
 import {BreadcrumbService} from '../../../shared/service/breadcrumb.service';
 import {Course} from 'src/app/shared/interfaces/course';
 import {SpecialApprove} from '../../../shared/interfaces/special-approve';
+import {switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-course',
@@ -40,7 +41,7 @@ export class CourseComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.courseService.setCourse(null);
+    // this.courseService.setCourse(null);
   }
 
   public assignCourse(id) {
@@ -135,15 +136,18 @@ export class CourseComponent implements OnInit, OnDestroy {
       createDate: null,
       lastUpdate: null,
       courseName: null,
-    }
-    ;
+    };
   }
 
   private getData() {
-    this.course = this.courseService.getCourse();
-    if (!this.course) {
-      this.router.navigate(['/courses']);
-    }
+    this.route.params.pipe(switchMap(param =>
+      this.courseService.getCourseByid(param.id)
+    )).subscribe(res => {
+      console.log(res);
+      if (res.status === 'Success') {
+        this.course = res['data'];
+      }
+    });
   }
 
   private initCourse() {

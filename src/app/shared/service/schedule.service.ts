@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { ApiConstants } from '../constants/ApiConstants';
-import { map } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {ApiConstants} from '../constants/ApiConstants';
+import {map} from 'rxjs/operators';
+import {HttpClientService} from './http-client.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,31 +9,25 @@ import { map } from 'rxjs/operators';
 export class ScheduleService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClientService
   ) {
 
   }
 
   getSchedule() {
-    return this.http.get(ApiConstants.baseURl + '/courses/schedule',
-      {
-        headers:
-          { Authorization: `Bearer ${localStorage.getItem('access-token')}` }
-      })
+    return this.http.get(ApiConstants.baseURl + '/courses/schedule')
       .pipe(
         map(res => {
-          const data = res['data'].map(data => {
-            return {
-              title: data['courseName'],
-              start: data['courseScheduleDate']
-            }
-          })
           return {
             status: res['result'],
-            data: data
-          }
+            data: res['data'].map(data => ({
+              title: data['course']['courseName'],
+              start: data['courseScheduleDate'],
+              url: `/courses/${data['courseId']}`
+            }))
+          };
         })
-      )
+      );
 
   }
 }

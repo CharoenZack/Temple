@@ -31,110 +31,115 @@ import {CookieService} from 'ngx-cookie-service';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
 import {CheckboxModule} from 'primeng/checkbox';
 import {ListboxModule} from 'primeng/listbox';
-
+import {AutoCompleteModule} from 'primeng/autocomplete';
 
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {
-    faUser,
-    faBars,
-    faBookOpen,
-    faArchive,
-    faLock,
-    faLandmark,
-    faPlus,
-    faUsers,
-    faAt,
-    faHome
+  faUser,
+  faBars,
+  faBookOpen,
+  faArchive,
+  faLock,
+  faLandmark,
+  faPlus,
+  faUsers,
+  faAt,
+  faHome,
+  faSearch,
 } from '@fortawesome/free-solid-svg-icons';
 import {
-    faCalendarAlt,
-    faIdCard
+  faCalendarAlt,
+  faIdCard,
 } from '@fortawesome/free-regular-svg-icons';
 
 
 import {PersonalInfoService} from './service/personal-info.service';
 import {BreadcrumbComponent} from './component/breadcrumb/breadcrumb.component';
+import {HttpClientService} from './service/http-client.service';
 
 
 @NgModule({
-    declarations: [
-        BreadcrumbComponent
-    ],
-    imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        RouterModule,
-        ButtonModule,
-        CardModule,
-        DropdownModule,
-        InputTextModule,
-        RadioButtonModule,
-        InputTextareaModule,
-        InputMaskModule,
-        CalendarModule,
-        ToastModule,
-        FormsModule,
-        FileUploadModule,
-        HttpClientModule,
-        BreadcrumbModule,
-    ],
-    exports: [
-        CommonModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        RouterModule,
-        ButtonModule,
-        BreadcrumbComponent,
-        RadioButtonModule,
-        DropdownModule,
-        CardModule,
-        InputTextModule,
-        InputTextareaModule,
-        InputMaskModule,
-        ToastModule,
-        SidebarModule,
-        PasswordModule,
-        FontAwesomeModule,
-        TableModule,
-        StepsModule,
-        FormsModule,
-        FullCalendarModule,
-        ConfirmDialogModule,
-        MessageModule,
-        MessagesModule,
-        DialogModule,
-        FullCalendarModule,
-        HttpClientModule,
-        NgxSpinnerModule,
-        BreadcrumbModule,
-        FileUploadModule,
-        CalendarModule,
-        CheckboxModule,
-        ListboxModule,
-    ],
-    providers: [
-        TitleNameService,
-        MessageService,
-        PersonalInfoService,
-        CookieService,
-    ]
+  declarations: [
+    BreadcrumbComponent
+  ],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterModule,
+    ButtonModule,
+    CardModule,
+    DropdownModule,
+    InputTextModule,
+    RadioButtonModule,
+    InputTextareaModule,
+    InputMaskModule,
+    CalendarModule,
+    ToastModule,
+    FormsModule,
+    FileUploadModule,
+    HttpClientModule,
+    BreadcrumbModule,
+  ],
+  exports: [
+    CommonModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    RouterModule,
+    ButtonModule,
+    BreadcrumbComponent,
+    RadioButtonModule,
+    DropdownModule,
+    CardModule,
+    InputTextModule,
+    InputTextareaModule,
+    InputMaskModule,
+    ToastModule,
+    SidebarModule,
+    PasswordModule,
+    FontAwesomeModule,
+    TableModule,
+    StepsModule,
+    FormsModule,
+    FullCalendarModule,
+    ConfirmDialogModule,
+    MessageModule,
+    MessagesModule,
+    DialogModule,
+    FullCalendarModule,
+    HttpClientModule,
+    NgxSpinnerModule,
+    BreadcrumbModule,
+    FileUploadModule,
+    CalendarModule,
+    CheckboxModule,
+    ListboxModule,
+    AutoCompleteModule,
+  ],
+  providers: [
+    TitleNameService,
+    MessageService,
+    PersonalInfoService,
+    CookieService,
+    HttpClientService,
+  ]
 })
 export class SharedModule {
-    constructor() {
-        library.add(
-            faUser,
-            faBars,
-            faBookOpen,
-            faArchive,
-            faLock,
-            faCalendarAlt,
-            faLandmark,
-            faPlus,
-            faIdCard,
-            faAt,
-            faUsers,
-            faHome
-        );
-    }
+  constructor() {
+    library.add(
+      faUser,
+      faBars,
+      faBookOpen,
+      faArchive,
+      faLock,
+      faCalendarAlt,
+      faLandmark,
+      faPlus,
+      faIdCard,
+      faAt,
+      faUsers,
+      faHome,
+      faSearch,
+    );
+  }
 }
