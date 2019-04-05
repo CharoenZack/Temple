@@ -1,9 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {ApiConstants} from 'src/app/shared/constants/ApiConstants';
 import {SpecialApprove} from '../../../shared/interfaces/special-approve';
-import {Course} from '../../../shared/interfaces/course';
 import {HttpClientService} from 'src/app/shared/service/http-client.service';
 
 @Injectable({
@@ -16,7 +14,7 @@ export class CourseService {
   ) {
   }
 
-  getCourseฺByid(id) {
+  getCourseByid(id) {
     return this.http.get(ApiConstants.baseURl + `/courses/${id}`).pipe(
       map(res => ({
           status: res['result'],
@@ -59,17 +57,6 @@ export class CourseService {
 
   cancelApprovalCourse(id) {
     return this.http.delete(ApiConstants.baseURl + `/approve/${id}`);
-  }
-  
-  getTeachers() {
-    return this.http.get(ApiConstants.baseURl + `/members/monk`).pipe(
-      map(res => {
-        return {
-          status: res['result'],
-          data: res['data']
-        };
-      })
-    );
   }
 
   getTeachers() {

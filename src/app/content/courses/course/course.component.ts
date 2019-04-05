@@ -137,12 +137,11 @@ export class CourseComponent implements OnInit, OnDestroy {
       lastUpdate: null,
       courseName: null,
     };
-    //this.specialApprove={};
   }
 
   private getData() {
     this.route.params.pipe(switchMap(param =>
-      this.courseService.getCourseฺByid(param.id)
+      this.courseService.getCourseByid(param.id)
     )).subscribe(res => {
       console.log(res);
       if (res.status === 'Success') {
@@ -169,6 +168,5 @@ export class CourseComponent implements OnInit, OnDestroy {
       mhcStatus: '',
       canRegister: null
     };
-    //this.course={};
   }
 }
