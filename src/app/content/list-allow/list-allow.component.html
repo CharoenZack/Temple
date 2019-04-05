@@ -26,7 +26,7 @@
                 </td>
                 <td *ngFor="let col of columns" class="content-center">
                     <div class="ui-g-12">
-                        <p-checkbox [value]="rowData[col.field]" [(ngModel)]="rowData.checked" binary="true" (onChange)="oncheck()"></p-checkbox>
+                        <p-checkbox *ngIf="showCheckbox()" [value]="rowData[col.field]" [(ngModel)]="rowData.checked" binary="true" (onChange)="oncheck()"></p-checkbox>
                     </div>
                 </td>
             </tr>
