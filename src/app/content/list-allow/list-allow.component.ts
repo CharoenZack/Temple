@@ -112,4 +112,8 @@ export class ListAllowComponent implements OnInit {
     }
   }
 
+  showCheckbox(){
+    return this.member[0]['displayName']==="ไม่มีข้อมูล"?false:true;
+  }
+
 }
