@@ -17,7 +17,7 @@ export class ManagePassCourseFormComponent implements OnInit {
   @Input() cols: any[];
   @Input() fieldId: string
   @Output() listData;
-  public courseId:string;
+  public courseId: string;
 
 
 
@@ -31,7 +31,7 @@ export class ManagePassCourseFormComponent implements OnInit {
 
   ngOnInit() {
     this.option = "1";
-    this.fieldId = "uId"
+    this.fieldId = "mhcId"
     this.breadCrumbService.setPath([
       { label: 'Manage Pass Course: จัดการการอนุมัติผู้เรียน' },
       { label: 'Manage Pass Course: จัดการการอนุมัติผู้เรียน' },
@@ -42,16 +42,35 @@ export class ManagePassCourseFormComponent implements OnInit {
     ];
 
     this.courseId = this.route.snapshot.paramMap.get("id")
-    this.managePassCourse.getMemberInCourse(+this.courseId)
-    .subscribe( res =>{
-      if(res['status']==='Success')
-      this.member = res['data'];
-    })
+    this.initMember();
+
 
   }
 
+  initMember() {
+    this.managePassCourse.getMemberInCourse(+this.courseId)
+      .subscribe(res => {
+        if (res['status'] === 'Success')
+          this.member = res['data'];
+      })
+  }
+
   getData(e) {
-    console.log(e);
+    const data = {
+      mhcList: [
+        ...e.member
+      ],
+      cId: e.courseId,
+    }
+
+    this.managePassCourse.updateMemberPassCourse(data)
+      .subscribe(res => {
+        console.log(res);
+        
+        if (res['status'] === 'Success') {
+          this.initMember();
+        }
+      })
   }
 
 

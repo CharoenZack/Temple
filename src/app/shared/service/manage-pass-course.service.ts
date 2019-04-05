@@ -30,4 +30,15 @@ export class ManagePassCourseService {
         })
       )
   }
+
+  updateMemberPassCourse(data){
+    return this.http.put(ApiConstants.baseURl+'/graduated',data)
+    .pipe(
+      map((res) =>{
+        return {
+          status:res['result']
+        }
+      })
+    )
+  }
 }

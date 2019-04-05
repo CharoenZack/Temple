@@ -83,8 +83,21 @@ export class ListAllowComponent implements OnInit {
 
   sentData() {
     this.check = false;
-    if (this.member.length != 0) {
-      var memberSent = this.member.filter((member) => member.checked === true).map(member => member[this.fieldId])
+    var memberSent;
+    if (this.option === "1") {
+      memberSent = this.member.map(member =>{
+        return { 
+          mhcId: member[this.fieldId], 
+          status: member['checked']?'1':'2' 
+        }
+      })
+      memberSent = {
+        member:[...memberSent],
+        courseId:this.courseId
+      }
+      
+    } else if (this.option === "2") {
+      memberSent = this.member.filter((member) => member.checked === true).map(member => member[this.fieldId])
       memberSent =
         {
           member: [
@@ -93,7 +106,8 @@ export class ListAllowComponent implements OnInit {
           courseId: this.courseId,
           status: this.status.status
         }
-
+    }
+    if (this.member.length != 0) {
       this.listData.emit(memberSent)
     }
   }
