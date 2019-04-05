@@ -79,7 +79,7 @@ export class CourseEditComponent implements OnInit {
   }
 
   settingForm() {
-    this.courseService.getCourseById(this.courseId)
+    this.courseService.getCourseByid(this.courseId)
       .subscribe(res => {
         console.log(res);
         
