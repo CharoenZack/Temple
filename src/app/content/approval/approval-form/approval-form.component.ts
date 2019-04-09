@@ -14,7 +14,7 @@ import { ConfirmationService, Message } from 'primeng/api';
 export class ApprovalFormComponent implements OnInit {
 
   @Input() option: String;
-  @Input() member: MemberApproval;
+  @Input() member: MemberApproval[];
   @Input() cols: any[];
   @Input() fieldId: string
   @Input() course: any[];
@@ -33,8 +33,8 @@ export class ApprovalFormComponent implements OnInit {
     this.option = "2";
     this.fieldId = "specialApproveId"
     this.breadCrumbService.setPath([
-      { label: 'Manage Pass Course: จัดการการอนุมัติผู้เรียน' },
-      { label: 'Manage Pass Course: จัดการการอนุมัติผู้เรียน' },
+      { label: 'Approval: การอนุมัติ',url:'/approval' },
+      { label: 'Approval students: อนุมัติผู้เรียน' },
     ]);
 
     this.cols = [
@@ -51,6 +51,9 @@ export class ApprovalFormComponent implements OnInit {
       .subscribe(res => {
         if (res['status'] === 'Success') {
           this.member = res['data'];
+          if(this.member.length===0){
+            this.member = [{displayName:"ไม่มีข้อมูล"}]
+          }
         }
       })
   }

@@ -1,6 +1,6 @@
 <div class="ui-g-11 ui-lg-11 ui-md-10 ui-sm-9">
-    <div class="text-right" *ngIf="!dropdrow()">อนุมัติ</div>
-    <p-dropdown [options]="menusSelect" optionLabel="menuName" value="status" [(ngModel)]="status" *ngIf="dropdrow()"></p-dropdown>
+    <div class="text-right" *ngIf="!dropdown()">อนุมัติ</div>
+    <p-dropdown [options]="menusSelect" optionLabel="menuName" value="status" [(ngModel)]="status" *ngIf="dropdown()"></p-dropdown>
 </div>
 <div class="ui-g-1 ui-lg-1 ui-md-2 ui-sm-3">
     <p-button label="ยืนยัน" (onClick)=sentData()></p-button>
@@ -26,7 +26,7 @@
                 </td>
                 <td *ngFor="let col of columns" class="content-center">
                     <div class="ui-g-12">
-                        <p-checkbox [value]="rowData[col.field]" [(ngModel)]="rowData.checked" binary="true" (onChange)="oncheck()"></p-checkbox>
+                        <p-checkbox *ngIf="showCheckbox()" [value]="rowData[col.field]" [(ngModel)]="rowData.checked" binary="true" (onChange)="onCheck()"></p-checkbox>
                     </div>
                 </td>
             </tr>
@@ -36,8 +36,8 @@
 </div>
 
 <div class="ui-g-11 ui-lg-11 ui-md-10 ui-sm-9">
-    <div class="text-right" *ngIf="!dropdrow()">อนุมัติ</div>
-    <p-dropdown [options]="menusSelect" optionLabel="menuName" value="status" [(ngModel)]="status" *ngIf="dropdrow()"></p-dropdown>
+    <div class="text-right" *ngIf="!dropdown()">อนุมัติ</div>
+    <p-dropdown [options]="menusSelect" optionLabel="menuName" value="status" [(ngModel)]="status" *ngIf="dropdown()"></p-dropdown>
 </div>
 <div class="ui-g-1 ui-lg-1 ui-md-2 ui-sm-3">
     <p-button label="ยืนยัน" (onClick)=sentData()></p-button>

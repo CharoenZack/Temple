@@ -9,14 +9,36 @@
         <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
           <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
           <p-messages [value]="msgs"></p-messages>
-          <p-table [columns]="cols" [value]="courses" [paginator]="true" [rows]="5" [responsive]="true">
-              <ng-template pTemplate="caption">
-                  <div style="text-align:left">
-                    <button pButton type="button" (click)="createCourse()" label="เพิ่ม" class="ui-button-info"
-                      style="width: 20%"></button>
+          <p-table
+            #dt
+            [columns]="cols"
+            [value]="courses"
+            [paginator]="true"
+            [rows]="5"
+            [responsive]="true"
+            [lazy]="true"
+            (onLazyLoad)="loadData($event)"
+            [totalRecords]="totalRecords"
+            [loading]="loading"
+          >
+            <ng-template pTemplate="caption">
+              <div style="text-align:left">
+                <button pButton type="button" (click)="createCourse()" label="เพิ่ม" class="ui-button-info"
+                        style="width: 20%"></button>
+              </div>
+
+            </ng-template>
+            <ng-template pTemplate="caption">
+              <div class="ui-g ui-fluid">
+                <div class="ui-g-12 ui-lg-3 ui-md-3 ui-sm-12" style="margin-left: auto;">
+                  <div class="ui-inputgroup">
+                    <fa-icon [icon]="['fas', 'search']" class="ui-inputgroup-addon"></fa-icon>
+                    <input type="text" pInputText placeholder="ค้นหา"
+                           (input)="dt.filterGlobal($event.target.value, 'contains')">
                   </div>
-  
-                </ng-template>
+                </div>
+              </div>
+            </ng-template>
             <ng-template pTemplate="header" let-columns>
               <tr>
                 <th pSortableColumn="date">
@@ -61,7 +83,7 @@
                     {{rowData[col.field]}}
                     <div *ngIf="rowData[col.field] == rowData['conditionMin']">คอร์ส</div>
                   </div>
-                  
+
                 </td>
                 <td>
                   <div class="ui-g" style="text-align: center">
@@ -71,7 +93,8 @@
 
                     </div>
                     <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
-                      <button pButton type="button" (click)="deleteCourse(rowData['id'])" label="ลบ" class="ui-button-warning"></button>
+                      <button pButton type="button" (click)="deleteCourse(rowData['id'])" label="ลบ"
+                              class="ui-button-warning"></button>
                     </div>
                   </div>
                 </td>

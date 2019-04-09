@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import {ConfirmationService, MenuItem} from 'primeng/api';
+import {Component, OnInit} from '@angular/core';
+import {ConfirmationService, LazyLoadEvent, MenuItem} from 'primeng/api';
 import {Course} from 'src/app/shared/interfaces/course';
-import { CourseService } from '../courses/shared/course.service';
-import { BreadcrumbService } from 'src/app/shared/service/breadcrumb.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import {CourseService} from '../courses/shared/course.service';
+import {BreadcrumbService} from 'src/app/shared/service/breadcrumb.service';
+import {Router, ActivatedRoute} from '@angular/router';
+import {of} from 'rxjs';
+import {switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-manage-course',
@@ -16,6 +18,8 @@ export class ManageCourseComponent implements OnInit {
   courses: Course[];
   cols: any[];
   public menu: MenuItem[];
+  public totalRecords: number;
+  public loading: boolean;
 
   constructor(
     private courseService: CourseService,
@@ -27,11 +31,7 @@ export class ManageCourseComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.courseService.getCourses().subscribe(res => {
-      if (res['status'] === 'Success') {
-        this.courses = res['data'];
-      }
-    });
+    this.getTotalRecord();
 
     this.cols = [
       {field: 'stDate', header: 'วันที่'},
@@ -44,14 +44,15 @@ export class ManageCourseComponent implements OnInit {
       // {label: 'Courses : ข้อมูลคอร์สทั้งหมด', routerLink: '/courses'},
     ]);
   }
-  createCourse(){
+
+  createCourse() {
     // this.courseService.createCourse.subscribe(function (res) {
     //   if (res['status'] === 'Success') {
     //     this.courses = res['data'];
     //   }
     // });
 
-    this.router.navigateByUrl("/createCourse");
+    this.router.navigateByUrl('/createCourse');
   }
 
   editCourse(id) {
@@ -75,6 +76,7 @@ export class ManageCourseComponent implements OnInit {
       }
     });
   }
+
   deleteCourse(id) {
     this.confirmationService.confirm({
       message: 'Are you sure that you want to proceed?',
@@ -94,5 +96,35 @@ export class ManageCourseComponent implements OnInit {
         this.msgs = [{severity: 'info', summary: 'Rejected', detail: 'You have rejected'}];
       }
     });
+  }
+
+  private getTotalRecord() {
+    this.courseService.getTotalRecord().subscribe(res => {
+      if (res['status'] === 'Success') {
+        this.totalRecords = res['data'][0]['totalRecord'];
+      }
+    });
+  }
+
+  private getData(first = 0, rows = 10, query: string = '') {
+    this.loading = true;
+    of([first, rows, query]).pipe(
+      switchMap(([firstCon, rowsCon, queryCon]: [number, number, string]) =>
+        this.courseService.getCourses(firstCon, rowsCon, queryCon))
+    ).subscribe(res => {
+      if (res['status'] === 'Success') {
+        this.courses = res['data'];
+        this.loading = false;
+      }
+    });
+  }
+
+  public loadData(e: LazyLoadEvent) {
+    console.log(e);
+    let query = '';
+    if (e.globalFilter) {
+      query = e.globalFilter;
+    }
+    this.getData(e.first, e.rows, query);
   }
 }
