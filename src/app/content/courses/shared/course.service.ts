@@ -1,9 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {ApiConstants} from 'src/app/shared/constants/ApiConstants';
 import {SpecialApprove} from '../../../shared/interfaces/special-approve';
-import {Course} from '../../../shared/interfaces/course';
 import {HttpClientService} from 'src/app/shared/service/http-client.service';
 
 @Injectable({
@@ -16,6 +14,15 @@ export class CourseService {
   ) {
   }
 
+  getTotalRecord() {
+    return this.http.get(`${ApiConstants.baseURl}/courses/count`).pipe(
+      map(res => ({
+        status: res['result'],
+        data: res['data']
+      }))
+    );
+  }
+
   getCourseByid(id) {
     return this.http.get(ApiConstants.baseURl + `/courses/${id}`).pipe(
       map(res => ({
@@ -25,8 +32,8 @@ export class CourseService {
       ));
   }
 
-  getCourses() {
-    return this.http.get(ApiConstants.baseURl + '/courses').pipe(
+  getCourses(first: number, rows: number, query: string) {
+    return this.http.get(`${ApiConstants.baseURl}/courses?query=${query}&offset=${first}&limit=${rows}`).pipe(
       map(res => {
         return {
           status: res['result'],
@@ -46,7 +53,7 @@ export class CourseService {
   }
 
   editCourse(id,course) {
-    return this.http.patch(ApiConstants.baseURl + `/courses/${id}`,course);
+    return this.http.patch(ApiConstants.baseURl + `/courses/${id}`, course);
   }
 
   deleteCourse(id) {
