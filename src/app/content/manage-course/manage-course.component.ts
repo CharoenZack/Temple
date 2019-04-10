@@ -69,6 +69,7 @@ export class ManageCourseComponent implements OnInit {
         //     this.courses = res['data'];
         //   }
         // });
+        this.router.navigateByUrl(`/editCourse/${id}`);
       },
       reject: () => {
         this.msgs = [{severity: 'info', summary: 'Rejected', detail: 'You have rejected'}];

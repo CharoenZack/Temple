@@ -52,8 +52,8 @@ export class CourseService {
     return this.http.post(ApiConstants.baseURl + `/courses`, data);
   }
 
-  editCourse(id) {
-    return this.http.patch(ApiConstants.baseURl + `/courses`, {courseId: id});
+  editCourse(id,course) {
+    return this.http.patch(ApiConstants.baseURl + `/courses/${id}`, course);
   }
 
   deleteCourse(id) {

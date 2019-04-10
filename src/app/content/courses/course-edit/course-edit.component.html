@@ -1,3 +1,64 @@
-<p>
-  course-edit works!
-</p>
+<form [formGroup]="formEdit" (submit)="onSubmit($event)">
+  <div class="ui-g">
+    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ">
+      <div style="text-align: center">
+        <h2>แก้ไขคอร์ส</h2>
+      </div>
+      <div class="container">
+        <p-card [style]="{width: '100%',height:'100%'}">
+          <div class="ui-g">
+            <div class="ui-g-12 ui-lg-2 ui-md-2 ui-sm-12">
+              <label><b>ชื่อคอร์ส</b></label></div>
+            <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 ">
+              <input type="text" pInputText placeholder="ชื่อคอร์ส" formControlName="courseName">
+            </div>
+
+            <div class="ui-g-12 ui-lg- ui-md-2 ui-sm-12">
+              <label><b>รายละเอียด</b></label></div>
+            <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 ">
+              <textarea [rows]="5" [cols]="30" class="fixtextarea" pInputText placeholder="รายละเอียด"
+                formControlName="detail"></textarea>
+            </div>
+
+            <div class="ui-g-12 ui-lg-2 ui-md-2 ui-sm-12">
+              <label><b>สถานที่</b></label></div>
+            <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 ">
+              <p-dropdown [options]="location" placeholder="สถานที่" formControlName="location" value="id"
+                optionLabel="name"></p-dropdown> 
+            </div>
+
+
+            <div class="ui-g-12 ui-lg-2 ui-md-2 ui-sm-12">
+              <label><b>วันที่เรียน
+                </b></label></div>
+            <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 ">
+              <p-calendar class="calendar-button" dateFormat="dd/mm/yy" [monthNavigator]="true" formControlName="date"
+                selectionMode="multiple" [readonlyInput]="true" [yearNavigator]="true"  [yearRange]="yearRange"></p-calendar>
+            </div>
+            <div class="ui-g-12 ui-lg-2 ui-md-2 ui-sm-12">
+              <label><b>ผู้สอน
+                </b></label></div>
+            <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 ">
+              <p-autoComplete  formControlName="teacher" [suggestions]="filteredTeacher" 
+                (completeMethod)="filterTeacherMultiple($event)" styleClass="wid100" [minLength]="1"
+                placeholder="ผู้สอน" field="fname" [multiple]="true" [dropdown]="true">
+              </p-autoComplete>
+            </div>
+
+            <div class="ui-g-12 ui-lg-2 ui-md-2 ui-sm-12">
+              <label><b>หมาตเหตุ</b></label></div>
+            <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 ">
+              เงื่อนไขการผ่านคอร์สอย่างน้อย <p-dropdown [options]="notice" placeholder="หมาตเหตุ"
+                formControlName="conditionMin" value="id" optionLabel="id"></p-dropdown> คอร์ส
+            </div>
+
+
+          </div>
+
+
+        </p-card>
+      </div>
+      <p-button type="submit" label="ยืนยัน"></p-button>
+    </div>
+  </div>
+</form>

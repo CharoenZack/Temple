@@ -24,9 +24,36 @@
               <label><b>สถานที่</b></label></div>
             <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 ">
               <p-dropdown [options]="locations" placeholder="สถานที่" formControlName="location" value="id"
-                optionLabel="name"></p-dropdown> {{locations | json}}
+                optionLabel="name"></p-dropdown> 
             </div>
 
+
+            <div class="ui-g-12 ui-lg-2 ui-md-2 ui-sm-12">
+              <label><b>วันที่เรียน
+                </b></label></div>
+            <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 ">
+              <p-calendar class="calendar-button" dateFormat="dd/mm/yy" [monthNavigator]="true" formControlName="date"
+                selectionMode="multiple" [readonlyInput]="true" [yearNavigator]="true" [yearRange]="yearRange"></p-calendar>
+            </div>
+            <div class="ui-g-12 ui-lg-2 ui-md-2 ui-sm-12">
+              <label><b>ผู้สอน
+                </b></label></div>
+            <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 ">
+              <p-autoComplete  formControlName="teachers" [suggestions]="filteredTeacher" value="id"
+                (completeMethod)="filterTeacherMultiple($event)" styleClass="wid100" [minLength]="1"
+                placeholder="ผู้สอน" field="fname" [multiple]="true" [dropdown]="true">
+              </p-autoComplete>
+            </div>
+
+            <div class="ui-g-12 ui-lg-2 ui-md-2 ui-sm-12">
+              <label><b>หมาตเหตุ</b></label></div>
+            <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 ">
+              เงื่อนไขการผ่านคอร์สอย่างน้อย <p-dropdown [options]="notice" placeholder="หมาตเหตุ"
+                formControlName="conditionMin" value="id" optionLabel="id"></p-dropdown> คอร์ส
+            </div>
+
+
+          </div>
 
             <div class="ui-g-12 ui-lg-2 ui-md-2 ui-sm-12">
               <label><b>วันที่เรียน
@@ -45,20 +72,14 @@
               </p-autoComplete>
             </div>
 
-            <div class="ui-g-12 ui-lg-2 ui-md-2 ui-sm-12">
-              <label><b>หมาตเหตุ</b></label></div>
-            <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 ">
-              เงื่อนไขการผ่านคอร์สอย่างน้อย <p-dropdown [options]="notice" placeholder="หมาตเหตุ"
-                formControlName="conditionMin" value="id" optionLabel="id"></p-dropdown> คอร์ส
-            </div>
-
-
-          </div>
-
-
         </p-card>
       </div>
-      <p-button type="submit" label="ยืนยัน"></p-button>
+      <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 row">
+        <div class="center temple-button font-show">
+          <p-button type="submit" label="ยืนยัน"></p-button>
+          <p-button type="button" label="ยกเลิก" (onClick)="onCancel()"></p-button>
+        </div>
+      </div>
     </div>
   </div>
 </form>

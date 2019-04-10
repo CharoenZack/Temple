@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { BreadcrumbService } from '../../../shared/service/breadcrumb.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Course } from 'src/app/shared/interfaces/course';
-import { formatDate } from '@angular/common';
+import { formatDate, DatePipe } from '@angular/common';
 import { LocationService } from '../../location/location.service';
 import { CourseService } from '../shared/course.service';
 // import { Teacher } from 'src/app/shared/interfaces/teacher';
 import { Member } from 'src/app/shared/interfaces/member';
+import { Router } from '@angular/router';
 // import { Teacher } from 'src/app/shared/interfaces/teacher';
 
 @Component({
@@ -24,20 +25,36 @@ export class CourseCreateComponent implements OnInit {
   public filteredTeacher: any[];
   public teachers:any[];
   public teacher:any;
+  public pipe = new DatePipe('th-TH')
+  public yearRange: string;
 
   constructor(
     private breadCrumbService: BreadcrumbService,
     private formBuilder: FormBuilder,
     private locationService: LocationService,
     private courseService: CourseService,
+    private router: Router,
     // private memberService: MemberService,
   ) { }
 
   ngOnInit() {
     this.initNotice();
+    
     this.breadCrumbService.setPath([
+      { label: 'ManageCourse : ตารางคอร์ส', routerLink: '/manageCourse' },
       { label: 'CreateCourse : สร้างคอร์ส', routerLink: '/createCourse' },
     ]);
+    this.courseService.getTeachers().subscribe( 
+      res => {
+        if(res.status == 'Success'){
+          this.teachers = res.data;
+        }    
+      },
+      error =>{
+        console.log(error['error']['message']);
+        
+      }
+    ) 
     this.locationService.getLocation().subscribe( 
       res => {
         if(res.status == 'Success'){
@@ -49,6 +66,9 @@ export class CourseCreateComponent implements OnInit {
         
       }
     ) 
+    const currentYear = this.pipe.transform(Date.now(),'yyyy');
+    const startYear = parseInt(currentYear) - 100;
+    this.yearRange = startYear + ':' + currentYear;
     this.createForm();   
   }
   
@@ -67,7 +87,7 @@ export class CourseCreateComponent implements OnInit {
         location: ['', Validators.required],
         date: ['', Validators.required],
         conditionMin: ['', Validators.required],
-        // teacher:['', Validators.required],
+        teachers:['', Validators.required],
       }
     );
   }
@@ -75,19 +95,15 @@ export class CourseCreateComponent implements OnInit {
     e.preventDefault();
     const date = this.formEdit.get('date').value;
     const datesort = date.map( res => formatDate(res,"yyyy-MM-dd",'en')).sort();
-    // const stdate = datesort[0];
-    // const enddate = datesort[date.length-1];
-    console.log(this.teacher);
+    console.log(this.formEdit.get('teachers').value);
     
     const course = {
         name: this.formEdit.get('courseName').value,
         detail: this.formEdit.get('detail').value,
         locationId: this.formEdit.get('location').value.id,
-        // stdate: stdate,
-        // enddate: enddate,
         conditionMin: this.formEdit.get('conditionMin').value.id,
         date:datesort,
-        teacher:this.teacher
+        teacher:this.formEdit.get('teachers').value.map(res => res.id)
       };
       console.log(course);
       
@@ -100,38 +116,24 @@ export class CourseCreateComponent implements OnInit {
           console.log(err['error']['message']);
         }
       );
-    const courseS = {
-        date: datesort
-    }
-
-
-
-
-      
   }
   filterTeacherMultiple(event) {
     let query = event.query;
-    console.log(query);
-    
-    this.courseService.getTeachers().subscribe(teachers => {
-        this.filteredTeacher = this.filterTeacher(query, teachers);
-        
-        
-    });
+    this.filteredTeacher = this.filterTeacher(query, this.teachers);
   } 
   filterTeacher(query, teachers: any):any[] {
-    console.log(query,teachers);
-    
     let filtered : any[] = [];
-    for(let i = 0; i < teachers.data.length; i++) {
-        let teacher = teachers.data[i].fname+' '+teachers.data[i].lname;
-        if(teacher.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+    for(let i = 0; i < teachers.length; i++) {
+        let teacher = teachers[i]
+        if((teacher.fname+teacher.lname).toLowerCase().indexOf(query.toLowerCase()) == 0) {
             filtered.push(teacher);
         }
     }
-    console.log(filtered);
     return filtered;
-    
-    
+    }
+
+    onCancel() {
+      this.router.navigateByUrl('/manageCourse');
+    }
 }
-}
+
