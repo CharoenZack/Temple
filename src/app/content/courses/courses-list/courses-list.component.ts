@@ -96,7 +96,7 @@ export class CoursesListComponent implements OnInit {
 
   public approvalCourse() {
     this.confirmationService.confirm({
-      message: 'ยืนยันการยกเลิกการขออนุมัติพิเศษ',
+      message: 'ยืนยันการขออนุมัติพิเศษ',
       header: 'ข้อความจากระบบ',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
