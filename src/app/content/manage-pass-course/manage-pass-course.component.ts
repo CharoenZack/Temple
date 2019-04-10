@@ -16,7 +16,7 @@ export class ManagePassCourseComponent implements OnInit {
 
   ngOnInit() {
     this.breadCrumbService.setPath([
-      {label: 'Manage Pass Course: จัดการการอนุมัติผู้เรียน'},
+      {label: 'Manage graduated: จัดการผ่านหลักสูตร'},
     ]);
   }
 
