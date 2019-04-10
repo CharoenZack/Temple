@@ -6,6 +6,7 @@ import { ApprovalService } from '../approval/approval.service';
 import { Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { ManagePassCourseService } from 'src/app/shared/service/manage-pass-course.service';
 
 @Component({
   selector: 'app-manage-pass-course',
@@ -22,8 +23,10 @@ export class ManagePassCourseComponent implements OnInit {
   public selectedCourse: Course;
   public courseId: string;
 
+  private totalRec:number;
+
   constructor(
-    private approvalService: ApprovalService,
+    private managePassCourse : ManagePassCourseService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private breadCrumbService: BreadcrumbService,
@@ -44,21 +47,23 @@ export class ManagePassCourseComponent implements OnInit {
   private setColumn() {
     this.cols = [
       {field: 'name', header: 'ชื่อคอร์ส'},
-      {field: 'conditionMin', header: 'หมายเหตุ'},
       {field: 'detail', header: 'รายละเอียด'},
+      {field: 'numberOfMembers', header: 'จำนวนนักเรียน'},
     ];
   }
 
   onRowSelect(e) {
-    this.router.navigateByUrl(`/approval/${e.data.id}`);
+    this.router.navigateByUrl(`/managepasscourse/${e.data.id}`);
   }
 
   private getData(first = 0, rows = 10, query: string = '') {
     this.loading = true;
     of([first, rows, query]).pipe(
       switchMap(([firstCon, rowsCon, queryCon]: [number, number, string]) =>
-        this.approvalService.getCoursesApproval(firstCon, rowsCon, queryCon))
+        this.managePassCourse.getAllCourse(firstCon, rowsCon, queryCon))
     ).subscribe(res => {
+      console.log(res);
+      
       if (res['status'] === 'Success') {
         this.courses = res['data'];
         this.loading = false;
@@ -67,7 +72,7 @@ export class ManagePassCourseComponent implements OnInit {
   }
 
   private getTotalRecord() {
-    this.approvalService.getTotalRecord().subscribe(res => {
+    this.managePassCourse.getTotalRecord().subscribe(res => {
       if (res['status'] === 'Success') {
         this.totalRecords = res['data'][0]['totalRecord'];
       }

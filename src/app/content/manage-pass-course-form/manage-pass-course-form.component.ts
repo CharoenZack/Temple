@@ -33,7 +33,7 @@ export class ManagePassCourseFormComponent implements OnInit {
     this.option = '1';
     this.fieldId = 'mhcId';
     this.breadCrumbService.setPath([
-      {label: 'Manage Pass Course: จัดการการอนุมัติผู้เรียน',url: '/managepasscourse'},
+      {label: 'Manage Pass Course: จัดการการอนุมัติผู้เรียน',routerLink: '/managepasscourse'},
       {label: 'Manage students : จัดการผู้เรียน'},
     ]);
 
