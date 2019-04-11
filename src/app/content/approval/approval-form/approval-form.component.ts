@@ -33,7 +33,7 @@ export class ApprovalFormComponent implements OnInit {
     this.option = "2";
     this.fieldId = "specialApproveId"
     this.breadCrumbService.setPath([
-      { label: 'Approval: การอนุมัติ',url:'/approval' },
+      { label: 'Approval: การอนุมัติ',routerLink:'/approval' },
       { label: 'Approval students: อนุมัติผู้เรียน' },
     ]);
 

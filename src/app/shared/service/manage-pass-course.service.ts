@@ -41,4 +41,26 @@ export class ManagePassCourseService {
       })
     )
   }
+
+  getAllCourse(offset=0,limit=10,query=''){
+    return this.http.get(ApiConstants.baseURl+`/graduated?query=${query}&limit=${limit}&offset=${offset}`)
+    .pipe(
+      map( res=>{
+        return {
+          status:res['result'],
+          data:res['data']
+        }
+      })
+    )
+  }
+
+  getTotalRecord(){
+    return this.http.get(`${ApiConstants.baseURl}/graduated/count`).pipe(
+      map(res => ({
+        status: res['result'],
+        data: res['data']
+      }))
+    );
+
+  }
 }
