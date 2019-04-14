@@ -18,14 +18,16 @@ export class ManagePassCourseFormComponent implements OnInit {
   @Input() cols: any[];
   @Input() fieldId: string;
   @Output() listData;
-  public courseId: string;
   @Input() msgs: Message[] = [];
+  public courseId: string;
+  public nameCourse:string;
+  
 
   constructor(
     private breadCrumbService: BreadcrumbService,
     private managePassCourse: ManagePassCourseService,
     private route: ActivatedRoute,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
   ) {
   }
 
@@ -44,7 +46,7 @@ export class ManagePassCourseFormComponent implements OnInit {
     this.courseId = this.route.snapshot.paramMap.get('id');
     this.initMember();
 
-
+    this.nameCourse = this.route.snapshot.queryParamMap.get('course');
   }
 
   initMember() {
