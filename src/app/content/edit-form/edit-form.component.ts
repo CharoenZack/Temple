@@ -1,13 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
-import {formatDate, DatePipe} from '@angular/common';
-import {Validators, FormBuilder, FormGroup} from '@angular/forms';
-import {MessageService, MenuItem} from 'primeng/api';
-import {TitleNameService} from 'src/app/shared/service/title-name.service';
-import {Router, ActivatedRoute} from '@angular/router';
-import {ManageUserService} from 'src/app/shared/service/manage-user.service';
-import {BreadcrumbService} from '../../shared/service/breadcrumb.service';
+import { Component, OnInit } from '@angular/core';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { formatDate, DatePipe } from '@angular/common';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { MessageService, MenuItem, ConfirmationService, Message } from 'primeng/api';
+import { TitleNameService } from 'src/app/shared/service/title-name.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ManageUserService } from 'src/app/shared/service/manage-user.service';
+import { BreadcrumbService } from '../../shared/service/breadcrumb.service';
 import localeTh from '@angular/common/locales/th.js';
+
 
 @Component({
   selector: 'app-edit-form',
@@ -28,6 +29,8 @@ export class EditFormComponent implements OnInit {
   public previewImg: any;
   public onEdit: boolean;
   public pipe = new DatePipe('th-TH')
+
+  public msgs: Message[] = [];
 
 
   public formError = {
@@ -93,6 +96,7 @@ export class EditFormComponent implements OnInit {
     private manageUserService: ManageUserService,
     private route: ActivatedRoute,
     private breadCrumbService: BreadcrumbService,
+    private confirmationService: ConfirmationService
   ) {
   }
 
@@ -108,7 +112,6 @@ export class EditFormComponent implements OnInit {
     this.titleService.getTitleNames().subscribe(
       res => {
         this.titleName = [
-          {display: 'กรุณาเลือกคำนำหน้า'},
           ...res
         ];
       },
@@ -119,8 +122,8 @@ export class EditFormComponent implements OnInit {
     );
 
     this.breadCrumbService.setPath([
-      {label: 'Profile : ข้อมูลส่วนตัว', routerLink: ['/profile', localStorage.getItem('userId')]},
-      {label: 'Edit Profile : แก้ไขข้อมูลส่วนตัว'},
+      { label: 'Profile : ข้อมูลส่วนตัว', routerLink: ['/profile', localStorage.getItem('userId')] },
+      { label: 'Edit Profile : แก้ไขข้อมูลส่วนตัว' },
     ]);
   }
 
@@ -144,21 +147,21 @@ export class EditFormComponent implements OnInit {
   settingForm() {
     this.manageUserService.getUser(this.personalId)
       .subscribe(res => {
-          const titlename = {
-            id: res['data']['titleId'],
-            display: res['data']['titleDisplay'],
-            name: res['data']['titleName']
-          };
-          this.formEdit.controls['titleName'].patchValue(titlename);
-          this.formEdit.controls['fname'].setValue(res['data']['fname']);
-          this.formEdit.controls['lname'].setValue(res['data']['lname']);
-          this.formEdit.controls['birthday'].setValue(new Date(res['data']['birthdate']));
-          this.formEdit.controls['gender'].setValue(res['data']['genderId']);
-          this.formEdit.controls['phone'].setValue(res['data']['tel']);
-          this.formEdit.controls['email'].setValue(res['data']['email']);
-          this.formEdit.controls['address'].setValue(res['data']['address']);
-          this.formEdit.controls['phoneEmergency'].setValue(res['data']['emergencyTel']);
-        },
+        const titlename = {
+          id: res['data']['titleId'],
+          display: res['data']['titleDisplay'],
+          name: res['data']['titleName']
+        };
+        this.formEdit.controls['titleName'].patchValue(titlename);
+        this.formEdit.controls['fname'].setValue(res['data']['fname']);
+        this.formEdit.controls['lname'].setValue(res['data']['lname']);
+        this.formEdit.controls['birthday'].setValue(new Date(res['data']['birthdate']));
+        this.formEdit.controls['gender'].setValue(res['data']['genderId']);
+        this.formEdit.controls['phone'].setValue(res['data']['tel']);
+        this.formEdit.controls['email'].setValue(res['data']['email']);
+        this.formEdit.controls['address'].setValue(res['data']['address']);
+        this.formEdit.controls['phoneEmergency'].setValue(res['data']['emergencyTel']);
+      },
         err => console.log(err['error']['message'])
       );
   }
@@ -177,105 +180,34 @@ export class EditFormComponent implements OnInit {
     // const currentYear = new Date().toLocaleString('en-Us',{timeZone:'Asia/Bangkok'})
     // const aestTime = new Date(currentYear)
     //const currentYear = parseInt(formatDate(Date.now(),'yyyy','th'))
-    const currentYear = this.pipe.transform(Date.now(),'yyyy');
+    const currentYear = this.pipe.transform(Date.now(), 'yyyy');
     const startYear = parseInt(currentYear) - 100;
     this.yearRange = startYear + ':' + currentYear;
-    
-  }
-
-  onCancle() {
 
   }
 
   onSubmit(e) {
     console.log('onsubmit');
+    //this.testMessage();
 
     if (!this.formEdit.valid) {
       this.subscribeInputMessageWaring();
-      this.showMessage('warning');
+      this.showMessageWrongValidate();
     } else {
-      console.log('test');
-
-      const titleCode = this.formEdit.get('titleName').value;
-      const dataUser = {
-        fname: this.formEdit.get('fname').value,
-        lname: this.formEdit.get('lname').value,
-        birthdate: this.formEdit.get('birthday').value,
-        address: this.formEdit.get('address').value,
-        tel: this.formEdit.get('phone').value,
-        emergencyTel: this.formEdit.get('phoneEmergency').value,
-        email: this.formEdit.get('email').value,
-        img: null,
-        registerDate: null,
-        lastUpdate: null,
-        genderId: this.formEdit.get('gender').value,
-        titleId: +(titleCode.id),
-      };
-
-      this.manageUserService.updateUser(this.personalId, dataUser).subscribe(
-        res => {
-          console.log(res);
-
-          if (res['status'] === 'Success') {
-            this.showMessage('success');
-          } else {
-            this.showMessage('err');
-          }
-        },
-        err => {
-           console.log(err);
-        }
-      );
-
+      this.submitMessage(e);
     }
   }
 
-  showMessage(type) {
-    this.messageService.clear();
-    if (type === 'warning') {
-      this.messageService.add(
-        {
-          key: 'systemMessage',
-          sticky: true,
-          summary: 'ข้อความจากระบบ',
-          detail: this.detailWarning
-        }
-      );
-    } else if (type === 'success') {
-      this.showCancelMessage = true;
-      this.onEdit = true;
-      //this.registerSuccess = true;
-      this.messageService.add(
-        {
-          key: 'systemMessage',
-          sticky: true,
-          summary: 'ยืนยันการแก้ไขข้อมูลส่วนตัวสำเร็จ',
-          detail: 'คุณต้องการยืนยันใช่หรือไม่'
-        }
-      );
-    } else if (type === 'cancel') {
-      this.showCancelMessage = true;
-      this.messageService.add(
-        {
-          key: 'systemMessage',
-          sticky: true,
-          summary: 'ยกเลิกการแก้ไขข้อมูลส่วนตัว',
-          detail: 'คุณต้องการยกเลิกใช่หรือไม่'
-        }
-      );
-    } else if (type === 'err') {
-      this.messageService.add(
-        {
-          key: 'systemMessage',
-          sticky: true,
-          summary: 'ยกเลิกการแก้ไขข้อมูลส่วนตัว',
-          detail: 'คุณต้องการยกเลิกใช่หรือไม่'
-        }
-      );
-    }
-
+  showMessageWrongValidate() {
+    this.showToast("systemMessage",this.detailWarning);
   }
 
+
+  submitMessage(e) {
+    const message = "ยืนยันการแก้ไขข้อมูลส่วนตัว ?";
+    const type = "submit"
+    this.showDialog(message, type, e);
+  }
   onEditprofile() {
     this.registerSuccess = true;
     this.router.navigateByUrl(this.urlback + this.personalId);
@@ -293,8 +225,11 @@ export class EditFormComponent implements OnInit {
     this.showCancelMessage = false;
   }
 
-  showCancel() {
-    this.showMessage('cancel');
+  showCancelConfirm() {
+    const message = "ยกเลิกการแก้ไขข้อมูลส่วนตัว และกลับสู่หน้า Profile ?";
+    const type = "cancle";
+    this.showDialog(message, type, null);
+
   }
 
 
@@ -339,18 +274,87 @@ export class EditFormComponent implements OnInit {
     for (const field of Object.keys(this.formError)) {
       this.formError[field] = '';
       const control = this.formEdit.get(field);
-      if (field === 'repassword' && control.value !== '' && control.value !== this.formEdit.get('password').value) {
-        this.detailWarning += 'กรุณากรอก รหัสผ่านให้ตรงกัน' + '\n';
-        this.formEdit.controls[field].setValue('');
-        this.formError[field] = this.validationMessage[field].required;
-      } else if (control && !control.valid) {
+      if (control && !control.valid) {
         this.detailWarning += this.validationMessage[field].datail + '\n';
         this.formError[field] = this.validationMessage[field].required;
       }
     }
   }
 
-  clear() {
-    this.settingForm();
+  showClearConfirm() {
+    const message = "ล้างค่าการแก้ไขทั้งหมด";
+    const type = "clear"
+    this.showDialog(message, type, null);
+  }
+
+
+  showDialog(message, type, data: any) {
+    this.confirmationService.confirm({
+      message: message,
+      header: 'ข้อความจากระบบ',
+      accept: () => {
+        this.actionAccept(type, data);
+      },
+      reject: () => {
+      }
+    });
+  }
+
+  actionAccept(type, data: any) {
+    switch (type) {
+      case "clear": {
+        this.settingForm();
+        break;
+      }
+      case "cancle": {
+        this.router.navigateByUrl(`/profile/${this.personalId}`);
+        break;
+      }
+      case "submit": {
+        const titleCode = this.formEdit.get('titleName').value;
+        const dataUser = {
+          fname: this.formEdit.get('fname').value,
+          lname: this.formEdit.get('lname').value,
+          birthdate: this.formEdit.get('birthday').value,
+          address: this.formEdit.get('address').value,
+          tel: this.formEdit.get('phone').value,
+          emergencyTel: this.formEdit.get('phoneEmergency').value,
+          email: this.formEdit.get('email').value,
+          img: null,
+          registerDate: null,
+          lastUpdate: null,
+          genderId: this.formEdit.get('gender').value,
+          titleId: +(titleCode.id),
+        };
+
+        this.manageUserService.updateUser(this.personalId, dataUser).subscribe(
+          res => {
+            if (res['status'] === 'Success') {
+              this.showToast("alertMessage", "แก้ไขข้อมูลสำเร็จ");
+            } else {
+              this.showToast("alertMessage", "แก้ไขข้อมูลไม่สำเร็จ");
+            }
+          },
+          err => {
+            console.log(err);
+          }
+        );
+        break;
+      }
+      default: { break; }
+    }
+  }
+
+  showToast(key, detail) {
+    this.messageService.clear();
+    this.messageService.add(
+      {
+        key: key,
+        sticky: true,
+        summary: 'ข้อความจากระบบ',
+        detail: detail
+      }
+    );
+
   }
 }
