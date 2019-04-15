@@ -72,7 +72,6 @@ export class ManageUserService {
   updateUser(id, dataUser) {
     const data = {
       ...dataUser,
-      roleId: this.authService.getRole()
     };
     return this.http.put(ApiConstants.baseURl + `/members/${id}`, data, {
       headers: {

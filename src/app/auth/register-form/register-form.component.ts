@@ -109,7 +109,7 @@ export class RegisterFormComponent implements OnInit {
     this.titleService.getTitleNames().subscribe(
       res => {
         this.titleName = [
-          { display: 'กรุณาเลือกคำนำหน้า' },
+          //{ display: 'กรุณาเลือกคำนำหน้า' },
           ...res
         ];
       },

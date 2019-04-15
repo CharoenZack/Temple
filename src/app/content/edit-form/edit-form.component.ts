@@ -211,6 +211,7 @@ export class EditFormComponent implements OnInit {
         genderId: this.formEdit.get('gender').value,
         titleId: +(titleCode.id),
       };
+
       this.manageUserService.updateUser(this.personalId, dataUser).subscribe(
         res => {
           console.log(res);
@@ -222,7 +223,7 @@ export class EditFormComponent implements OnInit {
           }
         },
         err => {
-          // console.log(err['error']['message']);
+           console.log(err);
         }
       );
 
