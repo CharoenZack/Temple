@@ -214,14 +214,21 @@
                 <h3>{{message.summary}}</h3>
                 <pre class="text-left">{{message.detail}}</pre>
             </div>
-            <div class="ui-g ui-fluid" *ngIf="showCancelMessage">
-                <div class="ui-g-6">
-                    <button type="button" pButton (click)="onCancel()" label="ยืนยัน" class="ui-button-warning" autofocus></button>
-                </div>
-                <div class="ui-g-6">
-                    <button type="button" pButton (click)="onReject()" label="ยกเลิก" class="ui-button-secondary"></button>
-                </div>
-            </div>
         </ng-template>
     </p-toast>
 </div>
+
+<p-confirmDialog></p-confirmDialog>
+<p-toast position="center" key="alertMessage" (onClose)="onReject()" [modal]="true" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+        <div style="text-align: center">
+            <h3>{{message.summary}}</h3>
+            <p>{{message.detail}}</p>
+        </div>
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-12">
+                <button type="button" pButton label="กลับสู่หน้า Login" class="ui-button-success" (click)="actionLink()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>

@@ -206,7 +206,7 @@ export class EditFormComponent implements OnInit {
   submitMessage(e) {
     const message = "ยืนยันการแก้ไขข้อมูลส่วนตัว ?";
     const type = "submit"
-    this.showDialog(message, type, e);
+    this.showDialog(message, type);
   }
   onEditprofile() {
     this.registerSuccess = true;
@@ -228,7 +228,7 @@ export class EditFormComponent implements OnInit {
   showCancelConfirm() {
     const message = "ยกเลิกการแก้ไขข้อมูลส่วนตัว และกลับสู่หน้า Profile ?";
     const type = "cancle";
-    this.showDialog(message, type, null);
+    this.showDialog(message, type);
 
   }
 
@@ -284,23 +284,23 @@ export class EditFormComponent implements OnInit {
   showClearConfirm() {
     const message = "ล้างค่าการแก้ไขทั้งหมด";
     const type = "clear"
-    this.showDialog(message, type, null);
+    this.showDialog(message, type);
   }
 
 
-  showDialog(message, type, data: any) {
+  showDialog(message, type) {
     this.confirmationService.confirm({
       message: message,
       header: 'ข้อความจากระบบ',
       accept: () => {
-        this.actionAccept(type, data);
+        this.actionAccept(type);
       },
       reject: () => {
       }
     });
   }
 
-  actionAccept(type, data: any) {
+  actionAccept(type) {
     switch (type) {
       case "clear": {
         this.settingForm();
@@ -355,6 +355,6 @@ export class EditFormComponent implements OnInit {
         detail: detail
       }
     );
-
   }
+  
 }

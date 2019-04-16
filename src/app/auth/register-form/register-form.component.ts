@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuItem, MessageService } from 'primeng/api';
+import { MenuItem, MessageService, ConfirmationService } from 'primeng/api';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { formatDate } from '@angular/common';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -21,7 +21,8 @@ export class RegisterFormComponent implements OnInit {
   public detailWarning: string;
   public registerSuccess: boolean;
   public showCancelMessage: boolean;
-  public urlback:string;
+  public urlback: string;
+  public messageBack:string;
 
   public formError = {
     username: '',
@@ -97,11 +98,12 @@ export class RegisterFormComponent implements OnInit {
     private titleService: TitleNameService,
     private router: Router,
     private manageUserService: ManageUserService,
-    private route:ActivatedRoute,
+    private route: ActivatedRoute,
+    private confirmationService: ConfirmationService
   ) { }
 
   ngOnInit() {
-    this.urlback = this.route.snapshot.data.urlback;   
+    this.urlback = this.route.snapshot.data.urlback;
     this.registerSuccess = false;
     this.showCancelMessage = false;
     this.createForm();
@@ -109,13 +111,11 @@ export class RegisterFormComponent implements OnInit {
     this.titleService.getTitleNames().subscribe(
       res => {
         this.titleName = [
-          //{ display: 'กรุณาเลือกคำนำหน้า' },
           ...res
         ];
       },
       err => {
         console.log(err['error']['message']);
-
       }
     )
 
@@ -160,97 +160,86 @@ export class RegisterFormComponent implements OnInit {
     this.yearRange = startYear + ':' + currentYear;
   }
 
-  onCancle() {
-
-  }
-
   onSubmit(e) {
-    console.log('onsubmit');
-
     if (!this.formRegister.valid) {
       this.subscribeInputMessageWaring();
       this.showMessage('warning');
     } else {
-      console.log('test');
+      this.submitMessage(e);
+    }
+  }
 
-      const titleCode = this.formRegister.get('titleName').value;
-      const dataUser = {
-        username: this.formRegister.get('username').value,
-        password: this.formRegister.get('password').value,
-        fname: this.formRegister.get('fname').value,
-        lname: this.formRegister.get('lname').value,
-        birthdate: this.formRegister.get('birthday').value,
-        address: this.formRegister.get('address').value,
-        tel: this.formRegister.get('phone').value,
-        emergencyTel: this.formRegister.get('phoneEmergency').value,
-        email: this.formRegister.get('email').value,
-        img: null,
-        registerDate: null,
-        lastUpdate: null,
-        genderId: this.formRegister.get('gender').value,
-        titleId: parseInt(titleCode.id),
-      };
-      this.manageUserService.createUser(dataUser).subscribe(
-        res => {
-          if (res['status'] === 'Success') {
-            this.showMessage('success');
-          } else {
-            this.showMessage('err');
+  submitMessage(e) {
+    const message = "ยืนยันการสมัครสมาชิก";
+    const type = "submit"
+    this.showDialog(message, type);
+  }
+
+
+  showDialog(message, type) {
+    this.confirmationService.confirm({
+      message: message,
+      header: 'ข้อความจากระบบ',
+      accept: () => {
+        this.actionAccept(type);
+      },
+      reject: () => {
+      }
+    });
+  }
+
+  actionAccept(type) {
+    switch (type) {
+      case "cancle": {
+        this.router.navigateByUrl(this.urlback);
+        break;
+      }
+      case "submit": {
+        console.log("submit");
+        const titleCode = this.formRegister.get('titleName').value;
+        const dataUser = {
+          username: this.formRegister.get('username').value,
+          password: this.formRegister.get('password').value,
+          fname: this.formRegister.get('fname').value,
+          lname: this.formRegister.get('lname').value,
+          birthdate: this.formRegister.get('birthday').value,
+          address: this.formRegister.get('address').value,
+          tel: this.formRegister.get('phone').value,
+          emergencyTel: this.formRegister.get('phoneEmergency').value,
+          email: this.formRegister.get('email').value,
+          img: null,
+          registerDate: null,
+          lastUpdate: null,
+          genderId: this.formRegister.get('gender').value,
+          titleId: parseInt(titleCode.id),
+        };
+
+        this.manageUserService.createUser(dataUser).subscribe(
+          res => {
+            if (res['status'] === 'Success') {
+              this.showToast("alertMessage","สมัครสมาชิกสำเร็จ")       
+            } else {
+              this.showToast("alertMessage","สมัครสมาชิกไม่สำเร็จ")          
+            }
+          },
+          err => {
+            console.log("submit error");
+            console.log(err);
           }
-        },
-        err => {
-          console.log(err['error']['message']);
-        }
-      );
+        );
 
+        break;
+      }
+      default: { break; }
     }
   }
 
   showMessage(type) {
     this.messageService.clear();
     if (type === 'warning') {
-      this.messageService.add(
-        {
-          key: 'systemMessage',
-          sticky: true,
-          summary: 'ข้อความจากระบบ',
-          detail: this.detailWarning
-        }
-      );
-    } else if (type === 'success') {
-      this.registerSuccess = true;
-      this.messageService.add(
-        {
-          key: 'systemMessage',
-          sticky: true,
-          summary: 'สมัครสมาชิกสำเร็จ',
-        }
-      );
-    } else if (type === 'cancel') {
-      this.showCancelMessage = true;
-      this.messageService.add(
-        {
-          key: 'systemMessage',
-          sticky: true,
-          summary: 'ยกเลิกการสมัครสมาชิก',
-          detail: 'คุณต้องการยกเลิกใช่หรือไม่'
-        }
-      );
-    } else if (type === 'err') {
-      this.messageService.add(
-        {
-          key: 'systemMessage',
-          sticky: true,
-          summary: 'ยกเลิกการสมัครสมาชิก',
-          detail: 'คุณต้องการยกเลิกใช่หรือไม่'
-        }
-      );
+      this.showDialog('systemMessage',this.detailWarning);
     }
 
-  }
-
-  onCancel() {
-    this.router.navigateByUrl(this.urlback);
   }
 
   onReject() {
@@ -262,7 +251,10 @@ export class RegisterFormComponent implements OnInit {
   }
 
   showCancel() {
-    this.showMessage('cancel');
+    //this.showMessage('cancel');
+    const message = "ยกเลิกการสมัคร ?";
+    const type = "cancle";
+    this.showDialog(message,type);
   }
 
 
@@ -298,6 +290,22 @@ export class RegisterFormComponent implements OnInit {
         this.formError[field] = this.validationMessage[field].required;
       }
     }
+
+  }
+
+  showToast(key, detail) {
+    this.messageService.clear();
+    this.messageService.add(
+      {
+        key: key,
+        sticky: true,
+        summary: 'ข้อความจากระบบ',
+        detail: detail
+      }
+    );
+  }
+
+  actionLink(){
 
   }
 }
