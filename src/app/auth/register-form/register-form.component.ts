@@ -6,6 +6,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { TitleNameService } from 'src/app/shared/service/title-name.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ManageUserService } from 'src/app/shared/service/manage-user.service';
+import {AuthService} from '../../shared/service/auth.service';
 
 @Component({
   selector: 'app-register-form',
@@ -22,7 +23,7 @@ export class RegisterFormComponent implements OnInit {
   public registerSuccess: boolean;
   public showCancelMessage: boolean;
   public urlback: string;
-  public messageBack:string;
+  public messageback:string;
 
   public formError = {
     username: '',
@@ -99,13 +100,14 @@ export class RegisterFormComponent implements OnInit {
     private router: Router,
     private manageUserService: ManageUserService,
     private route: ActivatedRoute,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
   ) { }
 
   ngOnInit() {
     this.urlback = this.route.snapshot.data.urlback;
     this.registerSuccess = false;
     this.showCancelMessage = false;
+    this.setBack();
     this.createForm();
     this.settingCalendarTH();
     this.titleService.getTitleNames().subscribe(
@@ -123,6 +125,11 @@ export class RegisterFormComponent implements OnInit {
       { label: 'Login', url: 'auth/login' },
       { label: 'Register : สมัครสมาชิก' },
     ];
+  }
+
+  setBack(){
+    this.urlback = this.route.snapshot.data.urlback;
+    this.messageback = this.route.snapshot.data.messageback;
   }
 
   createForm() {

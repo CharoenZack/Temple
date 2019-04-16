@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { formatDate, DatePipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { MessageService, MenuItem, ConfirmationService, Message } from 'primeng/api';
 import { TitleNameService } from 'src/app/shared/service/title-name.service';
@@ -10,6 +10,7 @@ import { BreadcrumbService } from '../../shared/service/breadcrumb.service';
 import localeTh from '@angular/common/locales/th.js';
 import { ManageRoleService } from 'src/app/shared/service/manage-role.service';
 import { Role } from 'src/app/shared/interfaces/role';
+import {AuthService} from '../../shared/service/auth.service';
 
 
 @Component({
@@ -26,15 +27,15 @@ export class EditFormComponent implements OnInit {
   public detailWarning: string;
   public registerSuccess: boolean;
   public showCancelMessage: boolean;
-  public urlback: string;
   public personalId: string;
   public previewImg: any;
   public onEdit: boolean;
   public pipe = new DatePipe('th-TH')
   public showRole:boolean;
   public roles:Role[]
-
   public msgs: Message[] = [];
+  public urlback: string;
+  public messageback:string;
 
 
   public formError = {
@@ -107,6 +108,7 @@ export class EditFormComponent implements OnInit {
     private breadCrumbService: BreadcrumbService,
     private confirmationService: ConfirmationService,
     private roleService:ManageRoleService,
+    private authService:AuthService
   ) {
   }
 
@@ -114,8 +116,7 @@ export class EditFormComponent implements OnInit {
     this.showRole = this.roleService.getRoleStatus();
     this.roles = this.roleService.getRoles();
     this.personalId = this.route.snapshot.paramMap.get('id');
-    this.urlback = this.route.snapshot.data.urlback;
-
+    this.setBack();
     this.registerSuccess = false;
     this.showCancelMessage = false;
     this.onEdit = false;
@@ -137,6 +138,12 @@ export class EditFormComponent implements OnInit {
       { label: 'Profile : ข้อมูลส่วนตัว', routerLink: ['/profile', localStorage.getItem('userId')] },
       { label: 'Edit Profile : แก้ไขข้อมูลส่วนตัว' },
     ]);
+  }
+
+  setBack(){
+    const route = this.authService.getRole().value==="admin"?'':this.personalId;
+    this.urlback = this.route.snapshot.data.urlback+route;
+    this.messageback = this.route.snapshot.data.messageback;
   }
 
   createForm() {
@@ -165,8 +172,7 @@ export class EditFormComponent implements OnInit {
           display: res['data']['titleDisplay'],
           name: res['data']['titleName']
         };
-        const role = 
-        {
+        const role = {
           roleId:res['data']['roleId'],
           roleName:res['data']['roleName'],
         };

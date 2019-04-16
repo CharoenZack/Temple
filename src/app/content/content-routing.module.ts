@@ -89,6 +89,10 @@ const routes: Routes = [
           {
             path: 'create',
             component: RegisterFormComponent,
+            data: {
+              urlback: '/users',
+              messageback: "กลับสู่หน้าจัดการผู้ใช้"
+            }
           },
           {
             path: ':id/edit',
