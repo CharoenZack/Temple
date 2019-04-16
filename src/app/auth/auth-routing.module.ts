@@ -4,6 +4,7 @@ import { AuthComponent } from './auth.component';
 import { LoginComponent } from './login/login.component';
 import { ForgetPasswordComponent } from "./forget-password/forget-password.component";
 import { RegisterFormComponent } from './register-form/register-form.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
     {
@@ -19,9 +20,14 @@ const routes: Routes = [
                 path: "login",
                 component: LoginComponent
             },
+            // {
+            //     path: "register",
+            //     component: RegisterFormComponent,
+            //     data: { urlback: '/auth/login' }
+            // },
             {
                 path: "register",
-                component: RegisterFormComponent,
+                component: RegisterComponent,
                 data: { urlback: '/auth/login' }
             },
             {

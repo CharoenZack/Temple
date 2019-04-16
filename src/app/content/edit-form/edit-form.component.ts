@@ -8,6 +8,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ManageUserService } from 'src/app/shared/service/manage-user.service';
 import { BreadcrumbService } from '../../shared/service/breadcrumb.service';
 import localeTh from '@angular/common/locales/th.js';
+import { ManageRoleService } from 'src/app/shared/service/manage-role.service';
+import { Role } from 'src/app/shared/interfaces/role';
 
 
 @Component({
@@ -29,6 +31,8 @@ export class EditFormComponent implements OnInit {
   public previewImg: any;
   public onEdit: boolean;
   public pipe = new DatePipe('th-TH')
+  public showRole:boolean;
+  public roles:Role[]
 
   public msgs: Message[] = [];
 
@@ -45,7 +49,8 @@ export class EditFormComponent implements OnInit {
     address: '',
     phone: '',
     email: '',
-    phoneEmergency: ''
+    phoneEmergency: '',
+    role:''
   };
 
   public validationMessage = {
@@ -84,6 +89,10 @@ export class EditFormComponent implements OnInit {
     phoneEmergency: {
       datail: 'กรุณากรอก เบอร์ติดต่อฉุกเฉิน',
       required: 'เบอร์ติดต่อฉุกเฉิน*'
+    },
+    role: {
+      datail: 'กรุณากรอก สิทธิการใช้งาน',
+      required: 'สิทธิการใช้งาน*'
     }
   };
 
@@ -96,24 +105,27 @@ export class EditFormComponent implements OnInit {
     private manageUserService: ManageUserService,
     private route: ActivatedRoute,
     private breadCrumbService: BreadcrumbService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private roleService:ManageRoleService,
   ) {
   }
 
   ngOnInit() {
+    this.showRole = this.roleService.getRoleStatus();
+    this.roles = this.roleService.getRoles();
     this.personalId = this.route.snapshot.paramMap.get('id');
     this.urlback = this.route.snapshot.data.urlback;
+
     this.registerSuccess = false;
     this.showCancelMessage = false;
     this.onEdit = false;
+
     this.createForm();
     this.settingForm();
     this.settingCalendarTH();
     this.titleService.getTitleNames().subscribe(
       res => {
-        this.titleName = [
-          ...res
-        ];
+        this.titleName = res
       },
       err => {
         console.log(err['error']['message']);
@@ -139,7 +151,8 @@ export class EditFormComponent implements OnInit {
         phone: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
         phoneEmergency: ['', Validators.required],
-        imgProfile: ['']
+        imgProfile: [''],
+        role:['', Validators.required]
       }
     );
   }
@@ -152,7 +165,13 @@ export class EditFormComponent implements OnInit {
           display: res['data']['titleDisplay'],
           name: res['data']['titleName']
         };
+        const role = 
+        {
+          roleId:res['data']['roleId'],
+          roleName:res['data']['roleName'],
+        };
         this.formEdit.controls['titleName'].patchValue(titlename);
+        this.formEdit.controls['role'].patchValue(role); 
         this.formEdit.controls['fname'].setValue(res['data']['fname']);
         this.formEdit.controls['lname'].setValue(res['data']['lname']);
         this.formEdit.controls['birthday'].setValue(new Date(res['data']['birthdate']));
@@ -188,8 +207,6 @@ export class EditFormComponent implements OnInit {
 
   onSubmit(e) {
     console.log('onsubmit');
-    //this.testMessage();
-
     if (!this.formEdit.valid) {
       this.subscribeInputMessageWaring();
       this.showMessageWrongValidate();
@@ -312,6 +329,7 @@ export class EditFormComponent implements OnInit {
       }
       case "submit": {
         const titleCode = this.formEdit.get('titleName').value;
+        const role = this.formEdit.get('role').value;
         const dataUser = {
           fname: this.formEdit.get('fname').value,
           lname: this.formEdit.get('lname').value,
@@ -325,6 +343,7 @@ export class EditFormComponent implements OnInit {
           lastUpdate: null,
           genderId: this.formEdit.get('gender').value,
           titleId: +(titleCode.id),
+          roleId:+(role.roleId)
         };
 
         this.manageUserService.updateUser(this.personalId, dataUser).subscribe(

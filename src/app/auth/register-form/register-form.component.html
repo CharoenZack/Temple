@@ -207,16 +207,17 @@
         </div>
 
     </form>
-
-    <p-toast position="center" key="systemMessage" (onClose)="onReject()" [modal]="true" [baseZIndex]="5000">
-        <ng-template let-message pTemplate="message">
-            <div style="text-align: center">
-                <h3>{{message.summary}}</h3>
-                <pre class="text-left">{{message.detail}}</pre>
-            </div>
-        </ng-template>
-    </p-toast>
 </div>
+
+<p-toast position="center" key="systemMessage" (onClose)="onReject()" [modal]="true" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+        <div style="text-align: center">
+            <h3>{{message.summary}}</h3>
+            <pre class="text-left">{{message.detail}}</pre>
+        </div>
+    </ng-template>
+</p-toast>
+
 
 <p-confirmDialog></p-confirmDialog>
 <p-toast position="center" key="alertMessage" (onClose)="onReject()" [modal]="true" [baseZIndex]="5000">

@@ -23,6 +23,20 @@
                             </div>
                         </div>
 
+                        <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12" *ngIf="showRole">
+                            <div *ngIf="!formError.role" class="text-right">
+                                สิทธิการใช้งาน
+                            </div>
+                            <div *ngIf="formError.role" class="text-danger text-invalid text-right">
+                                {{formError.role}}
+                            </div>
+                        </div>
+                        <div class="ui-g-9 ui-lg-9 ui-md-8 ui-sm-12" *ngIf="showRole">
+                            <div>
+                                <p-dropdown [options]="roles" optionLabel="roleName" value="roleId" [autoWidth]="false" placeholder="กรุณาเลือกสิทธิการใช้งาน" [style]="{'width':'100%'}" formControlName="role"></p-dropdown>
+                            </div>
+                        </div>
+
                         <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
                             <div *ngIf="!formError.titleName" class="text-right">
                                 คำนำหน้า

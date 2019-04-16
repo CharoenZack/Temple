@@ -1,15 +1,17 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {map} from 'rxjs/operators';
-import {ApiConstants} from '../constants/ApiConstants';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { ApiConstants } from '../constants/ApiConstants';
 import { AuthService } from './auth.service';
+import { HttpClientService } from './http-client.service';
 
 @Injectable()
 export class ManageUserService {
 
   constructor(
     private http: HttpClient,
-    private authService: AuthService
+    private authService: AuthService,
+    private httpService: HttpClientService
   ) {
   }
 
@@ -20,13 +22,13 @@ export class ManageUserService {
           Authorization: `Bearer ${localStorage.getItem('access-token')}`
         }
       }).pipe(
-      map(res => {
+        map(res => {
           return {
             status: res['result'],
           };
         }
-      )
-    );
+        )
+      );
 
   }
 
@@ -70,14 +72,17 @@ export class ManageUserService {
   }
 
   updateUser(id, dataUser) {
+    let res;
     const data = {
       ...dataUser,
     };
-    return this.http.put(ApiConstants.baseURl + `/members/${id}`, data, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('access-token')}`
-      }
-    }).pipe(
+    if (this.authService.getRole().value === "admin") {
+      res = this.httpService.put(ApiConstants.baseURl + `/members/updateByAdmin/${id}`, data)
+      //res = this.httpService.put(ApiConstants.baseURl + `/members/${id}`, data)
+    } else {
+      res = this.httpService.put(ApiConstants.baseURl + `/members/${id}`, data)
+    }
+    return res.pipe(
       map(res => {
         return {
           status: res['result'],
