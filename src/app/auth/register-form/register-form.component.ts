@@ -310,7 +310,4 @@ export class RegisterFormComponent implements OnInit {
     );
   }
 
-  actionLink(){
-
-  }
 }

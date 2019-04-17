@@ -114,6 +114,10 @@ const routes: Routes = [
           {
             path: ':id',
             component: ApprovalFormComponent,
+            data: {
+              urlback: '/approval/',
+              messageback: "อนุมัติพิเศษ"
+            }
           },
         ]
       },
@@ -123,7 +127,11 @@ const routes: Routes = [
       },
       {
         path: 'managepasscourse/:id',
-        component: ManagePassCourseFormComponent
+        component: ManagePassCourseFormComponent,
+        data: {
+          urlback: '/managepasscourse/',
+          messageback: "จัดการการผ่านคอร์ส"
+        }
       },
       {
         path: 'managepasscourse',
