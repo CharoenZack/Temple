@@ -170,10 +170,12 @@ export class RegisterFormComponent implements OnInit {
   onSubmit(e) {
     if (!this.formRegister.valid) {
       this.subscribeInputMessageWaring();
-      this.showMessage('warning');
+      this.showMessage();
     } else {
       this.submitMessage(e);
     }
+    console.log('test');
+    
   }
 
   submitMessage(e) {
@@ -241,12 +243,8 @@ export class RegisterFormComponent implements OnInit {
     }
   }
 
-  showMessage(type) {
-    this.messageService.clear();
-    if (type === 'warning') {
-      this.showDialog('systemMessage',this.detailWarning);
-    }
-
+  showMessage() {
+    this.showToast("systemMessage",this.detailWarning);
   }
 
   onReject() {
