@@ -41,18 +41,12 @@ export class ManageCourseComponent implements OnInit {
     ];
 
     this.breadCrumbService.setPath([
-      // {label: 'Courses : ข้อมูลคอร์สทั้งหมด', routerLink: '/courses'},
+      {label: 'Courses management : จัดการคอร์สทั้งหมด', routerLink: '/manageCourse'},
     ]);
     this.loading = true;
   }
 
   createCourse() {
-    // this.courseService.createCourse().subscribe(function (res) {
-    //   if (res['status'] === 'Success') {
-    //     this.courses = res['data'];
-    //   }
-    // });
-
     this.router.navigateByUrl('/createCourse');
   }
 

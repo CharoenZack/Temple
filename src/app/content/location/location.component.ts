@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Location} from '../../shared/interfaces/location';
 import {LocationService} from './location.service';
 import {MessageService, MenuItem} from 'primeng/api';
+import { BreadcrumbService } from 'src/app/shared/service/breadcrumb.service';
 
 @Component({
   selector: 'app-location',
@@ -20,11 +21,16 @@ export class LocationComponent implements OnInit {
 
   constructor(
     private locationService: LocationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private breadCrumbService: BreadcrumbService
   ) {
   }
 
   ngOnInit() {
+    this.breadCrumbService.setPath([
+      {label: 'Locations management: จัดการสถานที่ทั้งหมด', routerLink: '/location'},
+    ]);
+
     this.getLocation();
     this.cols = [
       {field: 'name', header: 'สถานที่'},

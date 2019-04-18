@@ -7,6 +7,7 @@ import { TitleNameService } from 'src/app/shared/service/title-name.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ManageUserService } from 'src/app/shared/service/manage-user.service';
 import {AuthService} from '../../shared/service/auth.service';
+import { BreadcrumbService } from 'src/app/shared/service/breadcrumb.service';
 
 @Component({
   selector: 'app-register-form',
@@ -101,9 +102,15 @@ export class RegisterFormComponent implements OnInit {
     private manageUserService: ManageUserService,
     private route: ActivatedRoute,
     private confirmationService: ConfirmationService,
+    private breadCrumbService: BreadcrumbService
   ) { }
 
   ngOnInit() {
+    this.breadCrumbService.setPath([
+      {label: 'Members management : จัดการสมาชิกทั้งหมด', routerLink: '/users'},
+      {label: 'Create members : ลงทะเบียนสมาชิก', routerLink: '/users/create'},
+    ]);
+
     this.urlback = this.route.snapshot.data.urlback;
     this.registerSuccess = false;
     this.showCancelMessage = false;
