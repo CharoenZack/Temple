@@ -43,10 +43,11 @@ export class ManageCourseComponent implements OnInit {
     this.breadCrumbService.setPath([
       // {label: 'Courses : ข้อมูลคอร์สทั้งหมด', routerLink: '/courses'},
     ]);
+    this.loading = true;
   }
 
   createCourse() {
-    // this.courseService.createCourse.subscribe(function (res) {
+    // this.courseService.createCourse().subscribe(function (res) {
     //   if (res['status'] === 'Success') {
     //     this.courses = res['data'];
     //   }
@@ -69,6 +70,7 @@ export class ManageCourseComponent implements OnInit {
         //     this.courses = res['data'];
         //   }
         // });
+        this.router.navigateByUrl(`/editCourse/${id}`);
       },
       reject: () => {
         this.msgs = [{severity: 'info', summary: 'Rejected', detail: 'You have rejected'}];

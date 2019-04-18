@@ -1,3 +1,8 @@
+<div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+    <div class="text-right">
+        <p-button label="ปิดคอร์ส" (onClick)=deleteCourse()></p-button> <br>
+    </div>
+</div>
 <div class="ui-g-11 ui-lg-11 ui-md-10 ui-sm-9">
     <div class="text-right" *ngIf="!dropdown()">อนุมัติ</div>
     <p-dropdown [options]="menusSelect" optionLabel="menuName" value="status" [(ngModel)]="status" *ngIf="dropdown()"></p-dropdown>
@@ -42,3 +47,18 @@
 <div class="ui-g-1 ui-lg-1 ui-md-2 ui-sm-3">
     <p-button label="ยืนยัน" (onClick)=sentData()></p-button>
 </div>
+
+
+<p-toast position="center" key="alertMessage" [modal]="true" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+        <div style="text-align: center">
+            <h3>{{message.summary}}</h3>
+            <p>{{message.detail}}</p>
+        </div>
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-12">
+                <button type="button" pButton [label]=messageback class="ui-button-success" [routerLink]=urlback></button>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>

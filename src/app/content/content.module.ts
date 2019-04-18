@@ -17,7 +17,6 @@ import {LocationComponent} from './location/location.component';
 import {ManagedTitlenameComponent} from './managed-titlename/managed-titlename.component';
 import {ConfirmationService} from 'primeng/api';
 import {ManageUserComponent} from './manage-user/manage-user.component';
-import {EditUserComponent} from './manageUser/edit-user/edit-user.component';
 import {EditFormComponent} from './edit-form/edit-form.component';
 import {HomeComponent} from './home/home.component';
 import {ApprovalComponent} from './approval/approval.component';
@@ -52,7 +51,6 @@ registerLocaleData(localeTh);
     LocationComponent,
     ManagedTitlenameComponent,
     ManageUserComponent,
-    EditUserComponent,
     EditFormComponent,
     HomeComponent,
     ApprovalComponent,

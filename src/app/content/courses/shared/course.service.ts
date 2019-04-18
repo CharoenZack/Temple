@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {map} from 'rxjs/operators';
-import {ApiConstants} from 'src/app/shared/constants/ApiConstants';
-import {SpecialApprove} from '../../../shared/interfaces/special-approve';
-import {HttpClientService} from 'src/app/shared/service/http-client.service';
+import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
+import { ApiConstants } from 'src/app/shared/constants/ApiConstants';
+import { SpecialApprove } from '../../../shared/interfaces/special-approve';
+import { HttpClientService } from 'src/app/shared/service/http-client.service';
 
 @Injectable({
   providedIn: 'root'
@@ -26,9 +26,9 @@ export class CourseService {
   getCourseByid(id) {
     return this.http.get(ApiConstants.baseURl + `/courses/${id}`).pipe(
       map(res => ({
-          status: res['result'],
-          data: res['data'][0]
-        })
+        status: res['result'],
+        data: res['data'][0]
+      })
       ));
   }
 
@@ -44,7 +44,7 @@ export class CourseService {
   }
 
   assignCourse(id) {
-    return this.http.post(ApiConstants.baseURl + `/courses/register`, {courseId: id});
+    return this.http.post(ApiConstants.baseURl + `/courses/register`, { courseId: id });
   }
 
 
@@ -52,13 +52,13 @@ export class CourseService {
     return this.http.post(ApiConstants.baseURl + `/courses`, data);
   }
 
-  editCourse(id) {
-    return this.http.patch(ApiConstants.baseURl + `/courses`, {courseId: id});
+  editCourse(id, course) {
+    return this.http.patch(ApiConstants.baseURl + `/courses/${id}`, course);
   }
 
-  deleteCourse(id) {
-    return this.http.patch(ApiConstants.baseURl + `/courses`, {courseId: id});
-  }
+  // deleteCourse(id) {
+  //   return this.http.patch(ApiConstants.baseURl + `/courses`, {courseId: id});
+  // }
 
   approvalCourse(data: SpecialApprove) {
     return this.http.post(ApiConstants.baseURl + `/approve`, data);
@@ -79,29 +79,18 @@ export class CourseService {
     );
   }
 
-  save(data) {
-    // let courses = this.getCourses();
-    // let l = courses.length
-    // return [...courses,
-    // {
-    //   id: l+1,
-    //   name: data
-    // }
-    // ];
-
+  deleteCourse(courseId) {
+    return this.http.put(ApiConstants.baseURl + `/courses/deleteCourse/${courseId}`, null)
+      .pipe(
+        map(res => {
+            return {
+              status : res['result']
+            }
+          }
+        )
+      )
   }
+  
 
-  showEdit(id) {
-    // return  this.courses.filter(e => e.id == id)[0];
 
-  }
-
-  delete(id) {
-    // const index = this.courses.findIndex(e => e.id == id);
-    // return [
-    //   ...this.courses.slice(0,index),
-    //   ...this.courses.slice(index+1),
-    // ]
-
-  }
 }

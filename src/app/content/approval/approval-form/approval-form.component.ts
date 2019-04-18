@@ -19,8 +19,9 @@ export class ApprovalFormComponent implements OnInit {
   @Input() fieldId: string
   @Input() course: any[];
   @Output() listData;
-  public courseId: string;
   @Input() msgs: Message[] = [];
+  public courseId: string;
+  public nameCourse:string;
 
   constructor(
     private breadCrumbService: BreadcrumbService,
@@ -33,7 +34,7 @@ export class ApprovalFormComponent implements OnInit {
     this.option = "2";
     this.fieldId = "specialApproveId"
     this.breadCrumbService.setPath([
-      { label: 'Approval: การอนุมัติ',url:'/approval' },
+      { label: 'Approval: การอนุมัติ',routerLink:'/approval' },
       { label: 'Approval students: อนุมัติผู้เรียน' },
     ]);
 
@@ -44,6 +45,8 @@ export class ApprovalFormComponent implements OnInit {
     this.courseId = this.route.snapshot.paramMap.get("id")
     this.initMember();
 
+    this.nameCourse = this.route.snapshot.queryParamMap.get('course');
+    
   }
 
   initMember() {
