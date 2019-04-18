@@ -3,6 +3,7 @@ import { TitleName } from '../interfaces/title-name';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { ApiConstants } from '../constants/ApiConstants';
+import { HttpClientService } from './http-client.service';
 
 
 
@@ -10,7 +11,8 @@ import { ApiConstants } from '../constants/ApiConstants';
 export class TitleNameService {
 
   constructor(
-    private http: HttpClient
+    //private http: HttpClient
+    private http: HttpClientService
   ) { }
 
   getTitleNames() {
