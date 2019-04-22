@@ -53,7 +53,7 @@ export class ManagePassCourseComponent implements OnInit {
   }
 
   onRowSelect(e) {
-    this.router.navigateByUrl(`/managepasscourse/${e.data.id}`);
+    this.router.navigateByUrl(`/managepasscourse/${e.data.id}?course=${e.data.name}`);
   }
 
   private getData(first = 0, rows = 10, query: string = '') {

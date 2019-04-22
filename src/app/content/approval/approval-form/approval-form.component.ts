@@ -19,8 +19,9 @@ export class ApprovalFormComponent implements OnInit {
   @Input() fieldId: string
   @Input() course: any[];
   @Output() listData;
-  public courseId: string;
   @Input() msgs: Message[] = [];
+  public courseId: string;
+  public nameCourse:string;
 
   constructor(
     private breadCrumbService: BreadcrumbService,
@@ -44,6 +45,8 @@ export class ApprovalFormComponent implements OnInit {
     this.courseId = this.route.snapshot.paramMap.get("id")
     this.initMember();
 
+    this.nameCourse = this.route.snapshot.queryParamMap.get('course');
+    
   }
 
   initMember() {

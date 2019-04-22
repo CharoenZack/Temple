@@ -44,8 +44,8 @@ export class CourseCreateComponent implements OnInit {
     this.initNotice();
 
     this.breadCrumbService.setPath([
-      { label: 'ManageCourse : ตารางคอร์ส', routerLink: '/manageCourse' },
-      { label: 'CreateCourse : สร้างคอร์ส', routerLink: '/createCourse' },
+      { label: 'Courses management : จัดการคอร์สทั้งหมด', routerLink: '/manageCourse' },
+      { label: 'Create course : สร้างคอร์ส', routerLink: '/createCourse' },
     ]);
     this.courseService.getTeachers().subscribe(
       res => {

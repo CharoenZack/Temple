@@ -73,7 +73,7 @@
                             </div>
                             <div class="ui-g-9 ui-lg-9 ui-md-8 ui-sm-12">
                                 <div>
-                                    <p-dropdown [options]="titleName" optionLabel="display" value="id" [autoWidth]="false" formControlName="titleName"></p-dropdown>
+                                    <p-dropdown [options]="titleName" optionLabel="display" value="id" [autoWidth]="false" formControlName="titleName" placeholder="กรุณาเลือกคำนำหน้า" [style]="{'width':'100%'}"></p-dropdown>
                                 </div>
                             </div>
                             <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
@@ -112,7 +112,7 @@
                             </div>
                             <div class="ui-g-9 ui-lg-9 ui-md-8 ui-sm-12">
                                 <div>
-                                    <p-calendar class="calendar-button" [locale]="th" [yearRange]="yearRange" placeholder="01/01/1990" [showIcon]="true" [yearNavigator]="true" dateFormat="dd/mm/yy" [monthNavigator]="true" formControlName="birthday"></p-calendar>
+                                    <p-calendar [baseZIndex]="10000" class="calendar-button" [locale]="th" [yearRange]="yearRange" placeholder="01/01/1990" [showIcon]="true" [yearNavigator]="true" dateFormat="dd/mm/yy" [monthNavigator]="true" formControlName="birthday"></p-calendar>
                                 </div>
                             </div>
 
@@ -207,21 +207,29 @@
         </div>
 
     </form>
-
-    <p-toast position="center" key="systemMessage" (onClose)="onReject()" [modal]="true" [baseZIndex]="5000">
-        <ng-template let-message pTemplate="message">
-            <div style="text-align: center">
-                <h3>{{message.summary}}</h3>
-                <pre class="text-left">{{message.detail}}</pre>
-            </div>
-            <div class="ui-g ui-fluid" *ngIf="showCancelMessage">
-                <div class="ui-g-6">
-                    <button type="button" pButton (click)="onCancel()" label="ยืนยัน" class="ui-button-warning" autofocus></button>
-                </div>
-                <div class="ui-g-6">
-                    <button type="button" pButton (click)="onReject()" label="ยกเลิก" class="ui-button-secondary"></button>
-                </div>
-            </div>
-        </ng-template>
-    </p-toast>
 </div>
+
+<p-toast position="center" key="systemMessage" (onClose)="onReject()" [modal]="true" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+        <div style="text-align: center">
+            <h3>{{message.summary}}</h3>
+            <pre class="text-left">{{message.detail}}</pre>
+        </div>
+    </ng-template>
+</p-toast>
+
+
+<p-confirmDialog></p-confirmDialog>
+<p-toast position="center" key="alertMessage" (onClose)="onReject()" [modal]="true" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+        <div style="text-align: center">
+            <h3>{{message.summary}}</h3>
+            <p>{{message.detail}}</p>
+        </div>
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-12">
+                <button type="button" pButton [label]=messageback class="ui-button-success" [routerLink]=urlback></button>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>

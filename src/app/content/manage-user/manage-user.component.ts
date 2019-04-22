@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ManageUserService} from 'src/app/shared/service/manage-user.service';
 import { MenuItem } from 'primeng/api';
+import { BreadcrumbService } from 'src/app/shared/service/breadcrumb.service';
 
 @Component({
   selector: 'app-manage-user',
@@ -13,10 +14,15 @@ export class ManageUserComponent implements OnInit {
   public menu: MenuItem[];
 
   constructor(
-    private manageUser: ManageUserService
+    private manageUser: ManageUserService,
+    private breadCrumbService : BreadcrumbService
   ) { }
 
   ngOnInit() {
+    this.breadCrumbService.setPath([
+      {label: 'Members management : จัดการสมาชิกทั้งหมด', routerLink: '/users'},
+    ]);
+
     this.manageUser.getAllUsers().subscribe(res => {
       if (res['status'] === 'Success') {
         this.personal = res.data;

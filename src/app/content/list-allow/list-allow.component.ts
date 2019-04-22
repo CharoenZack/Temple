@@ -1,6 +1,8 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {BreadcrumbService} from 'src/app/shared/service/breadcrumb.service';
 import {ActivatedRoute} from '@angular/router';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { CourseService } from '../courses/shared/course.service';
 
 @Component({
   selector: 'app-list-allow',
@@ -30,13 +32,21 @@ export class ListAllowComponent implements OnInit {
     },
   ];
 
+  public urlback: string;
+  public messageback: string;
+
 
   constructor(
     private route: ActivatedRoute,
+    private confirmationService: ConfirmationService,
+    private courseService: CourseService,
+    private messageService: MessageService
   ) {
   }
 
   ngOnInit() {
+    this.urlback = this.route.snapshot.data.urlback;
+    this.messageback = "กลับไปยังหน้า"+this.route.snapshot.data.messageback;
     this.courseId = this.route.snapshot.paramMap.get('id');
     this.status = {
       status: '1',
@@ -114,6 +124,41 @@ export class ListAllowComponent implements OnInit {
 
   showCheckbox() {
     return !(this.member[0]['displayName'] === 'ไม่มีข้อมูล');
+  }
+
+  deleteCourse(){
+    this.confirmationService.confirm({
+      message: 'คุณแน่ใจที่จะทำการปิดคอร์ส นักเรียนที่ขออนุมัติเข้าเรียนจะถูกยกเลิกและนักเรียนที่กำลังเรียนจะสอบตก',
+      header: 'ข้อความจากระบบ',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.courseService.deleteCourse(this.courseId)
+        .subscribe( res => {
+          if(res['status']==="Success"){
+            this.showToast("alertMessage","การปิดคอร์สสำเร็จ")
+          }else{
+            this.showToast("alertMessage","การปิดคอร์สไม่สำเร็จ")
+          }
+        }
+
+        )
+      },
+      reject: () => {
+          
+      }
+  });
+  }
+
+  showToast(key, detail) {
+    this.messageService.clear();
+    this.messageService.add(
+      {
+        key: key,
+        sticky: true,
+        summary: 'ข้อความจากระบบ',
+        detail: detail
+      }
+    );
   }
 
 }

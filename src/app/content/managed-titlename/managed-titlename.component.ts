@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {TitleName} from '../../shared/interfaces/title-name';
 import {TitleNameService} from 'src/app/shared/service/title-name.service';
 import {MenuItem} from 'primeng/api';
+import { BreadcrumbService } from 'src/app/shared/service/breadcrumb.service';
 
 @Component({
   selector: 'app-managed-titlename',
@@ -20,11 +21,15 @@ export class ManagedTitlenameComponent implements OnInit {
   public menu: MenuItem[];
 
   constructor(
-    private titleNamesService: TitleNameService
+    private titleNamesService: TitleNameService,
+    private breadCrumbService: BreadcrumbService
   ) {
   }
 
   ngOnInit() {
+    this.breadCrumbService.setPath([
+      {label: 'Title names management: จัดการคำนำหน้าทั้งหมด', routerLink: '/manageTitlename'},
+    ]);
 
     this.getTitleName();
     this.cols = [

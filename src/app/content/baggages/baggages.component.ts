@@ -40,7 +40,7 @@ export class BaggagesComponent implements OnInit {
     ];
 
     this.breadCrumbService.setPath([
-      {label: 'Baggages manage: จัดการสัมภาระ'}
+      {label: 'Baggage management: จัดการสัมภาระทั้งหมด',routerLink: '/baggages'}
     ]);
 
     this.authService.getRole().subscribe(res => this.role = res);

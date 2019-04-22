@@ -1,108 +1,105 @@
 <div class="ui-g">
-  <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
-    <div class="margin-top-bottom">
-      <fieldset>
-        <legend class="font-show">ข้อมูลส่วนตัว</legend>
-        <div class="container">
+    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+        <div class="margin-top-bottom">
+            <fieldset>
+                <legend class="font-show">ข้อมูลส่วนตัว</legend>
+                <div class="container">
 
-          <div class="ui-g">
-            <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ">
-              <div class="ui-g">
-                <div class="ui-g-12 ui-lg-2 ui-md-3 ui-sm-12 text-info">
-                  <span>รูปโปรไฟล์</span>
+                    <div class="ui-g">
+                        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ">
+                            <div class="ui-g">
+                                <div class="ui-g-12 ui-lg-2 ui-md-3 ui-sm-12 text-info">
+                                    <span>รูปโปรไฟล์</span>
+                                </div>
+                                <div class="ui-g-12 ui-lg-4 ui-md-3 ui-sm-12">
+                                    <img src="/assets/images/no-img.png" class="img-info" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ">
+                            <div class="ui-g">
+                                <div class="ui-g-12 ui-lg-2 ui-md-3 ui-sm-12 text-info">
+                                    <span>ชื่อ-นามสกุล</span>
+                                </div>
+                                <div class="ui-g-12 ui-lg-4 ui-md-3 ui-sm-12">
+                                    <span>{{(userData) ? userData.titleName + userData.fname+' '+userData.lname : ''}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ">
+                            <div class="ui-g">
+                                <div class="ui-g-12 ui-lg-2 ui-md-3 ui-sm-12 text-info">
+                                    <span>วันเกิด</span>
+                                </div>
+                                <div class="ui-g-12 ui-lg-4 ui-md-3 ui-sm-12">
+                                    <span>{{((userData) ? userData.birthdate:'') | date:'dd/MM/yyyy' }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ">
+                            <div class="ui-g">
+                                <div class="ui-g-12 ui-lg-2 ui-md-3 ui-sm-12 text-info">
+                                    <span>เพศ</span>
+                                </div>
+                                <div class="ui-g-12 ui-lg-4 ui-md-3 ui-sm-12">
+                                    <span>{{(userData) ? userData.genderName:''}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ">
+                            <div class="ui-g">
+                                <div class="ui-g-12 ui-lg-2 ui-md-3 ui-sm-12 text-info">
+                                    <span>ที่อยู่</span>
+                                </div>
+                                <div class="ui-g-12 ui-lg-4 ui-md-3 ui-sm-12">
+                                    <span>{{(userData) ? userData.address:''}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ">
+                            <div class="ui-g">
+                                <div class="ui-g-12 ui-lg-2 ui-md-3 ui-sm-12 text-info">
+                                    <span>เบอร์โทร</span>
+                                </div>
+                                <div class="ui-g-12 ui-lg-4 ui-md-3 ui-sm-12">
+                                    <span>{{(userData) ? userData.tel:''}}</span>
+                                </div>
+                                <div class="ui-g-12 ui-lg-2 ui-md-3 ui-sm-12 text-info">
+                                    <span>เบอร์ติดต่อฉุกเฉิน</span>
+                                </div>
+                                <div class="ui-g-12 ui-lg-4 ui-md-3 ui-sm-12">
+                                    <span>{{(userData) ? userData.emergencyTel:''}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ">
+                            <div class="ui-g">
+                                <div class="ui-g-12 ui-lg-2 ui-md-3 ui-sm-12 text-info">
+                                    <span>อีเมล</span>
+                                </div>
+                                <div class="ui-g-12 ui-lg-4 ui-md-3 ui-sm-12">
+                                    <span>{{(userData) ? userData.email:''}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="ui-g-12 ui-lg-4 ui-md-3 ui-sm-12">
-                  <img src="/assets/images/no-img.png" class="img-info" />
+
+            </fieldset>
+            <div class="ui-g">
+                <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 row">
+                    <div class="center temple-button font-show">
+                        <p-button type="button" label="แก้ไข" (onClick)='goToEdit()'></p-button>
+                    </div>
                 </div>
-              </div>
             </div>
 
-            <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ">
-              <div class="ui-g">
-                <div class="ui-g-12 ui-lg-2 ui-md-3 ui-sm-12 text-info">
-                  <span>ชื่อ-นามสกุล</span>
-                </div>
-                <div class="ui-g-12 ui-lg-4 ui-md-3 ui-sm-12">
-                  <span>{{(userData) ? userData.titleName+userData.fname+' '+userData.lname : ''}}</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ">
-              <div class="ui-g">
-                <div class="ui-g-12 ui-lg-2 ui-md-3 ui-sm-12 text-info">
-                  <span>วันเกิด</span>
-                </div>
-                <div class="ui-g-12 ui-lg-4 ui-md-3 ui-sm-12">
-                  <span>{{(userData) ? userData.birthdate:''}}</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ">
-              <div class="ui-g">
-                <div class="ui-g-12 ui-lg-2 ui-md-3 ui-sm-12 text-info">
-                  <span>เพศ</span>
-                </div>
-                <div class="ui-g-12 ui-lg-4 ui-md-3 ui-sm-12">
-                  <span>{{(userData) ? userData.genderName:''}}</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ">
-              <div class="ui-g">
-                <div class="ui-g-12 ui-lg-2 ui-md-3 ui-sm-12 text-info">
-                  <span>ที่อยู่</span>
-                </div>
-                <div class="ui-g-12 ui-lg-4 ui-md-3 ui-sm-12">
-                  <span>{{(userData) ? userData.address:''}}</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ">
-              <div class="ui-g">
-                <div class="ui-g-12 ui-lg-2 ui-md-3 ui-sm-12 text-info">
-                  <span>เบอร์โทร</span>
-                </div>
-                <div class="ui-g-12 ui-lg-4 ui-md-3 ui-sm-12">
-                  <span>{{(userData) ? userData.tel:''}}</span>
-                </div>
-                <div class="ui-g-12 ui-lg-2 ui-md-3 ui-sm-12 text-info">
-                  <span>เบอร์ติดต่อฉุกเฉิน</span>
-                </div>
-                <div class="ui-g-12 ui-lg-4 ui-md-3 ui-sm-12">
-                  <span>{{(userData) ? userData.emergencyTel:''}}</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ">
-              <div class="ui-g">
-                <div class="ui-g-12 ui-lg-2 ui-md-3 ui-sm-12 text-info">
-                  <span>อีเมล</span>
-                </div>
-                <div class="ui-g-12 ui-lg-4 ui-md-3 ui-sm-12">
-                  <span>{{(userData) ? userData.email:''}}</span>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-
-      </fieldset>
-      <div class="ui-g">
-        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 row">
-          <div class="center temple-button font-show">
-            <p-button type="button" label="แก้ไข" (onClick)='goToEdit()'></p-button>
-          </div>
-        </div>
-      </div>
-
     </div>
-  </div>
 </div>
-
-
-

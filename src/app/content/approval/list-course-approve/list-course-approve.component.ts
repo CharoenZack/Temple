@@ -61,7 +61,7 @@ export class ListCourseApproveComponent implements OnInit {
   }
 
   onRowSelect(e) {
-    this.router.navigateByUrl(`/approval/${e.data.id}`);
+    this.router.navigateByUrl(`/approval/${e.data.id}?course=${e.data.name}`);
   }
 
   private getData(first = 0, rows = 10, query: string = '') {

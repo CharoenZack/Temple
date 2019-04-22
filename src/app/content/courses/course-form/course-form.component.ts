@@ -60,9 +60,8 @@ export class CourseFormComponent implements OnInit {
         this.displayDialog = true;
     }
 
-    delete(id) {
-        this.courseService.delete(id);
-
-    }
+    // delete(id) {
+    //     this.courseService.delete(id);
+    // }
 
 }
