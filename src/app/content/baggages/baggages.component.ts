@@ -47,7 +47,7 @@ export class BaggagesComponent implements OnInit {
   }
 
   private getData() {
-    this.baggageService.getItem().subscribe(
+    this.baggageService.getItems().subscribe(
       res => {
         if (res['status'] === 'Success') {
           this.items = res['data'];
