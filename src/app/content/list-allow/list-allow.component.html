@@ -1,6 +1,6 @@
 <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
     <div class="text-right">
-        <p-button label="ปิดคอร์ส" (onClick)=deleteCourse()></p-button> <br>
+        <p-button label="ปิดคอร์ส" styleClass="ui-button-danger" (onClick)=deleteCourse()></p-button> <br>
     </div>
 </div>
 <div class="ui-g-11 ui-lg-11 ui-md-10 ui-sm-9">
@@ -8,7 +8,7 @@
     <p-dropdown [options]="menusSelect" optionLabel="menuName" value="status" [(ngModel)]="status" *ngIf="dropdown()"></p-dropdown>
 </div>
 <div class="ui-g-1 ui-lg-1 ui-md-2 ui-sm-3">
-    <p-button label="ยืนยัน" (onClick)=sentData()></p-button>
+    <p-button label="ยืนยัน" styleClass="ui-button-temple" (onClick)=sentData()></p-button>
 </div>
 <p-messages [value]="msgs"></p-messages>
 <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
@@ -45,7 +45,7 @@
     <p-dropdown [options]="menusSelect" optionLabel="menuName" value="status" [(ngModel)]="status" *ngIf="dropdown()"></p-dropdown>
 </div>
 <div class="ui-g-1 ui-lg-1 ui-md-2 ui-sm-3">
-    <p-button label="ยืนยัน" (onClick)=sentData()></p-button>
+    <p-button label="ยืนยัน" styleClass="ui-button-temple" (onClick)=sentData()></p-button>
 </div>
 
 

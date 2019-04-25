@@ -33,6 +33,7 @@ import localeTh from '@angular/common/locales/th';
 import { ListAllowComponent } from './list-allow/list-allow.component';
 import { CourseApproveComponent } from './approval/course-approve/course-approve.component';
 import { ApprovalFormComponent } from './approval/approval-form/approval-form.component';
+import { ManageStorageComponent } from './manage-storage/manage-storage.component';
 
 registerLocaleData(localeTh);
 
@@ -62,6 +63,7 @@ registerLocaleData(localeTh);
     ListAllowComponent,
     CourseApproveComponent,
     ApprovalFormComponent,
+    ManageStorageComponent,
 
   ],
   imports: [
