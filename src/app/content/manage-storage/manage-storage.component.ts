@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Baggage } from 'src/app/shared/interfaces/baggage';
-import { BaggageService } from 'src/app/shared/service/baggage.service';
-import { BreadcrumbService } from 'src/app/shared/service/breadcrumb.service';
-import { AuthService } from 'src/app/shared/service/auth.service';
-import { MenuItem, ConfirmationService, Message } from 'primeng/api';
-import { ManageUserService } from 'src/app/shared/service/manage-user.service';
+import {Component, OnInit} from '@angular/core';
+import {Baggage} from 'src/app/shared/interfaces/baggage';
+import {BaggageService} from 'src/app/shared/service/baggage.service';
+import {BreadcrumbService} from 'src/app/shared/service/breadcrumb.service';
+import {AuthService} from 'src/app/shared/service/auth.service';
+import {MenuItem, ConfirmationService, Message} from 'primeng/api';
+import {ManageUserService} from 'src/app/shared/service/manage-user.service';
 
 
 @Component({
@@ -27,7 +27,12 @@ export class ManageStorageComponent implements OnInit {
   public numberOfLocker: any[];
   public selectedMember: any;
   public selectedNumber: any;
+  public selectedStatus: any;
   public msgs: Message[] = [];
+  public status = [
+    {val: '0', label: 'ฝาก'},
+    {val: '1', label: 'รับคืนแล้ว'}
+  ];
 
   constructor(
     private baggageService: BaggageService,
@@ -43,14 +48,14 @@ export class ManageStorageComponent implements OnInit {
     this.getData();
 
     this.cols = [
-      { field: 'createDate', header: 'วันที่' },
-      { field: 'memberName', header: 'สมาชิก' },
-      { field: 'number', header: 'หมายเลขตู้' },
-      { field: 'status', header: 'สถานะ' }
+      {field: 'createDate', header: 'วันที่'},
+      {field: 'memberName', header: 'สมาชิก'},
+      {field: 'number', header: 'หมายเลขตู้'},
+      {field: 'status', header: 'สถานะ'}
     ];
 
     this.breadCrumbService.setPath([
-      { label: 'Baggage management: จัดการคนกับสัมพาระ', routerLink: '/storage' }
+      {label: 'Baggage management: จัดการคนกับสัมพาระ', routerLink: '/storage'}
     ]);
 
     this.authService.getRole().subscribe(res => this.role = res);
@@ -59,20 +64,20 @@ export class ManageStorageComponent implements OnInit {
   private initDialogData() {
     this.memberService.getAllUsers()
       .subscribe(res => {
-        if (res['status'] === 'Success') {
-          this.members = res['data'].map(res => {
-            return {
-              memberId: res['id'],
-              memberName: res['titleName'] + res['fname'] + "  " + res['lname']
-            }
-          })
-        }
-      },
+          if (res['status'] === 'Success') {
+            this.members = res['data'].map(res => {
+              return {
+                memberId: res['id'],
+                memberName: res['titleName'] + res['fname'] + '  ' + res['lname']
+              };
+            });
+          }
+        },
         err => {
           console.log(err);
 
         }
-      )
+      );
 
     this.baggageService.getItem()
       .subscribe(
@@ -82,11 +87,11 @@ export class ManageStorageComponent implements OnInit {
               return {
                 baggageId: res['id'],
                 number: res['number']
-              }
-            })
+              };
+            });
           }
         }
-      )
+      );
   }
 
   private getData() {
@@ -107,19 +112,22 @@ export class ManageStorageComponent implements OnInit {
 
   showEdit(id) {
     console.log(id);
-    
     this.newBaggage = false;
-    this.baggage = this.items.filter(e => e.id === id)[0];
+    this.baggage = this.items.filter(e => e.membersHasBaggageId === +id)[0];
     console.log(this.baggage);
     this.selectedMember = {
-      memberId:this.baggage['memberId'],
-      memberName:this.baggage['memberName']
-    }
+      memberId: this.baggage['memberId'],
+      memberName: this.baggage['memberName']
+    };
     this.selectedNumber = {
-      baggageId:this.baggage['baggageId'],
-      number:this.baggage['number']
-    }
-    
+      baggageId: this.baggage['baggageId'],
+      number: this.baggage['number']
+    };
+    this.selectedStatus = {
+      val: this.baggage['status'],
+      label: this.baggage['status'] === '0' ? 'ฝาก' : 'รับคืนแล้ว'
+    };
+
     this.displayDialog = true;
   }
 
@@ -145,58 +153,66 @@ export class ManageStorageComponent implements OnInit {
     if (this.selectedMember && this.selectedNumber) {
       this.baggageService.saveStorage(this.selectedMember['memberId'], this.selectedNumber['baggageId'])
         .subscribe(res => {
-          
-          if (res['status'] === "Success") {
-            this.msgs = [{ severity: 'success', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระสำเร็จ' }];
-            this.getData();
-          } else {
-            this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ' }];
-          }
-        },
-          (err) => {
-            this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ' }];
+
+            if (res['status'] === 'Success') {
+              this.msgs = [{severity: 'success', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระสำเร็จ'}];
+              this.getData();
+            } else {
+              this.msgs = [{severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ'}];
+            }
           },
-          ()=>{
-            this.selectedMember=[];
-            this.selectedNumber=[];
+          (err) => {
+            this.msgs = [{severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ'}];
+          },
+          () => {
+            this.selectedMember = [];
+            this.selectedNumber = [];
           }
-        )
-    }else{
-      this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ' }];
+        );
+    } else {
+      this.msgs = [{severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ'}];
     }
 
   }
 
-  update() {
+  update(id) {
     this.msgs = [];
     this.displayDialog = false;
-    // const data = {
-    //   id: this.baggage['id'],
-    //   number: this.baggageNumber
-    // };
-    // this.baggageService.update(data)
-    //   .subscribe(res => {
-    //     if (res['status'] === 'Success') {
-    //       const index = this.items.findIndex(e => e.id === res['data']['id']);
-    //       this.items[index].number = res['data']['number'];
-    //     }
-    //   },
-    //     (e) => {
-    //       console.log(e['error']['message']);
-    //     });
-    this.clear();
+    const data = {
+      memberId: this.selectedMember['memberId'],
+      baggageId: this.selectedNumber['baggageId'],
+      status: this.selectedStatus['val'],
+    };
+    this.baggageService.updateStorage(id, data).subscribe(res => {
+
+      const index = this.items.findIndex(e => e.membersHasBaggageId === res['data']['membersHasBaggageId']);
+      console.log(index);
+      const newData = this.items[index];
+      newData.status = data.status;
+      newData.id = data.baggageId;
+      newData.memberId = data.memberId;
+      console.log(newData);
+      this.items = [
+        ...this.items.slice(0, index - 1),
+        newData,
+        ...this.items.slice(index + 1)
+      ];
+      this.clear();
+      console.log(res);
+    });
   }
 
   clear() {
-    this.selectedMember=[];
-    this.selectedNumber=[];
+    this.selectedMember = [];
+    this.selectedNumber = [];
+    this.selectedStatus = [];
     this.displayDialog = false;
   }
 
 
   showDialogToAdd() {
     this.newBaggage = true;
-    this.baggage = { number: '', id: '' };
+    this.baggage = {number: '', id: ''};
     this.displayDialog = true;
   }
 }
