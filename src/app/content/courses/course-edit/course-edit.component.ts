@@ -3,8 +3,9 @@ import {BreadcrumbService} from '../../../shared/service/breadcrumb.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CourseService } from '../shared/course.service';
 import { formatDate, DatePipe } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LocationService } from '../../location/location.service';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-course-edit',
@@ -13,6 +14,7 @@ import { LocationService } from '../../location/location.service';
 })
 export class CourseEditComponent implements OnInit {
 
+  public msgs: any[] = [];
   public courseId: string;
   public formEdit: FormGroup;
   public noticearr = ['0','1','2','3','4','5','6','7','8','9','10']
@@ -30,6 +32,8 @@ export class CourseEditComponent implements OnInit {
       private courseService: CourseService,
       private route: ActivatedRoute,
       private locationService: LocationService,
+      private router: Router,
+      private confirmationService: ConfirmationService,
   ) { }
 
   ngOnInit() {
@@ -88,14 +92,14 @@ export class CourseEditComponent implements OnInit {
         //   name: res['data']['teacher']['fname']
         // }
         const location = {
-          id: res['data'][0]['locationId'],
-          name: res['data'][0]['locationName']
+          id: res['data']['locationId'],
+          name: res['data']['locationName']
         }
-        this.formEdit.controls['courseName'].setValue(res['data'][0]['name']);
-        this.formEdit.controls['detail'].setValue(res['data'][0]['detail']);
+        this.formEdit.controls['courseName'].setValue(res['data']['name']);
+        this.formEdit.controls['detail'].setValue(res['data']['detail']);
         this.formEdit.controls['location'].patchValue(location)
         // this.formEdit.controls['teacher'].patchValue(teacher)
-        this.formEdit.controls['conditionMin'].setValue({id:''+(res['data'][0]['conditionMin'])});
+        this.formEdit.controls['conditionMin'].setValue({id:''+(res['data']['conditionMin'])});
         
         },
         err => console.log(err['error']['message'])
@@ -123,7 +127,33 @@ export class CourseEditComponent implements OnInit {
           console.log(err['error']['message']);
         }
       );
+      this.courseService.createCourse(course).subscribe(res => {
+        if (res['result'] === 'Success') {
+          this.msgs = [{ severity: 'success', summary: 'ข้อความจากระบบ', detail: 'สร้างคอร์สสำเร็จ' }];
+        } else if (res['result'] === 'Fail') {
+          this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: res['errorMessage'] }];
+        }
+      });
+      this.router.navigateByUrl('/manageCourse');
   }
+  onCancel() {
+    this.confirmationService.confirm({
+      message: 'ยืนยันการยกเลิกการแก้ไขคอร์ส',
+      header: 'ข้อความจากระบบ',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        
+        this.msgs = [{severity: 'info', summary: 'ข้อความจากระบบ', detail: 'ยืนยันการยกเลิกการแก้ไขคอร์ส'}];
+        this.router.navigateByUrl('/manageCourse');
+      },
+      reject: () => {
+        // this.msgs = [{severity: 'info', summary: 'ข้อความจากระบบ', detail: 'ปฏิเสธการยกเลิกการขออนุมัติพิเศษ'}];
+      }
+    });
+    
+  }
+
+
   filterTeacherMultiple(event) {
     let query = event.query;
     this.filteredTeacher = this.filterTeacher(query, this.teachers);

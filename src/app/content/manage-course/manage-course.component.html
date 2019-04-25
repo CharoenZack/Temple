@@ -1,98 +1,87 @@
 <div class="ui-g">
-  <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
-    <div style="text-align:center">
-      <h1>ตารางคอร์ส</h1>
-    </div>
-    <div class="line"></div>
-    <div class="container">
-      <div class="ui-g">
-        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
-          <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
-          <p-messages [value]="msgs"></p-messages>
-          <p-table #dt [columns]="cols" [value]="courses" [paginator]="true" [rows]="5" [responsive]="true"
-            [lazy]="true" (onLazyLoad)="loadData($event)" [totalRecords]="totalRecords" [loading]="loading">
-            <ng-template pTemplate="caption">
-              <div class="ui-g ui-fluid">
-                <div class="ui-g-12 ui-lg-3 ui-md-3 ui-sm-12" style="text-align:left">
-                  <button pButton type="button" (click)="createCourse()" label="เพิ่ม" class="ui-button-info"
-                    style="width: 20%"></button>
-                </div>
-                <div class="ui-g-12 ui-lg-3 ui-md-3 ui-sm-12" style="margin-left: auto;">
-                  <div class="ui-inputgroup">
-                    <fa-icon [icon]="['fas', 'search']" class="ui-inputgroup-addon"></fa-icon>
-                    <input type="text" pInputText placeholder="ค้นหา"
-                      (input)="dt.filterGlobal($event.target.value, 'contains')">
-                  </div>
-                </div>
-              </div>
-            </ng-template>
-            <ng-template pTemplate="header" let-columns>
-              <tr>
-                <th pSortableColumn="date">
-                  วันที่
-                  <p-sortIcon field="date" ariaLabel="Activate to sort"
-                    ariaLabelDesc="Activate to sort in descending order"
-                    ariaLabelAsc="Activate to sort in ascending order">
-                  </p-sortIcon>
-                </th>
-                <th pSortableColumn="name" class="ui-p-4">
-                  ชื่อคอร์ส
-                  <p-sortIcon field="name" ariaLabel="Activate to sort"
-                    ariaLabelDesc="Activate to sort in descending order"
-                    ariaLabelAsc="Activate to sort in ascending order">
-                  </p-sortIcon>
-                </th>
-                <th pSortableColumn="location" class="ui-p-5">
-                  สถานที่
-                  <p-sortIcon field="location" ariaLabel="Activate to sort"
-                    ariaLabelDesc="Activate to sort in descending order"
-                    ariaLabelAsc="Activate to sort in ascending order">
-                  </p-sortIcon>
-                </th>
-                <th pSortableColumn="conditionMin" class="ui-p-6">
-                  หมายเหตุ
-                  <p-sortIcon field="conditionMin" ariaLabel="Activate to sort"
-                    ariaLabelDesc="Activate to sort in descending order"
-                    ariaLabelAsc="Activate to sort in ascending order">
-                  </p-sortIcon>
-                </th>
-                <th>
+    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+        <div style="text-align:center">
+            <h1>ตารางคอร์ส</h1>
+        </div>
+        <div class="line"></div>
+        <div class="container">
+            <div class="ui-g">
+                <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+                    <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+                    <p-messages [value]="msgs"></p-messages>
+                    <p-table #dt [columns]="cols" [value]="courses" [paginator]="true" [rows]="5" [responsive]="true" [lazy]="true" (onLazyLoad)="loadData($event)" [totalRecords]="totalRecords" [loading]="loading">
+                        <ng-template pTemplate="caption">
+                            <div class="ui-g ui-fluid">
+                                <div class="ui-g-12 ui-lg-3 ui-md-3 ui-sm-12" style="text-align:left">
+                                    <button pButton type="button" (click)="createCourse()" label="เพิ่ม" class="ui-button-info"></button>
+                                </div>
+                                <div class="ui-g-12 ui-lg-3 ui-md-3 ui-sm-12" style="margin-left: auto;">
+                                    <div class="ui-inputgroup">
+                                        <fa-icon [icon]="['fas', 'search']" class="ui-inputgroup-addon"></fa-icon>
+                                        <input type="text" pInputText placeholder="ค้นหา" (input)="dt.filterGlobal($event.target.value, 'contains')">
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="header" let-columns>
+                            <tr>
+                                <th pSortableColumn="date">
+                                    วันที่
+                                    <p-sortIcon field="date" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
+                                    </p-sortIcon>
+                                </th>
+                                <th pSortableColumn="name" class="ui-p-4">
+                                    ชื่อคอร์ส
+                                    <p-sortIcon field="name" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
+                                    </p-sortIcon>
+                                </th>
+                                <th pSortableColumn="location" class="ui-p-5">
+                                    สถานที่
+                                    <p-sortIcon field="location" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
+                                    </p-sortIcon>
+                                </th>
+                                <th pSortableColumn="conditionMin" class="ui-p-6">
+                                    หมายเหตุ
+                                    <p-sortIcon field="conditionMin" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
+                                    </p-sortIcon>
+                                </th>
+                                <th>
 
-                </th>
-              </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-rowData let-columns="columns">
-              <tr>
-                <td *ngFor="let col of columns;" [routerLink]="['/courses',rowData['id']]">
-                  <div *ngIf="rowData[col.field] != rowData['status']">
-                    <span class="ui-column-title">{{col.header}}</span>
-                    <div *ngIf="rowData[col.field] == rowData['conditionMin']">ต้องผ่านการเรียนคอร์สมาอย่างน้อย</div>
-                    {{rowData[col.field]}}
-                    <div *ngIf="rowData[col.field] == rowData['conditionMin']">คอร์ส</div>
-                  </div>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-rowData let-columns="columns">
+                            <tr>
+                                <td *ngFor="let col of columns;" [routerLink]="['/courses',rowData['id']]">
+                                    <div *ngIf="rowData[col.field] != rowData['status']">
+                                        <span class="ui-column-title">{{col.header}}</span>
+                                        <div *ngIf="rowData[col.field] == rowData['conditionMin']">ต้องผ่านการเรียนคอร์สมาอย่างน้อย</div>
+                                        {{rowData[col.field]}}
+                                        <div *ngIf="rowData[col.field] == rowData['conditionMin']">คอร์ส</div>
+                                    </div>
 
-                </td>
-                <td>
-                  <div class="ui-g" style="text-align: center">
-                    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
-                      <button pButton type="button" label="แก้ไข" (click)="editCourse(rowData['id'])"></button>
+                                </td>
+                                <td>
+                                    <div class="ui-g" style="text-align: center">
+                                        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+                                            <button pButton type="button" label="แก้ไข" (click)="editCourse(rowData['id'])"></button>
 
-                    </div>
-                    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+                                        </div>
+                                        <!-- <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
                       <button pButton type="button" (click)="deleteCourse(rowData['id'])" label="ลบ"
                         class="ui-button-warning"></button>
-                    </div>
-                  </div>
-                </td>
+                    </div> -->
+                                    </div>
+                                </td>
 
 
-              </tr>
-            </ng-template>
-          </p-table>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
         </div>
-      </div>
+
+
     </div>
-
-
-  </div>
 </div>

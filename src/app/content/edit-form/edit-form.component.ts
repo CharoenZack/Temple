@@ -133,11 +133,19 @@ export class EditFormComponent implements OnInit {
 
       }
     );
+    
+    if(this.authService.getRole().value==="admin"){
+      this.breadCrumbService.setPath([
+        {label: 'Members management : จัดการสมาชิกทั้งหมด', routerLink: '/users'},
+        { label: 'Edit Profile : แก้ไขข้อมูลส่วนตัว' },
+      ]);
+    }else{
+      this.breadCrumbService.setPath([
+        { label: 'Profile : ข้อมูลส่วนตัว', routerLink: ['/profile', localStorage.getItem('userId')] },
+        { label: 'Edit Profile : แก้ไขข้อมูลส่วนตัว' },
+      ]);
+    }
 
-    this.breadCrumbService.setPath([
-      { label: 'Profile : ข้อมูลส่วนตัว', routerLink: ['/profile', localStorage.getItem('userId')] },
-      { label: 'Edit Profile : แก้ไขข้อมูลส่วนตัว' },
-    ]);
   }
 
   setBack(){
@@ -249,7 +257,13 @@ export class EditFormComponent implements OnInit {
   }
 
   showCancelConfirm() {
-    const message = "ยกเลิกการแก้ไขข้อมูลส่วนตัว และกลับสู่หน้า Profile ?";
+    let message
+    if(this.authService.getRole().value ==='admin'){
+      message = "ยกเลิกการแก้ไขข้อมูลส่วนตัว และกลับสู่หน้า?";
+    }else{
+      message = "ยกเลิกการแก้ไขข้อมูลส่วนตัว และกลับสู่หน้า Profile ?";
+    }
+    
     const type = "cancle";
     this.showDialog(message, type);
 
@@ -330,7 +344,12 @@ export class EditFormComponent implements OnInit {
         break;
       }
       case "cancle": {
-        this.router.navigateByUrl(`/profile/${this.personalId}`);
+        if( this.authService.getRole().value==='admin'){
+          this.router.navigateByUrl(`/users`);
+        }else{
+          this.router.navigateByUrl(`/profile/${this.personalId}`);
+        }
+        
         break;
       }
       case "submit": {

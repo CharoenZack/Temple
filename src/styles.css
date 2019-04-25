@@ -52,6 +52,20 @@ body .ui-button.ui-state-default.ui-button-warning, body .ui-buttonset.ui-button
 
 } */
 
+.ui-button-temple {
+    border-color: #b8860b !important;
+    background-color: #b8860b !important;
+}
+
+.ui-button-temple:hover {
+    border-color: #cdaa54 !important;
+    background-color: #cdaa54 !important;
+}
+
+.ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active {
+    background-color: #b8860b !important
+}
+
 .row {
     display: flex;
     flex-wrap: wrap;

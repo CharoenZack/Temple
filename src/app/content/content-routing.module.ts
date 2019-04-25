@@ -21,6 +21,7 @@ import { ManagePassCourseFormComponent } from './manage-pass-course-form/manage-
 import { CourseCreateComponent } from './courses/course-create/course-create.component';
 import { CourseEditComponent } from './courses/course-edit/course-edit.component';
 import { ApprovalFormComponent } from './approval/approval-form/approval-form.component';
+import { ManageStorageComponent } from './manage-storage/manage-storage.component';
 
 const routes: Routes = [
   {
@@ -120,6 +121,9 @@ const routes: Routes = [
             }
           },
         ]
+      },{
+        path: 'storage',
+        component: ManageStorageComponent
       },
       {
         path: 'manageCourse',

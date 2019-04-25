@@ -44,8 +44,8 @@ export class CourseCreateComponent implements OnInit {
     this.initNotice();
 
     this.breadCrumbService.setPath([
-      { label: 'ManageCourse : ตารางคอร์ส', routerLink: '/manageCourse' },
-      { label: 'CreateCourse : สร้างคอร์ส', routerLink: '/createCourse' },
+      { label: 'Courses management : จัดการคอร์สทั้งหมด', routerLink: '/manageCourse' },
+      { label: 'Create course : สร้างคอร์ส', routerLink: '/createCourse' },
     ]);
     this.courseService.getTeachers().subscribe(
       res => {
@@ -117,11 +117,12 @@ export class CourseCreateComponent implements OnInit {
 
         this.courseService.createCourse(course).subscribe(res => {
           if (res['result'] === 'Success') {
-            this.msgs = [{ severity: 'success', summary: 'ข้อความจากระบบ', detail: 'ยกเลิกการสร้างคอร์ส' }];
+            this.msgs = [{ severity: 'success', summary: 'ข้อความจากระบบ', detail: 'สร้างคอร์สสำเร็จ' }];
           } else if (res['result'] === 'Fail') {
             this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: res['errorMessage'] }];
           }
         });
+        this.router.navigateByUrl('/manageCourse');
       },
       reject: () => {
         // this.msgs = [{severity: 'info', summary: 'ข้อความจากระบบ', detail: 'ปฏิเสธการยกเลิกการขออนุมัติพิเศษ'}];

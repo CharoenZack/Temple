@@ -34,20 +34,18 @@ export class BaggagesComponent implements OnInit {
     this.getData();
 
     this.cols = [
-      {field: 'createDate', header: 'วันที่'},
       {field: 'number', header: 'หมายเลขตู้'},
-      {field: 'status', header: 'สถานะ'}
     ];
 
     this.breadCrumbService.setPath([
-      {label: 'Baggages manage: จัดการสัมภาระ'}
+      {label: 'Baggage management: จัดการสัมภาระทั้งหมด',routerLink: '/baggages'}
     ]);
 
     this.authService.getRole().subscribe(res => this.role = res);
   }
 
   private getData() {
-    this.baggageService.getItem().subscribe(
+    this.baggageService.getItems().subscribe(
       res => {
         if (res['status'] === 'Success') {
           this.items = res['data'];
@@ -93,11 +91,16 @@ export class BaggagesComponent implements OnInit {
     };
     this.baggageService.save(baggage).toPromise().then(res => {
       console.log(res);
+      
       if (res['status'] === 'Success') {
+        console.log(res['data'][0]);
         this.items = [
           ...this.items,
-          res['data']
+          res['data'][0]
+          
         ];
+        console.log(this.items);
+        
       }
     }).catch((e) => console.log(e['error']['message']));
     this.clear();
@@ -126,8 +129,8 @@ export class BaggagesComponent implements OnInit {
     this.baggage = {number: '', id: ''};
     this.baggageNumber = '';
     this.displayDialog = false;
-  }
 
+  }
 
   showDialogToAdd() {
     this.newBaggage = true;
