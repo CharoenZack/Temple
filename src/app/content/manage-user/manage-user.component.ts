@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ManageUserService} from 'src/app/shared/service/manage-user.service';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import { BreadcrumbService } from 'src/app/shared/service/breadcrumb.service';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
   selector: 'app-manage-user',
@@ -13,9 +14,11 @@ export class ManageUserComponent implements OnInit {
   public personal: any[];
   public menu: MenuItem[];
 
+
   constructor(
     private manageUser: ManageUserService,
-    private breadCrumbService : BreadcrumbService
+    private breadCrumbService : BreadcrumbService,
+
   ) { }
 
   ngOnInit() {

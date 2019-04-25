@@ -128,7 +128,7 @@ export class ListAllowComponent implements OnInit {
 
   deleteCourse(){
     this.confirmationService.confirm({
-      message: 'คุณแน่ใจที่จะทำการปิดคอร์ส นักเรียนที่ขออนุมัติเข้าเรียนจะถูกยกเลิกและนักเรียนที่กำลังเรียนจะสอบตก',
+      message: 'คุณแน่ใจที่จะทำการปิดคอร์ส นักเรียนที่ขออนุมัติเข้าเรียนจะถูกยกเลิกและนักเรียนที่กำลังเรียนจะไม่ถูกอนุมัติให้ผ่านการเรียน',
       header: 'ข้อความจากระบบ',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {

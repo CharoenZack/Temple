@@ -338,7 +338,12 @@ export class EditFormComponent implements OnInit {
         break;
       }
       case "cancle": {
-        this.router.navigateByUrl(`/profile/${this.personalId}`);
+        if( this.authService.getRole().value==='admin'){
+          this.router.navigateByUrl(`/users`);
+        }else{
+          this.router.navigateByUrl(`/profile/${this.personalId}`);
+        }
+        
         break;
       }
       case "submit": {

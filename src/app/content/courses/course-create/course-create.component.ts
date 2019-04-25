@@ -117,11 +117,12 @@ export class CourseCreateComponent implements OnInit {
 
         this.courseService.createCourse(course).subscribe(res => {
           if (res['result'] === 'Success') {
-            this.msgs = [{ severity: 'success', summary: 'ข้อความจากระบบ', detail: 'ยกเลิกการสร้างคอร์ส' }];
+            this.msgs = [{ severity: 'success', summary: 'ข้อความจากระบบ', detail: 'สร้างคอร์สสำเร็จ' }];
           } else if (res['result'] === 'Fail') {
             this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: res['errorMessage'] }];
           }
         });
+        this.createForm()
       },
       reject: () => {
         // this.msgs = [{severity: 'info', summary: 'ข้อความจากระบบ', detail: 'ปฏิเสธการยกเลิกการขออนุมัติพิเศษ'}];
