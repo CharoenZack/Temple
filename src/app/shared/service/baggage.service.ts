@@ -28,7 +28,7 @@ export class BaggageService {
       })
     );
   }
-  
+
   getItem() {
     return this.http.get(ApiConstants.baseURl + '/manage_baggages', {
       headers: {
@@ -84,10 +84,16 @@ export class BaggageService {
   }
 
   saveStorage(memberId, baggageId) {
-    this.httpService.post(ApiConstants.baseURl + `/baggages`, {
+    return this.httpService.post(ApiConstants.baseURl + `/baggages`, {
       memberId: memberId,
       baggageId: baggageId
-    }).subscribe(res => console.log(res)
-    )
+    })
+    .pipe(map(res => {
+      console.log(res);
+      return{
+        status: res['result'],
+        data: res['data']
+      }
+    }));
   }
 }
