@@ -16,15 +16,13 @@ export class BaggageService {
 
   getItems() {
     return this.http.get(ApiConstants.baseURl + '/baggages', {
+  getItem() {
+    return this.http.get(ApiConstants.baseURl + '/manage_baggages', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('access-token')}`
       }
     }).pipe(
       map(res => {
-        // res['data'].map(data => {
-        //   data['date'] = formatDate(data['date'], 'dd/MM/yyyy', 'en-US');
-        // });
-
         return {
           status: res['result'],
           data: res['data']
@@ -37,11 +35,10 @@ export class BaggageService {
     console.log(data);
 
     const body = {
-      number: data['number'],
-      createBy: 1
+      number: data['number']
     };
 
-    return this.http.put(ApiConstants.baseURl + `/baggages/${data['id']}`, body, { headers: { Authorization: `Bearer ${localStorage.getItem('access-token')}` } })
+    return this.http.put(ApiConstants.baseURl + `/manage_baggages/${data['id']}`, body, { headers: { Authorization: `Bearer ${localStorage.getItem('access-token')}` } })
       .pipe(map((res) => {
         return {
           status: res['result'],
@@ -52,7 +49,7 @@ export class BaggageService {
   }
 
   delete(id) {
-    return this.http.delete(ApiConstants.baseURl + `/baggages/${id}`, { headers: { Authorization: `Bearer ${localStorage.getItem('access-token')}` } })
+    return this.http.delete(ApiConstants.baseURl + `/manage_baggages/${id}`, { headers: { Authorization: `Bearer ${localStorage.getItem('access-token')}` } })
       .pipe(map(res => {
         return {
           status: res['result']
@@ -61,23 +58,15 @@ export class BaggageService {
   }
 
   save(data) {
-    return this.http.post(ApiConstants.baseURl + `/baggages`, {
-      baggageNumber: data['name'],
-      baggageCreateBy: 1,
+    return this.http.post(ApiConstants.baseURl + `/manage_baggages`, {
+      number: data['name'],
     }, { headers: { Authorization: `Bearer ${localStorage.getItem('access-token')}` } })
       .pipe(map(res => {
-        // console.log(res);
-        //
-        // const data = {
-        //   date: formatDate(res['data'][0]['baggageDate'], 'dd/MM/yyyy', 'en-US'),
-        //   number: res['data'][0]['baggageNumber'],
-        //   id: res['data'][0]['baggageId']
-        // };
-        res['data'][0]['Date'] = formatDate(res['data'][0]['Date'], 'dd/MM/yyyy', 'en-US');
-        return {
+        console.log(res);
+        return{
           status: res['result'],
-          data: res['data'][0]
-        };
+          data: res['data']
+        }
       }));
   }
 
