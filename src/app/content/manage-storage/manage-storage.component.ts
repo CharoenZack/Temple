@@ -73,7 +73,7 @@ export class ManageStorageComponent implements OnInit {
         }
       )
 
-    this.baggageService.getItems()
+    this.baggageService.getItem()
       .subscribe(
         res => {
           if (res['status'] === 'Success') {

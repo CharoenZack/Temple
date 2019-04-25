@@ -16,6 +16,19 @@ export class BaggageService {
 
   getItems() {
     return this.http.get(ApiConstants.baseURl + '/baggages', {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access-token')}`
+      }
+    }).pipe(
+      map(res => {
+        return {
+          status: res['result'],
+          data: res['data']
+        };
+      })
+    );
+  }
+  
   getItem() {
     return this.http.get(ApiConstants.baseURl + '/manage_baggages', {
       headers: {
