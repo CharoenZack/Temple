@@ -4,10 +4,12 @@
             <div class="ui-g">
                 <div class="ui-g-6 ui-lg-6 ui-md-6 ui-sm-12 aa">
                     <div class="ui-g">
+
                         <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ui-fluid">
                             <div style="text-align: center">
                                 <h2>สัมภาระ</h2>
                             </div>
+                            <p-messages [value]="msgs"></p-messages>
 
                             <p-table [columns]="cols" [value]="items" [paginator]="true" [rows]="10" [responsive]="true">
                                 <ng-template pTemplate="caption" *ngIf="showEditButton('admin')">
@@ -30,6 +32,7 @@
 
                                 <ng-template pTemplate="body" let-rowData let-columns="columns">
                                     <tr>
+                                        {{rowData | json}}
                                         <td *ngFor="let col of columns;">
                                             {{(rowData[col.field] == rowData['status'] ) ? (rowData['status'] == '0') ? 'ฝาก':'รับคืนแล้ว' :rowData[col.field] }}
                                         </td>
@@ -50,11 +53,8 @@
                                             <div class="ui-g">
                                                 <div style="text-align:center">
                                                     <div class="ui-g">
-                                                        <div class="ui-g-6 ui-lg-6 ui-md-12 ui-sm-12 ">
-                                                            <button pButton type="button" (click)="showEdit(rowData['id'])" label="แก้ไข" class="ui-button-warning"></button>
-                                                        </div>
-                                                        <div class="ui-g-6 ui-lg-6 ui-md-12 ui-sm-12 ">
-                                                            <button pButton type="button" (click)="delete(rowData['id'])" label="ลบ" class="ui-button-danger"></button>
+                                                        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ">
+                                                            <button pButton type="button" (click)="showEdit(rowData)" label="แก้ไข" class="ui-button-warning"></button>
                                                         </div>
                                                     </div>
                                                 </div>
