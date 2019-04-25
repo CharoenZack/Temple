@@ -31,9 +31,22 @@
                                 <ng-template pTemplate="body" let-rowData let-columns="columns">
                                     <tr>
                                         <td *ngFor="let col of columns;">
-                                            {{(rowData[col.field] == rowData['status'] ) ? (rowData['status'] == '0')? 'ฝาก':'รับคืนแล้ว' :rowData[col.field]}}
+                                            {{(rowData[col.field] == rowData['status'] ) ? (rowData['status'] == '0') ? 'ฝาก':'รับคืนแล้ว' :rowData[col.field] }}
                                         </td>
-                                        <td *ngIf="showEditButton('admin')">
+                                        <!-- {{rowData | json}}
+                                        <td>
+                                            {{rowData['createDate'] | date:'dd/MM/yyyy'}}
+                                        </td>
+                                        <td>
+                                            {{rowData['memberName']}}
+                                        </td>
+                                        <td>
+                                            {{rowData['number']}}
+                                        </td>
+                                        <td>
+                                            {{(rowData['status'] == '0') ? 'ฝาก':'รับคืนแล้ว'}}
+                                        </td> -->
+                                        <td *ngIf="showEditButton('admin')"> 
                                             <div class="ui-g">
                                                 <div style="text-align:center">
                                                     <div class="ui-g">
