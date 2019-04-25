@@ -122,7 +122,7 @@ export class CourseCreateComponent implements OnInit {
             this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: res['errorMessage'] }];
           }
         });
-        this.createForm()
+        this.router.navigateByUrl('/manageCourse');
       },
       reject: () => {
         // this.msgs = [{severity: 'info', summary: 'ข้อความจากระบบ', detail: 'ปฏิเสธการยกเลิกการขออนุมัติพิเศษ'}];

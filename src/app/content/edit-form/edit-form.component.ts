@@ -257,7 +257,13 @@ export class EditFormComponent implements OnInit {
   }
 
   showCancelConfirm() {
-    const message = "ยกเลิกการแก้ไขข้อมูลส่วนตัว และกลับสู่หน้า Profile ?";
+    let message
+    if(this.authService.getRole().value ==='admin'){
+      message = "ยกเลิกการแก้ไขข้อมูลส่วนตัว และกลับสู่หน้า?";
+    }else{
+      message = "ยกเลิกการแก้ไขข้อมูลส่วนตัว และกลับสู่หน้า Profile ?";
+    }
+    
     const type = "cancle";
     this.showDialog(message, type);
 
