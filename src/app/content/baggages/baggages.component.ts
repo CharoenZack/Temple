@@ -19,6 +19,8 @@ export class BaggagesComponent implements OnInit {
   baggage: Baggage;
   baggageNumber: String;
   cols: any[];
+  location: Location;
+  locationName: String;
   public role: string;
   public menu: MenuItem[];
 
@@ -35,6 +37,7 @@ export class BaggagesComponent implements OnInit {
 
     this.cols = [
       {field: 'number', header: 'หมายเลขตู้'},
+      {filed: 'location' ,header: 'สถานที่'}
     ];
 
     this.breadCrumbService.setPath([
@@ -45,7 +48,7 @@ export class BaggagesComponent implements OnInit {
   }
 
   private getData() {
-    this.baggageService.getItems().subscribe(
+    this.baggageService.getItem().subscribe(
       res => {
         if (res['status'] === 'Success') {
           this.items = res['data'];

@@ -30,7 +30,7 @@
                                                 ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
 
                                         </th>
-                                        <th *ngIf="showEditButton('admin')" width="20%">Option</th>
+                                        <th *ngIf="showEditButton('admin')" width="25%">Option</th>
 
                                     </tr>
                                 </ng-template>
@@ -73,7 +73,7 @@
 
 
 <p-dialog (onHide)="clear()" header="Baggages Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade"
-    [modal]="true" [style]="{width: '300px'}">
+    [modal]="true">
     <div class="ui-g ui-fluid" *ngIf="baggage">
         <div class="ui-g-12">
             <div class="ui-g-4">
@@ -81,6 +81,16 @@
             </div>
             <div class="ui-g-8">
                 <input pInputText id="name" [(ngModel)]="baggageNumber" />
+            </div>
+        </div>
+    </div>
+    <div class="ui-g ui-fluid" *ngIf="location">
+        <div class="ui-g-12">
+            <div class="ui-g-4">
+                <label for="name">สถานที่</label>
+            </div>
+            <div class="ui-g-8">
+                <input pInputText id="name" [(ngModel)]="locationName" />
             </div>
         </div>
     </div>

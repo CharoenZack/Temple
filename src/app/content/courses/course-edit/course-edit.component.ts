@@ -108,6 +108,7 @@ export class CourseEditComponent implements OnInit {
 
   onSubmit(e) {
     e.preventDefault();
+    const id = 1
     const date = this.formEdit.get('date').value;
     const datesort = date.map( res => formatDate(res,"yyyy-MM-dd",'en')).sort();
     const course = {
@@ -127,7 +128,7 @@ export class CourseEditComponent implements OnInit {
           console.log(err['error']['message']);
         }
       );
-      this.courseService.createCourse(course).subscribe(res => {
+      this.courseService.editCourse(id,course).subscribe(res => {
         if (res['result'] === 'Success') {
           this.msgs = [{ severity: 'success', summary: 'ข้อความจากระบบ', detail: 'สร้างคอร์สสำเร็จ' }];
         } else if (res['result'] === 'Fail') {

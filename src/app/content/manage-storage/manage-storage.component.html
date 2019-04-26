@@ -32,7 +32,7 @@
 
                                 <ng-template pTemplate="body" let-rowData let-columns="columns">
                                     <tr>
-                                        {{rowData | json}}
+                                        <!-- {{rowData | json}} -->
                                         <td *ngFor="let col of columns;">
                                             {{(rowData[col.field] == rowData['status'] ) ? (rowData['status'] == '0') ? 'ฝาก':'รับคืนแล้ว' :rowData[col.field] }}
                                         </td>
