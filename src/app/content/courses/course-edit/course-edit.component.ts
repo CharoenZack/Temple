@@ -15,7 +15,7 @@ import { ConfirmationService } from 'primeng/api';
 export class CourseEditComponent implements OnInit {
 
   public msgs: any[] = [];
-  public courseId: string;
+  public courseId: string; 
   public formEdit: FormGroup;
   public noticearr = ['0','1','2','3','4','5','6','7','8','9','10']
   public notice: Array<any> = [];
@@ -44,6 +44,24 @@ export class CourseEditComponent implements OnInit {
       { label: 'ManageCourse : ตารางคอร์ส', routerLink: '/manageCourse' },
       { label: 'EditCourse : สร้างคอร์ส', routerLink: '/editCourse' },
     ]);
+    this.courseService.getTeachers().subscribe(
+      res => {
+        if (res.status == 'Success') {
+          this.teachers = res['data'].map(res=>{
+            return {
+              id: res.id,
+              name: res.titleDisplay+res.fname+' '+res.lname
+            }
+          })
+          console.log(this.teachers);
+          
+        }
+      },
+      error => {
+        console.log(error['error']['message']);
+
+      }
+    )
     this.locationService.getLocation().subscribe( 
       res => {
         if(res.status == 'Success'){
@@ -86,11 +104,28 @@ export class CourseEditComponent implements OnInit {
     this.courseService.getCourseByid(this.courseId)
       .subscribe(res => {
         console.log(res);
-        
-        // const teacher ={
-        //   id: res['data']['teacher']['id'],
-        //   name: res['data']['teacher']['fname']
+        const teachers = res['data']['teacherList'].map(res=>{
+          return {
+            id: res['id'],
+            name: res['titleDisplay']+res['fname']+" "+res['lname']
+          }
+        })
+        const date = res['data']['dateList'].map(res=>{
+          return new Date(res['courseScheduleDate'])
+
+          
+        })
+
+
+
+        // const teacher = {
+        //   id: res['data']['teacherList']['id'],
+        //   name: res['data']['teacherList']['fname']
+          
         // }
+        // const date = new Date(date1);
+        console.log(date);
+        
         const location = {
           id: res['data']['locationId'],
           name: res['data']['locationName']
@@ -98,7 +133,8 @@ export class CourseEditComponent implements OnInit {
         this.formEdit.controls['courseName'].setValue(res['data']['name']);
         this.formEdit.controls['detail'].setValue(res['data']['detail']);
         this.formEdit.controls['location'].patchValue(location)
-        // this.formEdit.controls['teacher'].patchValue(teacher)
+        this.formEdit.controls['teacher'].patchValue(teachers)
+        this.formEdit.controls['date'].patchValue(date)
         this.formEdit.controls['conditionMin'].setValue({id:''+(res['data']['conditionMin'])});
         
         },
@@ -163,7 +199,7 @@ export class CourseEditComponent implements OnInit {
     let filtered : any[] = [];
     for(let i = 0; i < teachers.length; i++) {
         let teacher = teachers[i]
-        if((teacher.fname+teacher.lname).toLowerCase().indexOf(query.toLowerCase()) == 0) {
+        if((teacher.name).toLowerCase().indexOf(query.toLowerCase()) == 0) {
             filtered.push(teacher);
         }
     }

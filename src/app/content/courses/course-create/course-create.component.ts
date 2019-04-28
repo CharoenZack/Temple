@@ -102,6 +102,8 @@ export class CourseCreateComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         const date = this.formEdit.get('date').value;
+        console.log(date);
+        
         const datesort = date.map(res => formatDate(res, "yyyy-MM-dd", 'en')).sort();
         console.log(this.formEdit.get('teachers').value);
 

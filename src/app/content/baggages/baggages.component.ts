@@ -4,6 +4,7 @@ import {BaggageService} from '../../shared/service/baggage.service';
 import {MenuItem} from 'primeng/api';
 import {BreadcrumbService} from 'src/app/shared/service/breadcrumb.service';
 import {AuthService} from 'src/app/shared/service/auth.service';
+import { LocationService } from '../location/location.service';
 
 
 @Component({
@@ -21,6 +22,8 @@ export class BaggagesComponent implements OnInit {
   cols: any[];
   location: Location;
   locationName: String;
+  locations: any[];
+  public filteredLocation: any[];
   public role: string;
   public menu: MenuItem[];
 
@@ -28,13 +31,24 @@ export class BaggagesComponent implements OnInit {
     private baggageService: BaggageService,
     private breadCrumbService: BreadcrumbService,
     private authService: AuthService,
+    private locationService: LocationService,
   ) {
   }
 
   ngOnInit() {
 
     this.getData();
+    this.locationService.getLocation().subscribe(
+      res => {
+        if (res.status == 'Success') {
+          this.locations = res.data;
+        }
+      },
+      error => {
+        console.log(error['error']['message']);
 
+      }
+    )
     this.cols = [
       {field: 'number', header: 'หมายเลขตู้'},
       {filed: 'location' ,header: 'สถานที่'}
@@ -139,5 +153,20 @@ export class BaggagesComponent implements OnInit {
     this.newBaggage = true;
     this.baggage = {number: '', id: ''};
     this.displayDialog = true;
+  }
+
+  filterLocationMultiple(event) {
+    let query = event.query;
+    this.filteredLocation = this.filterLocation(query, this.locations);
+  }
+  filterLocation(query, locations: any): any[] {
+    let filtered: any[] = [];
+    for (let i = 0; i < locations.length; i++) {
+      let location = locations[i]
+      if ((location.fname + location.lname).toLowerCase().indexOf(query.toLowerCase()) == 0) {
+        filtered.push(location);
+      }
+    }
+    return filtered;
   }
 }

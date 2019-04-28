@@ -84,13 +84,18 @@
             </div>
         </div>
     </div>
-    <div class="ui-g ui-fluid" *ngIf="location">
+    <div class="ui-g ui-fluid" >
         <div class="ui-g-12">
             <div class="ui-g-4">
                 <label for="name">สถานที่</label>
             </div>
             <div class="ui-g-8">
-                <input pInputText id="name" [(ngModel)]="locationName" />
+                <p-autoComplete formControlName="locations" [suggestions]="filteredLocation" value="id"
+                (completeMethod)="filterLocationMultiple($event)" styleClass="wid100" [minLength]="1"
+                placeholder="เลือกสถานที่" field="fname" [multiple]="true" [dropdown]="true">
+              </p-autoComplete>
+                <!-- <input pInputText id="name" [(ngModel)]="locationName" /> -->
+                <!-- <p-dropdown [options]="location" [(ngModel)]="locationName" editable="true" placeholder="เลือกสถานที่"></p-dropdown> -->
             </div>
         </div>
     </div>
