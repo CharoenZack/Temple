@@ -15,7 +15,7 @@ export class BaggageService {
   ) { }
 
   getItems() {
-    return this.http.get(ApiConstants.baseURl + '/baggages', {
+    return this.http.get(ApiConstants.baseURl + '/baggage', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('access-token')}`
       }
@@ -71,9 +71,7 @@ export class BaggageService {
   }
 
   save(data) {
-    return this.http.post(ApiConstants.baseURl + `/lockers`, {
-      number: data['name'],
-    }, { headers: { Authorization: `Bearer ${localStorage.getItem('access-token')}` } })
+    return this.httpService.post(ApiConstants.baseURl + `/lockers`, data )
       .pipe(map(res => {
         console.log(res);
         return{
@@ -83,11 +81,9 @@ export class BaggageService {
       }));
   }
 
-  saveStorage(memberId, baggageId) {
-    return this.httpService.post(ApiConstants.baseURl + `/baggages`, {
-      memberId: memberId,
-      baggageId: baggageId
-    })
+  saveStorage(data) {
+    return this.httpService.post(ApiConstants.baseURl + `/baggage`, data
+    )
     .pipe(map(res => {
       console.log(res);
       return{

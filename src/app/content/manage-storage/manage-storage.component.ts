@@ -80,8 +80,9 @@ export class ManageStorageComponent implements OnInit {
           if (res['status'] === 'Success') {
             this.numberOfLocker = res['data'].map(res => {
               return {
-                baggageId: res['id'],
-                number: res['number']
+                baggageId: res['number'],
+                number: res['locationName']+'  '+res['number'],
+                locationId: res['locationId']
               }
             })
           }
@@ -142,8 +143,18 @@ export class ManageStorageComponent implements OnInit {
   save() {
     this.msgs = [];
     this.displayDialog = false;
+    console.log(this.selectedNumber);
+    
     if (this.selectedMember && this.selectedNumber) {
-      this.baggageService.saveStorage(this.selectedMember['memberId'], this.selectedNumber['baggageId'])
+      const data = {
+        memberId: this.selectedMember['memberId'],
+        number: this.selectedNumber['baggageId'],
+        locationId: this.selectedNumber['locationId']
+      }
+      console.log(data);
+      
+
+      this.baggageService.saveStorage(data)
         .subscribe(res => {
           
           if (res['status'] === "Success") {

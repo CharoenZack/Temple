@@ -112,12 +112,7 @@ export class CourseEditComponent implements OnInit {
         })
         const date = res['data']['dateList'].map(res=>{
           return new Date(res['courseScheduleDate'])
-
-          
         })
-
-
-
         // const teacher = {
         //   id: res['data']['teacherList']['id'],
         //   name: res['data']['teacherList']['fname']
@@ -158,7 +153,6 @@ export class CourseEditComponent implements OnInit {
       this.courseService.editCourse(this.courseId,course).subscribe(
         res => {
           console.log(res);
-
         },
         err => {
           console.log(err['error']['message']);

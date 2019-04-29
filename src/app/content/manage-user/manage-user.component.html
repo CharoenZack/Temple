@@ -14,7 +14,7 @@
 
                     <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
 
-                        <p-table [paginator]="true" [value]='personal' [rows]="10" [responsive]="true">
+                        <p-table [paginator]="true" [value]='personal' [rows]="10" [responsive]="true" selectionMode="single" (onRowSelect)="onRowSelect($event)">
                             <ng-template pTemplate="caption">
                                 <div style="text-align:left">
                                     <button pButton type="button" label="เพิ่ม" class="ui-button-info" style="width: 20%" [routerLink]="[ '/users/create']"></button>
@@ -34,8 +34,8 @@
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-rowData>
-                                <tr>
-                                    <td>
+                                <tr >
+                                    <td [pSelectableRow]="rowData">
                                         {{rowData.titleName}} {{rowData.fname}} {{rowData.lname}}
                                     </td>
                                     <td>

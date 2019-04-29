@@ -4,6 +4,8 @@ export interface Baggage {
     memberName?:String;
     number?: String;
     date?: Date;
+    locationName?:String;
+    locationId?:String;
 
 
 }
