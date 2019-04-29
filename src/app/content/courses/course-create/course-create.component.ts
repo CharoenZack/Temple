@@ -6,8 +6,6 @@ import { formatDate, DatePipe } from '@angular/common';
 import { LocationService } from '../../location/location.service';
 import { CourseService } from '../shared/course.service';
 import { ConfirmationService } from 'primeng/api';
-// import { Teacher } from 'src/app/shared/interfaces/teacher';
-import { Member } from 'src/app/shared/interfaces/member';
 import { Router } from '@angular/router';
 // import { Teacher } from 'src/app/shared/interfaces/teacher';
 

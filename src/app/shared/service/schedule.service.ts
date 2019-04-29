@@ -28,6 +28,21 @@ export class ScheduleService {
           };
         })
       );
+  }
 
+  getScheduleForMonk() {
+    return this.http.get(ApiConstants.baseURl + '/courses/teacher_schedule')
+      .pipe(
+        map(res => {
+          return {
+            status: res['result'],
+            data: res['data'].map(data => ({
+              title: data['course']['courseName'],
+              start: data['courseScheduleDate'],
+              url: `/courses/${data['courseId']}`
+            }))
+          };
+        })
+      );
   }
 }

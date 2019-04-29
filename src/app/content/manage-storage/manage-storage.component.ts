@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {Baggage} from 'src/app/shared/interfaces/baggage';
-import {BaggageService} from 'src/app/shared/service/baggage.service';
-import {BreadcrumbService} from 'src/app/shared/service/breadcrumb.service';
-import {AuthService} from 'src/app/shared/service/auth.service';
-import {MenuItem, ConfirmationService, Message} from 'primeng/api';
-import {ManageUserService} from 'src/app/shared/service/manage-user.service';
+import { Component, OnInit } from '@angular/core';
+import { Baggage } from 'src/app/shared/interfaces/baggage';
+import { BaggageService } from 'src/app/shared/service/baggage.service';
+import { BreadcrumbService } from 'src/app/shared/service/breadcrumb.service';
+import { AuthService } from 'src/app/shared/service/auth.service';
+import { MenuItem, ConfirmationService, Message } from 'primeng/api';
+import { ManageUserService } from 'src/app/shared/service/manage-user.service';
 
 
 @Component({
@@ -30,8 +30,8 @@ export class ManageStorageComponent implements OnInit {
   public selectedStatus: any;
   public msgs: Message[] = [];
   public status = [
-    {val: '0', label: 'ฝาก'},
-    {val: '1', label: 'รับคืนแล้ว'}
+    { val: '0', label: 'ฝาก' },
+    { val: '1', label: 'รับคืนแล้ว' }
   ];
 
   constructor(
@@ -48,14 +48,14 @@ export class ManageStorageComponent implements OnInit {
     this.getData();
 
     this.cols = [
-      {field: 'createDate', header: 'วันที่'},
-      {field: 'memberName', header: 'สมาชิก'},
-      {field: 'number', header: 'หมายเลขตู้'},
-      {field: 'status', header: 'สถานะ'}
+      { field: 'createDate', header: 'วันที่' },
+      { field: 'memberName', header: 'สมาชิก' },
+      { field: 'number', header: 'หมายเลขตู้' },
+      { field: 'status', header: 'สถานะ' }
     ];
 
     this.breadCrumbService.setPath([
-      {label: 'Baggage management: จัดการคนกับสัมพาระ', routerLink: '/storage'}
+      { label: 'Baggage management: จัดการคนกับสัมพาระ', routerLink: '/storage' }
     ]);
 
     this.authService.getRole().subscribe(res => this.role = res);
@@ -64,15 +64,15 @@ export class ManageStorageComponent implements OnInit {
   private initDialogData() {
     this.memberService.getAllUsers()
       .subscribe(res => {
-          if (res['status'] === 'Success') {
-            this.members = res['data'].map(res => {
-              return {
-                memberId: res['id'],
-                memberName: res['titleName'] + res['fname'] + '  ' + res['lname']
-              };
-            });
-          }
-        },
+        if (res['status'] === 'Success') {
+          this.members = res['data'].map(res => {
+            return {
+              memberId: res['id'],
+              memberName: res['titleName'] + res['fname'] + '  ' + res['lname']
+            };
+          });
+        }
+      },
         err => {
           console.log(err);
 
@@ -154,15 +154,15 @@ export class ManageStorageComponent implements OnInit {
       this.baggageService.saveStorage(this.selectedMember['memberId'], this.selectedNumber['baggageId'])
         .subscribe(res => {
 
-            if (res['status'] === 'Success') {
-              this.msgs = [{severity: 'success', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระสำเร็จ'}];
-              this.getData();
-            } else {
-              this.msgs = [{severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ'}];
-            }
-          },
+          if (res['status'] === 'Success') {
+            this.msgs = [{ severity: 'success', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระสำเร็จ' }];
+            this.getData();
+          } else {
+            this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ' }];
+          }
+        },
           (err) => {
-            this.msgs = [{severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ'}];
+            this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ' }];
           },
           () => {
             this.selectedMember = [];
@@ -170,7 +170,7 @@ export class ManageStorageComponent implements OnInit {
           }
         );
     } else {
-      this.msgs = [{severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ'}];
+      this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ' }];
     }
 
   }
@@ -185,21 +185,30 @@ export class ManageStorageComponent implements OnInit {
     };
     this.baggageService.updateStorage(id, data).subscribe(res => {
 
-      const index = this.items.findIndex(e => e.membersHasBaggageId === res['data']['membersHasBaggageId']);
-      console.log(index);
-      const newData = this.items[index];
-      newData.status = data.status;
-      newData.id = data.baggageId;
-      newData.memberId = data.memberId;
-      console.log(newData);
-      this.items = [
-        ...this.items.slice(0, index - 1),
-        newData,
-        ...this.items.slice(index + 1)
-      ];
-      this.clear();
-      console.log(res);
-    });
+      if (res['status'] === 'Success') {
+        this.msgs = [{ severity: 'success', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระสำเร็จ' }];
+        const index = this.items.findIndex(e => e.membersHasBaggageId === res['data']['membersHasBaggageId']);
+        console.log(index);
+        const newData = this.items[index];
+        newData.status = data.status;
+        newData.id = data.baggageId;
+        newData.memberId = data.memberId;
+        console.log(newData);
+        this.items = [
+          ...this.items.slice(0, index - 1),
+          newData,
+          ...this.items.slice(index + 1)
+        ];
+        this.clear();
+
+      } else {
+        this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ' }];
+      }
+    },
+      err => {
+        this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ' }];
+      }
+    );
   }
 
   clear() {
@@ -212,7 +221,7 @@ export class ManageStorageComponent implements OnInit {
 
   showDialogToAdd() {
     this.newBaggage = true;
-    this.baggage = {number: '', id: ''};
+    this.baggage = { number: '', id: '' };
     this.displayDialog = true;
   }
 }
