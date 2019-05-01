@@ -162,24 +162,24 @@ export class ManageStorageComponent implements OnInit {
       console.log(data);
       
 
-      this.baggageService.saveStorage(data)
-        .subscribe(res => {
+      // this.baggageService.saveStorage(data)
+      //   .subscribe(res => {
 
-          if (res['status'] === 'Success') {
-            this.msgs = [{ severity: 'success', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระสำเร็จ' }];
-            this.getData();
-          } else {
-            this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ' }];
-          }
-        },
-          (err) => {
-            this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ' }];
-          },
-          () => {
-            this.selectedMember = [];
-            this.selectedNumber = [];
-          }
-        );
+      //     if (res['status'] === 'Success') {
+      //       this.msgs = [{ severity: 'success', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระสำเร็จ' }];
+      //       this.getData();
+      //     } else {
+      //       this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ' }];
+      //     }
+      //   },
+      //     (err) => {
+      //       this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ' }];
+      //     },
+      //     () => {
+      //       this.selectedMember = [];
+      //       this.selectedNumber = [];
+      //     }
+      //   );
     } else {
       this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ' }];
     }

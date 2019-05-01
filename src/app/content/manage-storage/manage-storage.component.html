@@ -36,7 +36,7 @@
                                         <td *ngFor="let col of columns;">
                                             {{(rowData[col.field] == rowData['status'] ) ? (rowData['status'] == '0') ? 'ฝาก':'รับคืนแล้ว' :rowData[col.field] }}
                                         </td>
-                                        <!-- {{rowData | json}}
+                                        <!-- {{rowData | json}} -->
                                         <td>
                                             {{rowData['createDate'] | date:'dd/MM/yyyy'}}
                                         </td>
@@ -95,7 +95,7 @@
 
             </div>
         </div>
-    </div> 
+    </div>
     <p-footer>
         <div class="ui-dialog-buttonpane ui-helper-clearfix">
             <button type="button" pButton (click)="clear()" label="Cancel"></button>
