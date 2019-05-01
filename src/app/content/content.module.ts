@@ -34,6 +34,7 @@ import { ListAllowComponent } from './list-allow/list-allow.component';
 import { CourseApproveComponent } from './approval/course-approve/course-approve.component';
 import { ApprovalFormComponent } from './approval/approval-form/approval-form.component';
 import { ManageStorageComponent } from './manage-storage/manage-storage.component';
+import { ManageCourseForMonkComponent } from './manage-course-for-monk/manage-course-for-monk.component';
 
 registerLocaleData(localeTh);
 
@@ -64,6 +65,7 @@ registerLocaleData(localeTh);
     CourseApproveComponent,
     ApprovalFormComponent,
     ManageStorageComponent,
+    ManageCourseForMonkComponent,
 
   ],
   imports: [
