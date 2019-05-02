@@ -6,6 +6,9 @@ import { BreadcrumbService } from 'src/app/shared/service/breadcrumb.service';
 import { AuthService } from 'src/app/shared/service/auth.service';
 import { LocationService } from '../location/location.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Location } from 'src/app/shared/interfaces/location';
+import { TouchSequence } from 'selenium-webdriver';
+
 
 
 @Component({
@@ -21,7 +24,7 @@ export class BaggagesComponent implements OnInit {
   baggage: Baggage;
   baggageNumber: String;
   cols: any[];
-  location: Location;
+  location: any;
   locationName: String;
   locations: any[];
   public filteredLocation: any[];
@@ -78,10 +81,19 @@ export class BaggagesComponent implements OnInit {
   showEditButton(...role) {
     return role.includes(this.role);
   }
-  showEdit(id) {
+  showEdit(data) {
+    
     this.newBaggage = false;
-    this.baggage = this.items.filter(e => e.id === id)[0];
+    this.baggage = this.items.filter(e => e.locationId === data.locationId && e.number === data.number)[0];
+    console.log(this.baggage);
+    
     this.baggageNumber = this.baggage['number'];
+    this.location = {
+      id: this.baggage['locationId'],
+      name : this.baggage['locationName']
+    }
+    console.log(this.location);
+    
     this.displayDialog = true;
   }
 
@@ -102,7 +114,7 @@ export class BaggagesComponent implements OnInit {
     const data = {
       number: this.baggageNumber,
       locationId: this.location['id']
-    };
+    }; 
     console.log(data);
     
     this.baggageService.save(data).toPromise().then(res => {
@@ -110,8 +122,14 @@ export class BaggagesComponent implements OnInit {
         console.log(res['data'][0]);
         this.items = [
           ...this.items,
-          res['data'][0]
+          {
+            number: data.number,
+            locationName: this.location['name'],
+            locationId: data.locationId,
+          }
         ];
+        console.log(this.items);
+        
       }
     }).catch((e) => console.log(e['error']['message']));
     this.clear();
@@ -119,7 +137,8 @@ export class BaggagesComponent implements OnInit {
   update() {
     const data = {
       id: this.baggage['id'],
-      number: this.baggageNumber
+      number: this.baggageNumber,
+      locationId: this.location['locationId']
     };
     this.baggageService.update(data)
       .subscribe(res => {
