@@ -6,6 +6,5 @@ export interface Baggage {
     date?: Date;
     locationName?:String;
     locationId?:String;
-
-
+    status?: string;
 }

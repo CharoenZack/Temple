@@ -5,11 +5,7 @@ import { MenuItem } from 'primeng/api';
 import { BreadcrumbService } from 'src/app/shared/service/breadcrumb.service';
 import { AuthService } from 'src/app/shared/service/auth.service';
 import { LocationService } from '../location/location.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Location } from 'src/app/shared/interfaces/location';
-import { TouchSequence } from 'selenium-webdriver';
-
-
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-baggages',
@@ -59,7 +55,7 @@ export class BaggagesComponent implements OnInit {
     ];
 
     this.breadCrumbService.setPath([
-      { label: 'Baggage management: จัดการสัมภาระทั้งหมด', routerLink: '/baggages' }
+      { label: 'Locker management: จัดการตู้สัมภาระทั้งหมด', routerLink: '/baggages' }
     ]);
 
     this.authService.getRole().subscribe(res => this.role = res);
@@ -72,7 +68,7 @@ export class BaggagesComponent implements OnInit {
           this.items = res['data'];
         }
         console.log(this.items);
-        
+
       },
       (e) => console.log(e['error']['message'])
     );
@@ -82,18 +78,18 @@ export class BaggagesComponent implements OnInit {
     return role.includes(this.role);
   }
   showEdit(data) {
-    
+
     this.newBaggage = false;
     this.baggage = this.items.filter(e => e.locationId === data.locationId && e.number === data.number)[0];
     console.log(this.baggage);
-    
+
     this.baggageNumber = this.baggage['number'];
     this.location = {
       id: this.baggage['locationId'],
-      name : this.baggage['locationName']
+      name: this.baggage['locationName']
     }
     console.log(this.location);
-    
+
     this.displayDialog = true;
   }
 
@@ -114,9 +110,9 @@ export class BaggagesComponent implements OnInit {
     const data = {
       number: this.baggageNumber,
       locationId: this.location['id']
-    }; 
+    };
     console.log(data);
-    
+
     this.baggageService.save(data).toPromise().then(res => {
       if (res['status'] === 'Success') {
         console.log(res['data'][0]);
@@ -176,3 +172,4 @@ export class BaggagesComponent implements OnInit {
     return filtered;
   }
 }
+

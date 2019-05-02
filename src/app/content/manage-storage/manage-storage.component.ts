@@ -55,7 +55,7 @@ export class ManageStorageComponent implements OnInit {
     ];
 
     this.breadCrumbService.setPath([
-      { label: 'Baggage management: จัดการคนกับสัมพาระ', routerLink: '/storage' }
+      { label: 'Baggage management: จัดการสัมพาระ', routerLink: '/storage' }
     ]);
 
     this.authService.getRole().subscribe(res => this.role = res);
@@ -114,7 +114,7 @@ export class ManageStorageComponent implements OnInit {
   showEdit(id) {
     console.log(id);
     this.newBaggage = false;
-    this.baggage = this.items.filter(e => e.membersHasBaggageId === +id)[0];
+    this.baggage = this.items.filter(e => e.id == id)[0];
     console.log(this.baggage);
     this.selectedMember = {
       memberId: this.baggage['memberId'],
@@ -198,7 +198,7 @@ export class ManageStorageComponent implements OnInit {
 
       if (res['status'] === 'Success') {
         this.msgs = [{ severity: 'success', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระสำเร็จ' }];
-        const index = this.items.findIndex(e => e.membersHasBaggageId === res['data']['membersHasBaggageId']);
+        const index = this.items.findIndex(e => e.id === res['data']['baggageId']);
         console.log(index);
         const newData = this.items[index];
         newData.status = data.status;

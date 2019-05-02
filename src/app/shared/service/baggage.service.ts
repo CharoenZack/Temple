@@ -92,4 +92,13 @@ export class BaggageService {
       }
     }));
   }
+  updateStorage(id, data) {
+    return this.httpService.put(ApiConstants.baseURl + `/baggages/${id}`, data).pipe(map(res => {
+      console.log(res);
+      return {
+        status: res['result'],
+        data: res['data'][0]
+      };
+    }));
+  }
 }

@@ -47,7 +47,7 @@
                                                                     (click)="showEdit(rowData)" label="แก้ไข"
                                                                     class="ui-button-warning"></button>
                                                             </div> -->
-                                                            <div class="ui-g-6 ui-lg-6 ui-md-12 ui-sm-12 ">
+                                                            <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ">
                                                                 <button pButton type="button"
                                                                     (click)="delete(rowData['id'])" label="ลบ"
                                                                     class="ui-button-danger"></button>         
@@ -68,7 +68,11 @@
 </div>
 
 
+<<<<<<< HEAD
+<p-dialog (onHide)="clear()" header="Baggage Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade"
+=======
 <p-dialog (onHide)="clear()" header="Baggages Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade"
+>>>>>>> dev_Yoz
     [modal]="true">
     <div class="ui-g ui-fluid" *ngIf="baggage">
         <div class="ui-g-12">
