@@ -14,7 +14,7 @@
                                     <!--<p-fileUpload name="myFile"  [showUploadButton]='true' accept="image/*" (onUpload)="profileSelect($event)">-->
 
                                     <!--</p-fileUpload>-->
-                                    <img [src]="previewImg ? previewImg: '/assets/images/no-img.png'" class="img-info" />
+                                    <img [src]="previewImg ? previewImg: './assets/images/no-img.png'" class="img-info" />
                                     <div class="btn-upload">
                                         <label for="profile" pButton label="Custom Upload"></label>
                                         <input type="file" id="profile" (change)="profileSelect($event)" accept='image/*' />

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ScheduleService} from 'src/app/shared/service/schedule.service';
 import {BreadcrumbService} from '../../shared/service/breadcrumb.service';
+import { AuthService } from 'src/app/shared/service/auth.service';
 
 @Component({
   selector: 'app-schedule',
@@ -10,23 +11,32 @@ import {BreadcrumbService} from '../../shared/service/breadcrumb.service';
 export class ScheduleComponent implements OnInit {
   events: any[];
   options: any;
+  title:String;
 
   constructor(
     private scheduleService: ScheduleService,
     private breadCrumbService: BreadcrumbService,
+    private authService:AuthService,
   ) {
 
   }
 
   ngOnInit() {
+    
+    if(this.authService.getRole().value === "monk"){
+      this.title = "ตารางสอน"
+      this.loadDataForMonk();
+    }else if(this.authService.getRole().value === "user") {
+      this.title = "ตารางเรียน"
+      this.loadData();
+    }
     this.setPath();
-    this.loadData();
     this.setOption();
   }
 
   private setPath() {
     this.breadCrumbService.setPath([
-      {label: 'Schedule : ตารางเรียน'}
+      {label: `Schedule : ${this.title}` }
     ]);
   }
 
@@ -41,6 +51,19 @@ export class ScheduleComponent implements OnInit {
         err => {
           console.log('Error', err);
         });
+  }
+
+  private loadDataForMonk(){
+    this.scheduleService.getScheduleForMonk()
+    .subscribe(res => {
+        console.log(res);
+        if (res['status'] === 'Success') {
+          this.events = res['data'];
+        }
+      },
+      err => {
+        console.log('Error', err);
+      });
   }
 
   private setOption() {

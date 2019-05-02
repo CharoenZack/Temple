@@ -77,16 +77,18 @@ export class ListAllowComponent implements OnInit {
       this.check = true;
     }
   }
-  dropdown() {
+  showWhenApproveForm() {
     if (this.option === '1') {
       return false;
     } else if (this.option === '2') {
       return true;
     }
   }
-  sentData() {
+  sentData(status:null) {
+    // '1' = pass '2' != pass
     this.check = false;
     let memberSent;
+    //อนุมัติผ่านคอร์ส
     if (this.option === '1') {
       memberSent = this.member.map(member => {
         return {
@@ -98,6 +100,7 @@ export class ListAllowComponent implements OnInit {
         member: [...memberSent],
         courseId: this.courseId
       };
+      //อนุมัติพิเศษ
     } else if (this.option === '2') {
       memberSent = this.member.filter((member) => member.checked === true).map(member => member[this.fieldId]);
       memberSent = {
@@ -105,12 +108,15 @@ export class ListAllowComponent implements OnInit {
             ...memberSent
           ],
           courseId: this.courseId,
-          status: this.status.status
+          //status: this.status.status
+          status:status
         };
     }
     if (this.member.length !== 0) {
-      this.listData.emit(memberSent);
+      //this.listData.emit(memberSent);
     }
+    console.log(status);
+    
   }
   showCheckbox() {
     return !(this.member[0]['displayName'] === 'ไม่มีข้อมูล');
@@ -126,5 +132,4 @@ export class ListAllowComponent implements OnInit {
       }
     );
   }
-
 }

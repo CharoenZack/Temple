@@ -25,7 +25,7 @@
                                             <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
 
                                         </th>
-                                        <th *ngIf="showEditButton('admin')">Option</th>
+                                        <th *ngIf="showEditButton('admin')" width='15%'>Option</th>
 
                                     </tr>
                                 </ng-template>
@@ -36,25 +36,25 @@
                                         <td *ngFor="let col of columns;">
                                             {{(rowData[col.field] == rowData['status'] ) ? (rowData['status'] == '0') ? 'ฝาก':'รับคืนแล้ว' :rowData[col.field] }}
                                         </td>
-                                        <!-- {{rowData | json}}
+                                        <!-- {{rowData | json}} -->
                                         <td>
                                             {{rowData['createDate'] | date:'dd/MM/yyyy'}}
                                         </td>
                                         <td>
-                                            {{rowData['memberName']}}
+                                            {{ rowData['memberName'] }}
                                         </td>
                                         <td>
-                                            {{rowData['number']}}
+                                            {{ rowData['number'] }}
                                         </td>
                                         <td>
-                                            {{(rowData['status'] == '0') ? 'ฝาก':'รับคืนแล้ว'}}
-                                        </td> -->
-                                        <td *ngIf="showEditButton('admin')"> 
+                                            {{(rowData['status'] == '0') ? 'ฝาก' : 'รับคืนแล้ว'}}
+                                        </td>
+                                        <td *ngIf="showEditButton('admin')">
                                             <div class="ui-g">
-                                                <div style="text-align:center">
+                                                <div style="margin: 0 auto;">
                                                     <div class="ui-g">
                                                         <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ">
-                                                            <button pButton type="button" (click)="showEdit(rowData)" label="แก้ไข" class="ui-button-warning"></button>
+                                                            <button pButton type="button" (click)="showEdit(rowData['membersHasBaggageId'])" label="แก้ไข" class="ui-button-warning"></button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -76,24 +76,31 @@
     <div class="ui-g ui-fluid" *ngIf="baggage">
         <div class="ui-g-12">
             <div class="ui-g-4">
-                <label for="name">สมาชิก</label>
+                <label>สมาชิก</label>
             </div>
             <div class="ui-g-8">
                 <p-dropdown [options]="members" optionLabel="memberName" value="memberId" placeholder="กรุณาเลือกสมาชิก" [(ngModel)]="selectedMember"></p-dropdown>
             </div>
             <div class="ui-g-4">
-                <label for="name">หมายเลขตู้</label>
+                <label>หมายเลขตู้</label>
             </div>
             <div class="ui-g-8">
                 <p-dropdown [options]="numberOfLocker" optionLabel="number" value="baggageId" placeholder="กรุณาเลือกหมายเลขตู้" [(ngModel)]="selectedNumber"></p-dropdown>
+            </div>
+            <div class="ui-g-4" *ngIf="!newBaggage">
+                <label>สถานะ</label>
+            </div>
+            <div class="ui-g-8" *ngIf="!newBaggage">
+                <p-dropdown [options]="status" optionLabel="label" value="val" placeholder="กรุณาเลือกสถานะ" [(ngModel)]="selectedStatus"></p-dropdown>
+
             </div>
         </div>
     </div> 
     <p-footer>
         <div class="ui-dialog-buttonpane ui-helper-clearfix">
-            <button type="button" pButton (click)="clear()" label="Clear"></button>
+            <button type="button" pButton (click)="clear()" label="Cancel"></button>
             <button *ngIf="newBaggage" type="button" pButton (click)="save()" label="Save"></button>
-            <button *ngIf="!newBaggage" type="button" pButton (click)="update()" label="Update"></button>
+            <button *ngIf="!newBaggage" type="button" pButton (click)="update(baggage.membersHasBaggageId)" label="Update"></button>
         </div>
     </p-footer>
 </p-dialog>

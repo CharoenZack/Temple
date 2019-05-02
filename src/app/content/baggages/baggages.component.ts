@@ -128,8 +128,6 @@ export class BaggagesComponent implements OnInit {
             locationId: data.locationId,
           }
         ];
-        console.log(this.items);
-        
       }
     }).catch((e) => console.log(e['error']['message']));
     this.clear();
