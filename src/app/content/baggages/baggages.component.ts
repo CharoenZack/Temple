@@ -5,7 +5,8 @@ import { MenuItem } from 'primeng/api';
 import { BreadcrumbService } from 'src/app/shared/service/breadcrumb.service';
 import { AuthService } from 'src/app/shared/service/auth.service';
 import { LocationService } from '../location/location.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { Location } from 'src/app/shared/interfaces/location';
 
 @Component({
   selector: 'app-baggages',
@@ -82,7 +83,7 @@ export class BaggagesComponent implements OnInit {
     this.baggage = this.items.filter(e => e.id === id)[0];
     this.baggageNumber = this.baggage['number'];
     this.location = {
-      id: this.baggage['locationId'],
+      id: +this.baggage['locationId'],
       name: this.baggage['locationName']
     }
     console.log(this.location);

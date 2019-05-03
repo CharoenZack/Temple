@@ -11,7 +11,7 @@
     text-align: center;
 }
 
-.text-right {
+:host>>>.text-right {
     text-align: right;
 }
 

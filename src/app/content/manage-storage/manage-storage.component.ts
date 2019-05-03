@@ -55,7 +55,7 @@ export class ManageStorageComponent implements OnInit {
     ];
 
     this.breadCrumbService.setPath([
-      { label: 'Baggage management: จัดการคนกับสัมพาระ', routerLink: '/storage' }
+      { label: 'Baggage management: จัดการสัมพาระ', routerLink: '/storage' }
     ]);
 
     this.authService.getRole().subscribe(res => this.role = res);
@@ -162,25 +162,25 @@ export class ManageStorageComponent implements OnInit {
       console.log(data);
       
 
-      // this.baggageService.saveStorage(data)
-      //   .subscribe(res => {
-
-      //     if (res['status'] === 'Success') {
-      //       this.msgs = [{ severity: 'success', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระสำเร็จ' }];
-      //       this.getData();
-      //     } else {
-      //       this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ' }];
-      //     }
-      //   },
-      //     (err) => {
-      //       this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ' }];
-      //     },
-      //     () => {
-      //       this.selectedMember = [];
-      //       this.selectedNumber = [];
-      //     }
-      //   );
-    } else {
+      this.baggageService.saveStorage(data)
+        .subscribe(res => {
+          
+          if (res['status'] === "Success") {
+            this.msgs = [{ severity: 'success', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระสำเร็จ' }];
+            this.getData();
+          } else {
+            this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ' }];
+          }
+        },
+          (err) => {
+            this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ' }];
+          },
+          ()=>{
+            this.selectedMember=[];
+            this.selectedNumber=[];
+          }
+        )
+    }else{
       this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ' }];
     }
 
@@ -198,7 +198,7 @@ export class ManageStorageComponent implements OnInit {
 
       if (res['status'] === 'Success') {
         this.msgs = [{ severity: 'success', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระสำเร็จ' }];
-        const index = this.items.findIndex(e => e.membersHasBaggageId === res['data']['membersHasBaggageId']);
+        const index = this.items.findIndex(e => e.id === res['data']['baggageId']);
         console.log(index);
         const newData = this.items[index];
         newData.status = data.status;

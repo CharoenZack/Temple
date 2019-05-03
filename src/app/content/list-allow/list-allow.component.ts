@@ -84,7 +84,7 @@ export class ListAllowComponent implements OnInit {
       return true;
     }
   }
-  sentData(status:null) {
+  sentData(status=null) {
     // '1' = pass '2' != pass
     this.check = false;
     let memberSent;
