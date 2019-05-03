@@ -7,6 +7,7 @@ import {AppComponent} from './app.component';
 import {ContentModule} from './content/content.module';
 import {AuthModule} from './auth/auth.module';
 import {AuthService} from './shared/service/auth.service';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,9 @@ import {AuthService} from './shared/service/auth.service';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [AuthService],
+  providers: [AuthService,
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
