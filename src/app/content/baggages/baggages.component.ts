@@ -5,7 +5,7 @@ import { MenuItem } from 'primeng/api';
 import { BreadcrumbService } from 'src/app/shared/service/breadcrumb.service';
 import { AuthService } from 'src/app/shared/service/auth.service';
 import { LocationService } from '../location/location.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-baggages',
@@ -20,7 +20,7 @@ export class BaggagesComponent implements OnInit {
   baggage: Baggage;
   baggageNumber: String;
   cols: any[];
-  location: any;
+  location: Location;
   locationName: String;
   locations: any[];
   public filteredLocation: any[];
@@ -55,7 +55,7 @@ export class BaggagesComponent implements OnInit {
     ];
 
     this.breadCrumbService.setPath([
-      { label: 'Locker management: จัดการตู้สัมภาระทั้งหมด', routerLink: '/baggages' }
+      { label: 'Baggage management: จัดการสัมภาระทั้งหมด', routerLink: '/baggages' }
     ]);
 
     this.authService.getRole().subscribe(res => this.role = res);
@@ -68,7 +68,7 @@ export class BaggagesComponent implements OnInit {
           this.items = res['data'];
         }
         console.log(this.items);
-
+        
       },
       (e) => console.log(e['error']['message'])
     );
@@ -77,12 +77,9 @@ export class BaggagesComponent implements OnInit {
   showEditButton(...role) {
     return role.includes(this.role);
   }
-  showEdit(data) {
-
+  showEdit(id) {
     this.newBaggage = false;
-    this.baggage = this.items.filter(e => e.locationId === data.locationId && e.number === data.number)[0];
-    console.log(this.baggage);
-
+    this.baggage = this.items.filter(e => e.id === id)[0];
     this.baggageNumber = this.baggage['number'];
     this.location = {
       id: this.baggage['locationId'],
@@ -112,17 +109,13 @@ export class BaggagesComponent implements OnInit {
       locationId: this.location['id']
     };
     console.log(data);
-
+    
     this.baggageService.save(data).toPromise().then(res => {
       if (res['status'] === 'Success') {
         console.log(res['data'][0]);
         this.items = [
           ...this.items,
-          {
-            number: data.number,
-            locationName: this.location['name'],
-            locationId: data.locationId,
-          }
+          res['data'][0]
         ];
       }
     }).catch((e) => console.log(e['error']['message']));

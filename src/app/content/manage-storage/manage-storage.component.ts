@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {Baggage} from 'src/app/shared/interfaces/baggage';
-import {BaggageService} from 'src/app/shared/service/baggage.service';
-import {BreadcrumbService} from 'src/app/shared/service/breadcrumb.service';
-import {AuthService} from 'src/app/shared/service/auth.service';
-import {MenuItem, ConfirmationService, Message} from 'primeng/api';
-import {ManageUserService} from 'src/app/shared/service/manage-user.service';
+import { Component, OnInit } from '@angular/core';
+import { Baggage } from 'src/app/shared/interfaces/baggage';
+import { BaggageService } from 'src/app/shared/service/baggage.service';
+import { BreadcrumbService } from 'src/app/shared/service/breadcrumb.service';
+import { AuthService } from 'src/app/shared/service/auth.service';
+import { MenuItem, ConfirmationService, Message } from 'primeng/api';
+import { ManageUserService } from 'src/app/shared/service/manage-user.service';
 
 
 @Component({
@@ -48,14 +48,14 @@ export class ManageStorageComponent implements OnInit {
     this.getData();
 
     this.cols = [
-      {field: 'createDate', header: 'วันที่'},
-      {field: 'memberName', header: 'สมาชิก'},
-      {field: 'number', header: 'หมายเลขตู้'},
-      {field: 'status', header: 'สถานะ'}
+      { field: 'createDate', header: 'วันที่' },
+      { field: 'memberName', header: 'สมาชิก' },
+      { field: 'number', header: 'หมายเลขตู้' },
+      { field: 'status', header: 'สถานะ' }
     ];
 
     this.breadCrumbService.setPath([
-      { label: 'Baggage management: จัดการสัมพาระ', routerLink: '/storage' }
+      { label: 'Baggage management: จัดการคนกับสัมพาระ', routerLink: '/storage' }
     ]);
 
     this.authService.getRole().subscribe(res => this.role = res);
@@ -162,26 +162,26 @@ export class ManageStorageComponent implements OnInit {
       console.log(data);
       
 
-      this.baggageService.saveStorage(data)
-        .subscribe(res => {
+      // this.baggageService.saveStorage(data)
+      //   .subscribe(res => {
 
-            if (res['status'] === 'Success') {
-              this.msgs = [{severity: 'success', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระสำเร็จ'}];
-              this.getData();
-            } else {
-              this.msgs = [{severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ'}];
-            }
-          },
-          (err) => {
-            this.msgs = [{severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ'}];
-          },
-          () => {
-            this.selectedMember = [];
-            this.selectedNumber = [];
-          }
-        );
+      //     if (res['status'] === 'Success') {
+      //       this.msgs = [{ severity: 'success', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระสำเร็จ' }];
+      //       this.getData();
+      //     } else {
+      //       this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ' }];
+      //     }
+      //   },
+      //     (err) => {
+      //       this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ' }];
+      //     },
+      //     () => {
+      //       this.selectedMember = [];
+      //       this.selectedNumber = [];
+      //     }
+      //   );
     } else {
-      this.msgs = [{severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ'}];
+      this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ' }];
     }
 
   }
@@ -198,7 +198,7 @@ export class ManageStorageComponent implements OnInit {
 
       if (res['status'] === 'Success') {
         this.msgs = [{ severity: 'success', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระสำเร็จ' }];
-        const index = this.items.findIndex(e => e.id === res['data']['baggageId']);
+        const index = this.items.findIndex(e => e.membersHasBaggageId === res['data']['membersHasBaggageId']);
         console.log(index);
         const newData = this.items[index];
         newData.status = data.status;
@@ -232,7 +232,7 @@ export class ManageStorageComponent implements OnInit {
 
   showDialogToAdd() {
     this.newBaggage = true;
-    this.baggage = {number: '', id: ''};
+    this.baggage = { number: '', id: '' };
     this.displayDialog = true;
   }
 }
