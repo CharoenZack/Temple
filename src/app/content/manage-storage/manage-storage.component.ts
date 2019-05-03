@@ -114,7 +114,7 @@ export class ManageStorageComponent implements OnInit {
   showEdit(id) {
     console.log(id);
     this.newBaggage = false;
-    this.baggage = this.items.filter(e => e.membersHasBaggageId === +id)[0];
+    this.baggage = this.items.filter(e => e.id == id)[0];
     console.log(this.baggage);
     this.selectedMember = {
       memberId: this.baggage['memberId'],

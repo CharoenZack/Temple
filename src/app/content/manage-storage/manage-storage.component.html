@@ -36,20 +36,20 @@
                                         <td *ngFor="let col of columns;">
                                             {{(rowData[col.field] == rowData['status'] ) ? (rowData['status'] == '0') ? 'ฝาก':'รับคืนแล้ว' :rowData[col.field] }}
                                         </td>
-                                        <!-- {{rowData | json}} -->
+                                        <!-- {{rowData | json}}
                                         <td>
                                             {{rowData['createDate'] | date:'dd/MM/yyyy'}}
                                         </td>
                                         <td>
-                                            {{ rowData['memberName'] }}
+                                            {{rowData['memberName']}}
                                         </td>
                                         <td>
-                                            {{ rowData['number'] }}
+                                            {{rowData['number']}}
                                         </td>
                                         <td>
-                                            {{(rowData['status'] == '0') ? 'ฝาก' : 'รับคืนแล้ว'}}
-                                        </td>
-                                        <td *ngIf="showEditButton('admin')">
+                                            {{(rowData['status'] == '0') ? 'ฝาก':'รับคืนแล้ว'}}
+                                        </td> -->
+                                        <td *ngIf="showEditButton('admin')"> 
                                             <div class="ui-g">
                                                 <div style="margin: 0 auto;">
                                                     <div class="ui-g">

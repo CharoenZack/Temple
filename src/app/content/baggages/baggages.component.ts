@@ -7,7 +7,6 @@ import { AuthService } from 'src/app/shared/service/auth.service';
 import { LocationService } from '../location/location.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-
 @Component({
   selector: 'app-baggages',
   templateUrl: './baggages.component.html',
@@ -82,6 +81,12 @@ export class BaggagesComponent implements OnInit {
     this.newBaggage = false;
     this.baggage = this.items.filter(e => e.id === id)[0];
     this.baggageNumber = this.baggage['number'];
+    this.location = {
+      id: this.baggage['locationId'],
+      name: this.baggage['locationName']
+    }
+    console.log(this.location);
+
     this.displayDialog = true;
   }
 
@@ -119,7 +124,8 @@ export class BaggagesComponent implements OnInit {
   update() {
     const data = {
       id: this.baggage['id'],
-      number: this.baggageNumber
+      number: this.baggageNumber,
+      locationId: this.location['locationId']
     };
     this.baggageService.update(data)
       .subscribe(res => {
@@ -159,3 +165,4 @@ export class BaggagesComponent implements OnInit {
     return filtered;
   }
 }
+
