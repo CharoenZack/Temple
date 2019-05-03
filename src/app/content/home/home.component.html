@@ -4,7 +4,7 @@
             <div class="menu-card">
                 <div class="ui-g">
                     <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
-                        <img class="img-menu" src="/assets/images/1info.png" alt>
+                        <img class="img-menu" src="./assets/images/1info.png" alt>
                     </div>
                     <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8 ">
                         <div class="text-center">ข้อมูลส่วนตัว</div>
@@ -16,7 +16,7 @@
             <div class="menu-card">
                 <div class="ui-g">
                     <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
-                        <img class="img-menu" src="/assets/images/agenda.png" alt>
+                        <img class="img-menu" src="./assets/images/agenda.png" alt>
                     </div>
                     <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
                         <div class="text-center">ลงทะเบียนเรียน</div>
@@ -28,7 +28,7 @@
             <div class="menu-card">
                 <div class="ui-g">
                     <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
-                        <img class="img-menu" src="/assets/images/calendar.png" alt>
+                        <img class="img-menu" src="./assets/images/calendar.png" alt>
                     </div>
                     <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
                         <div class="text-center">ตารางเรียน</div>
@@ -41,7 +41,7 @@
             <div class="menu-card">
                 <div class="ui-g">
                     <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
-                        <img class="img-menu" src="/assets/images/calendar.png" alt>
+                        <img class="img-menu" src="./assets/images/calendar.png" alt>
                     </div>
                     <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
                         <div class="text-center">ตารางสอน</div>
@@ -53,7 +53,7 @@
             <div class="menu-card">
                 <div class="ui-g">
                     <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
-                        <img class="img-menu" src="/assets/images/hiring.png" alt>
+                        <img class="img-menu" src="./assets/images/hiring.png" alt>
                     </div>
                     <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
                         <div class="text-center">อนุมัติพิเศษ</div>
@@ -62,6 +62,30 @@
             </div>
         </div>
         <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/manageCourse']" *ngIf="showHomeMenu('admin')">
+            <div class="menu-card">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
+                        <img class="img-menu" src="./assets/images/notebook.png" alt>
+                    </div>
+                    <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
+                        <div class="text-center">จัดการคอร์ส</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/manageCourseForMonk']" *ngIf="showHomeMenu('monk')">
+            <div class="menu-card">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
+                        <img class="img-menu" src="/assets/images/notebook.png" alt>
+                    </div>
+                    <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
+                        <div class="text-center">จัดการคอร์ส</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12" [routerLink]="['/manageCourseForMonk']" *ngIf="showHomeMenu('monk')">
             <div class="menu-card">
                 <div class="ui-g">
                     <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
@@ -77,7 +101,7 @@
             <div class="menu-card">
                 <div class="ui-g">
                     <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
-                        <img class="img-menu" src="/assets/images/notebook.png" alt>
+                        <img class="img-menu" src="./assets/images/notebook.png" alt>
                     </div>
                     <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
                         <div class="text-center">จัดการทะเบียนเรียน</div>
@@ -89,7 +113,7 @@
             <div class="menu-card">
                 <div class="ui-g">
                     <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
-                        <img class="img-menu" src="/assets/images/team.png" alt>
+                        <img class="img-menu" src="./assets/images/team.png" alt>
                     </div>
                     <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
                         <div class="text-center">จัดการสมาชิก</div>
@@ -102,7 +126,7 @@
             <div class="menu-card">
                 <div class="ui-g">
                     <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
-                        <img class="img-menu" src="/assets/images/id-card.png" alt>
+                        <img class="img-menu" src="./assets/images/id-card.png" alt>
                     </div>
                     <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
                         <div class="text-center">จัดการคำนำหน้า</div>
@@ -114,7 +138,7 @@
             <div class="menu-card">
                 <div class="ui-g">
                     <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
-                        <img class="img-menu" src="/assets/images/temple.png" alt>
+                        <img class="img-menu" src="./assets/images/temple.png" alt>
                     </div>
                     <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
                         <div class="text-center">จัดการสถานที่</div>
@@ -126,10 +150,10 @@
             <div class="menu-card">
                 <div class="ui-g">
                     <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
-                        <img class="img-menu" src="/assets/images/lockers.png" alt>
+                        <img class="img-menu" src="./assets/images/lockers.png" alt>
                     </div>
                     <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
-                        <div class="text-center">จัดการสัมพาระ</div>
+                        <div class="text-center">จัดการตู้สัมพาระ</div>
                     </div>
                 </div>
             </div>
@@ -138,10 +162,10 @@
             <div class="menu-card">
                 <div class="ui-g">
                     <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
-                        <img class="img-menu" src="/assets/images/lockers.png" alt>
+                        <img class="img-menu" src="./assets/images/lockers.png" alt>
                     </div>
                     <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
-                        <div class="text-center">จัดการคนกับสัมพาระ</div>
+                        <div class="text-center">จัดการสัมพาระ</div>
                     </div>
                 </div>
             </div>
@@ -150,7 +174,7 @@
             <div class="menu-card">
                 <div class="ui-g">
                     <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
-                        <img class="img-menu" src="/assets/images/lockers.png" alt>
+                        <img class="img-menu" src="./assets/images/lockers.png" alt>
                     </div>
                     <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
                         <div class="text-center">สัมพาระ</div>
@@ -162,10 +186,10 @@
             <div class="menu-card">
                 <div class="ui-g">
                     <div class="ui-g-12 ui-lg-12 ui-md-4 ui-sm-4 ">
-                        <img class="img-menu" src="/assets/images/like.png" alt>
+                        <img class="img-menu" src="./assets/images/like.png" alt>
                     </div>
                     <div class="ui-g-12 ui-lg-12 ui-md-8 ui-sm-8">
-                        <div class="text-center">จัดการการอนุมัติ</div>
+                        <div class="text-center">อนุมัติการผ่านหลักสูตร</div>
                     </div>
                 </div>
             </div>

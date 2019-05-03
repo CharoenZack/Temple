@@ -34,8 +34,6 @@ export class ListAllowComponent implements OnInit {
 
   public urlback: string;
   public messageback: string;
-
-
   constructor(
     private route: ActivatedRoute,
     private confirmationService: ConfirmationService,
@@ -43,7 +41,6 @@ export class ListAllowComponent implements OnInit {
     private messageService: MessageService
   ) {
   }
-
   ngOnInit() {
     this.urlback = this.route.snapshot.data.urlback;
     this.messageback = "กลับไปยังหน้า"+this.route.snapshot.data.messageback;
@@ -55,8 +52,6 @@ export class ListAllowComponent implements OnInit {
     this.check = false;
 
   }
-
-
   selectAll() {
 
     // check ว่า dechecked หรือ checked
@@ -71,7 +66,6 @@ export class ListAllowComponent implements OnInit {
     }
 
   }
-
   onCheck() {
     const obj = this.member.filter((item) => {
       return item.checked === true;
@@ -83,18 +77,18 @@ export class ListAllowComponent implements OnInit {
       this.check = true;
     }
   }
-
-  dropdown() {
+  showWhenApproveForm() {
     if (this.option === '1') {
       return false;
     } else if (this.option === '2') {
       return true;
     }
   }
-
-  sentData() {
+  sentData(status:null) {
+    // '1' = pass '2' != pass
     this.check = false;
     let memberSent;
+    //อนุมัติผ่านคอร์ส
     if (this.option === '1') {
       memberSent = this.member.map(member => {
         return {
@@ -106,7 +100,7 @@ export class ListAllowComponent implements OnInit {
         member: [...memberSent],
         courseId: this.courseId
       };
-
+      //อนุมัติพิเศษ
     } else if (this.option === '2') {
       memberSent = this.member.filter((member) => member.checked === true).map(member => member[this.fieldId]);
       memberSent = {
@@ -114,41 +108,19 @@ export class ListAllowComponent implements OnInit {
             ...memberSent
           ],
           courseId: this.courseId,
-          status: this.status.status
+          //status: this.status.status
+          status:status
         };
     }
     if (this.member.length !== 0) {
-      this.listData.emit(memberSent);
+      //this.listData.emit(memberSent);
     }
+    console.log(status);
+    
   }
-
   showCheckbox() {
     return !(this.member[0]['displayName'] === 'ไม่มีข้อมูล');
   }
-
-  deleteCourse(){
-    this.confirmationService.confirm({
-      message: 'คุณแน่ใจที่จะทำการปิดคอร์ส นักเรียนที่ขออนุมัติเข้าเรียนจะถูกยกเลิกและนักเรียนที่กำลังเรียนจะไม่ถูกอนุมัติให้ผ่านการเรียน',
-      header: 'ข้อความจากระบบ',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.courseService.deleteCourse(this.courseId)
-        .subscribe( res => {
-          if(res['status']==="Success"){
-            this.showToast("alertMessage","การปิดคอร์สสำเร็จ")
-          }else{
-            this.showToast("alertMessage","การปิดคอร์สไม่สำเร็จ")
-          }
-        }
-
-        )
-      },
-      reject: () => {
-          
-      }
-  });
-  }
-
   showToast(key, detail) {
     this.messageService.clear();
     this.messageService.add(
@@ -160,5 +132,4 @@ export class ListAllowComponent implements OnInit {
       }
     );
   }
-
 }

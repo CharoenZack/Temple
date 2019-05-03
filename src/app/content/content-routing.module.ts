@@ -22,6 +22,7 @@ import { CourseCreateComponent } from './courses/course-create/course-create.com
 import { CourseEditComponent } from './courses/course-edit/course-edit.component';
 import { ApprovalFormComponent } from './approval/approval-form/approval-form.component';
 import { ManageStorageComponent } from './manage-storage/manage-storage.component';
+import { ManageCourseForMonkComponent } from './manage-course-for-monk/manage-course-for-monk.component';
 
 const routes: Routes = [
   {
@@ -149,6 +150,10 @@ const routes: Routes = [
       {
         path: 'editCourse/:id',
         component: CourseEditComponent
+      },
+      {
+        path: 'manageCourseForMonk',
+        component: ManageCourseForMonkComponent
       }
     ]
   }];

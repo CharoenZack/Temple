@@ -3,6 +3,7 @@ import {ManageUserService} from 'src/app/shared/service/manage-user.service';
 import { MenuItem, MessageService } from 'primeng/api';
 import { BreadcrumbService } from 'src/app/shared/service/breadcrumb.service';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-manage-user',
@@ -18,7 +19,7 @@ export class ManageUserComponent implements OnInit {
   constructor(
     private manageUser: ManageUserService,
     private breadCrumbService : BreadcrumbService,
-
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -56,6 +57,9 @@ export class ManageUserComponent implements OnInit {
         (e) => console.log(e['error']['message'])
       );
   }
-
-
+  public onRowSelect(e) {
+    console.log(e);
+    
+    this.router.navigate(['/profile', e.data['id']]);
+  }
 }

@@ -32,9 +32,9 @@ export class ManageCourseComponent implements OnInit {
 
   ngOnInit() {
     this.getTotalRecord();
-
+    
     this.cols = [
-      {field: 'stDate', header: 'วันที่'},
+      {field: 'createDate', header: 'วันที่สร้าง'},
       {field: 'name', header: 'ชื่อคอร์ส'},
       {field: 'locationName', header: 'สถานที่'},
       {field: 'conditionMin', header: 'หมายเหตุ'},

@@ -8,7 +8,7 @@ import {BehaviorSubject} from 'rxjs';
 export class BreadcrumbService {
 
     private items = new BehaviorSubject<MenuItem[]>([]);
-    private home: MenuItem = {icon: 'pi pi-home', routerLink: '/'};
+    private home: MenuItem = {icon: 'pi pi-home', label: 'Home : หน้าหลัก', routerLink: '/'};
 
     constructor() {
     }

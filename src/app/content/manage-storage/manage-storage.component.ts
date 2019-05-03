@@ -30,8 +30,8 @@ export class ManageStorageComponent implements OnInit {
   public selectedStatus: any;
   public msgs: Message[] = [];
   public status = [
-    {val: '0', label: 'ฝาก'},
-    {val: '1', label: 'รับคืนแล้ว'}
+    { val: '0', label: 'ฝาก' },
+    { val: '1', label: 'รับคืนแล้ว' }
   ];
 
   constructor(
@@ -55,7 +55,7 @@ export class ManageStorageComponent implements OnInit {
     ];
 
     this.breadCrumbService.setPath([
-      {label: 'Baggage management: จัดการคนกับสัมพาระ', routerLink: '/storage'}
+      { label: 'Baggage management: จัดการสัมพาระ', routerLink: '/storage' }
     ]);
 
     this.authService.getRole().subscribe(res => this.role = res);
@@ -64,15 +64,15 @@ export class ManageStorageComponent implements OnInit {
   private initDialogData() {
     this.memberService.getAllUsers()
       .subscribe(res => {
-          if (res['status'] === 'Success') {
-            this.members = res['data'].map(res => {
-              return {
-                memberId: res['id'],
-                memberName: res['titleName'] + res['fname'] + '  ' + res['lname']
-              };
-            });
-          }
-        },
+        if (res['status'] === 'Success') {
+          this.members = res['data'].map(res => {
+            return {
+              memberId: res['id'],
+              memberName: res['titleName'] + res['fname'] + '  ' + res['lname']
+            };
+          });
+        }
+      },
         err => {
           console.log(err);
 
@@ -85,10 +85,11 @@ export class ManageStorageComponent implements OnInit {
           if (res['status'] === 'Success') {
             this.numberOfLocker = res['data'].map(res => {
               return {
-                baggageId: res['id'],
-                number: res['number']
-              };
-            });
+                baggageId: res['number'],
+                number: res['locationName']+'  '+res['number'],
+                locationId: res['locationId']
+              }
+            })
           }
         }
       );
@@ -113,7 +114,7 @@ export class ManageStorageComponent implements OnInit {
   showEdit(id) {
     console.log(id);
     this.newBaggage = false;
-    this.baggage = this.items.filter(e => e.membersHasBaggageId === +id)[0];
+    this.baggage = this.items.filter(e => e.id == id)[0];
     console.log(this.baggage);
     this.selectedMember = {
       memberId: this.baggage['memberId'],
@@ -150,8 +151,18 @@ export class ManageStorageComponent implements OnInit {
   save() {
     this.msgs = [];
     this.displayDialog = false;
+    console.log(this.selectedNumber);
+    
     if (this.selectedMember && this.selectedNumber) {
-      this.baggageService.saveStorage(this.selectedMember['memberId'], this.selectedNumber['baggageId'])
+      const data = {
+        memberId: this.selectedMember['memberId'],
+        number: this.selectedNumber['baggageId'],
+        locationId: this.selectedNumber['locationId']
+      }
+      console.log(data);
+      
+
+      this.baggageService.saveStorage(data)
         .subscribe(res => {
 
             if (res['status'] === 'Success') {
@@ -185,21 +196,30 @@ export class ManageStorageComponent implements OnInit {
     };
     this.baggageService.updateStorage(id, data).subscribe(res => {
 
-      const index = this.items.findIndex(e => e.membersHasBaggageId === res['data']['membersHasBaggageId']);
-      console.log(index);
-      const newData = this.items[index];
-      newData.status = data.status;
-      newData.id = data.baggageId;
-      newData.memberId = data.memberId;
-      console.log(newData);
-      this.items = [
-        ...this.items.slice(0, index - 1),
-        newData,
-        ...this.items.slice(index + 1)
-      ];
-      this.clear();
-      console.log(res);
-    });
+      if (res['status'] === 'Success') {
+        this.msgs = [{ severity: 'success', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระสำเร็จ' }];
+        const index = this.items.findIndex(e => e.id === res['data']['baggageId']);
+        console.log(index);
+        const newData = this.items[index];
+        newData.status = data.status;
+        newData.id = data.baggageId;
+        newData.memberId = data.memberId;
+        console.log(newData);
+        this.items = [
+          ...this.items.slice(0, index - 1),
+          newData,
+          ...this.items.slice(index + 1)
+        ];
+        this.clear();
+
+      } else {
+        this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ' }];
+      }
+    },
+      err => {
+        this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: 'เพิ่มสัมภาระไม่สำเร็จ' }];
+      }
+    );
   }
 
   clear() {

@@ -17,7 +17,7 @@ export class BaggageService {
   }
 
   getItems() {
-    return this.http.get(ApiConstants.baseURl + '/baggages', {
+    return this.http.get(ApiConstants.baseURl + '/baggage', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('access-token')}`
       }
@@ -32,7 +32,7 @@ export class BaggageService {
   }
 
   getItem() {
-    return this.http.get(ApiConstants.baseURl + '/manage_baggages', {
+    return this.http.get(ApiConstants.baseURl + '/lockers', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('access-token')}`
       }
@@ -53,7 +53,7 @@ export class BaggageService {
       number: data['number']
     };
 
-    return this.http.put(ApiConstants.baseURl + `/manage_baggages/${data['id']}`, body, {headers: {Authorization: `Bearer ${localStorage.getItem('access-token')}`}})
+    return this.http.put(ApiConstants.baseURl + `/lockers/${data['id']}`, body, { headers: { Authorization: `Bearer ${localStorage.getItem('access-token')}` } })
       .pipe(map((res) => {
         return {
           status: res['result'],
@@ -64,7 +64,7 @@ export class BaggageService {
   }
 
   delete(id) {
-    return this.http.delete(ApiConstants.baseURl + `/manage_baggages/${id}`, {headers: {Authorization: `Bearer ${localStorage.getItem('access-token')}`}})
+    return this.http.delete(ApiConstants.baseURl + `/lockers/${id}`, { headers: { Authorization: `Bearer ${localStorage.getItem('access-token')}` } })
       .pipe(map(res => {
         return {
           status: res['result']
@@ -73,9 +73,7 @@ export class BaggageService {
   }
 
   save(data) {
-    return this.http.post(ApiConstants.baseURl + `/manage_baggages`, {
-      number: data['name'],
-    }, {headers: {Authorization: `Bearer ${localStorage.getItem('access-token')}`}})
+    return this.httpService.post(ApiConstants.baseURl + `/lockers`, data )
       .pipe(map(res => {
         console.log(res);
         return {
@@ -85,20 +83,17 @@ export class BaggageService {
       }));
   }
 
-  saveStorage(memberId, baggageId) {
-    return this.httpService.post(ApiConstants.baseURl + `/baggages`, {
-      memberId: memberId,
-      baggageId: baggageId
-    })
-      .pipe(map(res => {
-        console.log(res);
-        return {
-          status: res['result'],
-          data: res['data']
-        };
-      }));
+  saveStorage(data) {
+    return this.httpService.post(ApiConstants.baseURl + `/baggage`, data
+    )
+    .pipe(map(res => {
+      console.log(res);
+      return {
+        status: res['result'],
+        data: res['data'][0]
+      };
+    }));
   }
-
   updateStorage(id, data) {
     return this.httpService.put(ApiConstants.baseURl + `/baggages/${id}`, data).pipe(map(res => {
       console.log(res);
