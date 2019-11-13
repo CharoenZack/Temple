@@ -18,17 +18,17 @@ export class ManageUserService {
   createUser(dataUser) {
     return this.http.post(ApiConstants.baseURl + '/auth/register',
       dataUser, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('access-token')}`
-        }
-      }).pipe(
-        map(res => {
-          return {
-            status: res['result'],
-          };
-        }
-        )
-      );
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access-token')}`
+      }
+    }).pipe(
+      map(res => {
+        return {
+          status: res['result'],
+        };
+      }
+      )
+    );
 
   }
 
@@ -42,6 +42,21 @@ export class ManageUserService {
         return {
           status: res['result'],
           data: res['data'][0]
+        };
+      })
+    );
+  }
+  // Service คอร์สที่ผ่านแล้ว
+  getPassCourse(id) {
+    return this.http.get(ApiConstants.baseURl + `/courses/history/${id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access-token')}`
+      }
+    }).pipe(
+      map((res) => {
+        return {
+          status: res['result'],
+          data: res['data']
         };
       })
     );
@@ -60,7 +75,10 @@ export class ManageUserService {
               id: member['id'],
               titleName: member['titleName'],
               fname: member['fname'],
-              lname: member['lname']
+              lname: member['lname'],
+              roleName: member['roleName'],
+              email: member['email'],
+              tel: member['tel']
             };
           });
         return {
@@ -76,11 +94,11 @@ export class ManageUserService {
     const data = {
       ...dataUser,
     };
-    if (this.authService.getRole().value === "admin") {
-      res = this.httpService.put(ApiConstants.baseURl + `/members/updateByAdmin/${id}`, data)
-      //res = this.httpService.put(ApiConstants.baseURl + `/members/${id}`, data)
+    if (this.authService.getRole().value === 'admin') {
+      res = this.httpService.put(ApiConstants.baseURl + `/members/updateByAdmin/${id}`, data);
+      // res = this.httpService.put(ApiConstants.baseURl + `/members/${id}`, data)
     } else {
-      res = this.httpService.put(ApiConstants.baseURl + `/members/${id}`, data)
+      res = this.httpService.put(ApiConstants.baseURl + `/members/${id}`, data);
     }
     return res.pipe(
       map(res => {
@@ -104,4 +122,32 @@ export class ManageUserService {
       })
     );
   }
+
+  getMemberById(id) {
+    return this.http.get(ApiConstants.baseURl + `/members/${id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access-token')}`
+      }
+    }).pipe(
+      map(res => ({
+
+        status: res['result'],
+        data: res['data'][0]
+      })
+      ));
+  }
+  getMemberLocker(id) {
+    return this.http.get(ApiConstants.baseURl + `/members/getMemberLocker/${id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access-token')}`
+      }
+    }).pipe(
+      map(res => ({
+
+        status: res['result'],
+        data: res['data']
+      })
+      ));
+  }
+
 }

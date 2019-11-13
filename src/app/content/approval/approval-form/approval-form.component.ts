@@ -16,12 +16,12 @@ export class ApprovalFormComponent implements OnInit {
   @Input() option: String;
   @Input() member: MemberApproval[];
   @Input() cols: any[];
-  @Input() fieldId: string
+  @Input() fieldId: string;
   @Input() course: any[];
   @Output() listData;
   @Input() msgs: Message[] = [];
   public courseId: string;
-  public nameCourse:string;
+  public nameCourse: string;
 
   constructor(
     private breadCrumbService: BreadcrumbService,
@@ -31,56 +31,64 @@ export class ApprovalFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.option = "2";
-    this.fieldId = "specialApproveId"
+    this.option = '2';
+    this.fieldId = 'specialApproveId';
     this.breadCrumbService.setPath([
-      { label: 'Approval: การอนุมัติ',routerLink:'/approval' },
-      { label: 'Approval students: อนุมัติผู้เรียน' },
+      { label: 'การอนุมัติ', routerLink: '/approval' },
+      { label: 'อนุมัติผู้เรียน' },
     ]);
 
     this.cols = [
       { field: 'displayName', header: 'ชื่อ-นามสกุล' },
     ];
 
-    this.courseId = this.route.snapshot.paramMap.get("id")
+    this.courseId = this.route.snapshot.paramMap.get('id');
     this.initMember();
 
     this.nameCourse = this.route.snapshot.queryParamMap.get('course');
-    
+    console.log('1');
   }
 
+
   initMember() {
+    console.log('2');
+
     this.approvalService.getMemberForApprove(+this.courseId)
       .subscribe(res => {
         if (res['status'] === 'Success') {
           this.member = res['data'];
-          if(this.member.length===0){
-            this.member = [{displayName:"ไม่มีข้อมูล"}]
+          console.log(res);
+
+          if (this.member.length === 0) {
+            this.member = [{ displayName: 'ไม่มีข้อมูล' }];
           }
         }
-      })
+      });
   }
-
   showDialog(e) {
-    const message = e.status === "1" ? "" : "ไม่";
+    console.log('3');
+    console.log(e);
     this.confirmationService.confirm({
-      message: message+"ต้องการอนุมัติ",
+      message: 'ต้องการอนุมัติ',
       header: 'ข้อความจากระบบ',
       accept: () => {
         this.approvalService.approveStudents(e)
-      .subscribe((res) => {
-        console.log(res);
-        
-        if (res['status'] === "Success") {
-          this.initMember();
-          this.msgs = [{ severity: 'success', summary: "การ"+message+"อนุมัติสำเร็จ", detail: '' }];
-        }else{
-          this.msgs = [{ severity: 'error', summary: "การ"+message+"อนุมัติไม่สำเร็จ", detail: '' }];
-        }
-      })   
+          .subscribe((res) => {
+            console.log(res);
+
+            if (res['status'] === 'Success') {
+              this.initMember();
+              this.msgs = [{ severity: 'success', summary: 'การ' + 'อนุมัติสำเร็จ', detail: '' }];
+            } else {
+              this.msgs = [{ severity: 'error', summary: 'การ' + 'อนุมัติไม่สำเร็จ', detail: '' }];
+            }
+          },
+          err => {
+            this.msgs = [{ severity: 'error', summary: 'ข้อความจากระบบ', detail: err.error['errorMessage'] }];
+          });
       },
       reject: () => {
-        
+
       }
     });
   }

@@ -1,40 +1,43 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {ReactiveFormsModule, FormsModule} from '@angular/forms';
-import {RouterModule} from '@angular/router';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HttpClientModule} from '@angular/common/http';
-import {NgxSpinnerModule} from 'ngx-spinner';
 
-import {ButtonModule} from 'primeng/button';
-import {RadioButtonModule} from 'primeng/radiobutton';
-import {DropdownModule} from 'primeng/dropdown';
-import {TitleNameService} from './service/title-name.service';
-import {CardModule} from 'primeng/card';
-import {InputTextModule} from 'primeng/inputtext';
-import {InputTextareaModule} from 'primeng/inputtextarea';
-import {InputMaskModule} from 'primeng/inputmask';
-import {CalendarModule} from 'primeng/calendar';
-import {ToastModule} from 'primeng/toast';
-import {MessageService} from 'primeng/components/common/messageservice';
-import {SidebarModule} from 'primeng/sidebar';
-import {PasswordModule} from 'primeng/password';
-import {TableModule} from 'primeng/table';
-import {StepsModule} from 'primeng/steps';
-import {FullCalendarModule} from 'primeng/fullcalendar';
-import {ConfirmDialogModule} from 'primeng/confirmdialog';
-import {MessagesModule} from 'primeng/messages';
-import {MessageModule} from 'primeng/message';
-import {DialogModule} from 'primeng/dialog';
-import {FileUploadModule} from 'primeng/fileupload';
-import {CookieService} from 'ngx-cookie-service';
-import {BreadcrumbModule} from 'primeng/breadcrumb';
-import {CheckboxModule} from 'primeng/checkbox';
-import {ListboxModule} from 'primeng/listbox';
-import {AutoCompleteModule} from 'primeng/autocomplete';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {library} from '@fortawesome/fontawesome-svg-core';
+import { ButtonModule } from 'primeng/button';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { DropdownModule } from 'primeng/dropdown';
+import { TitleNameService } from './service/title-name.service';
+import { CardModule } from 'primeng/card';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { InputMaskModule } from 'primeng/inputmask';
+import { CalendarModule } from 'primeng/calendar';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/components/common/messageservice';
+import { SidebarModule } from 'primeng/sidebar';
+import { PasswordModule } from 'primeng/password';
+import { TableModule } from 'primeng/table';
+import { StepsModule } from 'primeng/steps';
+import { FullCalendarModule } from 'primeng/fullcalendar';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
+import { DialogModule } from 'primeng/dialog';
+import { FileUploadModule } from 'primeng/fileupload';
+import { CookieService } from 'ngx-cookie-service';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { CheckboxModule } from 'primeng/checkbox';
+import { ListboxModule } from 'primeng/listbox';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { PanelModule } from 'primeng/panel';
+import { TabViewModule } from 'primeng/tabview';
+
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faUser,
   faBars,
@@ -54,14 +57,15 @@ import {
 } from '@fortawesome/free-regular-svg-icons';
 
 
-import {PersonalInfoService} from './service/personal-info.service';
-import {BreadcrumbComponent} from './component/breadcrumb/breadcrumb.component';
-import {HttpClientService} from './service/http-client.service';
-
+import { PersonalInfoService } from './service/personal-info.service';
+import { BreadcrumbComponent } from './component/breadcrumb/breadcrumb.component';
+import { HttpClientService } from './service/http-client.service';
+import { CourseMemberPassComponent } from './../content/courses/course-member-pass/course-member-pass.component';
 
 @NgModule({
   declarations: [
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    CourseMemberPassComponent
   ],
   imports: [
     CommonModule,
@@ -80,6 +84,8 @@ import {HttpClientService} from './service/http-client.service';
     FileUploadModule,
     HttpClientModule,
     BreadcrumbModule,
+    PanelModule,
+    TabViewModule
   ],
   exports: [
     CommonModule,
@@ -115,6 +121,8 @@ import {HttpClientService} from './service/http-client.service';
     CheckboxModule,
     ListboxModule,
     AutoCompleteModule,
+    PanelModule,
+    TabViewModule
   ],
   providers: [
     TitleNameService,

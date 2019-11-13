@@ -19,7 +19,7 @@ export class SidebarService {
   }
 
   closeSideBar() {
-    this.sideBar.next(false)
+    this.sideBar.next(false);
   }
 
   // destroy() {

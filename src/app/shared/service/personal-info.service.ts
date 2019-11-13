@@ -15,7 +15,7 @@ export class PersonalInfoService {
     phone: '0901112222',
     email: 'test@test.com',
     phoneEmergency: '0850001111'
-  }
+  };
 
   private personalData2 = {
     personalId: '2',
@@ -28,7 +28,7 @@ export class PersonalInfoService {
     phone: '0801213333',
     email: 'test1@test.com',
     phoneEmergency: '0850001111'
-  }
+  };
 
   private personalData = [
     {
@@ -70,17 +70,16 @@ export class PersonalInfoService {
       email: 'test1@test.com',
       phoneEmergency: '0850001111'
     }
-  ]
+  ];
 
   constructor() { }
 
   getPersonalInfo(id: String) {
-    if (id == '1') {
-      console.log("test มานี");
+    if (id === '1') {
+      console.log('test มานี');
       return this.personalData1;
-    }
-    else if (id == '2') {
-      console.log("test สมชาย");
+    } else if (id === '2') {
+      console.log('test สมชาย');
       return this.personalData2;
     }
     return null;
@@ -88,11 +87,11 @@ export class PersonalInfoService {
   getAllPersonalInfo() {
     return this.personalData.map((data) => {
       return {
-        id:data.personalId,
-        titleNameDisplay:data.titleNameDisplay,
-        fname:data.fname,
-        lname:data.lname
-      }
-    })
+        id: data.personalId,
+        titleNameDisplay: data.titleNameDisplay,
+        fname: data.fname,
+        lname: data.lname
+      };
+    });
   }
 }

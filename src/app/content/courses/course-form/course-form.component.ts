@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {CourseService} from '../shared/course.service';
+import { Component, OnInit } from '@angular/core';
+import { CourseService } from '../shared/course.service';
 
-import {BreadcrumbService} from '../../../shared/service/breadcrumb.service';
+import { BreadcrumbService } from '../../../shared/service/breadcrumb.service';
 import { Course } from 'src/app/shared/interfaces/course';
 
 @Component({
@@ -24,15 +24,15 @@ export class CourseFormComponent implements OnInit {
     }
 
     ngOnInit() {
-        //this.courses = this.courseService.getCourses();
+        // this.courses = this.courseService.getCourses();
         this.cols = [
-            {field: 'date', header: 'วันที่'},
-            {field: 'name', header: 'ชื่อคอร์ส'},
-            {field: 'location ', header: 'สถานที่'},
-            {field: 'annotation', header: 'หมายเหตุ'},
+            { field: 'date', header: 'วันที่' },
+            { field: 'name', header: 'ชื่อคอร์ส' },
+            { field: 'location ', header: 'สถานที่' },
+            { field: 'annotation', header: 'หมายเหตุ' },
         ];
         this.breadCrumbService.setPath([
-            {label: 'Approval: การอนุมัติ', routerLink: '/approval'},
+            { label: 'การอนุมัติ', routerLink: '/approval' },
         ]);
     }
 
@@ -45,7 +45,7 @@ export class CourseFormComponent implements OnInit {
     save() {
         console.log(this.course);
 
-        //this.courses = this.courseService.save(this.course .name);
+        // this.courses = this.courseService.save(this.course .name);
         this.course = {};
         this.displayDialog = false;
     }
@@ -56,7 +56,7 @@ export class CourseFormComponent implements OnInit {
 
     showEdit(id) {
         this.newCourse = false;
-        this.course = this.courses.filter(e => e.id == id)[0];
+        this.course = this.courses.filter(e => e.id === id)[0];
         this.displayDialog = true;
     }
 

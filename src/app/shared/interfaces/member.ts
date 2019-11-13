@@ -2,9 +2,8 @@ export interface Member {
   id?: Number;
   username?: String;
   password?: String;
-  fname: String ;
-  lname: String ;
-  birthdate?: Date;
+  fname: String;
+  lname: String;
   address?: String;
   tel?: String;
   emergencyTel?: String;
@@ -17,4 +16,13 @@ export interface Member {
   titleName?: String;
   genderId?: Number;
   genderName?: String;
+  memberJob?: String;
+  memberBlood?: String;
+  memberAllergyFood?: String;
+  memberAllergyMedicine?: String;
+  memberDisease?: String;
+  memberEmerName?: String;
+  memberEmerRelation?: String;
+  memberOther?: String;
+
 }

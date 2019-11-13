@@ -11,7 +11,7 @@ import { HttpClientService } from './http-client.service';
 export class TitleNameService {
 
   constructor(
-    //private http: HttpClient
+    // private http: HttpClient
     private http: HttpClientService
   ) { }
 
@@ -24,10 +24,10 @@ export class TitleNameService {
               id: data['id'],
               display: data['display'],
               name: data['name']
-            }
-          })
+            };
+          });
         })
-      )
+      );
   }
 
   getTitleNamesV2() {
@@ -37,9 +37,9 @@ export class TitleNameService {
           return {
             status: res['result'],
             data: res['data']
-          }
+          };
         })
-      )
+      );
   }
 
   updateTitleName(data) {
@@ -49,33 +49,47 @@ export class TitleNameService {
           return {
             status: res['result'],
             data: res['data'][0]
-          }
+          };
         })
-      )
+      );
 
   }
 
   createTitleName(data) {
-    return this.http.post(ApiConstants.baseURl + "/titlenames", data)
+    return this.http.post(ApiConstants.baseURl + '/titlenames', data)
       .pipe(
-        map(res=>{
+        map(res => {
           return {
             status: res['result'],
             data: res['data'][0]
-          }
+          };
         })
-      )
+      );
   }
 
-  deleteTitleName(id){
-    return this.http.delete(ApiConstants.baseURl+`/titlenames/${id}`)
-    .pipe(
-      map(res=>{
-        return {
-          status:res['result']
-        }
-      })
-    )
+  deleteTitleName(id) {
+    return this.http.delete(ApiConstants.baseURl + `/titlenames/${id}`)
+      .pipe(
+        map(res => {
+          return {
+            status: res['result']
+          };
+        })
+      );
+  }
+  getTransportations() {
+    return this.http.get(ApiConstants.baseURl + '/transportations')
+      .pipe(
+        map((res: any[]) => {
+          return res['data'].map(data => {
+            return {
+              tranId: data['tranId'],
+              tranName: data['tranName'],
+              tranStatus: data['tranStatus']
+            };
+          });
+        })
+      );
   }
 
 }

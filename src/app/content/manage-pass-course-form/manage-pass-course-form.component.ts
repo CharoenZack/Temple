@@ -1,10 +1,10 @@
-import {Component, OnInit, Input, Output} from '@angular/core';
-import {BreadcrumbService} from 'src/app/shared/service/breadcrumb.service';
-import {ApproveForMember} from 'src/app/shared/interfaces/approve-for-member';
-import {ManagePassCourseService} from 'src/app/shared/service/manage-pass-course.service';
-import {ActivatedRoute} from '@angular/router';
+import { Component, OnInit, Input, Output } from '@angular/core';
+import { BreadcrumbService } from 'src/app/shared/service/breadcrumb.service';
+import { ApproveForMember } from 'src/app/shared/interfaces/approve-for-member';
+import { ManagePassCourseService } from 'src/app/shared/service/manage-pass-course.service';
+import { ActivatedRoute } from '@angular/router';
 
-import {ConfirmationService, Message} from 'primeng/api';
+import { ConfirmationService, Message } from 'primeng/api';
 
 @Component({
   selector: 'app-manage-pass-course-form',
@@ -20,8 +20,8 @@ export class ManagePassCourseFormComponent implements OnInit {
   @Output() listData;
   @Input() msgs: Message[] = [];
   public courseId: string;
-  public nameCourse:string;
-  
+  public nameCourse: string;
+
 
   constructor(
     private breadCrumbService: BreadcrumbService,
@@ -35,12 +35,12 @@ export class ManagePassCourseFormComponent implements OnInit {
     this.option = '1';
     this.fieldId = 'mhcId';
     this.breadCrumbService.setPath([
-      {label: 'Manage Pass Course: จัดการการอนุมัติผู้เรียน',routerLink: '/managepasscourse'},
-      {label: 'Manage students : จัดการผู้เรียน'},
+      { label: 'จัดการการอนุมัติผู้เรียน', routerLink: '/managepasscourse' },
+      { label: 'จัดการผู้เรียน' },
     ]);
 
     this.cols = [
-      {field: 'fullname', header: 'ชื่อ-นามสกุล'},
+      { field: 'fullname', header: 'ชื่อ-นามสกุล' },
     ];
 
     this.courseId = this.route.snapshot.paramMap.get('id');
@@ -79,9 +79,9 @@ export class ManagePassCourseFormComponent implements OnInit {
             console.log(res);
             if (res['status'] === 'Success') {
               this.initMember();
-              this.msgs = [{severity: 'success', summary: 'การดำเนินการสำเร็จ', detail: ''}];
+              this.msgs = [{ severity: 'success', summary: 'การดำเนินการสำเร็จ', detail: '' }];
             } else {
-              this.msgs = [{severity: 'error', summary: 'ไม่การดำเนินการสำเร็จ', detail: ''}];
+              this.msgs = [{ severity: 'error', summary: 'การดำเนินไม่สำเร็จ', detail: '' }];
             }
           });
       },

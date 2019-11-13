@@ -1,1 +1,70 @@
+:host >>> .temple-button .ui-button[type="submit"] {
+  background-color: #007ad9 !important;
+  color: #fff;
+  margin-left: 5px;
+  margin-right: 5px;
+  border: #007ad9 !important;
+  border-radius: 5px;
+  font-size: 1em;
+}
+:host >>> .temple-button .ui-button:hover[type="submit"] {
+  background-color: #2a8dda !important;
+  border: #2a8dda;
+  border-radius: 5px;
+}
+:host >>> .temple-button .ui-button[type="button"] {
+  background-color: #e91224 !important;
+  color: #fff;
+  margin-left: 5px;
+  margin-right: 5px;
+  border: #e91224 !important;
+  border-radius: 5px;
+  font-size: 1em;
+}
+:host >>> .temple-button .ui-button:hover[type="button"] {
+  background-color: #ff5656 !important;
+  border: #ff5656;
+  border-radius: 5px;
+}
+:host
+  >>> button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left[ng-reflect-label="Yes"] {
+  background-color: #007ad9;
+  border: #007ad9;
+  border-radius: 3px;
+}
 
+:host
+  >>> button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left:hover[ng-reflect-label="Yes"] {
+  background-color: #2a8dda;
+  border: #2a8dda;
+  border-radius: 3px;
+}
+
+:host
+  >>> button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left[ng-reflect-label="No"] {
+  background-color: #e91224;
+  border: #e91224;
+  border-radius: 3px;
+}
+
+:host
+  >>> button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left:hover[ng-reflect-label="No"] {
+  background-color: #ff5656;
+  border: #ff5656;
+  border-radius: 3px;
+}
+/* input.ng-invalid.ng-touched {
+  border: solid 1px red;
+}
+input.ng-valid {
+  border: solid 1px green;
+} */
+.text-invalid {
+  color: red;
+}
+.ng-valid:not(form) {
+  border: 1px solid #42A948;
+}
+.ng-invalid:not(form) {
+  border:  1px solid #a94442;
+}

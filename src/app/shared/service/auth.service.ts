@@ -17,7 +17,7 @@ export class AuthService {
 
   }
 
-  getRole():BehaviorSubject<string>{
+  getRole(): BehaviorSubject<string> {
     return this.role;
   }
 

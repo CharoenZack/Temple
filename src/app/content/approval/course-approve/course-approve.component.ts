@@ -7,8 +7,8 @@ import { Component, OnInit, Input, Output } from '@angular/core';
 })
 export class CourseApproveComponent implements OnInit {
 
-  @Input() option:String;
-  @Input() member:any[]
+  @Input() option: String;
+  @Input() member: any[];
   @Output() listData;
 
   constructor() { }

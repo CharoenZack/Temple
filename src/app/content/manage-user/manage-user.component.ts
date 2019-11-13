@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {ManageUserService} from 'src/app/shared/service/manage-user.service';
+import { Component, OnInit } from '@angular/core';
+import { ManageUserService } from 'src/app/shared/service/manage-user.service';
 import { MenuItem, MessageService } from 'primeng/api';
 import { BreadcrumbService } from 'src/app/shared/service/breadcrumb.service';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
@@ -18,13 +18,13 @@ export class ManageUserComponent implements OnInit {
 
   constructor(
     private manageUser: ManageUserService,
-    private breadCrumbService : BreadcrumbService,
+    private breadCrumbService: BreadcrumbService,
     private router: Router,
   ) { }
 
   ngOnInit() {
     this.breadCrumbService.setPath([
-      {label: 'Members management : จัดการสมาชิกทั้งหมด', routerLink: '/users'},
+      { label: 'จัดการสมาชิกทั้งหมด', routerLink: '/users' },
     ]);
 
     this.manageUser.getAllUsers().subscribe(res => {
@@ -35,8 +35,8 @@ export class ManageUserComponent implements OnInit {
       (e) => console.log(e['error']['message'])
     );
     this.menu = [
-      { label: '',icon:"pi pi-home",routerLink:'/'},
-      { label: 'Manange Locations : จัดการสถานที่' },
+      { label: '', icon: 'pi pi-home', routerLink: '/' },
+      { label: 'จัดการสถานที่' },
     ];
   }
 
@@ -51,15 +51,15 @@ export class ManageUserComponent implements OnInit {
           this.personal = [
             ...this.personal.slice(0, index),
             ...this.personal.slice(index + 1)
-          ]
+          ];
         }
       },
         (e) => console.log(e['error']['message'])
       );
   }
-  public onRowSelect(e) {
-    console.log(e);
-    
-    this.router.navigate(['/profile', e.data['id']]);
-  }
+  // public onRowSelect(e) {
+  //   console.log(e);
+
+  //   this.router.navigate(['/profile', e.data['id']]);
+  // }
 }

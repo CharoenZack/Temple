@@ -68,6 +68,7 @@
     td.ui-p-4 {
         display: table-cell;
     }
+
 }
 
 
@@ -88,4 +89,7 @@
     td.ui-p-6 {
         display: table-cell;
     }
+}
+.ui-button-success .ui-button .ui-widget .ui-state-default .ui-corner-all .ui-button-text-icon-left {
+    background-color: #34A835;
 }

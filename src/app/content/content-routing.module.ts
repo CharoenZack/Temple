@@ -1,3 +1,4 @@
+import { CourseMemberPassComponent } from './courses/course-member-pass/course-member-pass.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CourseComponent } from './courses/course/course.component';
@@ -48,23 +49,41 @@ const routes: Routes = [
           }
         ]
       },
+      // {
+      //   path: 'extracourses',
+      //   component: CoursesComponent,
+      //   children: [
+      //     {
+      //       path: '',
+      //       component: CoursesListComponent,
+      //     },
+      //     {
+      //       path: ':id',
+      //       component: CourseComponent,
+      //     }
+      //   ]
+      // },
       {
         path: 'baggages',
         component: BaggagesComponent,
       },
       {
         path: 'profile',
-        children:[
+        children: [
           {
             path: ':id',
             component: ProfileComponent,
+          },
+          {
+            path: 'course/:id',
+            component: CourseMemberPassComponent,
           },
           {
             path: ':id/edit',
             component: EditFormComponent,
             data: {
               urlback: '/profile/',
-              messageback: "กลับสู่หน้า profile"
+              messageback: 'กลับสู่หน้า profile'
             }
           },
         ]
@@ -93,7 +112,7 @@ const routes: Routes = [
             component: RegisterFormComponent,
             data: {
               urlback: '/users',
-              messageback: "กลับสู่หน้าจัดการผู้ใช้"
+              messageback: 'กลับสู่หน้าจัดการผู้ใช้'
             }
           },
           {
@@ -101,14 +120,14 @@ const routes: Routes = [
             component: EditFormComponent,
             data: {
               urlback: '/users',
-              messageback: "กลับสู่หน้าจัดการผู้ใช้"
+              messageback: 'กลับสู่หน้าจัดการผู้ใช้'
             }
           },
         ]
       },
       {
         path: 'approval',
-        children:[
+        children: [
           {
             path: '',
             component: ApprovalComponent,
@@ -118,11 +137,11 @@ const routes: Routes = [
             component: ApprovalFormComponent,
             data: {
               urlback: '/approval/',
-              messageback: "อนุมัติพิเศษ"
+              messageback: 'อนุมัติพิเศษ'
             }
           },
         ]
-      },{
+      }, {
         path: 'storage',
         component: ManageStorageComponent
       },
@@ -135,7 +154,7 @@ const routes: Routes = [
         component: ManagePassCourseFormComponent,
         data: {
           urlback: '/managepasscourse/',
-          messageback: "จัดการการผ่านคอร์ส"
+          messageback: 'จัดการการผ่านคอร์ส'
         }
       },
       {

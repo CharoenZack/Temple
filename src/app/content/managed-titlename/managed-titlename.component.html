@@ -1,87 +1,113 @@
 <div class="ui-g">
-    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
-        <div style="text-align:center">
-            <h1>คำนำหน้า</h1>
-        </div>
-        <div class="line"></div>
-        <br>
-        <div class="container">
-            <div class="row">
-                <div class="ui-g">
-                    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
-                        <p-messages [(value)]="msgs"></p-messages>
-                    </div>
-                    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
-
-                        <p-table [columns]="cols" [value]="titleNames" [paginator]="true" [rows]="10" [responsive]="true">
-                            <ng-template pTemplate="caption">
-                                <div style="text-align:left">
-                                    <button pButton type="button" (click)="showDialogToAdd()" label="เพิ่ม" class="ui-button-temple" style="width: 20%"></button>
-                                </div>
-
-                            </ng-template>
-                            <ng-template pTemplate="header" let-columns>
-                                <tr>
-                                    <th pSortableColumn="name">
-                                        คำนำหน้า
-                                        <p-sortIcon field="name" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
-                                        </p-sortIcon>
-                                    </th>
-                                    <th pSortableColumn="nameAbbr">
-                                        ตัวย่อ
-                                        <p-sortIcon field="nameAbbr" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
-                                        </p-sortIcon>
-                                    </th>
-                                    <th>
-
-                                    </th>
-                                </tr>
-                            </ng-template>
-                            <ng-template pTemplate="body" let-rowData let-columns="columns">
-                                <tr>
-                                    <td *ngFor="let col of columns;">
-                                        <span class="ui-column-title">{{col.header}}</span> {{rowData[col.field]}}
-                                    </td>
-                                    <td>
-                                        <div style="text-align:center">
-                                            <button pButton type="button" label="แก้ไข" (click)="showEdit(rowData['id'])" class="ui-button-warning" style="width: 40%;"></button>
-                                            <button pButton type="button" label="ลบ" (click)="delete(rowData['id'])" class="ui-button-danger" style="width: 40%;margin-left: 5mm"></button>
-                                        </div>
-
-                                    </td>
-                                </tr>
-                            </ng-template>
-                        </p-table>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+    <div style="text-align:center">
+      <h1>คำนำหน้า</h1>
     </div>
+    <div class="line"></div>
+    <br>
+    <div class="container">
+      <div class="row">
+        <div class="ui-g">
+          <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+            <p-messages [(value)]="msgs"></p-messages>
+          </div>
+          <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
 
-    <p-dialog header="titleName Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [style]="{width: '300px'}">
-        <div class="ui-g ui-fluid" *ngIf="titleName">
-            <div class="ui-g-12">
-                <div class="ui-g-4">
-                    <label for="titleNameDisplay">คำนำหน้า</label>
+            <p-table [columns]="cols" [value]="titleNames" [paginator]="true" [rows]="10" [responsive]="true">
+              <ng-template pTemplate="caption">
+                <div style="text-align:left">
+                  <button pButton type="button" id="btn-Increase" (click)="showDialogToAdd()" label="เพิ่ม"
+                    class="ui-button-temple" style="width: 20%"></button>
                 </div>
-                <div class="ui-g-8">
-                    <input pInputText id="titleNameDisplay" [(ngModel)]="titleNameEdit" />
-                </div>
-                <div class="ui-g-4">
-                    <label for="titleNameDisplay">คำย่อ</label>
-                </div>
-                <div class="ui-g-8">
-                    <input pInputText id="titleNameDisplay" [(ngModel)]="titleNameAbbrEdit" />
-                </div>
-            </div>
+
+              </ng-template>
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th pSortableColumn="nameAbbr">
+                    ตัวย่อ
+                    <p-sortIcon field="nameAbbr" ariaLabel="Activate to sort"
+                      ariaLabelDesc="Activate to sort in descending order"
+                      ariaLabelAsc="Activate to sort in ascending order">
+                    </p-sortIcon>
+                  </th>
+                  <th pSortableColumn="name">
+                    คำนำหน้า
+                    <p-sortIcon field="name" ariaLabel="Activate to sort"
+                      ariaLabelDesc="Activate to sort in descending order"
+                      ariaLabelAsc="Activate to sort in ascending order">
+                    </p-sortIcon>
+                  </th>
+                  <th>
+
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr>
+                  <td *ngFor="let col of columns;">
+                    <span class="ui-column-title">{{col.header}}</span> {{rowData[col.field]}}
+                  </td>
+                  <td>
+                    <div style="text-align:center">
+                      <button pButton type="button" label="แก้ไข" (click)="showEdit(rowData['id'])"
+                        class="ui-button-warning" style="width: 40%;"></button>
+                      <button pButton type="button" label="ลบ" (click)="delete(rowData['id'])" class="ui-button-danger"
+                        style="width: 40%;margin-left: 5mm"></button>
+                    </div>
+
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
         </div>
-        <p-footer>
-            <div class="ui-dialog-buttonpane ui-helper-clearfix">
-                <button type="button" pButton (click)="clear()" label="Clear"></button>
-                <button *ngIf="newtitleName" type="button" pButton (click)="save()" label="Save"></button>
-                <button *ngIf="!newtitleName" type="button" pButton (click)="update()" label="Update"></button>
-            </div>
-        </p-footer>
-    </p-dialog>
+      </div>
+    </div>
+  </div>
+  <form [formGroup]="formEdit" novalidate>
+    <p-dialog header="รายละเอียดคำนำหน้า" [(visible)]="displayDialog" [responsive]="true" showEffect="fade"
+      [modal]="true" [style]="{width: '300px'}" (onHide)="formEdit.reset()">
+      <div class="ui-g ui-fluid" *ngIf="titleName">
+        <div class="ui-g-12">
+          <div class="form-group">
 
-    <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+            <div class="ui-g-4">
+              <label for="titleNameDisplay">คำย่อ</label>
+            </div>
+            <div class="ui-g-8">
+              <input pInputText id="titleNameDisplay" [(ngModel)]="titleNameAbbrEdit" formControlName="nameAbbr" />
+              <div
+                *ngIf="formEdit.controls['nameAbbr'].invalid && (formEdit.controls['nameAbbr'].dirty || formEdit.controls['nameAbbr'].touched)"
+                class="alert alert-danger">
+                <div class="text-danger text-invalid" *ngIf="formEdit.controls['nameAbbr'].errors.required">
+                  กรุณากรอกคำย่อ</div>
+              </div>
+            </div>
+            <div class="ui-g-4">
+              <label for="titleNameDisplay">คำนำหน้า</label>
+            </div>
+            <div class="ui-g-8">
+              <input pInputText id="titleNameDisplay" [(ngModel)]="titleNameEdit" formControlName="name" />
+              <div
+                *ngIf="formEdit.controls['name'].invalid && (formEdit.controls['name'].dirty || formEdit.controls['name'].touched)"
+                class="alert alert-danger">
+                <div class="text-danger text-invalid" *ngIf="formEdit.controls['name'].errors.required">
+                  กรุณากรอกคำนำหน้า</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+          <button type="button" id="btn-Clear" pButton (click)="clear()" label="ยกเลิก"></button>
+          <button *ngIf="newtitleName" id="btn-Save" type="button" pButton (click)="save()" label="บันทึก"
+            [disabled]="formEdit.pristine || formEdit.invalid"></button>
+          <button *ngIf="!newtitleName" id="btn-Update" type="button" pButton (click)="update()" label="แก้ไข"
+            [disabled]="formEdit.invalid"></button>
+        </div>
+      </p-footer>
+    </p-dialog>
+  </form>
+  <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+

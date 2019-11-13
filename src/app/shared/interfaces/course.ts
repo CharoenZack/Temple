@@ -3,6 +3,8 @@ export interface Course {
   name?: string;
   stDate?: Date;
   endDate?: Date;
+  createDate?: Date;
+  lastUpdate?: Date;
   detail?: string;
   conditionMin?: Number;
   memberId?: string;

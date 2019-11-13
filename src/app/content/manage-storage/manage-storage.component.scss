@@ -25,3 +25,36 @@ label {
     background-color: #cdaa54 !important;
     border: #cdaa54 !important;
 }
+#btn_Increase{
+    background-color: #b8860b ;
+    border: #b8860b ;
+}
+#btn_Increase:hover{
+    background-color: #cdaa54;
+    border: 1px solid #cdaa54;
+}
+#btn_Cancel{
+    background-color: #e91224;
+    border: #e91224;
+}
+#btn_Cancel:hover{
+    background-color: #e2525e;
+    border: 1px solid #e2525e;
+}
+#btn_Save{
+    background-color: #007ad9;
+    border: #007ad9;
+}
+#btn_Save:hover{
+    background-color: #2a8dda;
+    border: 1px solid #2a8dda;
+}
+.text-invalid {
+  color: red;
+}
+.ng-valid:not(form) {
+  border: 1px solid #42a948;
+}
+.ng-invalid:not(form) {
+  border: 1px solid #a94442;
+}

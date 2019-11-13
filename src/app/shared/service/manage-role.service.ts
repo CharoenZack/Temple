@@ -11,34 +11,36 @@ export class ManageRoleService {
   ) { }
 
   getRoleStatus() {
-    return this.authservice.getRole().getValue() === "admin" ? true : false;
+    return this.authservice.getRole().getValue() === 'admin' ? true : false;
   }
 
-
+  getRoleShowTable() {
+    return this.authservice.getRole().getValue() === 'user' ? true : false;
+  }
   getRoles() {
-    //return this.authservice.getRole().getValue();
-    if (this.authservice.getRole().getValue() === "admin") {
+    // return this.authservice.getRole().getValue();
+    if (this.authservice.getRole().getValue() === 'admin') {
       return [
         {
           roleId: 3,
-          roleName: "user"
+          roleName: 'user'
         },
         {
           roleId: 2,
-          roleName: "monk"
+          roleName: 'monk'
         },
         {
           roleId: 1,
-          roleName: "admin"
+          roleName: 'admin'
         },
-      ]
+      ];
     } else {
       return [
         {
           roleId: null,
           roleName: ''
         }
-      ]
+      ];
     }
   }
 }

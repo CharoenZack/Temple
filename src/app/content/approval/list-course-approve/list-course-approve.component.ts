@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {MenuItem, MessageService, ConfirmationService, LazyLoadEvent} from 'primeng/api';
-import {ApprovalService} from '../approval.service';
-import {BreadcrumbService} from '../../../shared/service/breadcrumb.service';
-import {Course} from '../../../shared/interfaces/course';
-import {of} from 'rxjs';
-import {switchMap, tap} from 'rxjs/operators';
-import {Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { MenuItem, MessageService, ConfirmationService, LazyLoadEvent } from 'primeng/api';
+import { ApprovalService } from '../approval.service';
+import { BreadcrumbService } from '../../../shared/service/breadcrumb.service';
+import { Course } from '../../../shared/interfaces/course';
+import { of } from 'rxjs';
+import { switchMap, tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-course-approve',
@@ -48,15 +48,15 @@ export class ListCourseApproveComponent implements OnInit {
 
   private setColumn() {
     this.cols = [
-      {field: 'name', header: 'ชื่อคอร์ส'},
-      {field: 'conditionMin', header: 'หมายเหตุ'},
-      {field: 'detail', header: 'รายละเอียด'},
+      { field: 'name', header: 'ชื่อคอร์ส' },
+      { field: 'conditionMin', header: 'หมายเหตุ' },
+      { field: 'detail', header: 'รายละเอียด' },
     ];
   }
 
   private setBreadCrumb() {
     this.breadCrumbService.setPath([
-      {label: 'Approval: การอนุมัติ', routerLink: '/approval'},
+      { label: 'การอนุมัติ', routerLink: '/approval' },
     ]);
   }
 

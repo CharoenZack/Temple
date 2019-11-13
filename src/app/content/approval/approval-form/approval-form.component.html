@@ -1,17 +1,18 @@
 <div class="container">
-    <div class="ui-g">
-        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
-            <div style="text-align:center">
-                <h1>อนุมัติพิเศษคอร์ส {{nameCourse}}</h1>
-            </div>
-        </div>
-        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
-            <div class="line"></div>
-        </div>
-        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
-            <app-list-allow [msgs]="msgs" [cols]="cols" [member]="member" [option]='option' (listData)="showDialog($event)" [fieldId]='fieldId'></app-list-allow>
-        </div>
-
+  <div class="ui-g">
+    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+      <div style="text-align:center">
+        <h1>อนุมัติพิเศษคอร์ส {{nameCourse}}</h1>
+      </div>
     </div>
+    <!-- <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+      <div class="line"></div>
+    </div> -->
+    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+      <app-list-allow [msgs]="msgs" [cols]="cols" [member]="member" [option]='option' (listData)="showDialog($event)"
+        [fieldId]='fieldId'></app-list-allow>
+    </div>
+
+  </div>
 </div>
 <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>

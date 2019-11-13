@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {Location} from '../../shared/interfaces/location';
-import {HttpClient} from '@angular/common/http';
-import {map} from 'rxjs/operators';
-import {ApiConstants} from 'src/app/shared/constants/ApiConstants';
+import { Injectable } from '@angular/core';
+import { Location } from '../../shared/interfaces/location';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { ApiConstants } from 'src/app/shared/constants/ApiConstants';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,9 @@ export class LocationService {
 
 
   getLocation() {
-    return this.http.get(ApiConstants.baseURl + '/locations', {
+    // const userId = localStorage.getItem('userId');
+    // return this.http.get(ApiConstants.baseURl + `/locations/${userId}`, {
+    return this.http.get(ApiConstants.baseURl + `/locations`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('access-token')}`
       }
@@ -66,7 +68,20 @@ export class LocationService {
       }
     }).pipe(map(res => {
       return {
-        status: res['result']
+        status: res['result'],
+      };
+    }));
+  }
+
+  getLockerByLocation(id) {
+    return this.http.get(ApiConstants.baseURl + `/locations/lockerByLocation/${id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access-token')}`
+      }
+    }).pipe(map(res => {
+      return {
+        status: res['result'],
+        data: res['data']
       };
     }));
   }

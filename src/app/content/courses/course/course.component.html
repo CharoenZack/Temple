@@ -1,86 +1,215 @@
 <div class="ui-g">
-    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ">
-        <div style="text-align: center">
-            <h2>{{(course) ? course.name : ''}}</h2>
-        </div>
-        <div class="container">
-            <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
-            <p-messages [value]="msgs"></p-messages>
-            <p-card>
-                <div class="ui-g">
-                    <div class="ui-g-12 ui-lg-2 ui-md-2 ui-sm-12">
-                        <label><b>วันที่</b></label></div>
-                    <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 "> {{(course) ? course.stDate : ''}} - {{(course) ? course.endDate : ''}} </div>
+  <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ">
+    <div class="container" *ngIf="showButtonBack('user')">
+      <div style="text-align: center">
+        <h2>{{(course) ? course.name : ''}}</h2>
+      </div>
+      <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+      <p-messages [value]="msgs"></p-messages>
+      <p-card>
+        <div class="ui-g">
+          <div class="ui-g-12 ui-lg-2 ui-md-2 ui-sm-12">
+            <label><b>วันที่ปฏิบัติธรรม</b></label></div>
+          <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 "> {{(course) ? (course.stDate | date:'dd/MM/yyyy') : ''}} -
+            {{(course) ?(course.endDate | date:'dd/MM/yyyy') : '' }} </div>
+          <div class="ui-g-12 ui-lg- ui-md-2 ui-sm-12">
+            <label><b>รายละเอียด</b></label></div>
+          <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 "> {{(course) ? course.detail : ''}} </div>
 
-                    <div class="ui-g-12 ui-lg- ui-md-2 ui-sm-12">
-                        <label><b>รายละเอียด</b></label></div>
-                    <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 "> {{(course) ? course.detail : ''}} </div>
+          <div class="ui-g-12 ui-lg-2 ui-md-2 ui-sm-12">
+            <label><b>สถานที่</b></label></div>
+          <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 "> {{(course) ? course.locationName : ''}} </div>
 
-                    <div class="ui-g-12 ui-lg-2 ui-md-2 ui-sm-12">
-                        <label><b>สถานที่</b></label></div>
-                    <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 "> {{(course) ? course.locationName : ''}} </div>
+          <div class="ui-g-12 ui-lg-2 ui-md-2 ui-sm-12">
+            <label><b>หมายเหตุ</b></label></div>
+          <div class="ui-g-12 ui-lg-10 ui-md-12 ui-sm-12 ">
+            <span> ต้องมีการลงคอร์สมาอย่างน้อย {{(course) ? course.conditionMin : ''}} คอร์ส </span>
+          </div>
+          <div class="ui-g-12 ui-lg-2 ui-md-2 ui-sm-12">
+            <label><b>สถานะ</b></label></div>
+          <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 ">{{(course) ? course.status : ''}}</div>
 
-                    <div class="ui-g-12 ui-lg-2 ui-md-2 ui-sm-12">
-                        <label><b>หมายเหตุ</b></label></div>
-                    <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 ">
-                        ต้องมีการลงคอร์สมาอย่างน้อย {{(course) ? course.conditionMin : ''}} คอร์ส
-                    </div>
-                    <div class="ui-g-12 ui-lg-2 ui-md-2 ui-sm-12">
-                        <label><b>สถานะ</b></label></div>
-                    <div class="ui-g-12 ui-lg-10 ui-md-10 ui-sm-12 ">{{(course) ? course.status : ''}}</div>
-
-                    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
-                        <div class="ui-g">
-                            <div class="ui-g-12 ui-lg-9 ui-md-9 ui-sm-12" style="margin: 0 auto;">
-                                <div class="ui-g btn-center">
-                                    <div class="ui-g-12 ui-lg-3 ui-md-3 ui-sm-12" *ngIf="course['saStatus'] !== '2' && course['canRegister'] === 1">
-                                        <button pButton type="button" label="สมัคร" icon="pi pi-check" (click)="assignCourse(course['id'])" [disabled]="course['canRegister'] === 0"></button>
-                                    </div>
-                                    <div class="ui-g-12 ui-lg-3 ui-md-3 ui-sm-12" *ngIf="course['saStatus'] !== '2' && course['canRegister'] === 1">
-                                        <button pButton type="button" label="ขออนุมัติพิเศษ" icon="pi pi-check" class="ui-button-warning" [disabled]="course['canRegister'] === 0" (click)="saCourse(course['id'])"></button>
-                                    </div>
-
-
-                                    <div class="ui-g-12 ui-lg-4 ui-md-4 ui-sm-12" *ngIf="course['saStatus'] === '2' && course['canRegister'] === 0">
-                                        <button pButton type="button" label="ยกเลิกการขออนุมัติพิเศษ" class="ui-button-warning" [disabled]="course['canRegister'] !== 0" (click)="cancelApprovalCourse(course['id'])"></button>
-                                    </div>
-                                    <div class="ui-g-12 ui-lg-3 ui-md-3 ui-sm-12">
-                                        <button pButton type="button" label="กลับ" class="ui-button-secondary" routerLink="/courses"></button>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
+          <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+            <div class="ui-g">
+              <div class="ui-g-12 ui-lg-9 ui-md-9 ui-sm-12" style="margin: 0 auto;">
+                <div class="ui-g btn-center">
+                  <div class="ui-g-12 ui-lg-3 ui-md-3 ui-sm-12" *ngIf="course['saStatus'] !== '2' && course['canRegister'] === 1
+                    && (totalRecordPass >= course['conditionMin'] || course['conditionMin'] === 0)">
+                    <button pButton type="button" label="สมัคร" icon="pi pi-check" (click)="mhcCourse(course['id'])"
+                      [disabled]="course['canRegister'] === 0" style="width:100%"></button>
+                  </div>
+                  <div class="ui-g-12 ui-lg-3 ui-md-3 ui-sm-12" *ngIf="course['saStatus'] !== '2' && course['canRegister'] === 1
+                     && (totalRecordPass < course['conditionMin'])">
+                    <button pButton type="button" label="ขออนุมัติพิเศษ" icon="pi pi-check" class=".ui-button-success"
+                      [disabled]="course['canRegister'] === 0" (click)="saCourse(course['id'])"
+                      style="background-color:#34A835; border:1px solid #34A835; width:100%"></button>
+                  </div>
+                  <div class="ui-g-12 ui-lg-4 ui-md-4 ui-sm-12"
+                    *ngIf="course['saStatus'] === '2' && course['canRegister'] === 0">
+                    <button pButton type="button" label="ยกเลิกการขออนุมัติพิเศษ" class="ui-button-warning"
+                      [disabled]="course['canRegister'] !== 0" (click)="cancelApprovalCourse(course['id'])"></button>
+                  </div>
+                  <div class="ui-g-12 ui-lg-3 ui-md-3 ui-sm-12" *ngIf="showButtonBack('user')">
+                    <button pButton type="button" label="กลับ" class="ui-button-secondary"
+                      routerLink="/courses"></button>
+                  </div>
+                  <div class="ui-g-12 ui-lg-3 ui-md-3 ui-sm-12" *ngIf="showButtonBack('monk')">
+                    <button pButton type="button" label="กลับ" class="ui-button-secondary"
+                      routerLink="/schedule"></button>
+                  </div>
 
                 </div>
+              </div>
 
-
-            </p-card>
+            </div>
+          </div>
 
         </div>
+
+
+      </p-card>
+
     </div>
+    <!-- .. -->
+    <div class="container" *ngIf="showButtonBack('monk')">
+      <div class="ui-g">
+        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+          <div style="text-align:center">
+
+            <h1>รายชื่อผู้เรียนคอร์ส {{(course) ? course.name : ''}}</h1>
+          </div>
+          <div class="line"></div>
+
+        </div>
+
+        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+          <!-- <app-list-allow [msgs]="msgs" [cols]="cols" [member]="member" [option]='option'></app-list-allow> -->
+          <p-table [value]="memberList">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>ชื่อ-นามสกุล</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-member ngFor="let member of memberList; let i = index">
+              <tr>
+                <td>
+                  {{member.data.titleName}}{{member.data.fname}} {{member.data.lname}}
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container" *ngIf="showButtonBack('admin')">
+      <div class="ui-g">
+        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+          <div style="text-align:center">
+
+            <h1>รายชื่อผู้เรียนคอร์ส {{(course) ? course.name : ''}}</h1>
+          </div>
+          <div class="line"></div>
+
+        </div>
+
+        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
+          <!-- <app-list-allow [msgs]="msgs" [cols]="cols" [member]="member" [option]='option'></app-list-allow> -->
+          <p-table [value]="memberList">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>ชื่อ-นามสกุล</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-member ngFor="let member of memberList; let i = index">
+              <tr>
+                <td>
+                  {{member.data.titleName}}{{member.data.fname}} {{member.data.lname}}
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
 </div>
 
-<p-dialog header="ข้อความจากระบบ" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
-    <div class="ui-g">
-        <div class="ui-g-12">
-            <div class="ui-g">
-                <div class="ui-g-4">
-                    <label for="name">รายละเอียด</label>
-                </div>
-                <div class="ui-g-8">
-                    <textarea pInputTextarea id="name" [(ngModel)]="specialApprove.detail" ></textarea>
-                </div>
-            </div>
-        </div>
+<p-dialog header="ข้อความจากระบบ" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"
+  [style]="{ width: '500px', minwidth: '450px' }" (onHide)="cancelDialog('2', specialCourse);">
+
+  <div class="ui-g-12">
+    <div class="ui-g-4">
+      <span>การเดินทางมาที่วัด*</span>
     </div>
-    <p-footer>
-        <div>
-            <button type="button" pButton (click)="approvalCourse()" label="ยืนยัน"></button>
-            <button type="button" pButton (click)="displayDialog=false" label="ยกเลิก"></button>
-        </div>
-    </p-footer>
+    <div class="ui-g-8">
+      <p-dropdown [options]="transportations" required [(ngModel)]="specialApprove.tranId" #specialCourse="ngModel"
+        optionLabel="tranName" [autoWidth]="false" placeholder="กรุณาเลือกการเดินทาง" [style]="{ width: '70%' }">
+      </p-dropdown>
+      <div *ngIf="specialCourse.invalid && (specialCourse.dirty || specialCourse.touched)" class="alert alert-danger">
+        <div *ngIf="specialCourse.errors.required" style="color: red">กรุณาเลือกการเดินทาง*</div>
+      </div>
+    </div>
+    <div class="ui-g-4">
+      <span>กรุณาเล่าประสบการณ์ปฎิบัติธรรมที่ผ่านมา</span>
+    </div>
+    <div class="ui-g-6">
+      <textarea pInputTextarea id="name" [(ngModel)]="specialApprove.senseExperience"></textarea>
+    </div>
+    <div class="ui-g-4">
+      <span>ความคาดหวังในครั้งนี้</span>
+    </div>
+    <div class="ui-g-6">
+      <textarea pInputTextarea id="name" [(ngModel)]="specialApprove.senseExpected"></textarea>
+    </div>
+    <div class="ui-g-4">
+      <label for="name">เหตุผลในการขออนุมัติพิเศษ</label>
+    </div>
+    <div class="ui-g-8">
+      <textarea pInputTextarea id="name" [(ngModel)]="specialApprove.detail"></textarea>
+    </div>
+  </div>
+  <p-footer>
+    <div>
+      <button type="button" pButton (click)="approvalCourse(specialApprove.tranId.tranId)"  [disabled]="specialCourse.pristine || specialCourse.invalid" label="ยืนยัน"></button>
+      <button type="button" pButton (click)="displayDialog=false" class="ui-button-danger" label="ยกเลิก"></button>
+    </div>
+  </p-footer>
+</p-dialog>
+<p-dialog header="ข้อความจากระบบ" [(visible)]="displayDialogmhc" [responsive]="true" showEffect="fade" [modal]="true"
+  [style]="{ width: '500px', minwidth: '450px' }" (onHide)="cancelDialog('1', Course);">
+  <div class="ui-g-12">
+    <div class="ui-g-4">
+      <span>การเดินทางมาที่วัด*</span>
+    </div>
+    <div class="ui-g-8">
+      <p-dropdown [options]="transportations" required [(ngModel)]="detailCourse.tranId" #Course="ngModel"
+        optionLabel="tranName" [autoWidth]="false" placeholder="กรุณาเลือกการเดินทาง" [style]="{ width: '70%' }">
+      </p-dropdown>
+      <div *ngIf="Course.invalid && (Course.dirty || Course.touched)" class="alert alert-danger">
+        <div *ngIf="Course.errors.required" style="color: red">กรุณาเลือกการเดินทาง*</div>
+      </div>
+    </div>
+    <div class="ui-g-4">
+      <span>กรุณาเล่าประสบการณ์ปฎิบัติธรรมที่ผ่านมา</span>
+    </div>
+    <div class="ui-g-6">
+      <textarea pInputTextarea id="name" [(ngModel)]="detailCourse.senseExperience"></textarea>
+    </div>
+    <div class="ui-g-4">
+      <span>ความคาดหวังในครั้งนี้</span>
+    </div>
+    <div class="ui-g-6">
+      <textarea pInputTextarea id="name" [(ngModel)]="detailCourse.senseExpected"></textarea>
+    </div>
+  </div>
+  <p-footer>
+    <div>
+      <button type="button" pButton (click)="assignCourse(detailCourse.tranId.tranId)" [disabled]="Course.pristine || Course.invalid" label="ยืนยัน"></button>
+      <button type="button" class="ui-button-danger" pButton (click)="displayDialogmhc = false" label="ยกเลิก"></button>
+    </div>
+  </p-footer>
 </p-dialog>

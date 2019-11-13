@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {map} from 'rxjs/operators';
-import {ApiConstants} from '../../shared/constants/ApiConstants';
-import {HttpClientService} from '../../shared/service/http-client.service';
+import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
+import { ApiConstants } from '../../shared/constants/ApiConstants';
+import { HttpClientService } from '../../shared/service/http-client.service';
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +56,7 @@ export class ApprovalService {
     const req = {
       saId: data.member,
       courseId: data.courseId,
+      memberId: data.memberId,
       status: data.status
     };
     return this.http.put(`${ApiConstants.baseURl}/approve`, req).pipe(

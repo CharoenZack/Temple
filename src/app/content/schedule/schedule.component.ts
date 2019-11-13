@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {ScheduleService} from 'src/app/shared/service/schedule.service';
-import {BreadcrumbService} from '../../shared/service/breadcrumb.service';
+import { DatePipe } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { ScheduleService } from 'src/app/shared/service/schedule.service';
+import { BreadcrumbService } from '../../shared/service/breadcrumb.service';
 import { AuthService } from 'src/app/shared/service/auth.service';
 
 @Component({
@@ -11,23 +12,26 @@ import { AuthService } from 'src/app/shared/service/auth.service';
 export class ScheduleComponent implements OnInit {
   events: any[];
   options: any;
-  title:String;
+  title: String;
+  day: any;
+  newEndDate: any;
+  element: any;
 
   constructor(
     private scheduleService: ScheduleService,
     private breadCrumbService: BreadcrumbService,
-    private authService:AuthService,
+    private authService: AuthService,
   ) {
 
   }
 
   ngOnInit() {
-    
-    if(this.authService.getRole().value === "monk"){
-      this.title = "ตารางสอน"
+
+    if (this.authService.getRole().value === 'monk') {
+      this.title = 'ตารางสอน';
       this.loadDataForMonk();
-    }else if(this.authService.getRole().value === "user") {
-      this.title = "ตารางเรียน"
+    } else if (this.authService.getRole().value === 'user') {
+      this.title = 'ตารางเรียน';
       this.loadData();
     }
     this.setPath();
@@ -36,34 +40,46 @@ export class ScheduleComponent implements OnInit {
 
   private setPath() {
     this.breadCrumbService.setPath([
-      {label: `Schedule : ${this.title}` }
+      { label: `${this.title}` }
     ]);
   }
 
   private loadData() {
     this.scheduleService.getSchedule()
       .subscribe(res => {
-          console.log(res);
-          if (res['status'] === 'Success') {
-            this.events = res['data'];
-          }
-        },
+        console.log(res);
+        if (res['status'] === 'Success') {
+          res['data'].forEach(element => {
+            this.day = new Date(element.end);
+            this.day.setDate((this.day.getDate()) + 1);
+            this.newEndDate = new DatePipe('en-En').transform(this.day, 'yyyy-MM-dd');
+            element.end = this.newEndDate;
+          });
+          this.events = res['data'];
+        }
+      },
         err => {
           console.log('Error', err);
         });
   }
 
-  private loadDataForMonk(){
+  private loadDataForMonk() {
     this.scheduleService.getScheduleForMonk()
-    .subscribe(res => {
+      .subscribe(res => {
         console.log(res);
         if (res['status'] === 'Success') {
+          res['data'].forEach(element => {
+            this.day = new Date(element.end);
+            this.day.setDate((this.day.getDate()) + 1);
+            this.newEndDate = new DatePipe('en-En').transform(this.day, 'yyyy-MM-dd');
+            element.end = this.newEndDate;
+          });
           this.events = res['data'];
         }
       },
-      err => {
-        console.log('Error', err);
-      });
+        err => {
+          console.log('Error', err);
+        });
   }
 
   private setOption() {

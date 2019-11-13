@@ -3,6 +3,7 @@ import { TitleName } from '../../shared/interfaces/title-name';
 import { TitleNameService } from 'src/app/shared/service/title-name.service';
 import { MenuItem, Message, ConfirmationService } from 'primeng/api';
 import { BreadcrumbService } from 'src/app/shared/service/breadcrumb.service';
+import { FormBuilder, FormGroup, Validators, NgModel } from '@angular/forms';
 
 
 @Component({
@@ -18,12 +19,15 @@ export class ManagedTitlenameComponent implements OnInit {
   titleNames: TitleName[];
   titleNameEdit: String;
   titleNameAbbrEdit: String;
+  public formEdit: FormGroup;
+
   cols: any[];
   public menu: MenuItem[];
   public msgs: Message[] = [];
 
   constructor(
     private titleNamesService: TitleNameService,
+    private formBuilder: FormBuilder,
     private breadCrumbService: BreadcrumbService,
     private confirmationService: ConfirmationService
   ) {
@@ -31,7 +35,7 @@ export class ManagedTitlenameComponent implements OnInit {
 
   ngOnInit() {
     this.breadCrumbService.setPath([
-      { label: 'Title names management: จัดการคำนำหน้าทั้งหมด', routerLink: '/manageTitlename' },
+      { label: 'จัดการคำนำหน้าทั้งหมด', routerLink: '/manageTitlename' },
     ]);
 
     this.getTitleName();
@@ -41,10 +45,19 @@ export class ManagedTitlenameComponent implements OnInit {
 
     this.menu = [
       { label: '', icon: 'pi pi-home', routerLink: '/' },
-      { label: 'Approval user : อนุมัติพิเศษ' },
+      { label: 'อนุมัติพิเศษ' },
     ];
-  }
 
+    this.createForm();
+  }
+  createForm() {
+    this.formEdit = this.formBuilder.group(
+      {
+        name: ['', Validators.required],
+        nameAbbr: ['', Validators.required],
+      }
+    );
+  }
   getTitleName() {
     this.titleNamesService.getTitleNamesV2()
       .subscribe(
@@ -52,12 +65,12 @@ export class ManagedTitlenameComponent implements OnInit {
           console.log(res, 'names');
           if (res['status'] === 'Success') {
             this.titleNames = res['data'];
-            //this.msgs.push({severity:'success', summary:'ข้อความจากระบบ', detail:'การดำเนินการสำเร็จ'});
+            // this.msgs.push({severity:'success', summary:'ข้อความจากระบบ', detail:'การดำเนินการสำเร็จ'});
           }
         },
         err => {
           console.log(err['error']['message']);
-          //this.msgs.push({severity:'error', summary:'ข้อความจากระบบ', detail:'การดำเนินการสำเร็จ'});
+          // this.msgs.push({severity:'error', summary:'ข้อความจากระบบ', detail:'การดำเนินการสำเร็จ'});
         }
       );
   }
@@ -67,12 +80,17 @@ export class ManagedTitlenameComponent implements OnInit {
     this.titleName = {};
     this.displayDialog = true;
   }
+  // public cancelDialog(model: NgModel) {
+  //   this.displayDialog = false;
+  //   this.showDialogToAdd();
+  //   model.control.markAsUntouched();
+  //   model.control.markAsPristine();
+  // }
 
   save() {
     this.msgs = [];
     this.titleName.display = this.titleNameEdit;
     this.titleName.name = this.titleNameAbbrEdit;
-
     this.titleNamesService.createTitleName(this.titleName)
       .subscribe(res => {
         if (res['status'] === 'Success') {
@@ -84,8 +102,8 @@ export class ManagedTitlenameComponent implements OnInit {
         }
       },
         (e) => {
-          console.log(e['error']['message'])
-          this.msgs.push({ severity: 'error', summary: 'ข้อความจากระบบ', detail: 'การดำเนินการไม่สำเร็จ' });
+          console.log(e['error']['message']);
+          this.msgs.push({ severity: 'error', summary: 'ข้อความจากระบบ', detail: 'ชื่อซ้ำ' });
         }
       );
     this.clear();
@@ -96,6 +114,7 @@ export class ManagedTitlenameComponent implements OnInit {
     this.displayDialog = false;
     this.titleNameEdit = '';
     this.titleNameAbbrEdit = '';
+    this.formEdit.reset();
   }
 
   update() {
@@ -114,7 +133,7 @@ export class ManagedTitlenameComponent implements OnInit {
         }
       },
         (e) => {
-          console.log(e['error']['message'])
+          console.log(e['error']['message']);
           this.msgs.push({ severity: 'error', summary: 'ข้อความจากระบบ', detail: 'การดำเนินการไม่สำเร็จ' });
         }
       );
@@ -122,6 +141,8 @@ export class ManagedTitlenameComponent implements OnInit {
   }
 
   showEdit(id) {
+    console.log(id);
+
     this.newtitleName = false;
     this.titleName = this.titleNames.filter(e => e.id === id)[0];
     this.titleNameEdit = this.titleName['display'];
@@ -130,7 +151,7 @@ export class ManagedTitlenameComponent implements OnInit {
   }
 
   delete(id) {
-    //console.log(id, 'delete');
+    // console.log(id, 'delete');
     this.msgs = [];
     this.confirmationService.confirm({
       message: 'ยืนยันการลบ',
@@ -156,7 +177,7 @@ export class ManagedTitlenameComponent implements OnInit {
       reject: () => {
 
       }
-    })
+    });
   }
 }
 

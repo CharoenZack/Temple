@@ -1,105 +1,291 @@
 <div class="ui-g">
-    <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
-        <div class="margin-top-bottom">
-            <fieldset>
-                <legend class="font-show">ข้อมูลส่วนตัว</legend>
-                <div class="container">
+  <div class="ui-g-12 ui-lg-12 ui-md-12">
+    <div class="margin-top-bottom" *ngIf="ShowTable">
+      <div class="ui-g-12 ui-lg-6 ui-md-12">
+        <p-panel>
+          <p-header>
+            <legend class="font-show">ข้อมูลส่วนตัว</legend>
+          </p-header>
+          <div class="ui-g">
+            <div class="ui-g-12 ui-lg-12 ui-md-12">
+              <div class="ui-g-12 ui-lg-4 ui-md-4" style="padding: 0px">
+                <img src="{{(userData?.img) ? 'data:image/jpg;base64,'+ userData.img : './assets/images/no-img.png'}}"
+                  class="img-info" />
+                <!-- <span>{{(userData) ? userData.img: './assets/images/no-img.png'}}</span> -->
+              </div>
+              <!-- <div class="ui-g-12 ui-lg-8 ui-md-8" style="height: 35 px"> -->
+              <div class="ui-g-5 ui-lg-3 ui-md-3 text-info">
+                <span>ชื่อ-นามสกุล</span>
+              </div>
+              <div class="ui-g-12 ui-lg-5 ui-md-5">
+                <span>{{(userData) ? userData.titleName +' '+ userData.fname+' '+userData.lname : ''}}</span>
+              </div>
+              <div class="ui-g-3 ui-lg-3 ui-md-3 text-info">
+                <span>อาชีพ</span>
+              </div>
+              <div class="ui-g-12 ui-lg-5 ui-md-5">
+                <span>{{(userData?.memberJob) ? userData.memberJob : 'ไม่ได้ระบุ'}}</span>
+              </div>
+              <div class="ui-g-3 ui-lg-3 ui-md-3 text-info">
+                <span>ที่อยู่</span>
+              </div>
+              <div class="ui-g-12 ui-lg-5 ui-md-5">
+                <span>{{(userData) ? userData.address:''}}</span>
+              </div>
+              <div class="ui-g-3 ui-lg-3 ui-md-3 text-info">
+                <span>อีเมล</span>
+              </div>
+              <div class="ui-g-12 ui-lg-5 ui-md-5">
+                <span>{{(userData) ? userData.email:''}}</span>
+              </div>
+              <div class="ui-g-6 ui-lg-3 ui-md-3 text-info">
+                <span>เบอร์โทรศัพท์</span>
+              </div>
+              <div class="ui-g-12 ui-lg-5 ui-md-5">
+                <span>{{(userData) ? userData.tel:''}}</span>
+              </div>
+              <div class="ui-g-4 ui-lg-3 ui-md-3 text-info ">
+                <span>กรุ๊ปเลือด</span>
+              </div>
+              <div class="ui-g-12 ui-lg-4 ui-md-5">
+                <span>{{(userData) ? userData.memberBlood:''}}</span>
+              </div>
+              <div class="ui-g-6 ui-lg-2 ui-md-2 text-info">
+                <span>ยาที่แพ้</span>
+              </div>
+              <div class="ui-g-12 ui-lg-3 ui-md-3">
+                <span>{{(userData?.memberAllergyMedicine) ? userData.memberAllergyMedicine: 'ไม่ได้ระบุ' }}</span>
+              </div>
+              <div class="ui-g-6 ui-lg-2 ui-md-2 text-info">
+                <span>อาหารที่แพ้</span>
+              </div>
+              <div class="ui-g-12 ui-lg-4 ui-md-3">
+                <span>{{(userData?.memberAllergyFood) ? userData.memberAllergyFood: 'ไม่ได้ระบุ' }}</span>
+              </div>
+              <div class="ui-g-6 ui-lg-2 ui-md-2 text-info">
+                <span>หมายเหตุ</span>
+              </div>
+              <div class="ui-g-12 ui-lg-3 ui-md-5">
+                <span>{{(userData?.memberOther) ? userData.memberOther : 'ไม่ได้ระบุ'}}</span>
+              </div>
+              <div class="ui-g-6 ui-lg-2 ui-md-2 text-info">
+                <span>โรคประจำตัว</span>
+              </div>
+              <div class="ui-g-12 ui-lg-4 ui-md-3">
+                <span>{{(userData?.memberDisease) ? userData.memberDisease: 'ไม่ได้ระบุ'}}</span>
+              </div>
+              <!-- </div> -->
 
-                    <div class="ui-g">
-                        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ">
-                            <div class="ui-g">
-                                <div class="ui-g-12 ui-lg-2 ui-md-3 ui-sm-12 text-info">
-                                    <span>รูปโปรไฟล์</span>
-                                </div>
-                                <div class="ui-g-12 ui-lg-4 ui-md-3 ui-sm-12">
-                                    <img src="./assets/images/no-img.png" class="img-info" />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ">
-                            <div class="ui-g">
-                                <div class="ui-g-12 ui-lg-2 ui-md-3 ui-sm-12 text-info">
-                                    <span>ชื่อ-นามสกุล</span>
-                                </div>
-                                <div class="ui-g-12 ui-lg-4 ui-md-3 ui-sm-12">
-                                    <span>{{(userData) ? userData.titleName +''+ userData.fname+' '+userData.lname : ''}}</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ">
-                            <div class="ui-g">
-                                <div class="ui-g-12 ui-lg-2 ui-md-3 ui-sm-12 text-info">
-                                    <span>วันเกิด</span>
-                                </div>
-                                <div class="ui-g-12 ui-lg-4 ui-md-3 ui-sm-12">
-                                    <span>{{((userData) ? userData.birthdate:'') | date:'dd/MM/yyyy' }}</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ">
-                            <div class="ui-g">
-                                <div class="ui-g-12 ui-lg-2 ui-md-3 ui-sm-12 text-info">
-                                    <span>เพศ</span>
-                                </div>
-                                <div class="ui-g-12 ui-lg-4 ui-md-3 ui-sm-12">
-                                    <span>{{(userData) ? userData.genderName:''}}</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ">
-                            <div class="ui-g">
-                                <div class="ui-g-12 ui-lg-2 ui-md-3 ui-sm-12 text-info">
-                                    <span>ที่อยู่</span>
-                                </div>
-                                <div class="ui-g-12 ui-lg-4 ui-md-3 ui-sm-12">
-                                    <span>{{(userData) ? userData.address:''}}</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ">
-                            <div class="ui-g">
-                                <div class="ui-g-12 ui-lg-2 ui-md-3 ui-sm-12 text-info">
-                                    <span>เบอร์โทร</span>
-                                </div>
-                                <div class="ui-g-12 ui-lg-4 ui-md-3 ui-sm-12">
-                                    <span>{{(userData) ? userData.tel:''}}</span>
-                                </div>
-                                <div class="ui-g-12 ui-lg-2 ui-md-3 ui-sm-12 text-info">
-                                    <span>เบอร์ติดต่อฉุกเฉิน</span>
-                                </div>
-                                <div class="ui-g-12 ui-lg-4 ui-md-3 ui-sm-12">
-                                    <span>{{(userData) ? userData.emergencyTel:''}}</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ">
-                            <div class="ui-g">
-                                <div class="ui-g-12 ui-lg-2 ui-md-3 ui-sm-12 text-info">
-                                    <span>อีเมล</span>
-                                </div>
-                                <div class="ui-g-12 ui-lg-4 ui-md-3 ui-sm-12">
-                                    <span>{{(userData) ? userData.email:''}}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            </div>
+            <hr>
+            <div class="ui-g-12 ui-lg-12 ui-md-12">
+              <div class="ui-g-12 ui-lg-12 ui-md-12 text-info" style="text-align: left">
+                <span>ผู้ติดต่อกรณีฉุกเฉิน</span>
+              </div>
+              <div class="ui-g-8 ui-lg-2 ui-md-2 text-info" style="padding-left: 13px;">
+                <span>ชื่อ-นามสกุล</span>
+              </div>
+              <div class="ui-g-8 ui-lg-3 ui-md-4">
+                <span>{{(userData) ? userData.memberEmerName: ''}}</span>
+              </div>
+              <div class="ui-g-6 ui-lg-2 ui-md-2 text-info">
+                <span>ความสัมพันธ์</span>
+              </div>
+              <div class="ui-g-8 ui-lg-4 ui-md-3">
+                <span>{{(userData) ? userData.memberEmerRelation: ''}}</span>
+              </div>
+              <div class="ui-g-12 ui-lg-2 ui-md-2 text-info">
+                <span>เบอร์โทรศัพท์</span>
+              </div>
+              <div class="ui-g-12 ui-lg-7 ui-md-3">
+                <span>{{(userData) ? userData.emergencyTel:''}}</span>
+              </div>
+            </div>
+            <div class="ui-g-12">
+              <div class="ui-g-12 ui-lg-12 ui-md-12 row">
+                <div class="center temple-button font-show">
+                  <p-button type="button" label="แก้ไข" (onClick)='goToEdit()'></p-button>
                 </div>
-
-            </fieldset>
-            <div class="ui-g">
-                <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 row">
-                    <div class="center temple-button font-show">
-                        <p-button type="button" label="แก้ไข" (onClick)='goToEdit()'></p-button>
+              </div>
+            </div>
+          </div>
+        </p-panel>
+      </div>
+      <div class="ui-g-12 ui-lg-6 ui-md-12">
+        <p-panel>
+          <p-header>
+            <legend class="font-show">ตารางคอร์สที่ผ่านการอบรม</legend>
+          </p-header>
+          <div class="ui-g">
+            <div class="ui-g-12 ui-lg-5 ui-md-12  text">
+              <i class="pi pi-check-circle" style="font-size: 2em"></i>
+              <span>จำนวนคอร์สที่ผ่านการอบรม {{totalRecordPass}} ครั้ง </span>
+            </div>
+            <div class="ui-g-12 ui-lg-12 ui-md-12">
+              <p-table #dt [columns]="cols" [value]="courseData" [paginator]="true" [rows]="10" [responsive]="true"
+                selectionMode="single" (onRowSelect)="onRowSelect($event)"
+                [totalRecords]="totalRecord" [loading]="loading">
+                <!-- [lazy]="true" (onLazyLoad)="loadData($event)" -->
+                <ng-template pTemplate="caption">
+                  <div class="ui-g ui-fluid">
+                    <div class="ui-g-12 ui-lg-3 ui-md-3" style="margin-left: auto;">
                     </div>
+                  </div>
+                </ng-template>
+                <ng-template pTemplate="header" let-columns>
+                  <tr>
+                    <th *ngFor="let col of columns">
+                      {{col.header}}
+                    </th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                  <tr [pSelectableRow]="rowData">
+                    <td *ngFor="let col of columns">
+                      <div *ngIf="rowData[col.field] == rowData['stDate']">
+                        {{ rowData["stDate"] }} - {{ rowData["endDate"] }}
+                      </div>
+                      <div *ngIf="rowData[col.field] == rowData['name']">
+                        {{ rowData["name"] }}
+                      </div>
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </div>
+        </p-panel>
+        <div class="ui-g-12">
+        </div>
+      </div>
+    </div>
+    <div class="ui-g-12 ui-lg-12 ui-md-12" *ngIf="!ShowTable">
+      <p-panel>
+        <p-header>
+          <legend class="font-show">ข้อมูลส่วนตัว</legend>
+        </p-header>
+        <div class="ui-g">
+          <div class="ui-g-12 ui-lg-4 ui-md-4" style="text-align: center">
+            <div class="ui-g-12 ui-lg-12 ui-md-4 ">
+              <div class="ui-g-12 ui-lg-12 ui-md-4 ">
+                <div class="ui-g-12 ui-lg-12 ui-md-4 ">
+                  <img src="{{(userData?.img) ? 'data:image/jpg;base64,'+ userData.img : './assets/images/no-img.png'}}"
+                  class="img-info-monk" />
+                  <!-- <span>{{(userData) ? userData.img: './assets/images/no-img.png'}}</span> -->
                 </div>
+              </div>
+            </div>
+          </div>
+          <div class="ui-g-12 ui-lg-8 ui-md-12">
+            <!-- <div class="ui-g-12 ui-lg-8 ui-md-8" style="height: 35 px"> -->
+            <div class="ui-g-5 ui-lg-3 ui-md-3 text-info">
+              <span class="text-info-monk">ชื่อ-นามสกุล :</span>
+            </div>
+            <div class="ui-g-12 ui-lg-2 ui-md-5">
+              <span
+                class="text-info-monk">{{(userData) ? userData.titleName +' '+ userData.fname+' '+userData.lname : ''}}</span>
+            </div>
+            <div class="ui-g-3 ui-lg-2 ui-md-3 text-info">
+              <span class="text-info-monk">อาชีพ :</span>
+            </div>
+            <div class="ui-g-12 ui-lg-4 ui-md-5">
+              <span class="text-info-monk">{{(userData?.memberJob) ? userData.memberJob : 'ไม่ได้ระบุ'}}</span>
+            </div>
+            <div class="ui-g-3 ui-lg-3 ui-md-3 text-info">
+              <span class="text-info-monk">อีเมล :</span>
+            </div>
+            <div class="ui-g-12 ui-lg-2 ui-md-5">
+              <span class="text-info-monk">{{(userData) ? userData.email:''}}</span>
+            </div>
+            <div class="ui-g-6 ui-lg-2 ui-md-3 text-info">
+              <span class="text-info-monk">เบอร์โทรศัพท์ :</span>
+            </div>
+            <div class="ui-g-12 ui-lg-4 ui-md-5">
+              <span class="text-info-monk">{{(userData) ? userData.tel:''}}</span>
+            </div>
+            <div class="ui-g-3 ui-lg-3 ui-md-3 text-info">
+              <span class="text-info-monk">ที่อยู่ :</span>
+            </div>
+            <div class="ui-g-12 ui-lg-8 ui-md-5">
+              <span class="text-info-monk">{{(userData) ? userData.address:''}}</span>
+            </div>
+            <div class="ui-g-4 ui-lg-3 ui-md-3 text-info ">
+              <span class="text-info-monk">กรุ๊ปเลือด : </span>
+            </div>
+            <div class="ui-g-12 ui-lg-2 ui-md-5">
+              <span class="text-info-monk">{{(userData?.memberBlood) ? userData.memberBlood: 'ไม่ได้ระบุ'}}</span>
+            </div>
+            <div class="ui-g-6 ui-lg-2 ui-md-2 text-info">
+              <span class="text-info-monk">ยาที่แพ้ : </span>
+            </div>
+            <div class="ui-g-12 ui-lg-4 ui-md-3">
+              <span
+                class="text-info-monk">{{(userData?.memberAllergyMedicine) ? userData.memberAllergyMedicine: 'ไม่ได้ระบุ' }}</span>
+            </div>
+            <div class="ui-g-6 ui-lg-3 ui-md-2 text-info">
+              <span class="text-info-monk">โรคประจำตัว</span>
+            </div>
+            <div class="ui-g-12 ui-lg-2 ui-md-3">
+              <span class="text-info-monk">{{(userData?.memberDisease) ? userData.memberDisease: 'ไม่ได้ระบุ'}}</span>
+            </div>
+            <div class="ui-g-6 ui-lg-2 ui-md-2 text-info">
+              <span class="text-info-monk">อาหารที่แพ้ :</span>
+            </div>
+            <div class="ui-g-12 ui-lg-4 ui-md-3">
+              <span
+                class="text-info-monk">{{(userData?.memberAllergyFood) ? userData.memberAllergyFood: 'ไม่ได้ระบุ' }}</span>
+            </div>
+            <div class="ui-g-6 ui-lg-3 ui-md-2 text-info">
+              <span class="text-info-monk">หมายเหตุ :</span>
+            </div>
+            <div class="ui-g-12 ui-lg-6 ui-md-5">
+              <span class="text-info-monk">{{(userData?.memberOther) ? userData.memberOther : 'ไม่ได้ระบุ'}}</span>
             </div>
 
+            <!-- </div> -->
+
+
+            <hr>
+            <div class="ui-g-12 ui-lg-12 ui-md-12">
+              <div class="ui-g-12 ui-lg-12 ui-md-12 text-info" style="text-align: left">
+                <span class="text-info-monk">ผู้ติดต่อกรณีฉุกเฉิน</span>
+              </div>
+              <div class="ui-g-8 ui-lg-3 ui-md-3 text-info" style="padding-left: 13px;">
+                <span class="text-info-monk">ชื่อ-นามสกุล : </span>
+              </div>
+              <div class="ui-g-8 ui-lg-2 ui-md-4">
+                <span
+                  class="text-info-monk">{{(userData?.memberEmerName) ? userData.memberEmerName: 'ไม่ได้ระบุ'}}</span>
+              </div>
+              <div class="ui-g-6 ui-lg-2 ui-md-2 text-info">
+                <span class="text-info-monk">ความสัมพันธ์ : </span>
+              </div>
+              <div class="ui-g-8 ui-lg-5 ui-md-3">
+                <span
+                  class="text-info-monk">{{(userData?.memberEmerRelation) ? userData.memberEmerRelation: 'ไม่ได้ระบุ'}}</span>
+              </div>
+              <div class="ui-g-12 ui-lg-3 ui-md-2 text-info">
+                <span class="text-info-monk">เบอร์โทรศัพท์ : </span>
+              </div>
+              <div class="ui-g-12 ui-lg-7 ui-md-3">
+                <span class="text-info-monk">{{(userData?.emergencyTel) ? userData.emergencyTel: 'ไม่ได้ระบุ'}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="ui-g-12">
+            <div class="ui-g-12 ui-lg-12 ui-md-12 row">
+              <div class="center temple-button font-show">
+                <p-button type="button" label="แก้ไข" (onClick)='goToEdit()'></p-button>
+              </div>
+            </div>
+          </div>
         </div>
+      </p-panel>
     </div>
+    <!-- <div class="ui-g-12 ui-lg-12 ui-md-12 row">
+      <div class="center temple-button font-show">
+        <p-button type="button" label="กลับหน้าหลัก" (onClick)='goToHomepage()'></p-button>
+      </div>
+    </div> -->
+  </div>
 </div>

@@ -1,6 +1,34 @@
 label{
     margin-bottom: 1mm;
 }
+#btn-Update{
+    border: 1px solid#007ad9;
+    background: #007ad9;
+}
+#btn-Update:hover{
+    background-color: #2a8dda;
+    border: #2a8dda;
+    border-radius: 3px;
+}
+#btn-Save{
+    border: 1px solid#007ad9;
+    background: #007ad9;
+}
+#btn-Save:hover{
+    background-color: #2a8dda;
+    border: #2a8dda;
+    border-radius: 3px;
+}
+#btn-Clear{
+    border: 1px solid#e91224;
+    background: #e91224;
+}
+#btn-Clear:hover{
+    background-color: #ff5656;
+    border: #ff5656;
+    border-radius: 3px;
+}
+
 :host >>> button.ui-button-info.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-only{
     background-color: #b8860b !important;
     border: #b8860b !important;
@@ -18,4 +46,14 @@ label{
 :host >>> a.ui-paginator-page.ui-paginator-element.ui-state-default.ui-corner-all.ui-state-active.ng-star-inserted:hover{
     background-color: #cdaa54 !important;
     border: #cdaa54 !important;
+}
+
+.text-invalid {
+  color: red;
+}
+.ng-valid:not(form) {
+  border: 1px solid #42a948;
+}
+.ng-invalid:not(form) {
+  border: 1px solid #a94442;
 }

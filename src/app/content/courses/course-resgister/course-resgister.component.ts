@@ -15,7 +15,7 @@ export class CourseResgisterComponent implements OnInit {
 
   ngOnInit() {
       this.breadCrumbService.setPath([
-          {label: 'Approval: การอนุมัติ', routerLink: '/approval'},
+          {label: 'การอนุมัติ', routerLink: '/approval'},
       ]);
   }
 

@@ -1,6 +1,6 @@
 
 .aa{
-    margin: 0 auto; 
+    margin: 0 auto;
 }
 label{
     margin-bottom: 1mm;
@@ -22,4 +22,32 @@ label{
 :host >>> a.ui-paginator-page.ui-paginator-element.ui-state-default.ui-corner-all.ui-state-active.ng-star-inserted:hover{
     background-color: #cdaa54 !important;
     border: #cdaa54 !important;
+}
+/*ปุ่ม Save และ Clear*/
+#btn-Clear{
+    background-color: #e91224;
+    border: 1px solid #e91224;
+}
+#btn-Clear:hover{
+    background-color: #c02d39;
+    border: 1px solid #c02d39;
+}
+#btn-Save{
+    background-color: #007ad9;
+    border: 1px solid #007ad9;
+}
+#btn-Save:hover {
+    background-color: #60aee9;
+    border: 1px solid #60aee9;
+}
+
+
+.text-invalid {
+  color: red;
+}
+.ng-valid:not(form) {
+  border: 1px solid #42a948;
+}
+.ng-invalid:not(form) {
+  border: 1px solid #a94442;
 }

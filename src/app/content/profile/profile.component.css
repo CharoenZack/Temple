@@ -1,31 +1,62 @@
 .margin-top-bottom {
     margin: 20px
 }
-
-
 .center {
    margin: 0 auto;
  }
 
 :host >>> .temple-button .ui-button {
-    background-color: #b8860b !important;
-    color: #fff;
+    background-color: #ffba01 !important;
+    color: #000000;
     margin-left: 5px;
     margin-right: 5px;
-    border: #b8860b !important;
+    border: #ffba01  !important;
     border-radius: 5px;
     font-size: 1em;
 }
 
 .font-show {
     font-size: 1.2em;
+
 }
 
 .text-info {
   font-weight: bold;
   text-align: right;
 }
-
-.img-info{
-  width: 400px;
+.text-info-monk{
+  font-size: 14px;
 }
+.img-info {
+  width: 200px;
+  text-align: center;
+  height: 200px;
+}
+
+.img-info-monk {
+  width: 60%;
+  text-align: center;
+  height: 300px;
+}
+body .ui-panel .ui-panel-titlebar {
+  padding: 0;
+}
+span {
+  font-size: 14px;
+  width:100px;
+}
+
+hr{
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: 0em;
+  margin-right: auto;
+  border-top: 2px solid #b8860b;
+  width: 100%;
+  text-align: left;
+}
+/* .ui-panel{
+  border-radius: 5px;
+
+} */
+

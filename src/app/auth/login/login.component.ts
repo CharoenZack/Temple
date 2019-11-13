@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {AuthService} from '../../shared/service/auth.service';
-import {NgxSpinnerService} from 'ngx-spinner';
-import {Router} from '@angular/router';
-import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
-import {MessageService} from 'primeng/api';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '../../shared/service/auth.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Router } from '@angular/router';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { MessageService } from 'primeng/api';
 
 
 @Component({
@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit {
             required: '*กรุณากรอกรหัสผ่าน'
         }
     };
-
     constructor(
         private formBuilder: FormBuilder,
         private authService: AuthService,
@@ -64,7 +63,7 @@ export class LoginComponent implements OnInit {
                     severity: 'error',
                     summary: err['error']['errorMessage']
                 });
-                this.form.setValue({'password': ''});
+                this.form.setValue({ 'password': '' });
             }).finally(() => this.spinner.hide());
         } else {
             this.onValueChange();
@@ -73,8 +72,8 @@ export class LoginComponent implements OnInit {
 
     private createForm() {
         this.form = this.formBuilder.group({
-            'username': ['', Validators.required],
-            'password': ['', Validators.required],
+            username: ['', Validators.required],
+            password: ['', Validators.required],
         });
 
         this.form
@@ -88,18 +87,17 @@ export class LoginComponent implements OnInit {
     }
 
     onConfirm() {
-        this.messageService.clear('alert');
+            this.messageService.clear('alert');
     }
 
     private onValueChange() {
         if (!this.form) {
             return;
         }
-
         for (const field of Object.keys(this.formError)) {
             this.formError[field] = '';
             const control = this.form.get(field);
-            if (control && !control.valid && control.dirty) {
+            if (control && !control.valid ) {
                 const messages = this.validationMassages[field];
                 for (const key of Object.keys(control.errors)) {
                     this.formError[field] += messages[key] + ' ';

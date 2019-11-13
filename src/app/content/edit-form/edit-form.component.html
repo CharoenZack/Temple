@@ -1,210 +1,330 @@
+<!-- {{ formEdit.controls.imgProfile.value }} -->
 <form [formGroup]="formEdit" (submit)="onSubmit($event)">
-    <div class="ui-g">
-        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
-            <div class="margin-top-bottom">
-                <fieldset>
-                    <legend class="font-show">ข้อมูลส่วนตัว</legend>
-                    <div class="ui-g-9 ui-lg-9 ui-md-12 ui-sm-12 ">
-                        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12">
-                            <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
-                                <div class="text-right">รูปประจำตัว</div>
-                            </div>
-                            <div class="ui-g-9 ui-lg-9 ui-md-8 ui-sm-12">
-                                <div>
-                                    <!--<p-fileUpload name="myFile"  [showUploadButton]='true' accept="image/*" (onUpload)="profileSelect($event)">-->
-
-                                    <!--</p-fileUpload>-->
-                                    <img [src]="previewImg ? previewImg: './assets/images/no-img.png'" class="img-info" />
-                                    <div class="btn-upload">
-                                        <label for="profile" pButton label="Custom Upload"></label>
-                                        <input type="file" id="profile" (change)="profileSelect($event)" accept='image/*' />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12" *ngIf="showRole">
-                            <div *ngIf="!formError.role" class="text-right">
-                                สิทธิการใช้งาน
-                            </div>
-                            <div *ngIf="formError.role" class="text-danger text-invalid text-right">
-                                {{formError.role}}
-                            </div>
-                        </div>
-                        <div class="ui-g-9 ui-lg-9 ui-md-8 ui-sm-12" *ngIf="showRole">
-                            <div>
-                                <p-dropdown [options]="roles" optionLabel="roleName" value="roleId" [autoWidth]="false" placeholder="กรุณาเลือกสิทธิการใช้งาน" [style]="{'width':'100%'}" formControlName="role"></p-dropdown>
-                            </div>
-                        </div>
-
-                        <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
-                            <div *ngIf="!formError.titleName" class="text-right">
-                                คำนำหน้า
-                            </div>
-                            <div *ngIf="formError.titleName" class="text-danger text-invalid text-right">
-                                {{formError.titleName}}
-                            </div>
-                        </div>
-                        <div class="ui-g-9 ui-lg-9 ui-md-8 ui-sm-12">
-                            <div>
-                                <p-dropdown [options]="titleName" optionLabel="display" value="id" [autoWidth]="false" placeholder="กรุณาเลือกคำนำหน้า" [style]="{'width':'100%'}" formControlName="titleName"></p-dropdown>
-                            </div>
-                        </div>
-                        <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
-                            <div *ngIf="!formError.fname" class="text-right">
-                                ชื่อ
-                            </div>
-                            <div *ngIf="formError.fname" class="text-danger text-invalid text-right">
-                                {{formError.fname}}
-                            </div>
-                        </div>
-                        <div class="ui-g-3 ui-lg-3 ui-md-8 ui-sm-12">
-                            <div>
-                                <input type="text" pInputText placeholder="ชื่อ" formControlName="fname">
-                            </div>
-                        </div>
-                        <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
-                            <div *ngIf="!formError.lname" class="text-right">
-                                นามสกุล
-                            </div>
-                            <div *ngIf="formError.lname" class="text-danger text-invalid text-right">
-                                {{formError.lname}}
-                            </div>
-                        </div>
-                        <div class="ui-g-3 ui-lg-3 ui-md-8 ui-sm-12">
-                            <div>
-                                <input type="text" pInputText placeholder="นามสกุล" formControlName="lname">
-                            </div>
-                        </div>
-                        <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
-                            <div *ngIf="!formError.birthday" class="text-right">
-                                วันเกิด
-                            </div>
-                            <div *ngIf="formError.birthday" class="text-danger text-invalid text-right">
-                                {{formError.birthday}}
-                            </div>
-                        </div>
-                        <div class="ui-g-9 ui-lg-9 ui-md-8 ui-sm-12">
-                            <div>
-                                <p-calendar [baseZIndex]="10000" class="calendar-button" [locale]="th" [yearRange]="yearRange" placeholder="01/01/1990" [showIcon]="true" [yearNavigator]="true" dateFormat="dd/mm/yy" [monthNavigator]="true" formControlName="birthday"></p-calendar>
-                            </div>
-                        </div>
-
-                        <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
-                            <div *ngIf="!formError.gender" class="text-right">
-                                เพศ
-                            </div>
-                            <div *ngIf="formError.gender" class="text-danger text-invalid text-right">
-                                {{formError.gender}}
-                            </div>
-                        </div>
-                        <div class="ui-g-9 ui-lg-9 ui-md-8 ui-sm-12">
-                            <div class="ui-g-3 ui-lg-3 ui-md-12 ui-sm-12 ">
-                                <p-radioButton name="gender" class="checkmark" value='1' label="ชาย" formControlName="gender">
-                                </p-radioButton>
-                            </div>
-                            <div class="ui-g-3 ui-lg-3 ui-md-12 ui-sm-12">
-                                <p-radioButton name="gender" class="checkmark" value='2' label="หญิง" formControlName="gender">
-                                </p-radioButton>
-                            </div>
-                            <div class="ui-g-3 ui-lg-3 ui-md-12 ui-sm-12">
-                                <p-radioButton name="gender" class="checkmark" value='3' label="ไม่ระบุ" formControlName="gender">
-                                </p-radioButton>
-                            </div>
-                        </div>
-                        <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
-                            <div *ngIf="!formError.address" class="text-right">
-                                ที่อยู่
-                            </div>
-                            <div *ngIf="formError.address" class="text-danger text-invalid text-right">
-                                {{formError.address}}
-                            </div>
-                        </div>
-                        <div class="ui-g-9 ui-lg-9 ui-md-8 ui-sm-12">
-                            <div>
-                                <textarea [rows]="5" [cols]="30" class="fixtextarea" pInputTextarea formControlName="address"></textarea>
-                            </div>
-                        </div>
-                        <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
-                            <div *ngIf="!formError.phone" class="text-right">
-                                เบอร์โทร
-                            </div>
-                            <div *ngIf="formError.phone" class="text-danger text-invalid text-right">
-                                {{formError.phone}}
-                            </div>
-                        </div>
-                        <div class="ui-g-3 ui-lg-3 ui-md-8 ui-sm-12">
-                            <div>
-                                <p-inputMask mask="999-999-9999" placeholder="099-999-9999" formControlName="phone">
-                                </p-inputMask>
-                            </div>
-                        </div>
-                        <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
-                            <div *ngIf="!formError.phoneEmergency" class="text-right">
-                                เบอร์ติดต่อฉุกเฉิน
-                            </div>
-                            <div *ngIf="formError.phoneEmergency" class="text-danger text-invalid text-right">
-                                {{formError.phoneEmergency}}
-                            </div>
-                        </div>
-                        <div class="ui-g-3 ui-lg-3 ui-md-8 ui-sm-12">
-                            <div>
-                                <p-inputMask mask="999-999-9999" placeholder="099-999-9999" formControlName="phoneEmergency">
-                                </p-inputMask>
-                            </div>
-                        </div>
-                        <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
-                            <div *ngIf="!formError.email" class="text-right">
-                                E-mail
-                            </div>
-                            <div *ngIf="formError.email" class="text-danger text-invalid text-right">
-                                {{formError.email}}
-                            </div>
-                        </div>
-                        <div class="ui-g-9 ui-lg-9 ui-md-8 ui-sm-12">
-                            <div>
-                                <input type="email" pInputText placeholder="example@example.com" formControlName="email">
-                            </div>
-                        </div>
-                    </div>
-
-                </fieldset>
-
-
-                <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 row">
-                    <div class="center temple-button font-show">
-                        <p-button type="button" label="ล้างค่า" (onClick)="showClearConfirm()"></p-button>
-                        <p-button type="submit" label="ยืนยัน"></p-button>
-                        <p-button type="button" label="ยกเลิก" (onClick)="showCancelConfirm()"></p-button>
-                    </div>
-                </div>
+  <div class="ui-g">
+    <div class="ui-g-12 ui-lg-12 ui-md-12">
+      <div class="margin-top-bottom">
+        <fieldset>
+          <legend class="font-show">ข้อมูลส่วนตัว</legend>
+          <div class="ui-g-12 ui-lg-6 ui-md-12">
+            <div class="ui-g-12 ui-lg-8 ui-md-12" style="text-align: right">
+              <!-- ng-container จะเป็นเหมือน div แต่จะไม่มีตัวของใัน จะเอามาแต่เนื้อข้างใน -->
+              <ng-container *ngIf="formEdit.controls.imgProfile.value else elseNoImage">
+                <img src="data:image/jpg;base64,{{formEdit.controls.imgProfile.value}}" class="img-info" />
+              </ng-container>
+              <ng-template  #elseNoImage>
+                <img src="./assets/images/no-img.png" class="img-info" />
+              </ng-template>
             </div>
+            <div class="ui-g-12 ui-lg-12 ui-md-12" style="text-align: center">
+              <label for="profile" pButton style="background-color:#b8860b;border:#b8860b;"
+                label="อัปโหลดรูปภาพ"></label>
+              <input type="file" name="img" id="profile" (change)="profileSelect($event, 1)" />
+            </div>
+          </div>
+          <div class="ui-g-12 ui-lg-6 ui-md-12">
+            <div class="ui-g-8 ui-lg-2 ui-md-4">
+              <div *ngIf="!formError.titleName" class="text-right">
+                คำนำหน้า*
+              </div>
+              <div *ngIf="formError.titleName" class="text-danger text-invalid text-right">
+                {{formError.titleName}}
+              </div>
+            </div>
+            <div class="ui-g-9 ui-lg-9 ui-md-8">
+              <div>
+                <p-dropdown [options]="titleName" optionLabel="display" value="id" [autoWidth]="false"
+                  placeholder="กรุณาเลือกคำนำหน้า" [style]="{'width':'50%'}" formControlName="titleName"></p-dropdown>
+              </div>
+            </div>
+            <div class="ui-g-12 ui-lg-2 ui-md-4">
+              <div *ngIf="!formError.gender" class="text-right">
+                เพศ*
+              </div>
+              <div *ngIf="formError.gender" class="text-danger text-invalid text-right">
+                {{formError.gender}}
+              </div>
+            </div>
+            <div class="ui-g-12 ui-lg-6 ui-md-8">
+              <div class="ui-g-4 ui-lg-10 ui-md-12 " style="font-size: 14px">
+                <p-radioButton name="gender" class="checkmark" value='1' label="ชาย" formControlName="gender">
+                </p-radioButton>
+              </div>
+              <div class="ui-g-4 ui-lg-10 ui-md-12" style="font-size: 14px">
+                <p-radioButton name="gender" class="checkmark" value='2' label="หญิง" formControlName="gender">
+                </p-radioButton>
+              </div>
+              <div class="ui-g-4 ui-lg-4 ui-md-12" style="font-size: 14px">
+                <p-radioButton name="gender" class="checkmark" value='3' label="ไม่ระบุ" formControlName="gender">
+                </p-radioButton>
+              </div>
+            </div>
+          </div>
+          <div class="ui-g-12 ui-lg-12 ui-md-12 ">
+            <div class="ui-g-3 ui-lg-2 ui-md-4" *ngIf="showRole">
+              <div *ngIf="!formError.role" class="text-right">
+                สิทธิการใช้งาน*
+              </div>
+              <div *ngIf="formError.role" class="text-danger text-invalid text-right">
+                {{formError.role}}
+              </div>
+            </div>
+            <div class="ui-g-9 ui-lg-10 ui-md-8" *ngIf="showRole">
+              <div>
+                <p-dropdown [options]="roles" optionLabel="roleName" value="roleId" [autoWidth]="false"
+                  placeholder="กรุณาเลือกสิทธิการใช้งาน" [style]="{'width':'20%'}" formControlName="role"></p-dropdown>
+              </div>
+            </div>
+            <div class="ui-g-10 ui-lg-2 ui-md-4">
+              <div *ngIf="!formError.email" class="text-right">
+                E-mail*
+              </div>
+              <div *ngIf="formError.email" class="text-danger text-invalid text-right">
+                {{formError.email}}
+              </div>
+            </div>
+            <div class="ui-g-3 ui-lg-10 ui-md-8">
+              <div>
+                <input type="email" pInputText placeholder="example@example.com" formControlName="email">
+              </div>
+            </div>
+            <div class="ui-g-8 ui-lg-2 ui-md-4">
+              <div *ngIf="!formError.fname" class="text-right">
+                ชื่อ*
+              </div>
+              <div *ngIf="formError.fname" class="text-danger text-invalid text-right">
+                {{formError.fname}}
+              </div>
+            </div>
+            <div class="ui-g-6 ui-lg-3 ui-md-8">
+              <div>
+                <input type="text" pInputText placeholder="ชื่อ" formControlName="fname">
+              </div>
+            </div>
+            <div class="ui-g-10 ui-lg-2 ui-md-4">
+              <div *ngIf="!formError.lname" class="text-right">
+                นามสกุล*
+              </div>
+              <div *ngIf="formError.lname" class="text-danger text-invalid text-right">
+                {{formError.lname}}
+              </div>
+            </div>
+            <div class="ui-g-3 ui-lg-5 ui-md-8">
+              <div>
+                <input type="text" pInputText placeholder="นามสกุล" formControlName="lname">
+              </div>
+            </div>
+            <div class="ui-g-8 ui-lg-2 ui-md-4">
+              <div *ngIf="!formError.memberJob" class="text-right">
+                อาชีพ*
+              </div>
+              <div *ngIf="formError.memberJob" class="text-danger text-invalid text-right">
+                {{formError.memberJob}}
+              </div>
+            </div>
+            <div class="ui-g-9 ui-lg-4 ui-md-8">
+              <div>
+                <input type="text" pInputText placeholder="อาชีพ" formControlName="memberJob">
+              </div>
+            </div>
+            <div class="ui-g-10 ui-lg-1 ui-md-4">
+              <div *ngIf="!formError.phone" class="text-right">
+                เบอร์โทรศัพท์*
+              </div>
+              <div *ngIf="formError.phone" class="text-danger text-invalid text-right">
+                {{formError.phone}}
+              </div>
+            </div>
+            <div class="ui-g-3 ui-lg-5 ui-md-8">
+              <div>
+                <p-inputMask mask="999-999-9999" placeholder="099-999-9999" formControlName="phone">
+                </p-inputMask>
+              </div>
+            </div>
+            <div class="ui-g-8 ui-lg-2 ui-md-4">
+              <div *ngIf="!formError.address" class="text-right">
+                ที่อยู่*
+              </div>
+              <div *ngIf="formError.address" class="text-danger text-invalid text-right">
+                {{formError.address}}
+              </div>
+            </div>
+            <div class="ui-g-9 ui-lg-10 ui-md-8">
+              <div>
+                <textarea [rows]="5" [cols]="30" class="fixtextarea" pInputTextarea formControlName="address"
+                  style="width: 30%"></textarea>
+              </div>
+            </div>
+            <div class="ui-g-10 ui-lg-2 ui-md-4">
+              <div *ngIf="!formError.memberBlood" class="text-right">
+                กรุ๊ปเลือด*
+              </div>
+              <div *ngIf="formError.memberBlood" class="text-danger text-invalid text-right">
+                {{formError.memberBlood}}
+              </div>
+            </div>
+            <div class="ui-g-9 ui-lg-4 ui-md-5">
+              <div>
+                <p-dropdown [options]="Bloodtype" placeholder="กรุณาเลือกกรุ๊ปเลือด" [style]="{'width':'60%'}"
+                  formControlName="memberBlood"></p-dropdown>
+                <!-- <p-dropdown [options]="transportation" [(ngModel)]="selectedTransportation"
+                                        formControlName="memberTransportation" editable="true"
+                                        [style]="{'width':'100%'}" [autoWidth]="false"
+                                        placeholder="Select a transportation"></p-dropdown> -->
+                <!-- <p>Selected Transportation:
+                                        {{selectedTransportation ? selectedTransportation : 'none'}}
+                                    </p> -->
+              </div>
+            </div>
+            <div class="ui-g-10 ui-lg-1 ui-md-4">
+              <div  class="text-right">
+                โรคประจำตัว
+              </div>
+              <!-- <div *ngIf="formError.memberDisease" class="text-danger text-invalid text-right">
+                {{formError.memberDisease}}
+              </div> -->
+            </div>
+            <div class="ui-g-3 ui-lg-5 ui-md-8">
+              <div>
+                <input type="text" pInputText formControlName="memberDisease">
+
+              </div>
+            </div>
+            <div class="ui-g-10 ui-lg-2 ui-md-4">
+              <div class="text-right">
+                ยาที่แพ้
+              </div>
+              <!-- <div *ngIf="formError.memberAllergyMedicine" class="text-danger text-invalid-2 text-right">
+                {{formError.memberAllergyMedicine}}
+              </div> -->
+            </div>
+            <div class="ui-g-3 ui-lg-3 ui-md-8">
+              <div>
+                <input type="text" pInputText formControlName="memberAllergyMedicine">
+              </div>
+            </div>
+            <div class="ui-g-10 ui-lg-2 ui-md-4">
+              <div class="text-right" style="font-size: 14px">
+                อาหารที่แพ้
+              </div>
+              <!-- <div *ngIf="formError.memberAllergyFood" class="text-danger text-invalid-2 text-right">
+                {{formError.memberAllergyFood}}
+              </div> -->
+            </div>
+            <div class="ui-g-3 ui-lg-5 ui-md-8">
+              <div>
+                <input type="text" pInputText formControlName="memberAllergyFood">
+              </div>
+            </div>
+
+            <div class="ui-g-10 ui-lg-2 ui-md-4">
+              <div class="text-right">
+                หมายเหตุ
+              </div>
+              <!-- <div *ngIf="formError.memberOther" class="text-danger text-invalid text-right">
+                {{formError.memberOther}}
+              </div> -->
+            </div>
+            <div class="ui-g-3 ui-lg-10 ui-md-8">
+              <div>
+                <input type="text" pInputText formControlName="memberOther">
+              </div>
+            </div>
+            <hr>
+            <div class="ui-g-12">
+              <div class="ui-g-10 ui-lg-12 ui-md-8" style="font-weight: bold;">
+                <span>ผู้ติดต่อกรณีฉุกเฉิน</span>
+              </div>
+
+              <div class="ui-g-10 ui-lg-2 ui-md-4">
+                <div *ngIf="!formError.EmerFName" class="text-right">
+                  ชื่อ*
+                </div>
+                <div *ngIf="formError.EmerFName" class="text-danger text-invalid text-right">
+                  {{formError.EmerFName}}
+                </div>
+              </div>
+              <div class="ui-g-3 ui-lg-3 ui-md-8">
+                <div>
+                  <input type="text" pInputText placeholder="ชื่อ" formControlName="EmerFName">
+                </div>
+              </div>
+              <div class="ui-g-10 ui-lg-2 ui-md-4">
+                <div *ngIf="!formError.EmerLName" class="text-right">
+                  นามสกุล*
+                </div>
+                <div *ngIf="formError.EmerLName" class="text-danger text-invalid text-right">
+                  {{formError.EmerLName}}
+                </div>
+              </div>
+              <div class="ui-g-3 ui-lg-4 ui-md-8">
+                <div>
+                  <input type="text" pInputText placeholder="นามสกุล" formControlName="EmerLName">
+                </div>
+              </div>
+              <div class="ui-g-10 ui-lg-2 ui-md-4">
+                <div *ngIf="!formError.memberEmerRelation" class="text-right">
+                  ความสัมพันธ์*
+                </div>
+                <div *ngIf="formError.memberEmerRelation" class="text-danger text-invalid text-right">
+                  {{formError.memberEmerRelation}}
+                </div>
+              </div>
+              <div class="ui-g-9 ui-lg-3 ui-md-8">
+                <div>
+                  <input type="text" pInputText placeholder="ความสัมพันธ์" formControlName="memberEmerRelation">
+                </div>
+              </div>
+              <div class="ui-g-10 ui-lg-2 ui-md-4">
+                <div *ngIf="!formError.phoneEmergency" class="text-right">
+                  เบอร์ติดต่อฉุกเฉิน*
+                </div>
+                <div *ngIf="formError.phoneEmergency" class="text-danger text-invalid text-right">
+                  {{formError.phoneEmergency}}
+                </div>
+              </div>
+              <div class="ui-g-3 ui-lg-3 ui-md-8">
+                <div>
+                  <p-inputMask mask="999-999-9999" placeholder="099-999-9999" formControlName="phoneEmergency">
+                  </p-inputMask>
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <div class="ui-g-12 ui-lg-12 ui-md-12 row">
+          <div class="center temple-button font-show">
+            <p-button type="button" label="ล้างค่า" (onClick)="showClearConfirm()"></p-button>
+            <p-button type="submit" label="ยืนยัน"></p-button>
+            <p-button type="button" label="ยกเลิก" (onClick)="showCancelConfirm()"></p-button>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </form>
 
 <p-toast position="center" key="systemMessage" (onClose)="onReject()" [modal]="true" [baseZIndex]="5000">
-    <ng-template let-message pTemplate="message">
-        <div style="text-align: center">
-            <h3>{{message.summary}}</h3>
-            <pre class="text-left">{{message.detail}}</pre>
-        </div>
-    </ng-template>
+  <ng-template let-message pTemplate="message">
+    <div style="text-align: center">
+      <h3>{{message.summary}}</h3>
+      <pre class="text-left">{{message.detail}}</pre>
+    </div>
+  </ng-template>
 </p-toast>
 
 
 <p-confirmDialog></p-confirmDialog>
 
 <p-toast position="center" key="alertMessage" (onClose)="onReject()" [modal]="true" [baseZIndex]="5000">
-    <ng-template let-message pTemplate="message">
-        <div style="text-align: center">
-            <h3>{{message.summary}}</h3>
-            <p>{{message.detail}}</p>
-        </div>
-        <div class="ui-g ui-fluid">
-            <div class="ui-g-12">
-                <button type="button" pButton [label]=messageback class="ui-button-success" [routerLink]=urlback></button>
-            </div>
-        </div>
-    </ng-template>
+  <ng-template let-message pTemplate="message">
+    <div style="text-align: center">
+      <h3>{{message.summary}}</h3>
+      <p>{{message.detail}}</p>
+    </div>
+    <div class="ui-g ui-fluid">
+      <div class="ui-g-12">
+        <button type="button" pButton [label]=messageback class="ui-button-success" [routerLink]=urlback></button>
+      </div>
+    </div>
+  </ng-template>
 </p-toast>

@@ -5,16 +5,16 @@ import { ContentComponent } from './content/content.component';
 
 const routes: Routes = [
   {
-    path: "",
+    path: '',
     component: ContentComponent
   },
   {
-    path: "auth",
+    path: 'auth',
     component: AuthComponent
   },
   {
-    path: "**",
-    redirectTo: ""
+    path: '**',
+    redirectTo: ''
   }
 ];
 

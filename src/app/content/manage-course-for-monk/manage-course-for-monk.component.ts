@@ -35,14 +35,14 @@ export class ManageCourseForMonkComponent implements OnInit {
     this.getTotalRecord();
 
     this.cols = [
-      {field: 'stDate', header: 'วันที่'},
-      {field: 'name', header: 'ชื่อคอร์ส'},
-      {field: 'locationName', header: 'สถานที่'},
-      {field: 'conditionMin', header: 'หมายเหตุ'},
+      { field: 'stDate', header: 'วันที่' },
+      { field: 'name', header: 'ชื่อคอร์ส' },
+      { field: 'locationName', header: 'สถานที่' },
+      { field: 'conditionMin', header: 'หมายเหตุ' },
     ];
 
     this.breadCrumbService.setPath([
-      {label: 'Courses management : จัดการคอร์ส', routerLink: '/manageCourseForMonk'},
+      { label: 'จัดการคอร์ส', routerLink: '/manageCourseForMonk' },
     ]);
     this.loading = true;
   }
@@ -53,21 +53,22 @@ export class ManageCourseForMonkComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.courseService.deleteCourse(id)
-        .subscribe( res => {
-          if(res['status']==="Success"){
-            this.msgs = [{severity: 'success', summary: 'ข้อความจากระบบ', detail: 'การดำเนินงานสำเร็จ'}];
-            const index = this.courses.findIndex(e => e.id === id);
-            this.courses = [
-              ...this.courses.slice(0,index-1),
-              ...this.courses.slice(index+1)
-            ]
-          }else{
-            this.msgs = [{severity: 'danger', summary: 'ข้อความจากระบบ', detail: 'การดำเนินงานไม่สำเร็จ'}];
+          .subscribe(res => {
+            if (res['status'] === 'Success') {
+              this.msgs = [{ severity: 'success', summary: 'ข้อความจากระบบ', detail: 'การดำเนินงานสำเร็จ' }];
+              const index = this.courses.findIndex(e => e.id === id);
+              this.courses = [
+                // ...this.courses
+                ...this.courses.slice(0, index - 1),
+                ...this.courses.slice(index + 1)
+              ];
+            } else {
+              this.msgs = [{ severity: 'danger', summary: 'ข้อความจากระบบ', detail: 'การดำเนินงานไม่สำเร็จ' }];
+            }
           }
-        }
-        
-        )
-        
+
+          );
+
       },
       reject: () => {
         // this.msgs = [{severity: 'info', summary: 'ข้อความจากระบบ', detail: 'ปฎิเสธการทำการปิดคอร์ส'}];
@@ -86,25 +87,26 @@ export class ManageCourseForMonkComponent implements OnInit {
     );
   }
   private getTotalRecord() {
-    this.courseService.getTotalRecord().subscribe(res => {
+    this.courseService.getTotalRecordForMonk().subscribe(res => {
       if (res['status'] === 'Success') {
         this.totalRecords = res['data'][0]['totalRecord'];
         console.log(this.totalRecords);
-        
+
       }
     });
   }
-  private getData(first = 0, rows = 10, query: string = '') {
+  private getData(first = 0, rows = 10, query: string = '', mhcStatus: string = '') {
     this.loading = true;
-    of([first, rows, query]).pipe(
-      switchMap(([firstCon, rowsCon, queryCon]: [number, number, string]) =>
-        this.courseService.getCourses(firstCon, rowsCon, queryCon))
-        
+    of([first, rows, query, mhcStatus]).pipe(
+      switchMap(([firstCon, rowsCon, queryCon, mhcStatusCon]: [number, number, string, string]) =>
+        this.courseService.getCourseWithOutUser(firstCon, rowsCon, queryCon, mhcStatusCon))
+
     ).subscribe(res => {
       console.log(res);
-      
+
       if (res['status'] === 'Success') {
         this.courses = res['data'];
+
         this.loading = false;
       }
     });
@@ -116,8 +118,8 @@ export class ManageCourseForMonkComponent implements OnInit {
       query = e.globalFilter;
     }
     this.getData(e.first, e.rows, query);
-    
-    
+
+
   }
 }
 

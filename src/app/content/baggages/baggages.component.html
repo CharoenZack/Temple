@@ -1,93 +1,120 @@
 <div class="ui-g">
-    <div class="ui-g-12">
-        <div class="row">
-            <div class="ui-g">
-                <div class="ui-g-6 ui-lg-6 ui-md-6 ui-sm-12 aa">
-                    <div class="ui-g">
-                        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ui-fluid">
-                            <div style="text-align: center">
-                                <h2>ตู้สัมภาระ</h2>
-                            </div>
-                            <p-table [columns]="cols" [value]="items" [paginator]="true" [rows]="10" [responsive]="true">
-                                <ng-template pTemplate="caption" *ngIf="showEditButton('admin')">
-                                    <div style="text-align:left">
-                                        <button pButton type="button" (click)="showDialogToAdd()" label="เพิ่ม" class="ui-button-info" style="width: 20%"></button>
-                                    </div>
+  <div class="ui-g-12">
+    <div class="row">
+      <div class="ui-g">
+        <div class="ui-g-6 ui-lg-6 ui-md-6 ui-sm-12 aa">
+          <div class="ui-g">
+            <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ui-fluid">
+              <div style="text-align: center">
+                <h2>ตู้สัมภาระ</h2>
+              </div>
+              <p-messages [value]="msgs"></p-messages>
 
-                                </ng-template>
-                                <ng-template pTemplate="header" let-columns>
-                                    <tr>
-                                        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
-                                            {{col.header}}
-                                            <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+              <p-table [columns]="cols" [value]="items" [paginator]="true" [rows]="10" [responsive]="true">
+                <ng-template pTemplate="caption" *ngIf="showEditButton('admin')">
+                  <div style="text-align:left">
+                    <button pButton type="button" (click)="showDialogToAdd()" label="เพิ่ม" class="ui-button-info"
+                      style="width: 20%"></button>
+                  </div>
 
-                                        </th>
-                                        <th *ngIf="showEditButton('admin')" width="25%">Option</th>
+                </ng-template>
+                <ng-template pTemplate="header" let-columns>
+                  <tr>
+                    <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                      {{col.header}}
+                      <p-sortIcon [field]="col.field" ariaLabel="Activate to sort"
+                        ariaLabelDesc="Activate to sort in descending order"
+                        ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
 
-                                    </tr>
-                                </ng-template>
+                    </th>
+                    <th *ngIf="showEditButton('admin')" width="25%">Option</th>
 
-                                <ng-template pTemplate="body" let-rowData let-columns="columns">
-                                    <tr>
-                                        <td *ngFor="let col of columns;">
-                                            <span class="ui-column-title">{{col.header}}</span> {{rowData[col.field]}}
-                                        </td>
-                                        <td *ngIf="showEditButton('admin')" style="text-align:center ">
-                                            <div class="ui-g">
-                                                <div style="margin: 0 auto ">
-                                                    <div class="ui-g">
-                                                        <!-- <div class="ui-g-6 ui-lg-6 ui-md-12 ui-sm-12 ">
+                  </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                  <tr>
+                    <td *ngFor="let col of columns;">
+                      <div *ngIf="rowData[col.field] == rowData['number']">
+                        {{ rowData["number"] }}
+                      </div>
+                      <div *ngIf="rowData[col.field] == rowData['locationName']">
+                        {{ rowData["locationName"] }}
+                      </div>
+                      <!-- <div *ngIf="rowData[col.field] == rowData['status']">
+                        {{ rowData["status"] }}
+                      </div> -->
+                      <!-- <span class="ui-column-title">{{col.header}}</span>
+                      {{rowData[col.field]}} -->
+                    </td>
+                    <td *ngIf="showEditButton('admin')" style="text-align:center ">
+                      <div class="ui-g">
+                        <!-- <div class="ui-g-6 ui-lg-6 ui-md-12 ui-sm-12 ">
                                                                 <button pButton type="button"
                                                                     (click)="showEdit(rowData)" label="แก้ไข"
                                                                     class="ui-button-warning"></button>
                                                             </div> -->
-                                                        <div class="ui-g-12 ui-lg-12 ui-md-12 ui-sm-12 ">
-                                                            <button pButton type="button" (click)="delete(rowData['id'])" label="ลบ" class="ui-button-danger"></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </ng-template>
-                            </p-table>
-                        </div>
-                    </div>
-                </div>
+                        <button pButton type="button" (click)="delete(rowData)" label="ลบ"
+                          class="ui-button-danger"></button>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
-
-<p-dialog (onHide)="clear()" header="Baggages Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+<form [formGroup]="formEdit" novalidate>
+  <p-dialog (onHide)="clear()" header="รายละเอียดตู้สัมภาระ" [(visible)]="displayDialog" [responsive]="true"
+    showEffect="fade" [modal]="true">
     <div class="ui-g ui-fluid" *ngIf="baggage">
-        <div class="ui-g-12">
-            <div class="ui-g-4">
-                <label for="name">หมายเลขตู้</label>
-            </div>
-            <div class="ui-g-8">
-                <input pInputText id="name" [(ngModel)]="baggageNumber" />
-            </div>
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <label for="name">หมายเลขตู้</label>
         </div>
+        <div class="ui-g-8">
+          <input pInputText id="name" [(ngModel)]="baggageNumber" formControlName="number" />
+          <div
+            *ngIf="formEdit.controls['number'].invalid && (formEdit.controls['number'].dirty || formEdit.controls['number'].touched)"
+            class="alert alert-danger">
+            <div class="text-danger text-invalid" *ngIf="formEdit.controls['number'].errors.required">
+              กรุณาระบุหมายเลขตู้</div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="ui-g ui-fluid">
-        <div class="ui-g-12">
-            <div class="ui-g-4">
-                <label for="name">สถานที่</label>
-            </div>
-            <div class="ui-g-8">
-                <p-autoComplete [(ngModel)]="location" [suggestions]="filteredLocation" value="id" (completeMethod)="filterLocationMultiple($event)" styleClass="wid100" [minLength]="1" placeholder="เลือกสถานที่" field="name" [dropdown]="true">
-                </p-autoComplete>
-                <!-- <input pInputText id="name" [(ngModel)]="locationName" /> -->
-                <!-- <p-dropdown [options]="location" [(ngModel)]="locationName" editable="true" placeholder="เลือกสถานที่"></p-dropdown> -->
-            </div>
+      <div class="ui-g-12">
+        <div class="ui-g-4">
+          <label for="name">สถานที่</label>
         </div>
+        <div class="ui-g-8">
+          <p-autoComplete [(ngModel)]="location" [suggestions]="filteredLocation" value="id" [appendTo]="body"
+            (completeMethod)="filterLocationMultiple($event)" styleClass="wid100" [minLength]="1"
+            placeholder="เลือกสถานที่" field="name" [dropdown]="true" formControlName="locationName" >
+            <div
+              *ngIf="formEdit.controls['locationName'].invalid && (formEdit.controls['locationName'].dirty || formEdit.controls['locationName'].touched)"
+              class="alert alert-danger">
+              <div class="text-danger text-invalid" *ngIf="formEdit.controls['locationName'].errors.required">
+                กรุณาระบุสถานที่</div>
+            </div>
+          </p-autoComplete>
+          <!-- <input pInputText id="name" [(ngModel)]="locationName" /> -->
+          <!-- <p-dropdown [options]="location" [(ngModel)]="locationName" editable="true" placeholder="เลือกสถานที่"></p-dropdown> -->
+        </div>
+      </div>
     </div>
     <p-footer>
-        <div class="ui-dialog-buttonpane ui-helper-clearfix">
-            <button type="button" pButton (click)="clear()" label="Clear"></button>
-            <button *ngIf="newBaggage" type="submit" pButton (click)="save()" label="Save"></button>
-            <button *ngIf="!newBaggage" type="button" pButton (click)="update()" label="Update"></button>
-        </div>
+      <div class="ui-dialog-buttonpane ui-helper-clearfix">
+        <button id="btn-Clear" type="button" pButton (click)="clear()" label="ยกเลิก"></button>
+        <button id="btn-Save" *ngIf="newBaggage" type="submit" pButton (click)="save()" label="บันทึก"
+          [disabled]="formEdit.pristine || formEdit.invalid"></button>
+        <button *ngIf="!newBaggage" type="button" pButton (click)="update()" label="แก้ไข"></button>
+      </div>
     </p-footer>
-</p-dialog>
+  </p-dialog>
+</form>

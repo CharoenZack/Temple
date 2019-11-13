@@ -1,11 +1,18 @@
-<div class="top-bar">
-    <div class="banner">
-        <a routerLink="/"><img src="./assets/images/logo.png"/></a>
-    </div>
-    <div class="title">
-        <span>ระบบรับสมัครอบรมธรรมมะ วัดป่าโสมพนัส</span>
-    </div>
-    <div class="top-menu" (click)="logout()" *ngIf="isLoggedIn">
-        <span><img class="logout-menu" src="./assets/images/logout.png"> ออกจากระบบ</span>
-    </div>
+<div class="top-bar ">
+  <div class="banner">
+    <a routerLink="/"><img src="./assets/images/logo.png" /></a>
+  </div>
+  <div class="title">
+    <span>ระบบรับสมัครอบรมธรรมมะ วัดป่าโสมพนัส</span>
+  </div>
+  <div class="username" *ngIf="isLoggedIn">
+      <span>ผู้ใช้:  {{ userDisplayName1 }}</span>
+  </div>
+  <!-- <div class="ui-g-12 ui-lg-12 ui-md-12 , title" style="text-align: right; height: 86px; padding: 0" >
+    <span>{{ userDisplayName }}</span>
+  </div> -->
+
+  <div class="top-menu" (click)="logout()" *ngIf="isLoggedIn">
+    <span><img class="logout-menu" src="./assets/images/logout.png"> ออกจากระบบ</span>
+  </div>
 </div>

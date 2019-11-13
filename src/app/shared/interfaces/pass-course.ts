@@ -1,6 +1,6 @@
 export interface PassCourse {
-    id?:number;
-    name?:string;
-    detail?:string;
-    numberOfMembers?:number;
+  id?: number;
+  name?: string;
+  detail?: string;
+  numberOfMembers?: number;
 }

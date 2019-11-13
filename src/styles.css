@@ -21,12 +21,19 @@ pre {
 img {
     max-width: 100%;
 }
-
+body .ui-panel .ui-panel-titlebar {
+    background-color: #b8860b;
+  }
 fieldset {
     background-color: #f1efe9 !important;
     border-radius: 5px;
     border: 1px #b8860b solid;
 }
+/* .ui-panel-content .ui-widget-content {
+    background-color: #f1efe9 !important;
+    border-radius: 5px;
+    border: 1px #b8860b solid;
+} */
 
 legend {
     padding: 5px;
@@ -41,6 +48,7 @@ legend {
   color: #000 !important;
 }
 
+/*
 body .ui-button:enabled:focus {
   box-shadow: 0 0 0 0.2em #ecb500 !important;
 }
@@ -56,12 +64,10 @@ body .ui-button.ui-state-default.ui-button-warning, body .ui-buttonset.ui-button
     border-color: #b8860b !important;
     background-color: #b8860b !important;
 }
-
 .ui-button-temple:hover {
     border-color: #cdaa54 !important;
     background-color: #cdaa54 !important;
 }
-
 .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active {
     background-color: #b8860b !important
 }
@@ -88,6 +94,13 @@ body .ui-button.ui-state-default.ui-button-warning, body .ui-buttonset.ui-button
     width: 60%;
     margin: 0 auto;
 }
+body .ui-panel .ui-panel-titlebar {
+    padding: 0;
+  }
+
+.ui-panel .ui-panel-titlebar {
+    padding: 0;
+}
 
 @media screen and (max-width: 1024px) {
     .container {
@@ -111,4 +124,36 @@ body .ui-button.ui-state-default.ui-button-warning, body .ui-buttonset.ui-button
     .container {
         width: 95%;
     }
+}
+:host>>>button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left[ng-reflect-label="Yes"]{
+    background-color: #007ad9 ;
+    border: #007ad9 ;
+    border-radius: 3px;
+}
+
+:host>>>button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left:hover[ng-reflect-label="Yes"] {
+    background-color: #2a8dda;
+    border: #2a8dda;
+    border-radius: 3px;
+}
+:host>>>button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left[ng-reflect-label="No"]{
+    background-color: #e91224 ;
+    border: #e91224 ;
+    border-radius: 3px;
+}
+
+:host>>>button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left:hover[ng-reflect-label="No"] {
+    background-color: #ff5656;
+    border: #ff5656;
+    border-radius: 3px;
+}
+
+.full-size-button >button {
+  background-color: #ffba01!important;
+  border: unset!important;
+  width: 100%;
+  color: black!important;
+}
+.full-size-button >button:hover:not(.ui-state-disabled) {
+background-color: #ED990B!important;
 }

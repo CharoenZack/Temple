@@ -10,3 +10,6 @@
 :host>>>.ui-table .ui-table-tbody>tr>td {
     word-wrap: break-word;
 }
+/* :host>>>.ng-trigger .ng-trigger-animation .ng-tns-c9-3 .ui-dialog .ui-widget .ui-widget-content .ui-corner-all .ui-shadow .ui-dialog-draggable .ui-dialog-resizable .ng-star-inserted {
+  width: 200px;
+} */

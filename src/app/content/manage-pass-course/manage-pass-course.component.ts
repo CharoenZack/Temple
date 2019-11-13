@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {BreadcrumbService} from 'src/app/shared/service/breadcrumb.service';
+import { Component, OnInit } from '@angular/core';
+import { BreadcrumbService } from 'src/app/shared/service/breadcrumb.service';
 import { Course } from 'src/app/shared/interfaces/course';
 import { MenuItem, MessageService, ConfirmationService, LazyLoadEvent } from 'primeng/api';
 import { ApprovalService } from '../approval/approval.service';
@@ -23,10 +23,10 @@ export class ManagePassCourseComponent implements OnInit {
   public selectedCourse: Course;
   public courseId: string;
 
-  private totalRec:number;
+  private totalRec: number;
 
   constructor(
-    private managePassCourse : ManagePassCourseService,
+    private managePassCourse: ManagePassCourseService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private breadCrumbService: BreadcrumbService,
@@ -40,15 +40,15 @@ export class ManagePassCourseComponent implements OnInit {
     this.getTotalRecord();
 
     this.breadCrumbService.setPath([
-      {label: 'Manage graduated: จัดการผ่านหลักสูตร'},
+      { label: 'จัดการผ่านหลักสูตร' },
     ]);
   }
-  
+
   private setColumn() {
     this.cols = [
-      {field: 'name', header: 'ชื่อคอร์ส'},
-      {field: 'detail', header: 'รายละเอียด'},
-      {field: 'numberOfMembers', header: 'จำนวนนักเรียน'},
+      { field: 'name', header: 'ชื่อคอร์ส' },
+      { field: 'detail', header: 'รายละเอียด' },
+      { field: 'numberOfMembers', header: 'จำนวนนักเรียน' },
     ];
   }
 
@@ -63,7 +63,7 @@ export class ManagePassCourseComponent implements OnInit {
         this.managePassCourse.getAllCourse(firstCon, rowsCon, queryCon))
     ).subscribe(res => {
       console.log(res);
-      
+
       if (res['status'] === 'Success') {
         this.courses = res['data'];
         this.loading = false;
@@ -71,6 +71,14 @@ export class ManagePassCourseComponent implements OnInit {
     });
   }
 
+  // private initMember() {
+  //   this.managePassCourse.getMemberInCourse(+this.courseId)
+  //   .subscribe(res => {
+  //     if(res['status'] === 'Success') {
+
+  //     }
+  //   })
+  // }
   private getTotalRecord() {
     this.managePassCourse.getTotalRecord().subscribe(res => {
       if (res['status'] === 'Success') {

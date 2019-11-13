@@ -1,0 +1,25 @@
+#btn-Increase{
+    background-color: #b8860b;
+    border: 1px solid #b8860b;
+}
+#btn-Increase:hover{
+    background-color: #bb9433;
+    border: 1px solid #bb9433;
+}
+body .ui-button[ng-reflect-label="Yes"] {
+    margin: 0;
+    color: #ffffff;
+    background-color: #007ad9;
+    border: 1px solid #007ad9;
+    font-size: 14px;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+body .ui-button[ng-reflect-label="No"] {
+    margin: 0;
+    color: #ffffff;
+    background-color: #e91224;
+    border: 1px solid #e91224;
+    font-size: 14px;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
