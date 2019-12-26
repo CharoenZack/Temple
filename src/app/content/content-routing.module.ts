@@ -49,20 +49,6 @@ const routes: Routes = [
           }
         ]
       },
-      // {
-      //   path: 'extracourses',
-      //   component: CoursesComponent,
-      //   children: [
-      //     {
-      //       path: '',
-      //       component: CoursesListComponent,
-      //     },
-      //     {
-      //       path: ':id',
-      //       component: CourseComponent,
-      //     }
-      //   ]
-      // },
       {
         path: 'baggages',
         component: BaggagesComponent,

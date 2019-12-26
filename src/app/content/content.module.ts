@@ -37,6 +37,7 @@ import { ManageStorageComponent } from './manage-storage/manage-storage.componen
 import { ManageCourseForMonkComponent } from './manage-course-for-monk/manage-course-for-monk.component';
 import { FullCalendarModule } from 'primeng/fullcalendar';
 
+
 registerLocaleData(localeTh);
 
 @NgModule({

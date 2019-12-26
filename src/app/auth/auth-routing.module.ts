@@ -20,11 +20,6 @@ const routes: Routes = [
         path: 'login',
         component: LoginComponent
       },
-      // {
-      //     path: "register",
-      //     component: RegisterFormComponent,
-      //     data: { urlback: '/auth/login' }
-      // },
       {
         path: 'register',
         component: RegisterComponent,
